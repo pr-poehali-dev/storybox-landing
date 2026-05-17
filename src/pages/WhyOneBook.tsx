@@ -199,8 +199,9 @@ export default function WhyOneBook({ openPopup }: Props) {
       {/* ── Финал + CTA ── */}
       <div className="px-8 md:px-12 py-7 border-t border-[#E8EEF3] flex flex-col md:flex-row md:items-center gap-6">
         <p className="text-[15px] leading-relaxed flex-1" style={{ color: "#7A7A7A" }}>
-          Книга в твёрдом переплёте переживёт жёсткие диски, облачные сервисы и переезды. Её не нужно «найти пароль» или «открыть на старом телефоне».{" "}
-          <span className="font-semibold text-black">Достаточно снять с полки.</span>
+          Цифровые файлы теряются. Облачные сервисы закрываются. Телефоны меняются. Книга — нет.
+          Через 30 лет её откроют руками, а не будут искать пароль от давно забытого аккаунта.{" "}
+          <span className="font-semibold text-black">Это единственный формат, который не устаревает.</span>
         </p>
         <div className="flex-shrink-0 flex flex-col items-start md:items-end gap-1.5">
           <button onClick={() => openPopup()} className="btn-cta-meeting">
