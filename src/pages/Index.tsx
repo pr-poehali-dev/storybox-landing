@@ -58,16 +58,16 @@ export default function Index() {
       </header>
 
       {/* HERO */}
-      <section className="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-[45fr_55fr] gap-12 items-center">
+      <section className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-28 grid md:grid-cols-[45fr_55fr] gap-8 md:gap-12 items-center">
         <div>
           <h1 className="leading-tight mb-0" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 700, color: "#00A4E3" }}>
             Литературная семейная хроника на основе видео-интервью
           </h1>
           <hr className="hero-hr" />
-          <p className="text-[18px] text-[#444] leading-relaxed mb-4 max-w-lg">
+          <p className="text-[16px] md:text-[18px] text-[#444] leading-relaxed mb-4 max-w-lg">
             QR-код на видео — внутри книги. Чтобы внуки услышали живой голос через 30 лет.
           </p>
-          <p className="text-[15px] text-[#7A7A7A] mb-8">
+          <p className="text-[14px] md:text-[15px] text-[#7A7A7A] mb-7">
             Интервью онлайн, в студии или дома. Работаем во всех крупных городах мира.
           </p>
           <div className="flex flex-wrap items-start gap-4">
@@ -188,16 +188,16 @@ export default function Index() {
               В книге есть то, чего нет в видео. Команда нашла в архивах данные о свёкре Ирины — Иване Ивановиче Гурбатове, погибшем в плену 14 мая 1942 года в лагере под бывшим Фурманово. Место, которое семья искала десятилетиями, теперь — часть семейной хроники. В приложении — стихи мужа Ирины, Валерия Ивановича, которые она много лет записывала в отдельную тетрадь.
             </p>
 
-            <div className="flex flex-wrap gap-4 mb-8">
+            <div className="grid grid-cols-4 gap-2 mb-8">
               {[
-                { val: "704", label: "страницы книги" },
+                { val: "704", label: "стр. книги" },
                 { val: "70",  label: "стр. хроники" },
-                { val: "600", label: "стр. фотоархива" },
+                { val: "600", label: "стр. фото" },
                 { val: "3 ч", label: "интервью" },
               ].map((s) => (
-                <div key={s.label} className="bg-white rounded-xl px-4 py-3 border border-[#E5E5E5] text-center min-w-[80px]">
-                  <div className="text-[22px] font-extrabold text-black leading-none">{s.val}</div>
-                  <div className="text-[11px] text-[#7A7A7A] mt-0.5">{s.label}</div>
+                <div key={s.label} className="bg-white rounded-xl px-2 py-3 border border-[#E5E5E5] text-center">
+                  <div className="text-[18px] md:text-[22px] font-extrabold text-black leading-none">{s.val}</div>
+                  <div className="text-[10px] md:text-[11px] text-[#7A7A7A] mt-0.5 leading-tight">{s.label}</div>
                 </div>
               ))}
             </div>
@@ -327,33 +327,6 @@ export default function Index() {
 
       {/* FAQ */}
       <FaqSection openPopup={openPopup} />
-
-      {/* FINAL CTA */}
-      <section id="cta" className="py-28 px-6" style={{ background: "#0F1419" }}>
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-[40px] font-bold text-white mb-6">Запишитесь на бесплатную консультацию</h2>
-            <p className="text-[17px] leading-relaxed mb-8" style={{ color: "rgba(255,255,255,0.65)" }}>
-              Расскажите о вашей истории. Подберём формат и ответим на все вопросы.
-            </p>
-            <div className="space-y-3 text-[15px]" style={{ color: "rgba(255,255,255,0.5)" }}>
-              <div className="flex items-center gap-3"><span style={{ color: "#00A4E3" }}>✓</span> Работаем во всех крупных городах мира</div>
-              <div className="flex items-center gap-3"><span style={{ color: "#00A4E3" }}>✓</span> Интервью онлайн, в студии или дома</div>
-              <div className="flex items-center gap-3"><span style={{ color: "#00A4E3" }}>✓</span> Подписываем NDA по запросу</div>
-              <div className="flex items-center gap-3"><span style={{ color: "#ED4463" }}>🔥</span> Скидка до 25% на все тарифы сейчас</div>
-            </div>
-          </div>
-          <div className="flex flex-col gap-4 max-w-[360px]">
-            <a
-              href="https://wa.me/79031932725"
-              target="_blank" rel="noopener noreferrer"
-              className="btn-secondary text-center text-[16px] py-4"
-            >
-              Написать в WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
 
       {/* FOOTER */}
       <footer style={{ background: "#0F1419" }} className="border-t border-white/10 pt-14 pb-10 px-6">

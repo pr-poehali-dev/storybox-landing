@@ -105,43 +105,42 @@ export default function WhyOneBook({ openPopup }: Props) {
       onMouseLeave={handleMouseLeave}
     >
       {/* ── Заголовок ── */}
-      <div className="px-8 md:px-12 pt-10 pb-8 border-b border-[#E8EEF3]" style={{ background: "#F7FAFD" }}>
-        <p className="text-[12px] font-semibold uppercase tracking-widest mb-3" style={{ color: "#00A4E3" }}>
+      <div className="px-5 md:px-12 pt-7 md:pt-10 pb-6 md:pb-8 border-b border-[#E8EEF3]" style={{ background: "#F7FAFD" }}>
+        <p className="text-[11px] md:text-[12px] font-semibold uppercase tracking-widest mb-2 md:mb-3" style={{ color: "#00A4E3" }}>
           Почему одной книги достаточно
         </p>
-        <div className="grid md:grid-cols-[1fr_1fr] gap-6 items-start">
-          <h3 className="text-[26px] md:text-[30px] font-bold text-black leading-tight">
+        <div className="grid md:grid-cols-[1fr_1fr] gap-3 md:gap-6 items-start">
+          <h3 className="text-[20px] md:text-[30px] font-bold text-black leading-tight">
             StoryBox-книга закрывает проблему сохранения памяти семьи{" "}
             <span style={{ color: "#AABBC8" }}>одной книгой.</span>
           </h3>
-          <p className="text-[16px] font-semibold leading-snug self-end" style={{ color: "#00A4E3" }}>
+          <p className="text-[14px] md:text-[16px] font-semibold leading-snug md:self-end" style={{ color: "#00A4E3" }}>
             Семья обычно пытается четырьмя разными способами — ни один не доводит до конца.
           </p>
         </div>
       </div>
 
       {/* ── Слайдер-навигация ── */}
-      <div className="px-8 md:px-12 pt-6 pb-4 border-b border-[#E8EEF3]">
-        <div className="flex gap-2 md:gap-3 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
+      <div className="px-5 md:px-12 pt-4 md:pt-6 pb-3 md:pb-4 border-b border-[#E8EEF3]">
+        <div className="flex gap-2 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
           {ITEMS.map((it, idx) => (
             <button
               key={it.id}
               onClick={() => handleManualSwitch(idx)}
-              className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-[14px] font-semibold transition-all duration-200"
+              className="flex-shrink-0 flex items-center gap-1.5 px-3.5 md:px-5 py-2 md:py-2.5 rounded-full text-[13px] md:text-[14px] font-semibold transition-all duration-200"
               style={
                 active === idx
                   ? { background: "#00A4E3", color: "#fff", boxShadow: "0 3px 12px rgba(0,164,227,0.28)" }
                   : { background: "#F0F4F8", color: "#6B7A8D" }
               }
             >
-              <span className="text-[15px]">{it.icon}</span>
+              <span className="text-[14px]">{it.icon}</span>
               {it.tab}
             </button>
           ))}
         </div>
 
-        {/* Прогресс-полоски: у активной заполняется по времени */}
-        <div className="flex gap-1.5 mt-4">
+        <div className="flex gap-1.5 mt-3">
           {ITEMS.map((_, idx) => (
             <button
               key={idx}
@@ -152,11 +151,7 @@ export default function WhyOneBook({ openPopup }: Props) {
               {active === idx ? (
                 <span
                   className="absolute left-0 top-0 h-full rounded-full"
-                  style={{
-                    width: `${progress}%`,
-                    background: "#00A4E3",
-                    transition: "width 0.05s linear",
-                  }}
+                  style={{ width: `${progress}%`, background: "#00A4E3", transition: "width 0.05s linear" }}
                 />
               ) : (
                 <span
@@ -174,37 +169,37 @@ export default function WhyOneBook({ openPopup }: Props) {
         key={animKey}
         className="animate-slide-content grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[#E8EEF3]"
       >
-        <div className="px-8 md:px-10 py-8">
+        <div className="px-5 md:px-10 py-5 md:py-8">
           <div
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-bold mb-5"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] md:text-[12px] font-bold mb-3 md:mb-5"
             style={{ background: "#E8F6FD", color: "#00A4E3" }}
           >
             ✓ Книга StoryBox
           </div>
-          <h4 className="text-[19px] font-bold text-black mb-3 leading-snug">{item.title}</h4>
-          <p className="text-[15px] text-[#333] leading-relaxed">{item.body}</p>
+          <h4 className="text-[16px] md:text-[19px] font-bold text-black mb-2 md:mb-3 leading-snug">{item.title}</h4>
+          <p className="text-[14px] md:text-[15px] text-[#333] leading-relaxed">{item.body}</p>
         </div>
 
-        <div className="px-8 md:px-10 py-8" style={{ background: "#F7FAFD" }}>
+        <div className="px-5 md:px-10 py-5 md:py-8" style={{ background: "#F7FAFD" }}>
           <div
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-bold mb-5"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] md:text-[12px] font-bold mb-3 md:mb-5"
             style={{ background: "#EAEAEA", color: "#999" }}
           >
             ✕ Обычно
           </div>
-          <p className="text-[15px] leading-relaxed" style={{ color: "#7A7A7A" }}>{item.contrast}</p>
+          <p className="text-[14px] md:text-[15px] leading-relaxed" style={{ color: "#7A7A7A" }}>{item.contrast}</p>
         </div>
       </div>
 
       {/* ── Финал + CTA ── */}
-      <div className="px-8 md:px-12 py-7 border-t border-[#E8EEF3] flex flex-col md:flex-row md:items-center gap-6">
-        <p className="text-[15px] leading-relaxed flex-1" style={{ color: "#7A7A7A" }}>
+      <div className="px-5 md:px-12 py-5 md:py-7 border-t border-[#E8EEF3] flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+        <p className="text-[13px] md:text-[15px] leading-relaxed flex-1" style={{ color: "#7A7A7A" }}>
           Цифровые файлы теряются. Облачные сервисы закрываются. Телефоны меняются. Книга — нет.
           Через 30 лет её откроют руками, а не будут искать пароль от давно забытого аккаунта.{" "}
           <span className="font-semibold text-black">Это единственный формат, который не устаревает.</span>
         </p>
         <div className="flex-shrink-0 flex flex-col items-start md:items-end gap-1.5">
-          <button onClick={() => openPopup()} className="btn-cta-meeting">
+          <button onClick={() => openPopup()} className="btn-cta-meeting w-full sm:w-auto">
             Записать установочную встречу
             <span className="arrow">→</span>
           </button>
