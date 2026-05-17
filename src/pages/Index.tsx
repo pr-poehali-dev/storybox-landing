@@ -308,9 +308,6 @@ export default function Index() {
             </div>
           </div>
           <div className="flex flex-col gap-4 max-w-[360px]">
-            <button onClick={() => openPopup()} className="btn-cta text-center text-[17px] py-5 w-full">
-              Оплатить онлайн
-            </button>
             <a
               href="https://wa.me/79031932725"
               target="_blank" rel="noopener noreferrer"
