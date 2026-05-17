@@ -111,11 +111,11 @@ export default function WhyOneBook({ openPopup }: Props) {
         </p>
         <div className="grid md:grid-cols-[1fr_1fr] gap-6 items-start">
           <h3 className="text-[26px] md:text-[30px] font-bold text-black leading-tight">
-            Семья пытается сохранить память четырьмя способами.{" "}
-            <span style={{ color: "#AABBC8" }}>Ни один не доводит до конца.</span>
+            StoryBox-книга закрывает проблему сохранения памяти семьи{" "}
+            <span style={{ color: "#AABBC8" }}>одной книгой.</span>
           </h3>
           <p className="text-[16px] font-semibold leading-snug self-end" style={{ color: "#00A4E3" }}>
-            StoryBox-книга закрывает все четыре — одним предметом на полке.
+            Семья обычно пытается четырьмя разными способами — ни один не доводит до конца.
           </p>
         </div>
       </div>
