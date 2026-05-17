@@ -6,10 +6,16 @@ interface Props {
 }
 
 export default function FaqSection({ openPopup }: Props) {
-  const [openIdx, setOpenIdx] = useState<number>(0);
+  const [openSet, setOpenSet] = useState<Set<number>>(
+    () => new Set(FAQ_ITEMS.map((_, i) => i))
+  );
 
   const toggle = (idx: number) => {
-    setOpenIdx(openIdx === idx ? -1 : idx);
+    setOpenSet((prev) => {
+      const next = new Set(prev);
+      if (next.has(idx)) { next.delete(idx); } else { next.add(idx); }
+      return next;
+    });
   };
 
   return (
@@ -41,7 +47,7 @@ export default function FaqSection({ openPopup }: Props) {
         {/* Аккордеон */}
         <div className="grid md:grid-cols-2 gap-3">
           {FAQ_ITEMS.map((item, idx) => {
-            const isOpen = openIdx === idx;
+            const isOpen = openSet.has(idx);
             return (
               <div
                 key={item.q}
