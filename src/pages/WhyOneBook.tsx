@@ -1,4 +1,6 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
+
+const AUTOPLAY_DELAY = 4000;
 
 const ITEMS = [
   {
@@ -46,17 +48,62 @@ interface Props {
 export default function WhyOneBook({ openPopup }: Props) {
   const [active, setActive] = useState(0);
   const [animKey, setAnimKey] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const progressRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pausedRef = useRef(false);
 
   const switchTo = useCallback((idx: number) => {
     setActive(idx);
     setAnimKey((k) => k + 1);
+    setProgress(0);
   }, []);
+
+  const startAutoplay = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    if (progressRef.current) clearInterval(progressRef.current);
+    setProgress(0);
+
+    const TICK = 50;
+    progressRef.current = setInterval(() => {
+      if (!pausedRef.current) {
+        setProgress((p) => Math.min(p + (TICK / AUTOPLAY_DELAY) * 100, 100));
+      }
+    }, TICK);
+
+    timerRef.current = setInterval(() => {
+      if (!pausedRef.current) {
+        setActive((prev) => (prev + 1) % ITEMS.length);
+        setAnimKey((k) => k + 1);
+        setProgress(0);
+      }
+    }, AUTOPLAY_DELAY);
+  }, []);
+
+  useEffect(() => {
+    startAutoplay();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+      if (progressRef.current) clearInterval(progressRef.current);
+    };
+  }, [startAutoplay]);
+
+  const handleManualSwitch = useCallback((idx: number) => {
+    switchTo(idx);
+    startAutoplay();
+  }, [switchTo, startAutoplay]);
+
+  const handleMouseEnter = () => { pausedRef.current = true; };
+  const handleMouseLeave = () => { pausedRef.current = false; };
 
   const item = ITEMS[active];
 
   return (
-    <div className="mb-12 rounded-2xl border border-[#E8EEF3] overflow-hidden bg-white">
-
+    <div
+      className="mb-12 rounded-2xl border border-[#E8EEF3] overflow-hidden bg-white"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       {/* ── Заголовок ── */}
       <div className="px-8 md:px-12 pt-10 pb-8 border-b border-[#E8EEF3]" style={{ background: "#F7FAFD" }}>
         <p className="text-[12px] font-semibold uppercase tracking-widest mb-3" style={{ color: "#00A4E3" }}>
@@ -74,24 +121,17 @@ export default function WhyOneBook({ openPopup }: Props) {
       </div>
 
       {/* ── Слайдер-навигация ── */}
-      <div className="px-8 md:px-12 pt-6 pb-0 border-b border-[#E8EEF3]">
-        <div className="flex gap-2 md:gap-3 overflow-x-auto pb-0" style={{ scrollbarWidth: "none" }}>
+      <div className="px-8 md:px-12 pt-6 pb-4 border-b border-[#E8EEF3]">
+        <div className="flex gap-2 md:gap-3 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
           {ITEMS.map((it, idx) => (
             <button
               key={it.id}
-              onClick={() => switchTo(idx)}
-              className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-[14px] font-semibold transition-all duration-200 mb-[-1px] relative"
+              onClick={() => handleManualSwitch(idx)}
+              className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-[14px] font-semibold transition-all duration-200"
               style={
                 active === idx
-                  ? {
-                      background: "#00A4E3",
-                      color: "#fff",
-                      boxShadow: "0 3px 12px rgba(0,164,227,0.28)",
-                    }
-                  : {
-                      background: "#F0F4F8",
-                      color: "#6B7A8D",
-                    }
+                  ? { background: "#00A4E3", color: "#fff", boxShadow: "0 3px 12px rgba(0,164,227,0.28)" }
+                  : { background: "#F0F4F8", color: "#6B7A8D" }
               }
             >
               <span className="text-[15px]">{it.icon}</span>
@@ -100,18 +140,31 @@ export default function WhyOneBook({ openPopup }: Props) {
           ))}
         </div>
 
-        {/* Прогресс-полоска под слайдером */}
-        <div className="flex gap-1.5 mt-4 pb-0">
+        {/* Прогресс-полоски: у активной заполняется по времени */}
+        <div className="flex gap-1.5 mt-4">
           {ITEMS.map((_, idx) => (
             <button
               key={idx}
-              onClick={() => switchTo(idx)}
-              className="h-[3px] rounded-full transition-all duration-300 flex-1"
-              style={{
-                background: active === idx ? "#00A4E3" : "#E0EAF2",
-                transform: active === idx ? "scaleY(1.5)" : "scaleY(1)",
-              }}
-            />
+              onClick={() => handleManualSwitch(idx)}
+              className="h-[3px] rounded-full overflow-hidden flex-1 relative"
+              style={{ background: "#E0EAF2" }}
+            >
+              {active === idx ? (
+                <span
+                  className="absolute left-0 top-0 h-full rounded-full"
+                  style={{
+                    width: `${progress}%`,
+                    background: "#00A4E3",
+                    transition: "width 0.05s linear",
+                  }}
+                />
+              ) : (
+                <span
+                  className="absolute left-0 top-0 h-full w-full rounded-full"
+                  style={{ background: idx < active ? "#00A4E3" : "#E0EAF2" }}
+                />
+              )}
+            </button>
           ))}
         </div>
       </div>
@@ -121,7 +174,6 @@ export default function WhyOneBook({ openPopup }: Props) {
         key={animKey}
         className="animate-slide-content grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[#E8EEF3]"
       >
-        {/* Левая — книга StoryBox */}
         <div className="px-8 md:px-10 py-8">
           <div
             className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-bold mb-5"
@@ -133,7 +185,6 @@ export default function WhyOneBook({ openPopup }: Props) {
           <p className="text-[15px] text-[#333] leading-relaxed">{item.body}</p>
         </div>
 
-        {/* Правая — как обычно */}
         <div className="px-8 md:px-10 py-8" style={{ background: "#F7FAFD" }}>
           <div
             className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-bold mb-5"
@@ -151,7 +202,6 @@ export default function WhyOneBook({ openPopup }: Props) {
           Книга в твёрдом переплёте переживёт жёсткие диски, облачные сервисы и переезды. Её не нужно «найти пароль» или «открыть на старом телефоне».{" "}
           <span className="font-semibold text-black">Достаточно снять с полки.</span>
         </p>
-
         <div className="flex-shrink-0 flex flex-col items-start md:items-end gap-1.5">
           <button onClick={() => openPopup()} className="btn-cta-meeting">
             Записать установочную встречу
