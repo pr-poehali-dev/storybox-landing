@@ -182,13 +182,15 @@ export default function Index() {
           </div>
 
           <div className="flex flex-col gap-5">
-            <div className="rounded-2xl overflow-hidden relative" style={{ aspectRatio: "4/3" }}>
-              <img src={INTERVIEW_IMG} alt="Пример интервью" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg cursor-pointer hover:scale-105 transition-transform">
-                  <Icon name="Play" size={28} style={{ color: "#00A4E3", marginLeft: 4 }} />
-                </div>
-              </div>
+            <div className="rounded-2xl overflow-hidden" style={{ aspectRatio: "16/9" }}>
+              <iframe
+                src="https://www.youtube.com/embed/SyRnCEncSh8"
+                title="Ирина Александровна — семейная хроника StoryBox"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+                style={{ border: "none", display: "block" }}
+              />
             </div>
             <div className="bg-white rounded-2xl border border-[#E5E5E5] p-6">
               <div className="text-[36px] leading-none mb-2" style={{ color: "#00A4E3", opacity: 0.2 }}>"</div>
