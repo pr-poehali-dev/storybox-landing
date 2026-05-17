@@ -113,51 +113,95 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="rounded-2xl p-8 md:p-12 mb-12" style={{ background: "#0F1419" }}>
-          <p className="text-[12px] font-semibold uppercase tracking-widest mb-4" style={{ color: "#00A4E3" }}>
-            Почему одной книги достаточно
-          </p>
-          <p className="text-[20px] md:text-[22px] font-semibold text-white leading-relaxed mb-3 max-w-3xl">
-            Семья обычно пытается сохранить память четырьмя разными способами — и ни один не доводит до конца.
-          </p>
-          <p className="text-[15px] leading-relaxed mb-8 max-w-2xl" style={{ color: "rgba(255,255,255,0.55)" }}>
-            Фотографии складывают в коробку «потом разберём». Видео на телефоне теряются при смене устройства. Бабушкины рассказы записывают на диктофон и не переслушивают. Старые письма пылятся на даче.
-          </p>
+        {/* ── Почему одной книги достаточно ── */}
+        <div className="mb-12 rounded-2xl overflow-hidden" style={{ background: "#0F1419" }}>
 
-          <p className="text-[16px] font-semibold mb-6" style={{ color: "rgba(255,255,255,0.85)" }}>
-            StoryBox-книга закрывает все четыре задачи одним предметом, который стоит на полке и работает сам.
-          </p>
-
-          <div className="grid sm:grid-cols-2 gap-5 mb-8">
-            {[
-              {
-                label: "Текст помнит факты",
-                text: "То, что прозвучало в интервью, перепроверено, дополнено архивами и оформлено как литературная хроника. Через 40 лет ваш правнук откроет книгу и узнает, кем был его прапрадед.",
-              },
-              {
-                label: "QR-код помнит голос",
-                text: "Сканируешь телефоном — слышишь, как она смеялась, какими словами говорила, как меняла интонацию, рассказывая про мужа. Этого не сохранит никакой текст.",
-              },
-              {
-                label: "Фотоархив помнит лица",
-                text: "До 600 страниц семейных снимков, отсканированных и оформленных. Не «коробка с фотографиями», а альбом, в котором каждое лицо подписано.",
-              },
-              {
-                label: "Архивная работа помнит то, чего не помните вы",
-                text: "Команда находит в открытых архивах данные о тех, кого уже не спросишь — место гибели прадеда в 1942-м, награды, обстоятельства. То, что семья ищет десятилетиями, мы находим за неделю.",
-              },
-            ].map((item) => (
-              <div key={item.label} className="rounded-xl p-5" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                <p className="text-[14px] font-bold mb-2" style={{ color: "#00A4E3" }}>— {item.label}</p>
-                <p className="text-[14px] leading-relaxed" style={{ color: "rgba(255,255,255,0.6)" }}>{item.text}</p>
+          {/* Верхняя часть: заголовок + вводный текст */}
+          <div className="px-8 md:px-12 pt-10 pb-8 border-b" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
+            <p className="text-[12px] font-semibold uppercase tracking-widest mb-4" style={{ color: "#00A4E3" }}>
+              Почему одной книги достаточно
+            </p>
+            <div className="grid md:grid-cols-[1fr_1fr] gap-8 items-end">
+              <h3 className="text-[26px] md:text-[30px] font-bold text-white leading-tight">
+                Семья пытается сохранить память четырьмя способами.<br />
+                <span style={{ color: "rgba(255,255,255,0.4)" }}>Ни один не доводит до конца.</span>
+              </h3>
+              <div>
+                <p className="text-[15px] leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+                  Фотографии в коробке «потом разберём». Видео теряются при смене телефона. Рассказы на диктофоне не переслушивают. Письма пылятся на даче.
+                </p>
+                <p className="text-[15px] font-semibold mt-3 text-white">
+                  StoryBox-книга закрывает все четыре одним предметом на полке.
+                </p>
               </div>
-            ))}
+            </div>
           </div>
 
-          <div className="rounded-xl p-5" style={{ background: "rgba(0,164,227,0.08)", border: "1px solid rgba(0,164,227,0.2)" }}>
-            <p className="text-[15px] leading-relaxed" style={{ color: "rgba(255,255,255,0.8)" }}>
-              Книга в твёрдом переплёте переживёт жёсткие диски, облачные сервисы и переезды. Её не нужно «найти пароль», «скачать в нужном формате» или «открыть на старом телефоне».{" "}
-              <span className="font-semibold text-white">Достаточно снять с полки.</span>
+          {/* Четыре пункта — полосы */}
+          {[
+            {
+              num: "01",
+              label: "Текст помнит факты",
+              text: "То, что прозвучало в интервью, перепроверено, дополнено архивами и оформлено как литературная хроника. Через 40 лет ваш правнук откроет книгу и узнает, кем был его прапрадед.",
+            },
+            {
+              num: "02",
+              label: "QR-код помнит голос",
+              text: "Сканируешь телефоном — слышишь, как она смеялась, какими словами говорила, как меняла интонацию, рассказывая про мужа. Этого не сохранит никакой текст.",
+            },
+            {
+              num: "03",
+              label: "Фотоархив помнит лица",
+              text: "До 600 страниц семейных снимков, отсканированных и оформленных. Не «коробка с фотографиями», а альбом, в котором каждое лицо подписано.",
+            },
+            {
+              num: "04",
+              label: "Архивная работа помнит то, чего не помните вы",
+              text: "Команда находит в открытых архивах данные о тех, кого уже не спросишь — место гибели прадеда в 1942-м, награды, обстоятельства. То, что семья ищет десятилетиями, мы находим за неделю.",
+            },
+          ].map((item, i) => (
+            <div
+              key={item.num}
+              className="grid md:grid-cols-[80px_220px_1fr] gap-0 items-stretch border-b"
+              style={{ borderColor: "rgba(255,255,255,0.07)" }}
+            >
+              {/* Номер */}
+              <div
+                className="hidden md:flex items-center justify-center text-[28px] font-extrabold border-r"
+                style={{
+                  color: i === 0 ? "#00A4E3" : "rgba(255,255,255,0.1)",
+                  borderColor: "rgba(255,255,255,0.07)",
+                  padding: "24px 0",
+                }}
+              >
+                {item.num}
+              </div>
+              {/* Заголовок */}
+              <div
+                className="flex items-center px-6 py-5 border-r"
+                style={{ borderColor: "rgba(255,255,255,0.07)" }}
+              >
+                <p className="text-[15px] font-bold text-white leading-snug">{item.label}</p>
+              </div>
+              {/* Текст */}
+              <div className="flex items-center px-6 py-5">
+                <p className="text-[14px] leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+                  {item.text}
+                </p>
+              </div>
+            </div>
+          ))}
+
+          {/* Нижняя полоса — финальный аргумент */}
+          <div className="px-8 md:px-12 py-7 flex flex-col md:flex-row md:items-center gap-4">
+            <p className="text-[15px] leading-relaxed flex-1" style={{ color: "rgba(255,255,255,0.6)" }}>
+              Книга в твёрдом переплёте переживёт жёсткие диски, облачные сервисы и переезды. Её не нужно «найти пароль», «скачать в нужном формате» или «открыть на старом телефоне».
+            </p>
+            <p
+              className="text-[18px] font-bold flex-shrink-0 md:text-right"
+              style={{ color: "#00A4E3" }}
+            >
+              Достаточно снять&nbsp;с полки.
             </p>
           </div>
         </div>
