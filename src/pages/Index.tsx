@@ -71,11 +71,23 @@ export default function Index() {
       {/* ABOUT */}
       <section id="about" className="section-soft py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-2xl mb-14">
-            <h2 className="text-[36px] font-bold text-black mb-4">О нас</h2>
-            <p className="text-[17px] text-[#444] leading-relaxed">
-              Мы горим идеей создания дополнительной памяти, которая позволит людям не только лучше помнить, как прошёл очередной год, но и навсегда сохранить свои представления о будущем и образ мыслей накануне выпускного, свадьбы и других значимых событий. Интервью — это лучшее воплощение этой идеи.
-            </p>
+          <div className="grid md:grid-cols-2 gap-12 items-center mb-14">
+            <div>
+              <h2 className="text-[36px] font-bold text-black mb-4">О нас</h2>
+              <p className="text-[17px] text-[#444] leading-relaxed">
+                Мы горим идеей создания дополнительной памяти, которая позволит людям не только лучше помнить, как прошёл очередной год, но и навсегда сохранить свои представления о будущем и образ мыслей накануне выпускного, свадьбы и других значимых событий. Интервью — это лучшее воплощение этой идеи.
+              </p>
+            </div>
+            <div className="rounded-2xl overflow-hidden" style={{ aspectRatio: "16/9" }}>
+              <iframe
+                src="https://www.youtube.com/embed/X1tRmSymfZM"
+                title="О компании StoryBox"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+                style={{ border: "none", display: "block" }}
+              />
+            </div>
           </div>
           <h3 className="text-[22px] font-bold text-black mb-8">Почему стоит выбрать StoryBox</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
