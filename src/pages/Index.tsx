@@ -423,16 +423,40 @@ export default function Index() {
 
       {/* CASE + PDF */}
       <section id="case" className="section-soft py-20">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-[55fr_45fr] gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-[55fr_45fr] gap-12 items-start">
           <div>
-            <p className="text-[12px] font-semibold uppercase tracking-widest mb-3" style={{ color: "#00A4E3" }}>Пример готовой книги</p>
-            <h2 className="text-[36px] font-bold text-black mb-4">Ирина Александровна, 85 лет — история семьи для потомков</h2>
-            <p className="text-[17px] text-[#444] leading-relaxed mb-4">
-              Родилась в Ленинграде в 1939 году. Когда наш архивист начал работу, выяснилось, что её дед числился в немецком плену в 1942 году — это было задокументировано в федеральном архиве. Семья не знала об этом 80 лет.
+            <p className="text-[12px] font-semibold uppercase tracking-widest mb-3" style={{ color: "#00A4E3" }}>
+              Пример готовой книги
             </p>
-            <p className="text-[17px] text-[#444] leading-relaxed mb-8">
-              Теперь это отдельная глава в книге. С документами. С фотографиями. С её голосом.
+            <h2 className="text-[34px] font-bold text-black mb-1">
+              Ирина Александровна, 85 лет, Иваново
+            </h2>
+            <p className="text-[13px] mb-6" style={{ color: "#7A7A7A" }}>
+              Реальный клиент StoryBox · тариф «Выездная съёмка» · осень 2025
             </p>
+
+            <p className="text-[16px] text-[#444] leading-relaxed mb-4">
+              Внучка Виктория записала бабушкин голос осенью 2025 года. Команда StoryBox приехала к Ирине Александровне домой в Иваново — без поездок в студию, в привычном кресле, рядом семейные фотографии. 3-часовое интервью с психологом превратилось в книгу: 70 страниц литературной хроники, 600 страниц оцифрованного фотоархива и QR-код на полное видео-интервью внутри обложки.
+            </p>
+            <p className="text-[16px] text-[#444] leading-relaxed mb-8">
+              В книге есть то, чего нет в видео. Команда нашла в архивах данные о свёкре Ирины — Иване Ивановиче Гурбатове, погибшем в плену 14 мая 1942 года в лагере под бывшим Фурманово. Место, которое семья искала десятилетиями, теперь — часть семейной хроники. В приложении — стихи мужа Ирины, Валерия Ивановича, которые она много лет записывала в отдельную тетрадь.
+            </p>
+
+            {/* Статы книги */}
+            <div className="flex flex-wrap gap-4 mb-8">
+              {[
+                { val: "704", label: "страницы книги" },
+                { val: "70", label: "стр. хроники" },
+                { val: "600", label: "стр. фотоархива" },
+                { val: "3 ч", label: "интервью" },
+              ].map((s) => (
+                <div key={s.label} className="bg-white rounded-xl px-4 py-3 border border-[#E5E5E5] text-center min-w-[80px]">
+                  <div className="text-[22px] font-extrabold text-black leading-none">{s.val}</div>
+                  <div className="text-[11px] text-[#7A7A7A] mt-0.5">{s.label}</div>
+                </div>
+              ))}
+            </div>
+
             <div className="flex flex-wrap gap-4">
               <button
                 onClick={() => alert("PDF будет доступен в ближайшее время")}
@@ -443,26 +467,29 @@ export default function Index() {
               </button>
               <button onClick={() => openPopup()} className="btn-secondary">Заказать такую же</button>
             </div>
-            <p className="text-[13px] text-[#7A7A7A] mt-3">5 страниц · PDF · 2.4 МБ</p>
+            <p className="text-[12px] text-[#AAAAAA] mt-3">5 страниц · PDF · 2.4 МБ</p>
           </div>
-          <div className="rounded-2xl overflow-hidden relative" style={{ aspectRatio: "4/3" }}>
-            <img src={INTERVIEW_IMG} alt="Пример интервью" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg cursor-pointer hover:scale-105 transition-transform">
-                <Icon name="Play" size={28} style={{ color: "#00A4E3", marginLeft: 4 }} />
+
+          <div className="flex flex-col gap-5">
+            <div className="rounded-2xl overflow-hidden relative" style={{ aspectRatio: "4/3" }}>
+              <img src={INTERVIEW_IMG} alt="Пример интервью" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg cursor-pointer hover:scale-105 transition-transform">
+                  <Icon name="Play" size={28} style={{ color: "#00A4E3", marginLeft: 4 }} />
+                </div>
               </div>
+            </div>
+
+            {/* Карточка-цитата прямо рядом с фото */}
+            <div className="bg-white rounded-2xl border border-[#E5E5E5] p-6">
+              <div className="text-[36px] leading-none mb-2" style={{ color: "#00A4E3", opacity: 0.2 }}>"</div>
+              <p className="text-[15px] leading-relaxed text-[#222] mb-4" style={{ fontStyle: "italic", marginTop: -16 }}>
+                Я хочу быть похожей на бабушку. Теперь у моих детей будет повод гордиться прабабушкой, даже когда её не станет рядом. Книгу будут держать в руках их внуки.
+              </p>
+              <p className="text-[13px] font-semibold text-[#7A7A7A]">— Виктория Гурбатова, внучка</p>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* QUOTE */}
-      <section className="max-w-[760px] mx-auto px-6 py-16 text-center">
-        <div className="text-[64px] leading-none mb-4" style={{ color: "#00A4E3", opacity: 0.2 }}>"</div>
-        <p className="text-[22px] leading-relaxed text-[#222] mb-6" style={{ fontStyle: "italic", marginTop: -24 }}>
-          Я хочу быть похожей на бабушку. Теперь у моих детей будет повод гордиться прабабушкой. Книгу будут держать в руках их внуки.
-        </p>
-        <p className="text-[15px] font-semibold text-[#7A7A7A]">— Виктория Гурбатова, внучка</p>
       </section>
 
       {/* ── TARIFFS ──────────────────────────────────────────────────────────── */}
