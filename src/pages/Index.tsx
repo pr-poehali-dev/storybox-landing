@@ -3,6 +3,7 @@ import Icon from "@/components/ui/icon";
 import BookingPopup from "./BookingPopup";
 import TariffsSection from "./TariffsSection";
 import WhyOneBook from "./WhyOneBook";
+import FaqSection from "./FaqSection";
 import {
   BOOK_IMG, INTERVIEW_IMG, TEAM_IMG, SPREAD_IMG, COVERS_IMG,
   NAV_LINKS, WHY_ITEMS, BOOK_FEATURES, GIFT_CARDS, PROCESS_STEPS,
@@ -289,31 +290,7 @@ export default function Index() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="max-w-7xl mx-auto px-6 py-20">
-        <div className="max-w-[800px]">
-          <h2 className="text-[40px] font-bold text-black mb-3">FAQ</h2>
-          <p className="text-[17px] text-[#7A7A7A] mb-10">
-            Или пишите в WhatsApp:{" "}
-            <a href="https://wa.me/79035069205" target="_blank" rel="noopener noreferrer" className="font-semibold text-[#222] hover:text-[#00A4E3] transition-colors">
-              +7 903 506 92 05
-            </a>
-          </p>
-          <div>
-            {FAQ_ITEMS.map((item) => (
-              <details key={item.q} className="faq-item">
-                <summary>
-                  <span>{item.q}</span>
-                  <span className="faq-icon">
-                    <span className="faq-icon-plus">+</span>
-                    <span className="faq-icon-minus">−</span>
-                  </span>
-                </summary>
-                <div className="faq-content">{item.a}</div>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqSection openPopup={openPopup} />
 
       {/* FINAL CTA */}
       <section id="cta" className="py-28 px-6" style={{ background: "#0F1419" }}>
