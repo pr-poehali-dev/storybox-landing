@@ -205,7 +205,7 @@ export default function Index() {
             <a href="tel:+79031932725" className="hidden md:block text-[15px] font-semibold text-[#222] hover:text-[#00A4E3] transition-colors">
               +7 903 193 27 25
             </a>
-            <a href="#cta" className="btn-cta" style={{ padding: "10px 20px", fontSize: 14 }}>
+            <a href="https://wa.me/79031932725" target="_blank" rel="noopener noreferrer" className="btn-cta" style={{ padding: "10px 20px", fontSize: 14 }}>
               Записаться
             </a>
           </div>
@@ -230,7 +230,7 @@ export default function Index() {
           </p>
           <div className="flex flex-wrap gap-3">
             <a href="#tariffs" className="btn-cta">Выбрать тариф</a>
-            <a href="#cta" className="btn-secondary">Бесплатная консультация</a>
+            <a href="https://wa.me/79031932725" target="_blank" rel="noopener noreferrer" className="btn-secondary">Бесплатная консультация</a>
           </div>
         </div>
         <div className="rounded-2xl overflow-hidden bg-[#F2F9FF] relative" style={{ aspectRatio: "4/3" }}>
@@ -506,7 +506,7 @@ export default function Index() {
         <div className="max-w-[800px] mx-auto px-6">
           <h2 className="text-[40px] font-bold text-black mb-3">FAQ</h2>
           <p className="text-[17px] text-[#7A7A7A] mb-10">
-            Или пишите в WhatsApp: <a href="tel:+79035069205" className="font-semibold text-[#222] hover:text-[#00A4E3] transition-colors">+7 903 506 92 05</a>
+            Или пишите в WhatsApp: <a href="https://wa.me/79035069205" target="_blank" rel="noopener noreferrer" className="font-semibold text-[#222] hover:text-[#00A4E3] transition-colors">+7 903 506 92 05</a>
           </p>
           <div>
             {FAQ_ITEMS.map((item) => (
