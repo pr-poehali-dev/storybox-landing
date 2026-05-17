@@ -123,23 +123,33 @@ const GIFT_CARDS = [
 const BOOK_FEATURES = [
   {
     icon: "BookOpen",
-    title: "Офсетная печать",
-    desc: "Книгопечатная бумага 80 г/м², плотная мелованная вставка для фотографий. Офсет сохраняет цвета и контрастность на десятилетия.",
-  },
-  {
-    icon: "Layers",
-    title: "Три вида обложки",
-    desc: "Стандарт — тёмный лён с матовой ламинацией. Премиум — тиснение названия фольгой. Люкс — натуральная кожа с индивидуальным золотым тиснением.",
-  },
-  {
-    icon: "Image",
-    title: "Профессиональная вёрстка",
-    desc: "Фотографии, документы и текст вёрстаются дизайнером вручную. Каждый разворот — отдельная история, не шаблон.",
+    title: "Литературная хроника",
+    desc: "~70 страниц основного текста. AI-транскрипция через 3 модели, литературная редактура, согласование с заказчиком. Сохраняется голос, факты и интонация — без «нукания» и обрывов.",
   },
   {
     icon: "QrCode",
-    title: "QR-код внутри книги",
-    desc: "На форзаце — QR-код с ссылкой на полное видео-интервью. Хранится в трёх облачных сервисах. Ссылка живёт столько, сколько указано в тарифе.",
+    title: "Видео по QR-коду",
+    desc: "Внутри книги QR-код на закрытое видео-интервью. Открыли книгу, навели телефон — слышите живой голос. Хранение 10 лет в трёх независимых облачных сервисах.",
+  },
+  {
+    icon: "Image",
+    title: "Оцифрованный фотоархив",
+    desc: "До 600 страниц. Сканируем, реставрируем и встраиваем в книгу все ваши семейные снимки. Никаких коробок на антресолях — всё в одном артефакте.",
+  },
+  {
+    icon: "Search",
+    title: "Архивная работа",
+    desc: "Ищем данные в открытых архивах: ОБД «Мемориал», «Память народа». Особенно по родственникам ВОВ. Часто находим то, что семья искала десятилетиями.",
+  },
+  {
+    icon: "FileText",
+    title: "Дополнительные материалы",
+    desc: "Стихи, письма, дневники близких. Если есть тетрадь со стихами деда или письма бабушки — включаем в книгу как самостоятельное приложение.",
+  },
+  {
+    icon: "Layers",
+    title: "Формат и печать",
+    desc: "Твёрдый переплёт, премиум-печать, тактильная обложка, ~25×17 см. Эстетика без китча — настоящая семейная реликвия, которая встанет на полку и будет передаваться поколениям.",
   },
 ];
 
@@ -342,14 +352,14 @@ export default function Index() {
       <section className="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-[45fr_55fr] gap-12 items-center">
         <div>
           <h1 className="leading-tight mb-0" style={{ fontSize: "clamp(34px, 5vw, 56px)", fontWeight: 700, color: "#00A4E3" }}>
-            Сохраним внутренний мир и истории
+            Литературная семейная хроника на основе видео-интервью
           </h1>
           <hr className="hero-hr" />
           <p className="text-[18px] text-[#444] leading-relaxed mb-4 max-w-lg">
-            Запишем интервью, которые сохранят в вечности ваш внутренний мир, истории старших родственников, а также мысли ваших детей в разные периоды жизни.
+            QR-код на видео — внутри книги. Чтобы внуки услышали живой голос через 30 лет.
           </p>
           <p className="text-[15px] text-[#7A7A7A] mb-8">
-            Интервью онлайн, в студии или в любой другой локации. Работаем во всех крупных городах мира.
+            Интервью онлайн, в студии или дома. Работаем во всех крупных городах мира.
           </p>
           <div className="flex flex-wrap gap-3">
             <button onClick={() => openPopup()} className="btn-cta">Оплатить онлайн</button>
@@ -389,16 +399,24 @@ export default function Index() {
 
       {/* BOOK SHOWCASE */}
       <section id="book" className="max-w-7xl mx-auto px-6 py-20">
-        <div className="mb-12">
-          <p className="text-[12px] font-semibold uppercase tracking-widest mb-2" style={{ color: "#00A4E3" }}>Готовый продукт</p>
-          <h2 className="text-[40px] font-bold text-black mb-3">Как выглядит напечатанная книга</h2>
-          <p className="text-[17px] text-[#7A7A7A] max-w-2xl">
-            Не электронный документ — физическая книга, которую держат в руках. Её ставят на полку, передают детям, открывают через 30 лет.
-          </p>
+        {/* Заголовок + определение продукта */}
+        <div className="grid md:grid-cols-[1fr_1fr] gap-12 mb-14 items-end">
+          <div>
+            <p className="text-[12px] font-semibold uppercase tracking-widest mb-2" style={{ color: "#00A4E3" }}>Готовый продукт</p>
+            <h2 className="text-[40px] font-bold text-black mb-0">StoryBox «Книга»</h2>
+          </div>
+          <div>
+            <p className="text-[17px] text-[#444] leading-relaxed">
+              Это не дневник и не транскрипт. Это профессиональная литературная хроника жизни вашего родителя, бабушки или дедушки, созданная из видео-интервью с психологом и оформленная как семейная реликвия.
+            </p>
+            <p className="text-[15px] text-[#7A7A7A] mt-3">
+              От установочной встречи до книги в руках — <strong className="text-black">8 недель.</strong>
+            </p>
+          </div>
         </div>
 
-        {/* Большие фото книги */}
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
+        {/* Фото + «Почему это работает» */}
+        <div className="grid md:grid-cols-2 gap-6 mb-14">
           <div className="rounded-2xl overflow-hidden" style={{ aspectRatio: "4/3" }}>
             <img src={SPREAD_IMG} alt="Разворот книги" className="w-full h-full object-cover" />
           </div>
@@ -407,8 +425,24 @@ export default function Index() {
           </div>
         </div>
 
-        {/* 4 характеристики */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* Блок "Почему это работает" */}
+        <div className="rounded-2xl p-8 md:p-10 mb-12" style={{ background: "#0F1419" }}>
+          <p className="text-[12px] font-semibold uppercase tracking-widest mb-3" style={{ color: "#00A4E3" }}>Почему это работает</p>
+          <p className="text-[20px] md:text-[24px] font-semibold text-white leading-relaxed max-w-3xl">
+            Через 30 лет внуки не вспомнят, как звучал её смех и какими словами она называла их в детстве.
+          </p>
+          <p className="text-[18px] mt-3 font-bold" style={{ color: "#00A4E3" }}>
+            Кроме того, что мы запишем.
+          </p>
+          <p className="text-[15px] mt-4 max-w-2xl leading-relaxed" style={{ color: "rgba(255,255,255,0.6)" }}>
+            Один артефакт, в котором соединяются текст, голос, фотографии и архивная правда — то, что останется навсегда.
+          </p>
+        </div>
+
+        {/* 6 составляющих книги */}
+        <h3 className="text-[24px] font-bold text-black mb-2">Из чего состоит каждая книга</h3>
+        <p className="text-[15px] text-[#7A7A7A] mb-8">Шесть составляющих, которые входят в каждый проект</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {BOOK_FEATURES.map((f) => (
             <div key={f.title} className="sb-card">
               <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style={{ background: "#F2F9FF" }}>
