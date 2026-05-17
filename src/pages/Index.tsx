@@ -113,17 +113,53 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="rounded-2xl p-8 md:p-10 mb-12" style={{ background: "#0F1419" }}>
-          <p className="text-[12px] font-semibold uppercase tracking-widest mb-3" style={{ color: "#00A4E3" }}>Почему это работает</p>
-          <p className="text-[20px] md:text-[24px] font-semibold text-white leading-relaxed max-w-3xl">
-            Через 30 лет внуки не вспомнят, как звучал её смех и какими словами она называла их в детстве.
+        <div className="rounded-2xl p-8 md:p-12 mb-12" style={{ background: "#0F1419" }}>
+          <p className="text-[12px] font-semibold uppercase tracking-widest mb-4" style={{ color: "#00A4E3" }}>
+            Почему одной книги достаточно
           </p>
-          <p className="text-[18px] mt-3 font-bold" style={{ color: "#00A4E3" }}>
-            Кроме того, что мы запишем.
+          <p className="text-[20px] md:text-[22px] font-semibold text-white leading-relaxed mb-3 max-w-3xl">
+            Семья обычно пытается сохранить память четырьмя разными способами — и ни один не доводит до конца.
           </p>
-          <p className="text-[15px] mt-4 max-w-2xl leading-relaxed" style={{ color: "rgba(255,255,255,0.6)" }}>
-            Один артефакт, в котором соединяются текст, голос, фотографии и архивная правда — то, что останется навсегда.
+          <p className="text-[15px] leading-relaxed mb-8 max-w-2xl" style={{ color: "rgba(255,255,255,0.55)" }}>
+            Фотографии складывают в коробку «потом разберём». Видео на телефоне теряются при смене устройства. Бабушкины рассказы записывают на диктофон и не переслушивают. Старые письма пылятся на даче.
           </p>
+
+          <p className="text-[16px] font-semibold mb-6" style={{ color: "rgba(255,255,255,0.85)" }}>
+            StoryBox-книга закрывает все четыре задачи одним предметом, который стоит на полке и работает сам.
+          </p>
+
+          <div className="grid sm:grid-cols-2 gap-5 mb-8">
+            {[
+              {
+                label: "Текст помнит факты",
+                text: "То, что прозвучало в интервью, перепроверено, дополнено архивами и оформлено как литературная хроника. Через 40 лет ваш правнук откроет книгу и узнает, кем был его прапрадед.",
+              },
+              {
+                label: "QR-код помнит голос",
+                text: "Сканируешь телефоном — слышишь, как она смеялась, какими словами говорила, как меняла интонацию, рассказывая про мужа. Этого не сохранит никакой текст.",
+              },
+              {
+                label: "Фотоархив помнит лица",
+                text: "До 600 страниц семейных снимков, отсканированных и оформленных. Не «коробка с фотографиями», а альбом, в котором каждое лицо подписано.",
+              },
+              {
+                label: "Архивная работа помнит то, чего не помните вы",
+                text: "Команда находит в открытых архивах данные о тех, кого уже не спросишь — место гибели прадеда в 1942-м, награды, обстоятельства. То, что семья ищет десятилетиями, мы находим за неделю.",
+              },
+            ].map((item) => (
+              <div key={item.label} className="rounded-xl p-5" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                <p className="text-[14px] font-bold mb-2" style={{ color: "#00A4E3" }}>— {item.label}</p>
+                <p className="text-[14px] leading-relaxed" style={{ color: "rgba(255,255,255,0.6)" }}>{item.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-xl p-5" style={{ background: "rgba(0,164,227,0.08)", border: "1px solid rgba(0,164,227,0.2)" }}>
+            <p className="text-[15px] leading-relaxed" style={{ color: "rgba(255,255,255,0.8)" }}>
+              Книга в твёрдом переплёте переживёт жёсткие диски, облачные сервисы и переезды. Её не нужно «найти пароль», «скачать в нужном формате» или «открыть на старом телефоне».{" "}
+              <span className="font-semibold text-white">Достаточно снять с полки.</span>
+            </p>
+          </div>
         </div>
 
         <h3 className="text-[24px] font-bold text-black mb-2">Из чего состоит каждая книга</h3>
