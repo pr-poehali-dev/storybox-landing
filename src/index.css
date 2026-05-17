@@ -203,6 +203,61 @@
     border: 2px solid var(--color-cta) !important;
   }
 
+  @keyframes slide-content {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-slide-content {
+    animation: slide-content 0.28s ease forwards;
+  }
+
+  @keyframes cta-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(0, 164, 227, 0.35);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(0, 164, 227, 0);
+    }
+  }
+  .btn-cta-meeting {
+    background: #00a4e3;
+    color: #fff;
+    border-radius: 12px;
+    padding: 16px 28px;
+    font-weight: 700;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition:
+      background 0.2s,
+      transform 0.2s;
+    animation: cta-pulse 2.5s ease infinite;
+  }
+  .btn-cta-meeting:hover {
+    background: #0090cc;
+    transform: translateY(-2px);
+    animation: none;
+    box-shadow: 0 6px 24px rgba(0, 164, 227, 0.35);
+  }
+  .btn-cta-meeting .arrow {
+    display: inline-block;
+    transition: transform 0.2s;
+    font-size: 18px;
+  }
+  .btn-cta-meeting:hover .arrow {
+    transform: translateX(4px);
+  }
+
   @keyframes popup-in {
     from {
       opacity: 0;
