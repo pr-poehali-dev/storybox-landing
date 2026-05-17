@@ -14,28 +14,17 @@ const NAV_LINKS = [
 ];
 
 const WHY_ITEMS = [
-  {
-    title: "Профессионализм",
-    desc: "Наши интервьюеры — профессиональные психологи, умеющие задавать точные вопросы и обходить нежелательные темы.",
-  },
-  {
-    title: "Конфиденциальность",
-    desc: "Интервьюеры и операторы подписывают соглашение о неразглашении, интервью хранятся в защищённых хранилищах.",
-  },
-  {
-    title: "Гибкость",
-    desc: "Вы можете корректировать список вопросов и заказать несколько версий интервью — для себя и для публикации.",
-  },
-  {
-    title: "Бережность",
-    desc: "Наши специалисты внимательно обсудят с вами темы, которые стоит раскрыть или обойти.",
-  },
+  { title: "Профессионализм", desc: "Наши интервьюеры — профессиональные психологи, умеющие задавать точные вопросы и обходить нежелательные темы." },
+  { title: "Конфиденциальность", desc: "Интервьюеры и операторы подписывают соглашение о неразглашении, интервью хранятся в защищённых хранилищах." },
+  { title: "Гибкость", desc: "Вы можете корректировать список вопросов и заказать несколько версий интервью — для себя и для публикации." },
+  { title: "Бережность", desc: "Наши специалисты внимательно обсудят с вами темы, которые стоит раскрыть или обойти." },
 ];
 
 const TARIFFS = [
   {
     name: "Онлайн-книга",
     duration: "Интервью в Zoom",
+    priceOld: "от 49 375 ₽",
     price: "от 39 500 ₽",
     tag: null,
     hook: "Первый шаг — записать. Без студии, в удобное время.",
@@ -51,6 +40,7 @@ const TARIFFS = [
   {
     name: "Книга 3 часа",
     duration: "Студия · 3 камеры",
+    priceOld: "от 68 125 ₽",
     price: "от 54 500 ₽",
     tag: null,
     hook: "Полноценная история жизни с профессиональным видео.",
@@ -66,6 +56,7 @@ const TARIFFS = [
   {
     name: "Книга 5 часов",
     duration: "Студия · 3 камеры",
+    priceOld: "от 99 375 ₽",
     price: "от 79 500 ₽",
     tag: "Чаще всего выбирают",
     hook: "Глубина, которую помнят внуки. Архив + 2 экземпляра.",
@@ -82,6 +73,7 @@ const TARIFFS = [
   {
     name: "Книга 8 часов",
     duration: "Студия · максимум",
+    priceOld: "от 149 375 ₽",
     price: "от 119 500 ₽",
     tag: null,
     hook: "Полная семейная хроника. Кожа, тиснение, бессрочно.",
@@ -112,10 +104,10 @@ const COMPARISON = [
 ];
 
 const GIFT_CARDS = [
-  { name: "Онлайн-книга", price: "от 39 500 ₽", desc: "Интервью в Zoom, ~50 стр., аудио по QR" },
-  { name: "Книга 3 часа", price: "от 54 500 ₽", desc: "Студия, профессиональное видео по QR" },
-  { name: "Книга 5 часов", price: "от 79 500 ₽", desc: "Студия, архивная работа, 2 экземпляра" },
-  { name: "Книга 8 часов", price: "от 119 500 ₽", desc: "Полная хроника, кожа, тиснение, бессрочно" },
+  { name: "Онлайн-книга", priceOld: "от 49 375 ₽", price: "от 39 500 ₽", desc: "Интервью в Zoom, ~50 стр., аудио по QR" },
+  { name: "Книга 3 часа", priceOld: "от 68 125 ₽", price: "от 54 500 ₽", desc: "Студия, профессиональное видео по QR" },
+  { name: "Книга 5 часов", priceOld: "от 99 375 ₽", price: "от 79 500 ₽", desc: "Студия, архивная работа, 2 экземпляра" },
+  { name: "Книга 8 часов", priceOld: "от 149 375 ₽", price: "от 119 500 ₽", desc: "Полная хроника, кожа, тиснение, бессрочно" },
 ];
 
 const PROCESS_STEPS = [
@@ -135,55 +127,281 @@ const TEAM_MEMBERS = [
 ];
 
 const FAQ_ITEMS = [
-  {
-    q: "Какие вопросы вы задаёте взрослым?",
-    a: "Вопросы охватывают детство, семью, профессиональный путь, важные события жизни, ценности и воспоминания. Список согласовывается заранее — вы можете его скорректировать и закрыть любые темы.",
-  },
-  {
-    q: "Какие вопросы вы задаёте детям?",
-    a: "Психолог работает по возрасту: мечты, друзья, что нравится и что пугает, взгляды на будущее. Беседа строится так, чтобы ребёнок говорил свободно, без ощущения «правильных ответов».",
-  },
-  {
-    q: "Как проходит интервью?",
-    a: "Психолог заранее обсуждает с вами список тем. В день записи — беседа в комфортном темпе. Никаких сценариев: живой разговор, который ведётся бережно и профессионально.",
-  },
-  {
-    q: "Как проходит интервью со старшими родственниками?",
-    a: "Особый формат: психолог учитывает возраст, темп и эмоциональное состояние собеседника. Нежелательные темы обходятся. Можно проводить дома или в студии — в зависимости от самочувствия.",
-  },
-  {
-    q: "Как и где хранятся записи?",
-    a: "Видео хранится в трёх независимых защищённых облачных сервисах. В зависимости от тарифа — 5 лет, 10 лет или бессрочно. Доступ — по QR-коду внутри книги.",
-  },
-  {
-    q: "Кто берёт интервью?",
-    a: "Только профессиональные психологи из нашей команды. Каждый из них прошёл специальный отбор и подписал соглашение о конфиденциальности.",
-  },
-  {
-    q: "Можно ли заказать несколько версий интервью?",
-    a: "Да — во всех студийных тарифах входят 2 версии монтажа: полная (для семьи) и сокращённая (для публикации или показа гостям).",
-  },
-  {
-    q: "Работаете ли вы в других городах?",
-    a: "Онлайн-формат доступен в любом городе мира. Студийные форматы — Москва, и мы работаем во всех крупных городах. Уточните ваш город на консультации.",
-  },
+  { q: "Какие вопросы вы задаёте взрослым?", a: "Вопросы охватывают детство, семью, профессиональный путь, важные события жизни, ценности и воспоминания. Список согласовывается заранее — вы можете его скорректировать и закрыть любые темы." },
+  { q: "Какие вопросы вы задаёте детям?", a: "Психолог работает по возрасту: мечты, друзья, что нравится и что пугает, взгляды на будущее. Беседа строится так, чтобы ребёнок говорил свободно, без ощущения «правильных ответов»." },
+  { q: "Как проходит интервью?", a: "Психолог заранее обсуждает с вами список тем. В день записи — беседа в комфортном темпе. Никаких сценариев: живой разговор, который ведётся бережно и профессионально." },
+  { q: "Как проходит интервью со старшими родственниками?", a: "Особый формат: психолог учитывает возраст, темп и эмоциональное состояние собеседника. Нежелательные темы обходятся. Можно проводить дома или в студии — в зависимости от самочувствия." },
+  { q: "Как и где хранятся записи?", a: "Видео хранится в трёх независимых защищённых облачных сервисах. В зависимости от тарифа — 5 лет, 10 лет или бессрочно. Доступ — по QR-коду внутри книги." },
+  { q: "Кто берёт интервью?", a: "Только профессиональные психологи из нашей команды. Каждый из них прошёл специальный отбор и подписал соглашение о конфиденциальности." },
+  { q: "Можно ли заказать несколько версий интервью?", a: "Да — во всех студийных тарифах входят 2 версии монтажа: полная (для семьи) и сокращённая (для публикации или показа гостям)." },
+  { q: "Работаете ли вы в других городах?", a: "Онлайн-формат доступен в любом городе мира. Студийные форматы — Москва, и мы работаем во всех крупных городах. Уточните ваш город на консультации." },
 ];
 
-export default function Index() {
-  const [toast, setToast] = useState(false);
+const VALID_PROMOS: Record<string, number> = {
+  "STORY10": 10,
+  "GIFT15": 15,
+  "VIP20": 20,
+};
+
+interface PopupProps {
+  open: boolean;
+  onClose: () => void;
+  initialTariff?: string;
+}
+
+function BookingPopup({ open, onClose, initialTariff = "" }: PopupProps) {
   const [formData, setFormData] = useState({
-    name: "", contact: "", about: "", tariff: "", agree: false,
+    name: "",
+    phone: "",
+    tariff: initialTariff,
+    promo: "",
+    agreePersonal: false,
+    agreeTerms: false,
+    agreeMarketing: false,
   });
+  const [promoStatus, setPromoStatus] = useState<"idle" | "valid" | "invalid">("idle");
+  const [promoDiscount, setPromoDiscount] = useState(0);
+  const [submitted, setSubmitted] = useState(false);
+
+  const checkPromo = () => {
+    const code = formData.promo.trim().toUpperCase();
+    if (VALID_PROMOS[code]) {
+      setPromoStatus("valid");
+      setPromoDiscount(VALID_PROMOS[code]);
+    } else {
+      setPromoStatus("invalid");
+      setPromoDiscount(0);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setToast(true);
-    setTimeout(() => setToast(false), 3000);
-    setFormData({ name: "", contact: "", about: "", tariff: "", agree: false });
+    setSubmitted(true);
+  };
+
+  const handleClose = () => {
+    onClose();
+    setTimeout(() => {
+      setFormData({ name: "", phone: "", tariff: initialTariff, promo: "", agreePersonal: false, agreeTerms: false, agreeMarketing: false });
+      setPromoStatus("idle");
+      setPromoDiscount(0);
+      setSubmitted(false);
+    }, 300);
+  };
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      style={{ background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)" }}
+      onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}
+    >
+      <div
+        className="bg-white rounded-2xl w-full max-w-[480px] max-h-[90vh] overflow-y-auto shadow-2xl"
+        style={{ animation: "popup-in 0.25s cubic-bezier(0.34,1.56,0.64,1)" }}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-7 pt-7 pb-4">
+          <div>
+            <h2 className="text-[22px] font-bold text-black">Записаться</h2>
+            <p className="text-[13px] text-[#7A7A7A] mt-0.5">Свяжемся с вами в течение дня</p>
+          </div>
+          <button
+            onClick={handleClose}
+            className="w-9 h-9 rounded-full flex items-center justify-center text-[#7A7A7A] hover:bg-[#F2F2F2] transition-colors"
+          >
+            <Icon name="X" size={18} />
+          </button>
+        </div>
+
+        {submitted ? (
+          <div className="px-7 pb-8 pt-4 text-center">
+            <div
+              className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5 text-white text-2xl"
+              style={{ background: "#00A4E3" }}
+            >
+              ✓
+            </div>
+            <h3 className="text-[20px] font-bold text-black mb-2">Заявка принята!</h3>
+            <p className="text-[15px] text-[#7A7A7A] mb-6">Свяжемся с вами в ближайшее время.</p>
+            <button onClick={handleClose} className="btn-cta">Закрыть</button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="px-7 pb-7 space-y-4">
+            {/* Скидочный баннер */}
+            <div className="rounded-xl px-4 py-3 flex items-center gap-3" style={{ background: "#FFF5F7" }}>
+              <span className="text-xl">🎁</span>
+              <p className="text-[13px] text-[#222] leading-snug">
+                <span className="font-bold text-[#ED4463]">Скидка 25%</span> уже применена к ценам на сайте
+                {promoDiscount > 0 && (
+                  <span> + <span className="font-bold text-[#ED4463]">{promoDiscount}% по промокоду</span></span>
+                )}
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-[13px] font-semibold text-[#222] mb-1">Имя</label>
+              <input
+                type="text"
+                required
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="Ваше имя"
+                className="w-full border border-[#E5E5E5] rounded-lg px-4 py-3 text-[15px] focus:outline-none focus:border-[#00A4E3] transition-colors"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[13px] font-semibold text-[#222] mb-1">Телефон</label>
+              <input
+                type="tel"
+                required
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                placeholder="+7 999 123-45-67"
+                className="w-full border border-[#E5E5E5] rounded-lg px-4 py-3 text-[15px] focus:outline-none focus:border-[#00A4E3] transition-colors"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[13px] font-semibold text-[#222] mb-1">Тариф</label>
+              <select
+                value={formData.tariff}
+                onChange={(e) => setFormData({ ...formData, tariff: e.target.value })}
+                className="w-full border border-[#E5E5E5] rounded-lg px-4 py-3 text-[15px] focus:outline-none focus:border-[#00A4E3] transition-colors bg-white"
+              >
+                <option value="">Ещё не определился</option>
+                {TARIFFS.map((t) => (
+                  <option key={t.name}>{t.name} — {t.price}</option>
+                ))}
+                <option>Подарочный сертификат</option>
+              </select>
+            </div>
+
+            {/* Промокод */}
+            <div>
+              <label className="block text-[13px] font-semibold text-[#222] mb-1">
+                Промокод <span className="text-[#7A7A7A] font-normal">(необязательно)</span>
+              </label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={formData.promo}
+                  onChange={(e) => {
+                    setFormData({ ...formData, promo: e.target.value });
+                    setPromoStatus("idle");
+                    setPromoDiscount(0);
+                  }}
+                  placeholder="Введите промокод"
+                  className={`flex-1 border rounded-lg px-4 py-3 text-[15px] focus:outline-none transition-colors uppercase ${
+                    promoStatus === "valid"
+                      ? "border-green-500 bg-green-50 focus:border-green-500"
+                      : promoStatus === "invalid"
+                      ? "border-red-400 bg-red-50 focus:border-red-400"
+                      : "border-[#E5E5E5] focus:border-[#00A4E3]"
+                  }`}
+                />
+                <button
+                  type="button"
+                  onClick={checkPromo}
+                  disabled={!formData.promo.trim()}
+                  className="px-4 py-3 rounded-lg text-[14px] font-semibold border transition-colors disabled:opacity-40"
+                  style={{ borderColor: "#00A4E3", color: "#00A4E3" }}
+                >
+                  Применить
+                </button>
+              </div>
+              {promoStatus === "valid" && (
+                <p className="text-[12px] text-green-600 mt-1 font-semibold">✓ Промокод применён — доп. скидка {promoDiscount}%</p>
+              )}
+              {promoStatus === "invalid" && (
+                <p className="text-[12px] text-red-500 mt-1">Промокод не найден или уже использован</p>
+              )}
+            </div>
+
+            {/* Разделитель */}
+            <div className="border-t border-[#F0F0F0] pt-2" />
+
+            {/* Чекбоксы */}
+            <div className="space-y-3">
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  required
+                  checked={formData.agreePersonal}
+                  onChange={(e) => setFormData({ ...formData, agreePersonal: e.target.checked })}
+                  className="mt-0.5 w-4 h-4 flex-shrink-0 cursor-pointer rounded"
+                  style={{ accentColor: "#00A4E3" }}
+                />
+                <span className="text-[13px] text-[#444] leading-snug group-hover:text-black transition-colors">
+                  Я согласен(-на) на{" "}
+                  <a href="#" className="underline hover:text-[#00A4E3]">обработку персональных данных</a>
+                  {" "}в соответствии с Федеральным законом № 152-ФЗ <span className="text-[#ED4463]">*</span>
+                </span>
+              </label>
+
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  required
+                  checked={formData.agreeTerms}
+                  onChange={(e) => setFormData({ ...formData, agreeTerms: e.target.checked })}
+                  className="mt-0.5 w-4 h-4 flex-shrink-0 cursor-pointer"
+                  style={{ accentColor: "#00A4E3" }}
+                />
+                <span className="text-[13px] text-[#444] leading-snug group-hover:text-black transition-colors">
+                  Я принимаю{" "}
+                  <a href="#" className="underline hover:text-[#00A4E3]">пользовательское соглашение</a>
+                  {" "}и{" "}
+                  <a href="#" className="underline hover:text-[#00A4E3]">условия оказания услуг</a>
+                  {" "}<span className="text-[#ED4463]">*</span>
+                </span>
+              </label>
+
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  checked={formData.agreeMarketing}
+                  onChange={(e) => setFormData({ ...formData, agreeMarketing: e.target.checked })}
+                  className="mt-0.5 w-4 h-4 flex-shrink-0 cursor-pointer"
+                  style={{ accentColor: "#00A4E3" }}
+                />
+                <span className="text-[13px] text-[#7A7A7A] leading-snug group-hover:text-[#444] transition-colors">
+                  Хочу получать новости, специальные предложения и рекламные рассылки StoryBox
+                </span>
+              </label>
+
+              <p className="text-[11px] text-[#AAAAAA]"><span className="text-[#ED4463]">*</span> — обязательные поля</p>
+            </div>
+
+            <button
+              type="submit"
+              className="btn-cta w-full text-center"
+              disabled={!formData.agreePersonal || !formData.agreeTerms}
+              style={{ opacity: (!formData.agreePersonal || !formData.agreeTerms) ? 0.5 : 1, cursor: (!formData.agreePersonal || !formData.agreeTerms) ? "not-allowed" : "pointer" }}
+            >
+              Записаться на консультацию
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function Index() {
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [popupTariff, setPopupTariff] = useState("");
+
+  const openPopup = (tariff = "") => {
+    setPopupTariff(tariff);
+    setPopupOpen(true);
   };
 
   return (
     <div style={{ fontFamily: "'Open Sans', sans-serif" }}>
+      <BookingPopup open={popupOpen} onClose={() => setPopupOpen(false)} initialTariff={popupTariff} />
 
       {/* HEADER */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[#E5E5E5]">
@@ -205,9 +423,9 @@ export default function Index() {
             <a href="tel:+79031932725" className="hidden md:block text-[15px] font-semibold text-[#222] hover:text-[#00A4E3] transition-colors">
               +7 903 193 27 25
             </a>
-            <a href="https://wa.me/79031932725" target="_blank" rel="noopener noreferrer" className="btn-cta" style={{ padding: "10px 20px", fontSize: 14 }}>
+            <button onClick={() => openPopup()} className="btn-cta" style={{ padding: "10px 20px", fontSize: 14 }}>
               Записаться
-            </a>
+            </button>
           </div>
         </div>
       </header>
@@ -229,8 +447,8 @@ export default function Index() {
             Интервью онлайн, в студии или в любой другой локации. Работаем во всех крупных городах мира.
           </p>
           <div className="flex flex-wrap gap-3">
-            <a href="#tariffs" className="btn-cta">Выбрать тариф</a>
-            <a href="https://wa.me/79031932725" target="_blank" rel="noopener noreferrer" className="btn-secondary">Бесплатная консультация</a>
+            <button onClick={() => openPopup()} className="btn-cta">Выбрать тариф</button>
+            <button onClick={() => openPopup()} className="btn-secondary">Бесплатная консультация</button>
           </div>
         </div>
         <div className="rounded-2xl overflow-hidden bg-[#F2F9FF] relative" style={{ aspectRatio: "4/3" }}>
@@ -252,7 +470,6 @@ export default function Index() {
               Мы горим идеей создания дополнительной памяти, которая позволит людям не только лучше помнить, как прошёл очередной год, но и навсегда сохранить свои представления о будущем и образ мыслей накануне выпускного, свадьбы и других значимых событий. И интервью — это пока лучшее воплощение этой идеи.
             </p>
           </div>
-
           <h3 className="text-[22px] font-bold text-black mb-8">Почему стоит выбрать StoryBox</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {WHY_ITEMS.map((item) => (
@@ -267,9 +484,14 @@ export default function Index() {
 
       {/* TARIFFS */}
       <section id="tariffs" className="max-w-7xl mx-auto px-6 py-20">
-        <div className="mb-12">
+        <div className="mb-10">
           <h2 className="text-[40px] font-bold text-black mb-3">Выберите тариф</h2>
-          <p className="text-[17px] text-[#7A7A7A]">Запишитесь на бесплатную консультацию — поможем определиться</p>
+          <div className="flex flex-wrap items-center gap-3">
+            <p className="text-[17px] text-[#7A7A7A]">Запишитесь на бесплатную консультацию — поможем определиться</p>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-white text-[13px] font-bold" style={{ background: "#ED4463" }}>
+              🔥 Скидка 25% сейчас
+            </span>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
@@ -277,9 +499,7 @@ export default function Index() {
             <div
               key={t.name}
               className={`flex flex-col relative rounded-xl border transition-all duration-200 hover:shadow-lg ${
-                t.tag
-                  ? "border-[#ED4463] shadow-md"
-                  : "border-[#E5E5E5] hover:border-[#00A4E3]"
+                t.tag ? "border-[#ED4463] shadow-md" : "border-[#E5E5E5] hover:border-[#00A4E3]"
               }`}
               style={{ background: "#fff" }}
             >
@@ -297,7 +517,18 @@ export default function Index() {
                   {t.duration}
                 </p>
                 <h3 className="text-[22px] font-bold text-black mb-3">{t.name}</h3>
-                <p className="text-[14px] text-[#7A7A7A] leading-snug mb-5 min-h-[40px]">{t.hook}</p>
+                <p className="text-[14px] text-[#7A7A7A] leading-snug mb-4 min-h-[40px]">{t.hook}</p>
+
+                {/* Цены */}
+                <div className="mb-1">
+                  <span className="text-[14px] text-[#AAAAAA] line-through mr-2">{t.priceOld}</span>
+                  <span
+                    className="inline-flex items-center px-2 py-0.5 rounded text-white text-[11px] font-bold"
+                    style={{ background: "#ED4463" }}
+                  >
+                    −25%
+                  </span>
+                </div>
                 <p className="text-[34px] font-extrabold text-black mb-1" style={{ lineHeight: 1 }}>
                   {t.price}
                 </p>
@@ -322,9 +553,12 @@ export default function Index() {
               </div>
 
               <div className="p-7 pt-6 mt-auto">
-                <a href="#cta" className="btn-cta block text-center w-full">
+                <button
+                  onClick={() => openPopup(t.name)}
+                  className="btn-cta block text-center w-full"
+                >
                   Записаться
-                </a>
+                </button>
               </div>
             </div>
           ))}
@@ -387,11 +621,18 @@ export default function Index() {
                 🎁
               </div>
               <h4 className="text-[17px] font-bold text-black mb-1">{g.name}</h4>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[13px] text-[#AAAAAA] line-through">{g.priceOld}</span>
+                <span className="text-[11px] font-bold text-white px-1.5 py-0.5 rounded" style={{ background: "#ED4463" }}>−25%</span>
+              </div>
               <p className="text-[22px] font-extrabold mb-3" style={{ color: "#ED4463" }}>{g.price}</p>
               <p className="text-[13px] text-[#7A7A7A] leading-snug mb-5">{g.desc}</p>
-              <a href="#cta" className="block text-center text-[14px] font-semibold py-2.5 px-4 rounded-lg border-2 border-[#ED4463] text-[#ED4463] hover:bg-[#ED4463] hover:text-white transition-all duration-200">
+              <button
+                onClick={() => openPopup(g.name)}
+                className="block w-full text-center text-[14px] font-semibold py-2.5 px-4 rounded-lg border-2 border-[#ED4463] text-[#ED4463] hover:bg-[#ED4463] hover:text-white transition-all duration-200"
+              >
                 Заказать сертификат
-              </a>
+              </button>
             </div>
           ))}
         </div>
@@ -403,9 +644,13 @@ export default function Index() {
               Вы выбираете тариф и оплачиваете сертификат. Мы присылаем красиво оформленный документ — его можно распечатать или отправить в мессенджер. Получатель записывается на интервью сам, в удобное время.
             </p>
           </div>
-          <a href="#cta" className="btn-cta flex-shrink-0" style={{ background: "#ED4463" }}>
+          <button
+            onClick={() => openPopup("Подарочный сертификат")}
+            className="btn-cta flex-shrink-0"
+            style={{ background: "#ED4463" }}
+          >
             Заказать сертификат
-          </a>
+          </button>
         </div>
       </section>
 
@@ -421,7 +666,7 @@ export default function Index() {
             <p className="text-[17px] text-[#444] leading-relaxed mb-8">
               Теперь это отдельная глава в книге. С документами. С фотографиями. С её голосом.
             </p>
-            <div className="flex flex-wrap gap-4 text-[14px] font-semibold" style={{ color: "#7A7A7A" }}>
+            <div className="flex flex-wrap gap-2 text-[14px] text-[#7A7A7A]">
               <span>Артём и Маргарита — что происходит с отношениями за 7 лет</span>
               <span>·</span>
               <span>Интервью с 6-летним Петром</span>
@@ -474,9 +719,7 @@ export default function Index() {
       {/* TEAM */}
       <section id="team" className="max-w-7xl mx-auto px-6 py-20">
         <h2 className="text-[40px] font-bold text-black mb-3">Наши интервьюеры</h2>
-        <p className="text-[17px] text-[#7A7A7A] mb-12">
-          Проверенные психологи, умеющие профессионально и бережно задавать вопросы
-        </p>
+        <p className="text-[17px] text-[#7A7A7A] mb-12">Проверенные психологи, умеющие профессионально и бережно задавать вопросы</p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {TEAM_MEMBERS.map((m, idx) => (
             <div key={m.name} className="sb-card text-center p-6">
@@ -485,13 +728,7 @@ export default function Index() {
                   src={TEAM_IMG}
                   alt={m.name}
                   className="w-full h-full object-cover"
-                  style={{
-                    objectPosition:
-                      idx === 0 ? "0% 0%" :
-                      idx === 1 ? "100% 0%" :
-                      idx === 2 ? "0% 100%" :
-                      "100% 100%",
-                  }}
+                  style={{ objectPosition: idx === 0 ? "0% 0%" : idx === 1 ? "100% 0%" : idx === 2 ? "0% 100%" : "100% 100%" }}
                 />
               </div>
               <h3 className="text-[15px] font-semibold text-black mb-1">{m.name}</h3>
@@ -506,7 +743,10 @@ export default function Index() {
         <div className="max-w-[800px] mx-auto px-6">
           <h2 className="text-[40px] font-bold text-black mb-3">FAQ</h2>
           <p className="text-[17px] text-[#7A7A7A] mb-10">
-            Или пишите в WhatsApp: <a href="https://wa.me/79035069205" target="_blank" rel="noopener noreferrer" className="font-semibold text-[#222] hover:text-[#00A4E3] transition-colors">+7 903 506 92 05</a>
+            Или пишите в WhatsApp:{" "}
+            <a href="https://wa.me/79035069205" target="_blank" rel="noopener noreferrer" className="font-semibold text-[#222] hover:text-[#00A4E3] transition-colors">
+              +7 903 506 92 05
+            </a>
           </p>
           <div>
             {FAQ_ITEMS.map((item) => (
@@ -529,81 +769,32 @@ export default function Index() {
       <section id="cta" className="py-32 px-6" style={{ background: "#0F1419" }}>
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-[40px] font-bold text-white mb-6">
-              Запишитесь на бесплатную консультацию
-            </h2>
+            <h2 className="text-[40px] font-bold text-white mb-6">Запишитесь на бесплатную консультацию</h2>
             <p className="text-[17px] leading-relaxed mb-8" style={{ color: "rgba(255,255,255,0.65)" }}>
-              Внесите свои контактные данные и мы свяжемся с вами в ближайшее время.
+              Свяжемся с вами в ближайшее время и подберём подходящий формат.
             </p>
             <div className="space-y-3 text-[15px]" style={{ color: "rgba(255,255,255,0.5)" }}>
-              <div className="flex items-center gap-3">
-                <span style={{ color: "#00A4E3" }}>✓</span> Работаем во всех крупных городах мира
-              </div>
-              <div className="flex items-center gap-3">
-                <span style={{ color: "#00A4E3" }}>✓</span> Интервью онлайн, в студии или дома
-              </div>
-              <div className="flex items-center gap-3">
-                <span style={{ color: "#00A4E3" }}>✓</span> Подписываем NDA по запросу
-              </div>
+              <div className="flex items-center gap-3"><span style={{ color: "#00A4E3" }}>✓</span> Работаем во всех крупных городах мира</div>
+              <div className="flex items-center gap-3"><span style={{ color: "#00A4E3" }}>✓</span> Интервью онлайн, в студии или дома</div>
+              <div className="flex items-center gap-3"><span style={{ color: "#00A4E3" }}>✓</span> Подписываем NDA по запросу</div>
+              <div className="flex items-center gap-3"><span style={{ color: "#ED4463" }}>🔥</span> Скидка 25% на все тарифы сейчас</div>
             </div>
           </div>
-          <div className="bg-white rounded-[12px] p-8 max-w-[500px] w-full">
-            <h3 className="text-[20px] font-bold text-black mb-6">Записаться</h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-[14px] font-semibold text-[#222] mb-1">Имя</label>
-                <input
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="Ваше имя"
-                  className="w-full border border-[#E5E5E5] rounded-lg px-4 py-3 text-[15px] focus:outline-none focus:border-[#00A4E3] transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-[14px] font-semibold text-[#222] mb-1">Телефон</label>
-                <input
-                  type="text"
-                  required
-                  value={formData.contact}
-                  onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
-                  placeholder="+7 999 123-45-67"
-                  className="w-full border border-[#E5E5E5] rounded-lg px-4 py-3 text-[15px] focus:outline-none focus:border-[#00A4E3] transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-[14px] font-semibold text-[#222] mb-1">Тип интервью</label>
-                <select
-                  value={formData.tariff}
-                  onChange={(e) => setFormData({ ...formData, tariff: e.target.value })}
-                  className="w-full border border-[#E5E5E5] rounded-lg px-4 py-3 text-[15px] focus:outline-none focus:border-[#00A4E3] transition-colors bg-white"
-                >
-                  <option value="">Ещё не определился</option>
-                  {TARIFFS.map((t) => (
-                    <option key={t.name}>{t.name}</option>
-                  ))}
-                  <option>Подарочный сертификат</option>
-                </select>
-              </div>
-              <div className="flex items-start gap-3">
-                <input
-                  type="checkbox"
-                  id="agree"
-                  required
-                  checked={formData.agree}
-                  onChange={(e) => setFormData({ ...formData, agree: e.target.checked })}
-                  className="mt-1 w-4 h-4 cursor-pointer"
-                  style={{ accentColor: "#00A4E3" }}
-                />
-                <label htmlFor="agree" className="text-[13px] text-[#7A7A7A] leading-snug cursor-pointer">
-                  Нажимая «Записаться» вы соглашаетесь с политикой обработки персональных данных
-                </label>
-              </div>
-              <button type="submit" className="btn-cta w-full text-center">
-                Записаться
-              </button>
-            </form>
+          <div className="flex flex-col gap-4 max-w-[400px]">
+            <button
+              onClick={() => openPopup()}
+              className="btn-cta text-center text-[18px] py-5"
+            >
+              Записаться на консультацию
+            </button>
+            <a
+              href="https://wa.me/79031932725"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary text-center text-[16px] py-4"
+            >
+              Написать в WhatsApp
+            </a>
           </div>
         </div>
       </section>
@@ -625,9 +816,9 @@ export default function Index() {
             <ul className="space-y-2">
               {TARIFFS.map((t) => (
                 <li key={t.name}>
-                  <a href="#tariffs" className="text-[14px] hover:text-white transition-colors" style={{ color: "rgba(255,255,255,0.5)" }}>
+                  <button onClick={() => openPopup(t.name)} className="text-[14px] hover:text-white transition-colors text-left" style={{ color: "rgba(255,255,255,0.5)" }}>
                     {t.name}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -648,7 +839,7 @@ export default function Index() {
             <h4 className="text-white font-semibold mb-4 text-[15px]">Контакты</h4>
             <ul className="space-y-2 text-[14px]" style={{ color: "rgba(255,255,255,0.5)" }}>
               <li><a href="tel:+79031932725" className="hover:text-white transition-colors">+7 903 193 27 25</a></li>
-              <li><a href="https://wa.me/79035069205" className="hover:text-white transition-colors">WhatsApp</a></li>
+              <li><a href="https://wa.me/79035069205" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">WhatsApp +7 903 506 92 05</a></li>
               <li>Работаем во всех крупных городах</li>
             </ul>
           </div>
@@ -661,12 +852,6 @@ export default function Index() {
           <span>Политика конфиденциальности · Договор оферты</span>
         </div>
       </footer>
-
-      {toast && (
-        <div className="toast-success">
-          ✓ Заявка принята — свяжемся с вами в ближайшее время
-        </div>
-      )}
     </div>
   );
 }
