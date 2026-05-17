@@ -497,29 +497,29 @@ export default function Index() {
         </div>
 
         {/* Активная карточка тарифа */}
-        <div className="grid md:grid-cols-[1fr_340px] gap-6 items-start">
+        <div className="grid md:grid-cols-[1fr_320px] gap-6 items-start">
           {/* Левая: инфо */}
-          <div className="rounded-2xl border-2 p-8 transition-all duration-300"
+          <div className="rounded-2xl border-2 p-6 md:p-8 transition-all duration-300"
             style={{ borderColor: t.color, background: "#fff" }}>
             <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
               <div>
                 <p className="text-[12px] font-semibold uppercase tracking-widest mb-1" style={{ color: t.color }}>{t.duration}</p>
-                <h3 className="text-[28px] font-bold text-black">{t.fullName}</h3>
-                <p className="text-[15px] text-[#7A7A7A] mt-1">{t.hook}</p>
+                <h3 className="text-[24px] md:text-[28px] font-bold text-black">{t.fullName}</h3>
+                <p className="text-[14px] text-[#7A7A7A] mt-1">{t.hook}</p>
               </div>
               <div className="text-right flex-shrink-0">
                 {t.tag ? (
-                  <span className="inline-block px-3 py-1 rounded-full text-white text-[12px] font-bold mb-2" style={{ background: "#ED4463" }}>
+                  <span className="inline-block px-3 py-1 rounded-full text-white text-[11px] font-bold mb-2" style={{ background: "#ED4463" }}>
                     {t.tag} −{t.discount}%
                   </span>
                 ) : (
-                  <span className="inline-block px-3 py-1 rounded-full text-white text-[12px] font-bold mb-2" style={{ background: t.color }}>
+                  <span className="inline-block px-3 py-1 rounded-full text-white text-[11px] font-bold mb-2" style={{ background: t.color }}>
                     Скидка −{t.discount}%
                   </span>
                 )}
                 <div>
-                  <span className="text-[14px] text-[#AAAAAA] line-through block">{t.priceOld}</span>
-                  <span className="text-[38px] font-extrabold" style={{ color: "#000", lineHeight: 1 }}>{t.price}</span>
+                  <span className="text-[13px] text-[#AAAAAA] line-through block">{t.priceOld}</span>
+                  <span className="text-[32px] md:text-[38px] font-extrabold" style={{ color: "#000", lineHeight: 1 }}>{t.price}</span>
                 </div>
               </div>
             </div>
@@ -531,33 +531,30 @@ export default function Index() {
                     style={{ background: f.included ? `${t.color}18` : "#F5F5F5", color: f.included ? t.color : "#CCC" }}>
                     {f.included ? "✓" : "×"}
                   </span>
-                  <span className={`text-[14px] ${f.included ? "text-[#222]" : "text-[#BBBBB]"} ${!f.included ? "line-through opacity-40" : ""}`}>{f.text}</span>
+                  <span className={`text-[14px] ${f.included ? "text-[#222]" : ""} ${!f.included ? "line-through opacity-40" : ""}`}>{f.text}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Правая: сравнение всех тарифов */}
-          <div className="rounded-2xl border border-[#E5E5E5] overflow-hidden">
+          {/* Правая: сравнение — только на desktop */}
+          <div className="hidden md:block rounded-2xl border border-[#E5E5E5] overflow-hidden">
             <div className="px-5 py-4 border-b border-[#F0F0F0]" style={{ background: "#FAFAFA" }}>
               <p className="text-[13px] font-semibold text-[#444]">Сравнение тарифов</p>
             </div>
             <table className="w-full border-collapse">
-              {/* Шапка с названиями тарифов */}
               <thead>
                 <tr style={{ background: "#FAFAFA" }}>
-                  <th className="w-[110px] min-w-[110px] px-4 py-3 border-b border-[#F0F0F0]" />
+                  <th className="w-[100px] px-4 py-3 border-b border-[#F0F0F0]" />
                   {TARIFFS.map((tariff, vi) => (
-                    <th key={vi}
-                      onClick={() => setActiveTariff(vi)}
-                      className="px-2 py-3 text-center cursor-pointer transition-colors border-b"
+                    <th key={vi} onClick={() => setActiveTariff(vi)}
+                      className="px-2 py-3 text-center cursor-pointer border-b transition-all"
                       style={{
                         borderBottomColor: activeTariff === vi ? tariff.color : "#F0F0F0",
                         borderBottomWidth: activeTariff === vi ? 2 : 1,
                         background: activeTariff === vi ? `${tariff.color}0D` : "transparent",
-                      }}
-                    >
-                      <div className="text-[12px] font-bold" style={{ color: activeTariff === vi ? tariff.color : "#888" }}>
+                      }}>
+                      <div className="text-[11px] font-bold" style={{ color: activeTariff === vi ? tariff.color : "#888" }}>
                         {tariff.name}
                       </div>
                     </th>
@@ -566,50 +563,83 @@ export default function Index() {
               </thead>
               <tbody>
                 {[
-                  { label: "Длительность", vals: ["2 сессии", "3 ч", "5 ч", "8 ч"] },
+                  { label: "Длит.", vals: ["2 сес.", "3 ч", "5 ч", "8 ч"] },
                   { label: "Текст", vals: ["~50 стр.", "~70 стр.", "~120 стр.", "~200 стр."] },
-                  { label: "Фотоархив", vals: ["200 стр.", "400 стр.", "600 стр.", "∞"] },
+                  { label: "Фото", vals: ["200 стр.", "400 стр.", "600 стр.", "∞"] },
                   { label: "Видео", vals: ["Аудио", "✓", "Главы", "Серия"] },
                   { label: "Архив", vals: ["—", "—", "✓", "Расш."] },
                   { label: "Экз.", vals: ["1", "1", "2", "3+USB"] },
-                  { label: "Хранение", vals: ["5 лет", "10 лет", "10 лет", "∞"] },
+                  { label: "Хран.", vals: ["5 лет", "10 лет", "10 лет", "∞"] },
                 ].map((row, ri) => (
                   <tr key={row.label} style={{ background: ri % 2 === 0 ? "#fff" : "#FAFAFA" }}>
-                    <td className="w-[110px] min-w-[110px] px-4 py-2.5 text-[12px] font-semibold text-[#888] whitespace-nowrap border-b border-[#F5F5F5]">
+                    <td className="px-4 py-2 text-[11px] font-semibold text-[#999] whitespace-nowrap border-b border-[#F5F5F5]">
                       {row.label}
                     </td>
                     {row.vals.map((v, vi) => (
-                      <td key={vi}
-                        onClick={() => setActiveTariff(vi)}
-                        className="px-2 py-2.5 text-center text-[13px] font-semibold cursor-pointer transition-colors border-b border-[#F5F5F5]"
+                      <td key={vi} onClick={() => setActiveTariff(vi)}
+                        className="px-1 py-2 text-center text-[12px] font-semibold cursor-pointer border-b border-[#F5F5F5] transition-colors"
                         style={{
                           background: activeTariff === vi ? `${TARIFFS[vi].color}0D` : "transparent",
                           color: activeTariff === vi ? TARIFFS[vi].color : "#333",
-                        }}
-                      >
+                        }}>
                         {v}
                       </td>
                     ))}
                   </tr>
                 ))}
-                {/* Строка с ценами */}
                 <tr style={{ background: "#FAFAFA" }}>
-                  <td className="px-4 py-3 text-[12px] font-semibold text-[#888] whitespace-nowrap">Цена</td>
+                  <td className="px-4 py-3 text-[11px] font-semibold text-[#999]">Цена</td>
                   {TARIFFS.map((tariff, vi) => (
-                    <td key={vi}
-                      onClick={() => setActiveTariff(vi)}
-                      className="px-2 py-3 text-center cursor-pointer"
-                      style={{ background: activeTariff === vi ? `${tariff.color}0D` : "transparent" }}
-                    >
-                      <div className="text-[11px] text-[#AAAAAA] line-through leading-none mb-0.5">{tariff.priceOld}</div>
-                      <div className="text-[12px] font-extrabold leading-none" style={{ color: tariff.color }}>
-                        {tariff.price}
-                      </div>
+                    <td key={vi} onClick={() => setActiveTariff(vi)}
+                      className="px-1 py-3 text-center cursor-pointer transition-colors"
+                      style={{ background: activeTariff === vi ? `${tariff.color}0D` : "transparent" }}>
+                      <div className="text-[10px] text-[#AAAAAA] line-through leading-none mb-0.5">{tariff.priceOld}</div>
+                      <div className="text-[11px] font-extrabold leading-none" style={{ color: tariff.color }}>{tariff.price}</div>
                     </td>
                   ))}
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          {/* Мобильное сравнение — горизонтальный скролл с карточками */}
+          <div className="md:hidden -mx-6 px-6">
+            <p className="text-[13px] font-semibold text-[#444] mb-3">Быстрое сравнение</p>
+            <div className="flex gap-3 overflow-x-auto pb-3" style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}>
+              {TARIFFS.map((tariff, vi) => (
+                <button key={vi} onClick={() => setActiveTariff(vi)}
+                  className="flex-shrink-0 rounded-xl border-2 p-4 text-left transition-all duration-200"
+                  style={{
+                    width: 180,
+                    scrollSnapAlign: "start",
+                    borderColor: activeTariff === vi ? tariff.color : "#E5E5E5",
+                    background: activeTariff === vi ? `${tariff.color}08` : "#fff",
+                  }}>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[13px] font-bold" style={{ color: activeTariff === vi ? tariff.color : "#222" }}>
+                      {tariff.fullName}
+                    </span>
+                    {tariff.tag && (
+                      <span className="text-[10px] font-bold text-white px-1.5 py-0.5 rounded-full flex-shrink-0 ml-1" style={{ background: "#ED4463" }}>
+                        −{tariff.discount}%
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-[11px] text-[#AAAAAA] line-through">{tariff.priceOld}</div>
+                  <div className="text-[18px] font-extrabold mb-3" style={{ color: activeTariff === vi ? tariff.color : "#000", lineHeight: 1.2 }}>
+                    {tariff.price}
+                  </div>
+                  <div className="space-y-1">
+                    {[
+                      tariff.features.filter(f => f.included).length + " опций включено",
+                      tariff.duration,
+                    ].map((line) => (
+                      <div key={line} className="text-[11px] text-[#7A7A7A]">{line}</div>
+                    ))}
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
