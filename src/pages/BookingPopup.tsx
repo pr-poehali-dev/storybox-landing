@@ -21,6 +21,25 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
   const [promoStatus, setPromoStatus] = useState<"idle" | "valid" | "invalid">("idle");
   const [promoDiscount, setPromoDiscount] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [phoneError, setPhoneError] = useState("");
+
+  const validatePhone = (value: string) => {
+    const digits = value.replace(/\D/g, "");
+    if (!value.trim()) return "Введите номер телефона";
+    if (digits.length < 10) return "Слишком короткий номер";
+    if (digits.length > 12) return "Слишком длинный номер";
+    return "";
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setForm({ ...form, phone: value });
+    if (phoneError) setPhoneError(validatePhone(value));
+  };
+
+  const handlePhoneBlur = () => {
+    setPhoneError(validatePhone(form.phone));
+  };
 
   const checkPromo = () => {
     const code = form.promo.trim().toUpperCase();
@@ -32,8 +51,15 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
     onClose();
     setTimeout(() => {
       setForm({ name: "", phone: "", tariff: initialTariff, promo: "", agreePersonal: false, agreeTerms: false, agreeMarketing: false });
-      setPromoStatus("idle"); setPromoDiscount(0); setSubmitted(false);
+      setPromoStatus("idle"); setPromoDiscount(0); setSubmitted(false); setPhoneError("");
     }, 300);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const err = validatePhone(form.phone);
+    if (err) { setPhoneError(err); return; }
+    setSubmitted(true);
   };
 
   if (!open) return null;
@@ -66,7 +92,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
             <button onClick={handleClose} className="btn-cta">Закрыть</button>
           </div>
         ) : (
-          <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="px-7 pb-7 pt-5 space-y-4">
+          <form onSubmit={handleSubmit} className="px-7 pb-7 pt-5 space-y-4">
             <div className="rounded-xl px-4 py-3 flex items-center gap-3" style={{ background: "#F2F9FF" }}>
               <span className="text-xl flex-shrink-0">🔥</span>
               <p className="text-[13px] text-[#222] leading-snug">
@@ -87,11 +113,23 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
             <div>
               <label className="block text-[13px] font-semibold text-[#222] mb-1">Телефон</label>
               <input
-                type="tel" required value={form.phone}
-                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                type="tel"
+                required
+                value={form.phone}
+                onChange={handlePhoneChange}
+                onBlur={handlePhoneBlur}
                 placeholder="+7 999 123-45-67"
-                className="w-full border border-[#E5E5E5] rounded-lg px-4 py-3 text-[15px] focus:outline-none focus:border-[#00A4E3] transition-colors"
+                className="w-full rounded-lg px-4 py-3 text-[15px] focus:outline-none transition-colors"
+                style={{
+                  border: phoneError ? "1.5px solid #ED4463" : "1px solid #E5E5E5",
+                  outline: "none",
+                }}
               />
+              {phoneError && (
+                <p className="text-[12px] mt-1.5 font-medium" style={{ color: "#ED4463" }}>
+                  {phoneError}
+                </p>
+              )}
             </div>
 
             <div>

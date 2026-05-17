@@ -33,8 +33,25 @@ export default function Index() {
               <a key={l.label} href={l.href} className="text-[15px] text-[#222] hover:text-[#00A4E3] transition-colors">{l.label}</a>
             ))}
           </nav>
-          <div className="flex items-center gap-4">
-            <a href="tel:+79031932725" className="hidden lg:block text-[15px] font-semibold text-[#222] hover:text-[#00A4E3] transition-colors">+7 903 193 27 25</a>
+          <div className="flex items-center gap-3">
+            <a
+              href="https://wa.me/79031932725"
+              target="_blank" rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="hidden md:flex w-9 h-9 rounded-full items-center justify-center text-white text-[13px] font-bold hover:opacity-85 transition-opacity flex-shrink-0"
+              style={{ background: "#25D366" }}
+            >
+              W
+            </a>
+            <a
+              href="https://t.me/storybox_ru"
+              target="_blank" rel="noopener noreferrer"
+              aria-label="Telegram"
+              className="hidden md:flex w-9 h-9 rounded-full items-center justify-center text-white text-[13px] font-bold hover:opacity-85 transition-opacity flex-shrink-0"
+              style={{ background: "#2AABEE" }}
+            >
+              T
+            </a>
             <button onClick={() => openPopup()} className="btn-cta" style={{ padding: "10px 20px", fontSize: 14 }}>Оплатить онлайн</button>
           </div>
         </div>
@@ -53,9 +70,14 @@ export default function Index() {
           <p className="text-[15px] text-[#7A7A7A] mb-8">
             Интервью онлайн, в студии или дома. Работаем во всех крупных городах мира.
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap items-start gap-4">
             <button onClick={() => openPopup()} className="btn-cta">Оплатить онлайн</button>
-            <button onClick={() => openPopup()} className="btn-secondary">Бесплатная консультация</button>
+            <div>
+              <button onClick={() => openPopup()} className="btn-secondary">Бесплатная консультация</button>
+              <p className="text-[12px] mt-1.5" style={{ color: "#AAAAAA" }}>
+                Поможем подобрать тариф · до 30 минут · онлайн · бесплатно
+              </p>
+            </div>
           </div>
         </div>
         <div className="rounded-2xl overflow-hidden bg-[#F2F9FF] relative" style={{ aspectRatio: "4/3" }}>
@@ -370,9 +392,26 @@ export default function Index() {
             <h4 className="text-white font-semibold mb-4 text-[15px]">Контакты</h4>
             <ul className="space-y-2 text-[14px]" style={{ color: "rgba(255,255,255,0.5)" }}>
               <li><a href="tel:+79031932725" className="hover:text-white transition-colors">+7 903 193 27 25</a></li>
-              <li><a href="https://wa.me/79035069205" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">WhatsApp +7 903 506 92 05</a></li>
               <li>Работаем во всех крупных городах</li>
             </ul>
+            <div className="flex gap-2 mt-4">
+              <a
+                href="https://wa.me/79031932725"
+                target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] font-semibold hover:opacity-90 transition-opacity"
+                style={{ background: "#25D366", color: "#fff" }}
+              >
+                <span>W</span> WhatsApp
+              </a>
+              <a
+                href="https://t.me/storybox_ru"
+                target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] font-semibold hover:opacity-90 transition-opacity"
+                style={{ background: "#2AABEE", color: "#fff" }}
+              >
+                <span>T</span> Telegram
+              </a>
+            </div>
           </div>
         </div>
         <div
