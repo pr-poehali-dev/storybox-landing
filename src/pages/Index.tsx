@@ -52,7 +52,7 @@ export default function Index() {
             >
               T
             </a>
-            <button onClick={() => openPopup()} className="btn-cta" style={{ padding: "10px 20px", fontSize: 14 }}>Оплатить онлайн</button>
+            <button onClick={() => openPopup()} className="btn-cta" style={{ padding: "10px 20px", fontSize: 14 }}>Бесплатная консультация</button>
           </div>
         </div>
       </header>
@@ -71,7 +71,7 @@ export default function Index() {
             Интервью онлайн, в студии или дома. Работаем во всех крупных городах мира.
           </p>
           <div className="flex flex-wrap items-start gap-4">
-            <button onClick={() => openPopup()} className="btn-cta">Оплатить онлайн</button>
+            <a href="#tariffs" className="btn-cta">Выбрать тариф</a>
             <div>
               <button onClick={() => openPopup()} className="btn-secondary">Бесплатная консультация</button>
               <p className="text-[12px] mt-1.5" style={{ color: "#AAAAAA" }}>
