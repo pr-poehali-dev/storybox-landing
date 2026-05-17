@@ -1,0 +1,216 @@
+import { useState } from "react";
+import Icon from "@/components/ui/icon";
+
+interface ConsultPopupProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
+  const [form, setForm] = useState({ name: "", contact: "" });
+  const [contactType, setContactType] = useState<"phone" | "email">("phone");
+  const [contactError, setContactError] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const validateContact = (value: string, type: "phone" | "email") => {
+    if (!value.trim()) return "Заполните это поле";
+    if (type === "phone") {
+      const digits = value.replace(/\D/g, "");
+      if (digits.length < 10) return "Слишком короткий номер";
+      if (digits.length > 12) return "Слишком длинный номер";
+    } else {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) return "Введите корректный e-mail";
+    }
+    return "";
+  };
+
+  const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value;
+    // разрешаем только цифры, +, пробел, скобки, дефис
+    const filtered = raw.replace(/[^\d\s+()/-]/g, "");
+    setForm({ ...form, contact: filtered });
+    if (contactError) setContactError(validateContact(filtered, "phone"));
+  };
+
+  const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, contact: e.target.value });
+    if (contactError) setContactError(validateContact(e.target.value, "email"));
+  };
+
+  const handleContactBlur = () => {
+    setContactError(validateContact(form.contact, contactType));
+  };
+
+  const switchType = (type: "phone" | "email") => {
+    setContactType(type);
+    setForm({ ...form, contact: "" });
+    setContactError("");
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const err = validateContact(form.contact, contactType);
+    if (err) { setContactError(err); return; }
+    setSubmitted(true);
+  };
+
+  const handleClose = () => {
+    onClose();
+    setTimeout(() => {
+      setForm({ name: "", contact: "" });
+      setContactType("phone");
+      setContactError("");
+      setSubmitted(false);
+    }, 300);
+  };
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }}
+      onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}
+    >
+      <div
+        className="bg-white rounded-2xl w-full max-w-[420px] shadow-2xl overflow-hidden"
+        style={{ animation: "popup-in 0.25s cubic-bezier(0.34,1.56,0.64,1)" }}
+      >
+        {/* Шапка */}
+        <div className="px-7 pt-7 pb-5 border-b border-[#F0F0F0]">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h2 className="text-[20px] font-bold text-black leading-tight">
+                Бесплатная консультация
+              </h2>
+              <p className="text-[13px] text-[#7A7A7A] mt-1">
+                30 минут · онлайн · без обязательств
+              </p>
+            </div>
+            <button
+              onClick={handleClose}
+              className="w-9 h-9 rounded-full flex items-center justify-center text-[#7A7A7A] hover:bg-[#F2F2F2] transition-colors flex-shrink-0"
+            >
+              <Icon name="X" size={18} />
+            </button>
+          </div>
+        </div>
+
+        {submitted ? (
+          /* Успех */
+          <div className="px-7 py-10 text-center">
+            <div
+              className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5 text-white text-2xl"
+              style={{ background: "#00A4E3" }}
+            >
+              ✓
+            </div>
+            <h3 className="text-[20px] font-bold text-black mb-2">Заявка принята!</h3>
+            <p className="text-[15px] text-[#7A7A7A] mb-6">
+              Свяжемся с вами в ближайшее время и подберём удобное время для встречи.
+            </p>
+            <button onClick={handleClose} className="btn-cta">Закрыть</button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="px-7 py-6 space-y-4">
+
+            {/* Что будет на встрече */}
+            <div className="rounded-xl px-4 py-3 flex gap-3" style={{ background: "#F2F9FF" }}>
+              <span className="text-xl flex-shrink-0 mt-0.5">💬</span>
+              <p className="text-[13px] text-[#444] leading-snug">
+                Расскажем, как всё устроено, ответим на вопросы и поможем выбрать формат для вашей семьи.
+              </p>
+            </div>
+
+            {/* Имя */}
+            <div>
+              <label className="block text-[13px] font-semibold text-[#222] mb-1.5">Ваше имя</label>
+              <input
+                type="text"
+                required
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                placeholder="Как к вам обращаться?"
+                className="w-full border border-[#E5E5E5] rounded-lg px-4 py-3 text-[15px] focus:outline-none focus:border-[#00A4E3] transition-colors"
+              />
+            </div>
+
+            {/* Переключатель телефон / email */}
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-[13px] font-semibold text-[#222]">Как с вами связаться?</label>
+                <div className="flex rounded-lg overflow-hidden border border-[#E5E5E5]">
+                  <button
+                    type="button"
+                    onClick={() => switchType("phone")}
+                    className="px-3 py-1 text-[12px] font-semibold transition-colors"
+                    style={{
+                      background: contactType === "phone" ? "#00A4E3" : "transparent",
+                      color: contactType === "phone" ? "#fff" : "#7A7A7A",
+                    }}
+                  >
+                    Телефон
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => switchType("email")}
+                    className="px-3 py-1 text-[12px] font-semibold transition-colors"
+                    style={{
+                      background: contactType === "email" ? "#00A4E3" : "transparent",
+                      color: contactType === "email" ? "#fff" : "#7A7A7A",
+                    }}
+                  >
+                    E-mail
+                  </button>
+                </div>
+              </div>
+
+              {contactType === "phone" ? (
+                <input
+                  type="tel"
+                  required
+                  value={form.contact}
+                  onChange={handlePhoneInput}
+                  onBlur={handleContactBlur}
+                  placeholder="+7 999 123-45-67"
+                  className="w-full rounded-lg px-4 py-3 text-[15px] focus:outline-none transition-colors"
+                  style={{
+                    border: contactError ? "1.5px solid #ED4463" : "1px solid #E5E5E5",
+                  }}
+                />
+              ) : (
+                <input
+                  type="email"
+                  required
+                  value={form.contact}
+                  onChange={handleEmailInput}
+                  onBlur={handleContactBlur}
+                  placeholder="your@email.com"
+                  className="w-full rounded-lg px-4 py-3 text-[15px] focus:outline-none transition-colors"
+                  style={{
+                    border: contactError ? "1.5px solid #ED4463" : "1px solid #E5E5E5",
+                  }}
+                />
+              )}
+
+              {contactError && (
+                <p className="text-[12px] mt-1.5 font-medium" style={{ color: "#ED4463" }}>
+                  {contactError}
+                </p>
+              )}
+            </div>
+
+            <button type="submit" className="btn-cta w-full text-center text-[15px] py-4">
+              Записаться на консультацию
+            </button>
+
+            <p className="text-[11px] text-center" style={{ color: "#AAAAAA" }}>
+              Нажимая кнопку, вы соглашаетесь с{" "}
+              <a href="#" className="underline hover:text-[#00A4E3]">политикой обработки персональных данных</a>
+            </p>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}

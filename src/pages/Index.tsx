@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 import BookingPopup from "./BookingPopup";
+import ConsultPopup from "./ConsultPopup";
 import TariffsSection from "./TariffsSection";
 import WhyOneBook from "./WhyOneBook";
 import FaqSection from "./FaqSection";
@@ -13,13 +14,16 @@ import {
 export default function Index() {
   const [popupOpen, setPopupOpen] = useState(false);
   const [popupTariff, setPopupTariff] = useState("");
+  const [consultOpen, setConsultOpen] = useState(false);
   const [activeTariff, setActiveTariff] = useState(2); // 5 часов по умолчанию
 
   const openPopup = (tariff = "") => { setPopupTariff(tariff); setPopupOpen(true); };
+  const openConsult = () => setConsultOpen(true);
 
   return (
     <div style={{ fontFamily: "'Open Sans', sans-serif" }}>
       <BookingPopup open={popupOpen} onClose={() => setPopupOpen(false)} initialTariff={popupTariff} />
+      <ConsultPopup open={consultOpen} onClose={() => setConsultOpen(false)} />
 
       {/* HEADER */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[#E5E5E5]">
@@ -52,7 +56,7 @@ export default function Index() {
             >
               T
             </a>
-            <button onClick={() => openPopup()} className="btn-cta" style={{ padding: "10px 20px", fontSize: 14 }}>Бесплатная консультация</button>
+            <button onClick={openConsult} className="btn-cta" style={{ padding: "10px 20px", fontSize: 14 }}>Бесплатная консультация</button>
           </div>
         </div>
       </header>
@@ -73,7 +77,7 @@ export default function Index() {
           <div className="flex flex-wrap items-start gap-4">
             <a href="#tariffs" className="btn-cta">Выбрать тариф</a>
             <div>
-              <button onClick={() => openPopup()} className="btn-secondary">Бесплатная консультация</button>
+              <button onClick={openConsult} className="btn-secondary">Бесплатная консультация</button>
               <p className="text-[12px] mt-1.5" style={{ color: "#AAAAAA" }}>
                 Поможем подобрать тариф · до 30 минут · онлайн · бесплатно
               </p>
@@ -150,7 +154,7 @@ export default function Index() {
         </div>
 
         {/* ── Почему одной книги достаточно ── */}
-        <WhyOneBook openPopup={openPopup} />
+        <WhyOneBook openConsult={openConsult} />
 
         <h3 className="text-[24px] font-bold text-black mb-2">Из чего состоит каждая книга</h3>
         <p className="text-[15px] text-[#7A7A7A] mb-8">Шесть составляющих, которые входят в каждый проект</p>
@@ -242,6 +246,7 @@ export default function Index() {
         activeTariff={activeTariff}
         setActiveTariff={setActiveTariff}
         openPopup={openPopup}
+        openConsult={openConsult}
       />
 
       {/* GIFT CERTIFICATES */}
@@ -326,7 +331,7 @@ export default function Index() {
       </section>
 
       {/* FAQ */}
-      <FaqSection openPopup={openPopup} />
+      <FaqSection openConsult={openConsult} />
 
       {/* FOOTER */}
       <footer style={{ background: "#0F1419" }} className="border-t border-white/10 pt-14 pb-10 px-6">

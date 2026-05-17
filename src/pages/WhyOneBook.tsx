@@ -42,10 +42,10 @@ const ITEMS = [
 ];
 
 interface Props {
-  openPopup: (tariff?: string) => void;
+  openConsult: () => void;
 }
 
-export default function WhyOneBook({ openPopup }: Props) {
+export default function WhyOneBook({ openConsult }: Props) {
   const [active, setActive] = useState(0);
   const [animKey, setAnimKey] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -199,7 +199,7 @@ export default function WhyOneBook({ openPopup }: Props) {
           <span className="font-semibold text-black">Это единственный формат, который не устаревает.</span>
         </p>
         <div className="flex-shrink-0 flex flex-col items-start md:items-end gap-1.5">
-          <button onClick={() => openPopup()} className="btn-cta-meeting w-full sm:w-auto">
+          <button onClick={openConsult} className="btn-cta-meeting w-full sm:w-auto">
             Записать установочную встречу
             <span className="arrow">→</span>
           </button>

@@ -2,10 +2,10 @@ import { useState } from "react";
 import { FAQ_ITEMS } from "./data";
 
 interface Props {
-  openPopup: (tariff?: string) => void;
+  openConsult: () => void;
 }
 
-export default function FaqSection({ openPopup }: Props) {
+export default function FaqSection({ openConsult }: Props) {
   const [openSet, setOpenSet] = useState<Set<number>>(
     () => new Set(FAQ_ITEMS.map((_, i) => i))
   );
@@ -121,7 +121,7 @@ export default function FaqSection({ openPopup }: Props) {
               </p>
             </div>
             <div className="flex-shrink-0">
-              <button onClick={() => openPopup()} className="btn-cta-meeting w-full md:w-auto">
+              <button onClick={openConsult} className="btn-cta-meeting w-full md:w-auto">
                 Записать установочную встречу
                 <span className="arrow">→</span>
               </button>

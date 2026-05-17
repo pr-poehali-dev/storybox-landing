@@ -4,6 +4,7 @@ interface TariffsSectionProps {
   activeTariff: number;
   setActiveTariff: (idx: number) => void;
   openPopup: (tariff?: string) => void;
+  openConsult: () => void;
 }
 
 const COMPARISON_ROWS = [
@@ -17,7 +18,7 @@ const COMPARISON_ROWS = [
   { label: "Обложка",         vals: ["Стандарт", "Стандарт", "Премиум", "Кожа + тиснение"] },
 ];
 
-export default function TariffsSection({ activeTariff, setActiveTariff, openPopup }: TariffsSectionProps) {
+export default function TariffsSection({ activeTariff, setActiveTariff, openPopup, openConsult }: TariffsSectionProps) {
   const t = TARIFFS[activeTariff];
 
   return (
@@ -170,7 +171,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
           <button onClick={() => openPopup(t.fullName)} className="btn-cta text-[14px] md:text-[15px] px-5 md:px-7 py-3.5 md:py-4 w-full sm:w-auto">
             Оплатить онлайн — {t.price}
           </button>
-          <button onClick={() => openPopup()} className="btn-secondary text-[13px] md:text-[14px] px-5 md:px-6 py-3.5 md:py-4 w-full sm:w-auto">
+          <button onClick={openConsult} className="btn-secondary text-[13px] md:text-[14px] px-5 md:px-6 py-3.5 md:py-4 w-full sm:w-auto">
             Бесплатная консультация
           </button>
         </div>
