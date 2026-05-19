@@ -317,10 +317,14 @@ export default function Index() {
             {TEAM_MEMBERS.map((m, idx) => (
               <div key={m.name} className="sb-card text-center p-6">
                 <div className="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden bg-[#F2F9FF]">
-                  <img
-                    src={TEAM_IMG} alt={m.name} className="w-full h-full object-cover"
-                    style={{ objectPosition: idx === 0 ? "0% 0%" : idx === 1 ? "100% 0%" : idx === 2 ? "0% 100%" : "100% 100%" }}
-                  />
+                  {m.photo ? (
+                    <img src={m.photo} alt={m.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <img
+                      src={TEAM_IMG} alt={m.name} className="w-full h-full object-cover"
+                      style={{ objectPosition: idx === 1 ? "100% 0%" : idx === 2 ? "0% 100%" : "100% 100%" }}
+                    />
+                  )}
                 </div>
                 <h3 className="text-[15px] font-semibold text-black mb-1">{m.name}</h3>
                 <p className="text-[13px] text-[#7A7A7A]">{m.role}</p>

@@ -160,10 +160,10 @@ export const PROCESS_STEPS = [
 ];
 
 export const TEAM_MEMBERS = [
-  { name: "Екатерина Чемрова", role: "Психолог, детский психолог" },
-  { name: "Дарья Дараганова", role: "Психолог" },
-  { name: "Екатерина Аникина", role: "Психолог" },
-  { name: "Максим Третьяков", role: "Психолог" },
+  { name: "Екатерина Чемрова", role: "Психолог, детский психолог", photo: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/e04eab5a-c083-4660-aaf3-22d3358eb20c.png" },
+  { name: "Дарья Дараганова", role: "Психолог", photo: null },
+  { name: "Екатерина Аникина", role: "Психолог", photo: null },
+  { name: "Максим Третьяков", role: "Психолог", photo: null },
 ];
 
 export const FAQ_ITEMS = [
