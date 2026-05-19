@@ -314,20 +314,15 @@ export default function Index() {
           <h2 className="text-[40px] font-bold text-black mb-3">Наши интервьюеры</h2>
           <p className="text-[17px] text-[#7A7A7A] mb-12">Проверенные психологи, умеющие профессионально и бережно задавать вопросы</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {TEAM_MEMBERS.map((m, idx) => (
-              <div key={m.name} className="sb-card text-center p-6">
-                <div className="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden bg-[#F2F9FF]">
-                  {m.photo ? (
-                    <img src={m.photo} alt={m.name} className="w-full h-full object-cover" />
-                  ) : (
-                    <img
-                      src={TEAM_IMG} alt={m.name} className="w-full h-full object-cover"
-                      style={{ objectPosition: idx === 1 ? "100% 0%" : idx === 2 ? "0% 100%" : "100% 100%" }}
-                    />
-                  )}
+            {TEAM_MEMBERS.map((m) => (
+              <div key={m.name} className="sb-card overflow-hidden p-0">
+                <div className="w-full aspect-[3/4] overflow-hidden bg-[#F2F9FF]">
+                  <img src={m.photo!} alt={m.name} className="w-full h-full object-cover object-top" />
                 </div>
-                <h3 className="text-[15px] font-semibold text-black mb-1">{m.name}</h3>
-                <p className="text-[13px] text-[#7A7A7A]">{m.role}</p>
+                <div className="px-4 py-4 text-center">
+                  <h3 className="text-[15px] font-semibold text-black mb-0.5">{m.name}</h3>
+                  <p className="text-[13px] text-[#7A7A7A]">{m.role}</p>
+                </div>
               </div>
             ))}
           </div>
