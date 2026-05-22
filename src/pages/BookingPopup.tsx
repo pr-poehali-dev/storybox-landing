@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 import { TARIFFS, VALID_PROMOS } from "./data";
 
@@ -12,7 +12,6 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
   const [form, setForm] = useState({
     name: "",
     phone: "",
-    tariff: initialTariff,
     promo: "",
     agreePersonal: false,
     agreeTerms: false,
@@ -22,6 +21,20 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
   const [promoDiscount, setPromoDiscount] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [phoneError, setPhoneError] = useState("");
+
+  // Находим тариф по fullName
+  const tariffData = TARIFFS.find((t) => t.fullName === initialTariff) ?? null;
+
+  // Сбрасываем форму при открытии
+  useEffect(() => {
+    if (open) {
+      setForm({ name: "", phone: "", promo: "", agreePersonal: false, agreeTerms: false, agreeMarketing: false });
+      setPromoStatus("idle");
+      setPromoDiscount(0);
+      setSubmitted(false);
+      setPhoneError("");
+    }
+  }, [open]);
 
   const validatePhone = (value: string) => {
     const digits = value.replace(/\D/g, "");
@@ -37,9 +50,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
     if (phoneError) setPhoneError(validatePhone(value));
   };
 
-  const handlePhoneBlur = () => {
-    setPhoneError(validatePhone(form.phone));
-  };
+  const handlePhoneBlur = () => setPhoneError(validatePhone(form.phone));
 
   const checkPromo = () => {
     const code = form.promo.trim().toUpperCase();
@@ -47,13 +58,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
     else { setPromoStatus("invalid"); setPromoDiscount(0); }
   };
 
-  const handleClose = () => {
-    onClose();
-    setTimeout(() => {
-      setForm({ name: "", phone: "", tariff: initialTariff, promo: "", agreePersonal: false, agreeTerms: false, agreeMarketing: false });
-      setPromoStatus("idle"); setPromoDiscount(0); setSubmitted(false); setPhoneError("");
-    }, 300);
-  };
+  const handleClose = () => onClose();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,6 +69,9 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
 
   if (!open) return null;
 
+  const title = tariffData ? tariffData.fullName : initialTariff || "Заказать книгу";
+  const subtitle = tariffData ? tariffData.hook : "Свяжемся для подтверждения в течение дня";
+
   return (
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4"
@@ -71,18 +79,70 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
       onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}
     >
       <div
-        className="bg-white rounded-2xl w-full max-w-[460px] max-h-[90vh] overflow-y-auto shadow-2xl"
+        className="bg-white rounded-2xl w-full max-w-[480px] max-h-[92vh] overflow-y-auto shadow-2xl"
         style={{ animation: "popup-in 0.25s cubic-bezier(0.34,1.56,0.64,1)" }}
       >
-        <div className="flex items-center justify-between px-7 pt-7 pb-4 border-b border-[#F0F0F0]">
+        {/* Шапка */}
+        <div
+          className="flex items-start justify-between px-7 pt-7 pb-5"
+          style={{ borderBottom: tariffData ? "none" : "1px solid #F0F0F0" }}
+        >
           <div>
-            <h2 className="text-[20px] font-bold text-black">Оплатить онлайн</h2>
-            <p className="text-[13px] text-[#7A7A7A] mt-0.5">Свяжемся для подтверждения в течение дня</p>
+            <p className="text-[11px] font-semibold uppercase tracking-widest mb-1" style={{ color: tariffData?.color ?? "#00A4E3" }}>
+              Оплатить онлайн
+            </p>
+            <h2 className="text-[22px] font-bold text-black leading-tight">{title}</h2>
+            <p className="text-[13px] text-[#7A7A7A] mt-1">{subtitle}</p>
           </div>
-          <button onClick={handleClose} className="w-9 h-9 rounded-full flex items-center justify-center text-[#7A7A7A] hover:bg-[#F2F2F2] transition-colors">
+          <button onClick={handleClose} className="w-9 h-9 rounded-full flex items-center justify-center text-[#7A7A7A] hover:bg-[#F2F2F2] transition-colors flex-shrink-0 mt-1">
             <Icon name="X" size={18} />
           </button>
         </div>
+
+        {/* Карточка тарифа */}
+        {tariffData && (
+          <div className="px-7 pb-2 pt-0">
+            <div
+              className="rounded-xl p-4 border"
+              style={{
+                borderColor: tariffData.discount > 0 ? "#ED446330" : "#E5E5E5",
+                background: tariffData.discount > 0 ? "#FFF5F7" : "#FAFAFA",
+              }}
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2 flex-wrap">
+                  {tariffData.tag && (
+                    <span className="text-[10px] font-bold text-white px-2 py-0.5 rounded-full" style={{ background: "#ED4463" }}>
+                      🔥 {tariffData.tag}
+                    </span>
+                  )}
+                  <span className="text-[12px] text-[#7A7A7A]">{tariffData.duration}</span>
+                </div>
+                <div className="flex items-baseline gap-1.5">
+                  {tariffData.priceOld && (
+                    <span className="text-[12px] text-[#AAAAAA] line-through">{tariffData.priceOld}</span>
+                  )}
+                  <span className="text-[20px] font-extrabold" style={{ color: tariffData.color, lineHeight: 1 }}>
+                    {tariffData.price}
+                  </span>
+                  {tariffData.discount > 0 && (
+                    <span className="text-[10px] font-bold text-white px-1.5 py-0.5 rounded-full" style={{ background: "#ED4463" }}>
+                      −{tariffData.discount}%
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+                {tariffData.features.filter((f) => f.included).map((f) => (
+                  <div key={f.text} className="flex items-center gap-1.5">
+                    <span className="text-[10px] font-bold flex-shrink-0" style={{ color: tariffData.color }}>✓</span>
+                    <span className="text-[12px] text-[#333] leading-tight">{f.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         {submitted ? (
           <div className="px-7 pb-8 pt-6 text-center">
@@ -93,13 +153,6 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="px-7 pb-7 pt-5 space-y-4">
-            <div className="rounded-xl px-4 py-3 flex items-center gap-3" style={{ background: "#F2F9FF" }}>
-              <span className="text-xl flex-shrink-0">🔥</span>
-              <p className="text-[13px] text-[#222] leading-snug">
-                Скидки уже применены к ценам{promoDiscount > 0 && <> + <span className="font-bold text-[#ED4463]">{promoDiscount}% по промокоду</span></>}
-              </p>
-            </div>
-
             <div>
               <label className="block text-[13px] font-semibold text-[#222] mb-1">Имя</label>
               <input
@@ -113,36 +166,13 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
             <div>
               <label className="block text-[13px] font-semibold text-[#222] mb-1">Телефон</label>
               <input
-                type="tel"
-                required
-                value={form.phone}
-                onChange={handlePhoneChange}
-                onBlur={handlePhoneBlur}
+                type="tel" required value={form.phone}
+                onChange={handlePhoneChange} onBlur={handlePhoneBlur}
                 placeholder="+7 999 123-45-67"
                 className="w-full rounded-lg px-4 py-3 text-[15px] focus:outline-none transition-colors"
-                style={{
-                  border: phoneError ? "1.5px solid #ED4463" : "1px solid #E5E5E5",
-                  outline: "none",
-                }}
+                style={{ border: phoneError ? "1.5px solid #ED4463" : "1px solid #E5E5E5" }}
               />
-              {phoneError && (
-                <p className="text-[12px] mt-1.5 font-medium" style={{ color: "#ED4463" }}>
-                  {phoneError}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-[13px] font-semibold text-[#222] mb-1">Тариф</label>
-              <select
-                value={form.tariff}
-                onChange={(e) => setForm({ ...form, tariff: e.target.value })}
-                className="w-full border border-[#E5E5E5] rounded-lg px-4 py-3 text-[15px] focus:outline-none focus:border-[#00A4E3] transition-colors bg-white"
-              >
-                <option value="">Ещё не определился</option>
-                {TARIFFS.map((t) => <option key={t.name}>{t.fullName} — {t.price}</option>)}
-                <option>Подарочный сертификат</option>
-              </select>
+              {phoneError && <p className="text-[12px] mt-1.5 font-medium" style={{ color: "#ED4463" }}>{phoneError}</p>}
             </div>
 
             <div>
@@ -172,7 +202,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
             </div>
 
             <div className="border-t border-[#F0F0F0] pt-3 space-y-3">
-              <label className="flex items-start gap-3 cursor-pointer group">
+              <label className="flex items-start gap-3 cursor-pointer">
                 <input
                   type="checkbox" required checked={form.agreePersonal}
                   onChange={(e) => setForm({ ...form, agreePersonal: e.target.checked })}
@@ -183,39 +213,36 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
                 </span>
               </label>
 
-              <label className="flex items-start gap-3 cursor-pointer group">
+              <label className="flex items-start gap-3 cursor-pointer">
                 <input
                   type="checkbox" required checked={form.agreeTerms}
                   onChange={(e) => setForm({ ...form, agreeTerms: e.target.checked })}
                   className="mt-0.5 w-4 h-4 flex-shrink-0 cursor-pointer" style={{ accentColor: "#00A4E3" }}
                 />
                 <span className="text-[13px] text-[#444] leading-snug">
-                  Принимаю <a href="#" className="underline hover:text-[#00A4E3]">пользовательское соглашение</a> и <a href="#" className="underline hover:text-[#00A4E3]">условия оказания услуг</a> <span className="text-[#ED4463]">*</span>
+                  Принимаю условия <a href="#" className="underline hover:text-[#00A4E3]">договора оферты</a> <span className="text-[#ED4463]">*</span>
                 </span>
               </label>
 
-              <label className="flex items-start gap-3 cursor-pointer group">
+              <label className="flex items-start gap-3 cursor-pointer">
                 <input
                   type="checkbox" checked={form.agreeMarketing}
                   onChange={(e) => setForm({ ...form, agreeMarketing: e.target.checked })}
                   className="mt-0.5 w-4 h-4 flex-shrink-0 cursor-pointer" style={{ accentColor: "#00A4E3" }}
                 />
-                <span className="text-[13px] text-[#7A7A7A] leading-snug">Хочу получать специальные предложения и рекламные рассылки StoryBox</span>
+                <span className="text-[13px] text-[#7A7A7A] leading-snug">
+                  Хочу получать новости и специальные предложения
+                </span>
               </label>
-
-              <p className="text-[11px] text-[#AAAAAA]"><span className="text-[#ED4463]">*</span> — обязательные поля</p>
             </div>
 
-            <button
-              type="submit" className="btn-cta w-full text-center"
-              disabled={!form.agreePersonal || !form.agreeTerms}
-              style={{
-                opacity: (!form.agreePersonal || !form.agreeTerms) ? 0.45 : 1,
-                cursor: (!form.agreePersonal || !form.agreeTerms) ? "not-allowed" : "pointer",
-              }}
-            >
-              Оплатить онлайн
+            <button type="submit" className="btn-cta w-full text-center text-[15px] py-4">
+              Отправить заявку{tariffData ? ` — ${tariffData.price}` : ""}
             </button>
+
+            <p className="text-[11px] text-center" style={{ color: "#AAAAAA" }}>
+              После отправки мы свяжемся в течение дня для подтверждения и оплаты
+            </p>
           </form>
         )}
       </div>

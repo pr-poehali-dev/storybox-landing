@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { TARIFFS } from "./data";
 
 interface TariffsSectionProps {
@@ -8,10 +9,10 @@ interface TariffsSectionProps {
 }
 
 const TARIFF_CTA = [
-  "Заказать онлайн-книгу — 24 500 ₽",
-  "Заказать книгу — 45 500 ₽",
-  "Заказать со скидкой 25% — 66 000 ₽",
-  "Заказать премиум — 91 000 ₽",
+  "Заказать онлайн-книгу",
+  "Заказать книгу — скидка 5%",
+  "Заказать со скидкой 25% 🔥",
+  "Заказать премиум — скидка 10%",
 ];
 
 const COMPARISON_ROWS = [
@@ -28,18 +29,30 @@ const COMPARISON_ROWS = [
 export default function TariffsSection({ activeTariff, setActiveTariff, openPopup, openConsult }: TariffsSectionProps) {
   const t = TARIFFS[activeTariff];
 
+  // На мобайле скроллим к карточке «5 часов» (idx=2) при первом рендере
+  const scrollRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const card = el.children[2] as HTMLElement;
+    if (card) {
+      el.scrollLeft = card.offsetLeft - 16;
+    }
+  }, []);
+
   return (
     <section id="tariffs" className="py-12 md:py-20" style={{ background: "#fff" }}>
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="mb-6 md:mb-10">
           <h2 className="text-[24px] md:text-[40px] font-bold text-black mb-2">Выберите тариф</h2>
-          <p className="text-[14px] md:text-[17px] text-[#7A7A7A]">Запишитесь на бесплатную консультацию — поможем определиться</p>
+          <p className="text-[14px] md:text-[17px] text-[#7A7A7A]">Запишитесь на пробное интервью — бесплатно, 30 минут, онлайн</p>
         </div>
       </div>
 
       {/* MOBILE: горизонтальный скролл карточек */}
       <div className="md:hidden">
         <div
+          ref={scrollRef}
           className="flex gap-4 px-4 pb-4"
           style={{ overflowX: "auto", scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
         >
@@ -107,7 +120,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
             </div>
           ))}
         </div>
-        <p className="px-4 mt-2 text-[12px] text-[#AAAAAA]">Каждый доп. экземпляр — 95 € · Оплата картой или переводом</p>
+        <p className="px-4 mt-2 text-[12px] text-[#AAAAAA]">Каждый доп. экземпляр — 7 900 ₽ · Оплата картой или переводом</p>
       </div>
 
       {/* DESKTOP: таблица + детальная карточка */}
@@ -256,12 +269,12 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
               {TARIFF_CTA[activeTariff]}
             </button>
             <button onClick={openConsult} className="btn-secondary text-[14px] px-6 py-4">
-              Бесплатная консультация
+              Пробное интервью
             </button>
           </div>
         </div>
 
-        <p className="mt-3 text-[13px] text-[#7A7A7A]">Каждый доп. экземпляр — 95 € · Оплата картой или переводом</p>
+        <p className="mt-3 text-[13px] text-[#7A7A7A]">Каждый доп. экземпляр — 7 900 ₽ · Оплата картой или переводом</p>
       </div>
     </section>
   );

@@ -81,10 +81,10 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="text-[20px] font-bold text-black leading-tight">
-                Бесплатная консультация
+                Пробное интервью
               </h2>
               <p className="text-[13px] text-[#7A7A7A] mt-1">
-                30 минут · онлайн · без обязательств
+                30 минут · онлайн · бесплатно
               </p>
             </div>
             <button
@@ -118,7 +118,7 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
             <div className="rounded-xl px-4 py-3 flex gap-3" style={{ background: "#F2F9FF" }}>
               <span className="text-xl flex-shrink-0 mt-0.5">💬</span>
               <p className="text-[13px] text-[#444] leading-snug">
-                Расскажем, как всё устроено, ответим на вопросы и поможем выбрать формат для вашей семьи.
+                Проведём короткое пробное интервью, чтобы вы почувствовали формат и поняли, подходит ли он вашей семье.
               </p>
             </div>
 
@@ -201,7 +201,7 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
             </div>
 
             <button type="submit" className="btn-cta w-full text-center text-[15px] py-4">
-              Записаться на консультацию
+              Записаться на пробное интервью
             </button>
 
             <p className="text-[11px] text-center" style={{ color: "#AAAAAA" }}>
