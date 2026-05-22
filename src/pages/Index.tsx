@@ -123,22 +123,7 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ДОВЕРИЕ — социальные факты */}
-      <div className="bg-[#F8F8F8] border-y border-[#EEEEEE]">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex flex-wrap justify-center md:justify-between gap-4 md:gap-0">
-          {[
-            { val: "120+", label: "книг создано" },
-            { val: "4.9 ★", label: "средняя оценка" },
-            { val: "8 нед.", label: "от встречи до книги" },
-            { val: "0 ₽", label: "консультация" },
-          ].map((s) => (
-            <div key={s.label} className="flex items-center gap-2 text-center md:text-left">
-              <span className="text-[20px] md:text-[24px] font-extrabold text-black">{s.val}</span>
-              <span className="text-[12px] md:text-[13px] text-[#7A7A7A]">{s.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
+
 
       {/* РАЗВОРОТ КНИГИ */}
       <section className="w-full">
