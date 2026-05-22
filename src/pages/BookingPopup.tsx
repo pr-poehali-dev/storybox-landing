@@ -92,7 +92,6 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
               Оплатить онлайн
             </p>
             <h2 className="text-[22px] font-bold text-black leading-tight">{title}</h2>
-            <p className="text-[13px] text-[#7A7A7A] mt-1">{subtitle}</p>
           </div>
           <button onClick={handleClose} className="w-9 h-9 rounded-full flex items-center justify-center text-[#7A7A7A] hover:bg-[#F2F2F2] transition-colors flex-shrink-0 mt-1">
             <Icon name="X" size={18} />
@@ -109,7 +108,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
                 background: tariffData.discount > 0 ? "#FFF5F7" : "#FAFAFA",
               }}
             >
-              <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 flex-wrap">
                   {tariffData.tag && (
                     <span className="text-[10px] font-bold text-white px-2 py-0.5 rounded-full" style={{ background: "#ED4463" }}>
@@ -131,14 +130,6 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
                     </span>
                   )}
                 </div>
-              </div>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-1">
-                {tariffData.features.filter((f) => f.included).map((f) => (
-                  <div key={f.text} className="flex items-center gap-1.5">
-                    <span className="text-[10px] font-bold flex-shrink-0" style={{ color: tariffData.color }}>✓</span>
-                    <span className="text-[12px] text-[#333] leading-tight">{f.text}</span>
-                  </div>
-                ))}
               </div>
             </div>
           </div>
@@ -237,7 +228,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
             </div>
 
             <button type="submit" className="btn-cta w-full text-center text-[15px] py-4">
-              Отправить заявку{tariffData ? ` — ${tariffData.price}` : ""}
+              Отправить заявку
             </button>
 
             <p className="text-[11px] text-center" style={{ color: "#AAAAAA" }}>
