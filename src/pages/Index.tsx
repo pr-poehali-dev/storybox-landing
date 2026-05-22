@@ -125,17 +125,46 @@ export default function Index() {
 
 
 
-      {/* РАЗВОРОТ КНИГИ */}
-      <section className="w-full">
-        <div className="max-w-7xl mx-auto md:px-6 md:py-10">
-          <div className="md:rounded-2xl overflow-hidden" style={{ maxHeight: "55vw", minHeight: 220 }}>
-            <img
-              src={BOOK_SPREAD_IMG}
-              alt="Разворот семейной книги StoryBox"
-              className="w-full object-cover object-center"
-              style={{ display: "block", width: "100%" }}
-            />
-          </div>
+      {/* ГАЛЕРЕЯ КНИГ — автоматическая прокрутка */}
+      <section className="w-full overflow-hidden py-6 md:py-10" style={{ background: "#FAFAFA" }}>
+        <style>{`
+          @keyframes book-scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .book-scroll-track {
+            display: flex;
+            width: max-content;
+            animation: book-scroll 22s linear infinite;
+          }
+          .book-scroll-track:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+        <div className="book-scroll-track">
+          {[
+            { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/0d069a37-552f-48da-b1e8-605a5f113e74.png", alt: "Коллекция семейных книг StoryBox" },
+            { src: BOOK_SPREAD_IMG, alt: "Разворот семейной книги StoryBox" },
+            { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/b4c7ee0d-1be8-4d00-a733-e20e61158248.jpg", alt: "Премиальные обложки книг StoryBox" },
+            { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/c09e7ca1-eb4b-4a20-88c1-8c06b7101416.jpg", alt: "Семейные мемуары в твёрдой обложке" },
+            { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/0d069a37-552f-48da-b1e8-605a5f113e74.png", alt: "Коллекция семейных книг StoryBox" },
+            { src: BOOK_SPREAD_IMG, alt: "Разворот семейной книги StoryBox" },
+            { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/b4c7ee0d-1be8-4d00-a733-e20e61158248.jpg", alt: "Премиальные обложки книг StoryBox" },
+            { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/c09e7ca1-eb4b-4a20-88c1-8c06b7101416.jpg", alt: "Семейные мемуары в твёрдой обложке" },
+          ].map((img, i) => (
+            <div
+              key={i}
+              className="flex-shrink-0 rounded-xl overflow-hidden mx-2 md:mx-3"
+              style={{ width: "clamp(280px, 50vw, 560px)", height: "clamp(180px, 32vw, 360px)" }}
+            >
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="w-full h-full object-cover"
+                style={{ display: "block" }}
+              />
+            </div>
+          ))}
         </div>
       </section>
 
