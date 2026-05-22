@@ -8,10 +8,10 @@ interface TariffsSectionProps {
 }
 
 const TARIFF_CTA = [
-  "Заказать онлайн-книгу — 295 €",
-  "Заказать книгу — 545 €",
-  "Заказать популярный тариф — 795 €",
-  "Заказать премиум — 1 095 €",
+  "Заказать онлайн-книгу — 24 500 ₽",
+  "Заказать книгу — 45 500 ₽",
+  "Заказать со скидкой 25% — 66 000 ₽",
+  "Заказать премиум — 91 000 ₽",
 ];
 
 const COMPARISON_ROWS = [
@@ -58,7 +58,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
               {tariff.tag && (
                 <div className="mb-3">
                   <span className="text-[11px] font-bold text-white px-2.5 py-1 rounded-full" style={{ background: "#ED4463" }}>
-                    ★ {tariff.tag}
+                    🔥 {tariff.tag} — скидка {tariff.discount}%
                   </span>
                 </div>
               )}
@@ -69,8 +69,16 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
               <h3 className="text-[18px] font-bold text-black mb-1">{tariff.fullName}</h3>
               <p className="text-[13px] text-[#7A7A7A] mb-4 leading-snug">{tariff.hook}</p>
 
-              <div className="flex items-end gap-2 mb-5">
+              <div className="flex items-baseline gap-2 mb-5">
                 <span className="text-[28px] font-extrabold text-black" style={{ lineHeight: 1 }}>{tariff.price}</span>
+                {tariff.priceOld && (
+                  <span className="text-[13px] text-[#AAAAAA] line-through">{tariff.priceOld}</span>
+                )}
+                {tariff.discount > 0 && (
+                  <span className="text-[11px] font-bold text-white px-1.5 py-0.5 rounded-full" style={{ background: "#ED4463" }}>
+                    −{tariff.discount}%
+                  </span>
+                )}
               </div>
 
               <ul className="space-y-2 mb-6 flex-1">
@@ -154,13 +162,16 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
                       <div className="text-[13px] font-bold mb-0.5 leading-tight" style={{ color: activeTariff === vi ? tariff.color : "#555" }}>
                         {tariff.fullName}
                       </div>
+                      {tariff.priceOld && (
+                        <div className="text-[11px] text-[#AAAAAA] line-through leading-none">{tariff.priceOld}</div>
+                      )}
                       <div className="text-[15px] font-extrabold leading-tight" style={{ color: activeTariff === vi ? tariff.color : "#222" }}>
                         {tariff.price}
                       </div>
-                      {tariff.tag && (
+                      {tariff.discount > 0 && (
                         <div className="mt-1">
                           <span className="text-[10px] font-bold text-white px-1.5 py-0.5 rounded-full" style={{ background: "#ED4463" }}>
-                            ★ хит
+                            −{tariff.discount}%
                           </span>
                         </div>
                       )}
@@ -204,7 +215,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
             <div className="min-w-0">
               {t.tag && (
                 <span className="inline-block text-[11px] font-bold text-white px-2.5 py-1 rounded-full mb-2" style={{ background: "#ED4463" }}>
-                  ★ {t.tag}
+                  🔥 {t.tag} — скидка {t.discount}%
                 </span>
               )}
               <p className="text-[11px] font-semibold uppercase tracking-widest mb-1" style={{ color: t.color }}>{t.duration}</p>
@@ -212,7 +223,15 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
               <p className="text-[15px] text-[#7A7A7A]">{t.hook}</p>
             </div>
             <div className="flex-shrink-0 flex flex-col items-end gap-1">
+              {t.priceOld && (
+                <span className="text-[13px] text-[#AAAAAA] line-through leading-none">{t.priceOld}</span>
+              )}
               <span className="text-[36px] font-extrabold text-black" style={{ lineHeight: 1 }}>{t.price}</span>
+              {t.discount > 0 && (
+                <span className="text-[12px] font-bold px-2 py-0.5 rounded-full text-white" style={{ background: "#ED4463" }}>
+                  экономия {t.discount}%
+                </span>
+              )}
             </div>
           </div>
 

@@ -58,7 +58,7 @@ export default function Index() {
               className="hidden md:inline-flex items-center btn-cta ml-2"
               style={{ padding: "10px 20px", fontSize: 14 }}
             >
-              Книга от 295 € →
+              Книга со скидкой 25% — 66 000 ₽ →
             </a>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function Index() {
               Мы бережно интервьюируем ваших близких, помогаем собрать фотографии и создаём красивую книгу, которая сохранит семейные истории на годы.
             </p>
             <a href="#tariffs" className="btn-cta w-full text-center block" style={{ fontSize: 16, padding: "16px 20px" }}>
-              Начать от 295 € →
+              Книга со скидкой 25% — 66 000 ₽ →
             </a>
             <p className="text-[12px] text-[#AAAAAA] mt-2 text-center">Бесплатная консультация · без предоплаты</p>
           </div>
@@ -101,7 +101,7 @@ export default function Index() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 items-start">
               <a href="#tariffs" className="btn-cta" style={{ fontSize: 16, padding: "16px 32px" }}>
-                Начать от 295 € →
+                Книга со скидкой 25% — 66 000 ₽ →
               </a>
               <button onClick={openConsult} className="btn-secondary" style={{ fontSize: 15, padding: "15px 28px" }}>
                 Бесплатная консультация
