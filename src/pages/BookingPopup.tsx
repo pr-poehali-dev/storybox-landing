@@ -108,28 +108,28 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
                 background: tariffData.discount > 0 ? "#FFF5F7" : "#FAFAFA",
               }}
             >
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex flex-col gap-1 min-w-0">
-                  {tariffData.tag && (
-                    <span className="text-[10px] font-bold text-white px-2 py-0.5 rounded-full self-start" style={{ background: "#ED4463" }}>
-                      🔥 {tariffData.tag}
-                    </span>
-                  )}
-                  <span className="text-[13px] text-[#7A7A7A]">{tariffData.duration}</span>
-                </div>
-                <div className="flex items-center gap-2 flex-shrink-0">
-                  {tariffData.priceOld && (
-                    <span className="text-[12px] text-[#AAAAAA] line-through whitespace-nowrap">{tariffData.priceOld}</span>
-                  )}
-                  <span className="text-[22px] font-extrabold whitespace-nowrap" style={{ color: tariffData.color, lineHeight: 1 }}>
-                    {tariffData.price}
+              {/* Строка 1: цена + скидка */}
+              <div className="flex items-center gap-2 mb-1.5">
+                {tariffData.priceOld && (
+                  <span className="text-[12px] text-[#AAAAAA] line-through whitespace-nowrap">{tariffData.priceOld}</span>
+                )}
+                <span className="text-[22px] font-extrabold whitespace-nowrap" style={{ color: tariffData.color, lineHeight: 1 }}>
+                  {tariffData.price}
+                </span>
+                {tariffData.discount > 0 && (
+                  <span className="text-[11px] font-bold text-white px-2 py-0.5 rounded-full whitespace-nowrap" style={{ background: "#ED4463" }}>
+                    −{tariffData.discount}%
                   </span>
-                  {tariffData.discount > 0 && (
-                    <span className="text-[10px] font-bold text-white px-1.5 py-0.5 rounded-full whitespace-nowrap" style={{ background: "#ED4463" }}>
-                      −{tariffData.discount}%
-                    </span>
-                  )}
-                </div>
+                )}
+              </div>
+              {/* Строка 2: формат + бейдж */}
+              <div className="flex items-center gap-2">
+                <span className="text-[13px] text-[#7A7A7A] whitespace-nowrap">{tariffData.duration}</span>
+                {tariffData.tag && (
+                  <span className="text-[10px] font-bold text-white px-2 py-0.5 rounded-full whitespace-nowrap" style={{ background: "#ED4463" }}>
+                    🔥 {tariffData.tag}
+                  </span>
+                )}
               </div>
             </div>
           </div>
