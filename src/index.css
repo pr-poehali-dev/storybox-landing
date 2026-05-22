@@ -41,6 +41,11 @@
     scroll-behavior: smooth;
   }
 
+  /* Скрытие скроллбара для горизонтального скролла */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   body {
     @apply bg-white text-black;
     font-family: "Open Sans", sans-serif;
