@@ -205,47 +205,73 @@ export default function Index() {
 
       {/* КАК ЭТО РАБОТАЕТ */}
       <section className="py-10 md:py-16 section-soft">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-8">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-10">
           <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Как это работает</h2>
           <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">От первой встречи до книги в ваших руках — 3 простых шага</p>
         </div>
-        {/* Mobile: горизонтальный скролл */}
-        <div
-          className="md:hidden flex gap-4 px-4 pb-2"
-          style={{ overflowX: "auto", scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
-        >
-          {[
-            { n: "1", title: "Созвон и интервью", desc: "Обсуждаем историю семьи, подбираем вопросы и проводим видео-интервью с психологом — онлайн, в студии или дома." },
-            { n: "2", title: "Литературная обработка", desc: "Расшифровываем интервью, редактируем в живой текст, собираем и оцифровываем фотоархив." },
-            { n: "3", title: "Печать и доставка", desc: "Создаём красивую книгу в твёрдой обложке и доставляем прямо к вашей двери — в любую точку мира." },
-          ].map((s) => (
-            <div key={s.n} className="sb-card flex-shrink-0 flex flex-col" style={{ width: "76vw", maxWidth: 300 }}>
-              <div className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-[18px] mb-4 flex-shrink-0" style={{ background: "#00A4E3" }}>
-                {s.n}
+
+        {/* Шаги с фото — единый список для mobile и desktop */}
+        {(() => {
+          const steps = [
+            {
+              n: "1",
+              title: "Созвон и интервью",
+              desc: "Обсуждаем историю семьи, подбираем вопросы и проводим видео-интервью с психологом — онлайн, в студии или дома.",
+              img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/2c2f29ad-9e9a-4c10-b168-c9168dde8c80.jpg",
+            },
+            {
+              n: "2",
+              title: "Литературная обработка",
+              desc: "Расшифровываем интервью, редактируем в живой текст, собираем и оцифровываем фотоархив, ищем данные в архивах.",
+              img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/3328f699-4625-44b1-8039-95f75d8b8bbc.jpg",
+            },
+            {
+              n: "3",
+              title: "Печать и доставка",
+              desc: "Создаём красивую книгу в твёрдой обложке и доставляем прямо к вашей двери — в любую точку мира.",
+              img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/3c8715ac-4a6d-498a-8fc6-02d22c42f2a4.jpg",
+            },
+          ];
+          return (
+            <>
+              {/* Mobile: горизонтальный скролл */}
+              <div
+                className="md:hidden flex gap-4 px-4 pb-2"
+                style={{ overflowX: "auto", scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
+              >
+                {steps.map((s) => (
+                  <div key={s.n} className="flex-shrink-0 bg-white rounded-2xl overflow-hidden shadow-sm border border-[#EEEEEE]" style={{ width: "76vw", maxWidth: 300 }}>
+                    <div style={{ aspectRatio: "4/3", overflow: "hidden" }}>
+                      <img src={s.img} alt={s.title} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="p-5">
+                      <p className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: "#00A4E3" }}>Шаг {s.n}</p>
+                      <h3 className="text-[16px] font-bold text-black mb-2">{s.title}</h3>
+                      <p className="text-[13px] text-[#7A7A7A] leading-relaxed">{s.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <h3 className="text-[16px] font-semibold text-black mb-2">{s.title}</h3>
-              <p className="text-[13px] text-[#7A7A7A] leading-relaxed">{s.desc}</p>
-            </div>
-          ))}
-        </div>
-        {/* Desktop: горизонтально в ряд */}
-        <div className="hidden md:grid max-w-7xl mx-auto px-6 grid-cols-3 gap-6">
-          {[
-            { n: "1", title: "Созвон и интервью", desc: "Обсуждаем историю семьи, подбираем вопросы и проводим видео-интервью с психологом — онлайн, в студии или дома." },
-            { n: "2", title: "Литературная обработка", desc: "Расшифровываем интервью, редактируем в живой текст, собираем и оцифровываем фотоархив, ищем данные в архивах." },
-            { n: "3", title: "Печать и доставка", desc: "Создаём красивую книгу в твёрдой обложке и доставляем прямо к вашей двери — в любую точку мира." },
-          ].map((s) => (
-            <div key={s.n} className="sb-card flex gap-5 items-start">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-[20px]" style={{ background: "#00A4E3" }}>
-                {s.n}
+
+              {/* Desktop: три карточки в ряд */}
+              <div className="hidden md:grid max-w-7xl mx-auto px-6 grid-cols-3 gap-6">
+                {steps.map((s) => (
+                  <div key={s.n} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-[#EEEEEE]">
+                    <div style={{ aspectRatio: "4/3", overflow: "hidden" }}>
+                      <img src={s.img} alt={s.title} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="p-6">
+                      <p className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: "#00A4E3" }}>Шаг {s.n}</p>
+                      <h3 className="text-[19px] font-bold text-black mb-3">{s.title}</h3>
+                      <p className="text-[14px] text-[#7A7A7A] leading-relaxed">{s.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div>
-                <h3 className="text-[18px] font-semibold text-black mb-2">{s.title}</h3>
-                <p className="text-[14px] text-[#7A7A7A] leading-relaxed">{s.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+            </>
+          );
+        })()}
+
       </section>
 
       {/* ТАРИФЫ */}
