@@ -19,17 +19,14 @@ export const WHY_ITEMS = [
   { title: "Бережность", desc: "Наши специалисты внимательно обсудят с вами темы, которые стоит раскрыть или обойти." },
 ];
 
-// Скидки: Онлайн −10%, 3ч −15%, 5ч −25%, 8ч −5%
-// Реальные цены (после скидки): 39 500, 54 500, 79 500, 119 500
-// Старые цены (до скидки): /0.9, /0.85, /0.75, /0.95
 export const TARIFFS = [
   {
     name: "Онлайн",
     fullName: "Онлайн-книга",
     duration: "Интервью в Zoom",
-    priceOld: "43 900 ₽",
-    price: "39 500 ₽",
-    discount: 10,
+    priceOld: "",
+    price: "295 €",
+    discount: 0,
     tag: null as string | null,
     color: "#00A4E3",
     hook: "Первый шаг без студии — в удобное время из любой точки мира",
@@ -42,16 +39,16 @@ export const TARIFFS = [
       { text: "Хранение 5 лет", included: true },
       { text: "Видео по QR-коду", included: false },
       { text: "Архивная работа", included: false },
-      { text: "Несколько экземпляров", included: false },
+      { text: "Доп. экземпляры (95 € / шт.)", included: false },
     ],
   },
   {
     name: "3 часа",
     fullName: "Книга 3 часа",
     duration: "Студия · 3 камеры",
-    priceOld: "64 100 ₽",
-    price: "54 500 ₽",
-    discount: 15,
+    priceOld: "",
+    price: "545 €",
+    discount: 0,
     tag: null as string | null,
     color: "#00A4E3",
     hook: "Полноценная история жизни — профессиональное видео в студии",
@@ -63,17 +60,17 @@ export const TARIFFS = [
       { text: "2 версии монтажа", included: true },
       { text: "Хранение в 3 сервисах, 10 лет", included: true },
       { text: "Архивная работа", included: false },
-      { text: "Несколько экземпляров", included: false },
+      { text: "Доп. экземпляры (95 € / шт.)", included: false },
     ],
   },
   {
     name: "5 часов",
     fullName: "Книга 5 часов",
     duration: "Студия · 3 камеры",
-    priceOld: "106 000 ₽",
-    price: "79 500 ₽",
-    discount: 25,
-    tag: "Максимальная скидка" as string | null,
+    priceOld: "",
+    price: "795 €",
+    discount: 0,
+    tag: "Популярный выбор" as string | null,
     color: "#ED4463",
     hook: "Самый популярный выбор — глубина, архив и два экземпляра",
     features: [
@@ -84,16 +81,16 @@ export const TARIFFS = [
       { text: "2 версии монтажа", included: true },
       { text: "Архивная работа по гос. архивам", included: true },
       { text: "2 экземпляра · хранение 10 лет", included: true },
-      { text: "Кожаная обложка с тиснением", included: false },
+      { text: "Доп. экземпляры (95 € / шт.)", included: true },
     ],
   },
   {
     name: "8 часов",
     fullName: "Книга 8 часов",
     duration: "Студия · премиум",
-    priceOld: "125 800 ₽",
-    price: "119 500 ₽",
-    discount: 5,
+    priceOld: "",
+    price: "1 095 €",
+    discount: 0,
     tag: null as string | null,
     color: "#00A4E3",
     hook: "Полная семейная хроника — кожа, тиснение, бессрочное хранение",
@@ -111,10 +108,10 @@ export const TARIFFS = [
 ];
 
 export const GIFT_CARDS = [
-  { name: "Онлайн-книга", priceOld: "43 900 ₽", price: "39 500 ₽", discount: 10, desc: "Интервью в Zoom, ~50 стр., аудио по QR" },
-  { name: "Книга 3 часа", priceOld: "64 100 ₽", price: "54 500 ₽", discount: 15, desc: "Студия, профессиональное видео по QR" },
-  { name: "Книга 5 часов", priceOld: "106 000 ₽", price: "79 500 ₽", discount: 25, desc: "Студия, архивная работа, 2 экземпляра" },
-  { name: "Книга 8 часов", priceOld: "125 800 ₽", price: "119 500 ₽", discount: 5, desc: "Полная хроника, кожа, тиснение, бессрочно" },
+  { name: "Онлайн-книга", priceOld: "", price: "295 €", discount: 0, desc: "Интервью в Zoom, ~50 стр., аудио по QR" },
+  { name: "Книга 3 часа", priceOld: "", price: "545 €", discount: 0, desc: "Студия, профессиональное видео по QR" },
+  { name: "Книга 5 часов", priceOld: "", price: "795 €", discount: 0, desc: "Студия, архивная работа, 2 экземпляра" },
+  { name: "Книга 8 часов", priceOld: "", price: "1 095 €", discount: 0, desc: "Полная хроника, кожа, тиснение, бессрочно" },
 ];
 
 export const BOOK_FEATURES = [

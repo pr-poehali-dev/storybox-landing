@@ -8,10 +8,10 @@ interface TariffsSectionProps {
 }
 
 const TARIFF_CTA = [
-  "Начать онлайн — 39 500 ₽",
-  "Заказать за 54 500 ₽",
-  "Самый выгодный — 79 500 ₽ (−25%)",
-  "Премиум за 119 500 ₽",
+  "Заказать онлайн-книгу — 295 €",
+  "Заказать книгу — 545 €",
+  "Заказать популярный тариф — 795 €",
+  "Заказать премиум — 1 095 €",
 ];
 
 const COMPARISON_ROWS = [
@@ -32,9 +32,6 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
     <section id="tariffs" className="py-12 md:py-20" style={{ background: "#fff" }}>
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="mb-6 md:mb-10">
-          <p className="text-[12px] font-semibold uppercase tracking-widest mb-2" style={{ color: "#ED4463" }}>
-            Скидка до 25% — ограниченное время
-          </p>
           <h2 className="text-[24px] md:text-[40px] font-bold text-black mb-2">Выберите тариф</h2>
           <p className="text-[14px] md:text-[17px] text-[#7A7A7A]">Запишитесь на бесплатную консультацию — поможем определиться</p>
         </div>
@@ -61,7 +58,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
               {tariff.tag && (
                 <div className="mb-3">
                   <span className="text-[11px] font-bold text-white px-2.5 py-1 rounded-full" style={{ background: "#ED4463" }}>
-                    🔥 Максимальная скидка −{tariff.discount}%
+                    ★ {tariff.tag}
                   </span>
                 </div>
               )}
@@ -74,7 +71,6 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
 
               <div className="flex items-end gap-2 mb-5">
                 <span className="text-[28px] font-extrabold text-black" style={{ lineHeight: 1 }}>{tariff.price}</span>
-                <span className="text-[13px] text-[#AAAAAA] line-through mb-0.5">{tariff.priceOld}</span>
               </div>
 
               <ul className="space-y-2 mb-6 flex-1">
@@ -103,7 +99,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
             </div>
           ))}
         </div>
-        <p className="px-4 mt-2 text-[12px] text-[#AAAAAA]">Доп. экземпляр — от 9 500 ₽ · Рассрочка 0% · Оплата СБП, МИР</p>
+        <p className="px-4 mt-2 text-[12px] text-[#AAAAAA]">Каждый доп. экземпляр — 95 € · Оплата картой или переводом</p>
       </div>
 
       {/* DESKTOP: таблица + детальная карточка */}
@@ -122,12 +118,10 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
               }
             >
               {tariff.name}
-              {tariff.tag ? (
-                <span className="absolute -top-2 -right-2 text-[10px] font-bold text-white px-1.5 py-0.5 rounded-full" style={{ background: "#ED4463" }}>
-                  −{tariff.discount}%
+              {tariff.tag && (
+                <span className="absolute -top-2 -right-3 text-[9px] font-bold text-white px-1.5 py-0.5 rounded-full whitespace-nowrap" style={{ background: "#ED4463" }}>
+                  ★ хит
                 </span>
-              ) : (
-                <span className="ml-1.5 text-[11px] font-bold opacity-60">−{tariff.discount}%</span>
               )}
             </button>
           ))}
@@ -160,14 +154,13 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
                       <div className="text-[13px] font-bold mb-0.5 leading-tight" style={{ color: activeTariff === vi ? tariff.color : "#555" }}>
                         {tariff.fullName}
                       </div>
-                      <div className="text-[11px] text-[#AAAAAA] line-through leading-none">{tariff.priceOld}</div>
                       <div className="text-[15px] font-extrabold leading-tight" style={{ color: activeTariff === vi ? tariff.color : "#222" }}>
                         {tariff.price}
                       </div>
                       {tariff.tag && (
                         <div className="mt-1">
                           <span className="text-[10px] font-bold text-white px-1.5 py-0.5 rounded-full" style={{ background: "#ED4463" }}>
-                            −{tariff.discount}%
+                            ★ хит
                           </span>
                         </div>
                       )}
@@ -211,7 +204,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
             <div className="min-w-0">
               {t.tag && (
                 <span className="inline-block text-[11px] font-bold text-white px-2.5 py-1 rounded-full mb-2" style={{ background: "#ED4463" }}>
-                  🔥 {t.tag} — скидка {t.discount}%
+                  ★ {t.tag}
                 </span>
               )}
               <p className="text-[11px] font-semibold uppercase tracking-widest mb-1" style={{ color: t.color }}>{t.duration}</p>
@@ -219,9 +212,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
               <p className="text-[15px] text-[#7A7A7A]">{t.hook}</p>
             </div>
             <div className="flex-shrink-0 flex flex-col items-end gap-1">
-              <span className="text-[11px] text-[#AAAAAA] line-through leading-none">{t.priceOld}</span>
               <span className="text-[36px] font-extrabold text-black" style={{ lineHeight: 1 }}>{t.price}</span>
-              <span className="text-[12px]" style={{ color: "#ED4463" }}>экономия {parseInt(t.priceOld) - parseInt(t.price.replace(/\D/g, ""))} ₽</span>
             </div>
           </div>
 
@@ -251,7 +242,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
           </div>
         </div>
 
-        <p className="mt-3 text-[13px] text-[#7A7A7A]">Доп. экземпляр — от 9 500 ₽ · Оплата СБП, МИР · Рассрочка 0%</p>
+        <p className="mt-3 text-[13px] text-[#7A7A7A]">Каждый доп. экземпляр — 95 € · Оплата картой или переводом</p>
       </div>
     </section>
   );

@@ -58,7 +58,7 @@ export default function Index() {
               className="hidden md:inline-flex items-center btn-cta ml-2"
               style={{ padding: "10px 20px", fontSize: 14 }}
             >
-              Книга от 39 500 ₽ →
+              Книга от 295 € →
             </a>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function Index() {
               Мы бережно интервьюируем ваших близких, помогаем собрать фотографии и создаём красивую книгу, которая сохранит семейные истории на годы.
             </p>
             <a href="#tariffs" className="btn-cta w-full text-center block" style={{ fontSize: 16, padding: "16px 20px" }}>
-              Начать от 39 500 ₽ — скидка 25% сейчас
+              Начать от 295 € →
             </a>
             <p className="text-[12px] text-[#AAAAAA] mt-2 text-center">Бесплатная консультация · без предоплаты</p>
           </div>
@@ -93,9 +93,6 @@ export default function Index() {
         {/* Desktop layout */}
         <div className="hidden md:grid md:grid-cols-2 max-w-7xl mx-auto" style={{ minHeight: 520 }}>
           <div className="flex flex-col justify-center px-8 lg:px-16 py-16">
-            <p className="text-[13px] font-semibold uppercase tracking-widest mb-4" style={{ color: "#ED4463" }}>
-              Скидка до 25% — только сейчас
-            </p>
             <h1 className="leading-tight mb-5" style={{ fontSize: "clamp(36px, 4vw, 56px)", fontWeight: 700, color: "#000" }}>
               Превращаем воспоминания в книги
             </h1>
@@ -104,7 +101,7 @@ export default function Index() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 items-start">
               <a href="#tariffs" className="btn-cta" style={{ fontSize: 16, padding: "16px 32px" }}>
-                Начать от 39 500 ₽ →
+                Начать от 295 € →
               </a>
               <button onClick={openConsult} className="btn-secondary" style={{ fontSize: 15, padding: "15px 28px" }}>
                 Бесплатная консультация
