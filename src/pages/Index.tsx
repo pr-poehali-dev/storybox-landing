@@ -29,9 +29,12 @@ export default function Index() {
       {/* HEADER */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[#E5E5E5]">
         <div className="max-w-7xl mx-auto px-4 md:px-6 h-14 md:h-16 flex items-center justify-between">
-          <a href="#" className="flex items-baseline gap-0 text-[22px] md:text-[24px] select-none">
-            <span style={{ fontWeight: 400, color: "#000" }}>Story</span>
-            <span style={{ fontWeight: 700, color: "#000" }}>Box</span>
+          <a href="#" className="flex items-center select-none">
+            <img
+              src="https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/874d79b5-75c5-4ae2-9132-9374a61ed263.png"
+              alt="StoryBox"
+              className="h-8 md:h-10 w-auto object-contain"
+            />
           </a>
           <nav className="hidden md:flex items-center gap-8">
             {NAV_LINKS.map((l) => (
@@ -58,7 +61,7 @@ export default function Index() {
               className="hidden md:inline-flex items-center btn-cta ml-2"
               style={{ padding: "10px 20px", fontSize: 14 }}
             >
-              Книга со скидкой 25% — 66 000 ₽ →
+              Книга со скидкой 25% →
             </a>
           </div>
         </div>
@@ -84,7 +87,7 @@ export default function Index() {
               Мы бережно интервьюируем ваших близких, помогаем собрать фотографии и создаём красивую книгу, которая сохранит семейные истории на годы.
             </p>
             <a href="#tariffs" className="btn-cta w-full text-center block" style={{ fontSize: 16, padding: "16px 20px" }}>
-              Книга со скидкой 25% — 66 000 ₽ →
+              Книга со скидкой 25% →
             </a>
             <p className="text-[12px] text-[#AAAAAA] mt-2 text-center">Пробное интервью бесплатно · без предоплаты</p>
           </div>
@@ -101,7 +104,7 @@ export default function Index() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 items-start">
               <a href="#tariffs" className="btn-cta" style={{ fontSize: 16, padding: "16px 32px" }}>
-                Книга со скидкой 25% — 66 000 ₽ →
+                Книга со скидкой 25% →
               </a>
               <button onClick={openConsult} className="btn-secondary" style={{ fontSize: 15, padding: "15px 28px" }}>
                 Пробное интервью
