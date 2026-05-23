@@ -56,27 +56,7 @@ export default function LegalLayout({ title, pdfUrl, children }: LegalLayoutProp
         </h1>
         <div className="mb-8" style={{ width: 80, height: 3, background: "#00A4E3", borderRadius: 2 }} />
 
-        {/* PDF embed — primary view */}
-        <div
-          className="mb-8 rounded-xl overflow-hidden border"
-          style={{ borderColor: "#E5E5E5", height: "75vh", minHeight: 480 }}
-        >
-          <iframe
-            src={pdfUrl + "#toolbar=0&navpanes=0"}
-            title={title}
-            width="100%"
-            height="100%"
-            style={{ display: "block", border: "none" }}
-          />
-        </div>
-
-        {/* Fallback text content */}
-        <div
-          className="rounded-xl border p-6 md:p-8 prose prose-sm max-w-none"
-          style={{ borderColor: "#E5E5E5", color: "#222" }}
-        >
-          {children}
-        </div>
+        {children}
       </main>
 
       {/* Footer */}
