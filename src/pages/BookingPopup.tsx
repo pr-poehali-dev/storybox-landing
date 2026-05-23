@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { TARIFFS, VALID_PROMOS } from "./data";
 
@@ -200,7 +201,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
                   className="mt-0.5 w-4 h-4 flex-shrink-0 cursor-pointer" style={{ accentColor: "#00A4E3" }}
                 />
                 <span className="text-[13px] text-[#444] leading-snug">
-                  Согласен(-на) на <a href="#" className="underline hover:text-[#00A4E3]">обработку персональных данных</a> (ФЗ № 152) <span className="text-[#ED4463]">*</span>
+                  Согласен(-на) на <Link to="/legal/data-consent" target="_blank" className="underline hover:text-[#00A4E3]">обработку персональных данных</Link> (ФЗ № 152) <span className="text-[#ED4463]">*</span>
                 </span>
               </label>
 
@@ -211,7 +212,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
                   className="mt-0.5 w-4 h-4 flex-shrink-0 cursor-pointer" style={{ accentColor: "#00A4E3" }}
                 />
                 <span className="text-[13px] text-[#444] leading-snug">
-                  Принимаю условия <a href="#" className="underline hover:text-[#00A4E3]">договора оферты</a> <span className="text-[#ED4463]">*</span>
+                  Принимаю условия <Link to="/legal/offer" target="_blank" className="underline hover:text-[#00A4E3]">договора оферты</Link> <span className="text-[#ED4463]">*</span>
                 </span>
               </label>
 

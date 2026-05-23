@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 
 interface ConsultPopupProps {
@@ -206,7 +207,7 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
 
             <p className="text-[11px] text-center" style={{ color: "#AAAAAA" }}>
               Нажимая кнопку, вы соглашаетесь с{" "}
-              <a href="#" className="underline hover:text-[#00A4E3]">политикой обработки персональных данных</a>
+              <Link to="/legal/privacy" target="_blank" className="underline hover:text-[#00A4E3]">политикой обработки персональных данных</Link>
             </p>
           </form>
         )}

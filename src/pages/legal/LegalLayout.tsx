@@ -36,6 +36,7 @@ export default function LegalLayout({ title, pdfUrl, children }: LegalLayoutProp
             href={pdfUrl}
             target="_blank"
             rel="noopener noreferrer"
+            download
             className="flex items-center gap-2 text-[13px] font-semibold px-4 py-2 rounded-lg transition-opacity hover:opacity-90"
             style={{ background: "#00A4E3", color: "#fff", borderRadius: "10px" }}
           >
