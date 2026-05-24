@@ -71,7 +71,7 @@ export const TARIFFS = [
     price: "74 800 ₽",
     discount: 15,
     tag: null as string | null,
-    color: "#ED4463",
+    color: "#00A4E3",
     hook: "Самый популярный выбор — глубина, архив и два экземпляра",
     features: [
       { text: "5 часов в студии, 3 камеры", included: true },
