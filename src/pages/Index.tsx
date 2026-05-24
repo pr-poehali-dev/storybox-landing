@@ -169,11 +169,11 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ИЗ ЧЕГО СОСТОИТ КНИГА — горизонтальный скролл */}
+      {/* ИЗ ЧЕГО СОСТОИТ КНИГА */}
       <section className="py-10 md:py-16">
         <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-8">
           <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Из чего состоит каждая книга</h2>
-          <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">Шесть составляющих, которые входят в каждый проект</p>
+          <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">Пять составляющих, которые входят в каждый проект</p>
         </div>
         {/* Mobile: горизонтальный скролл */}
         <div
@@ -181,24 +181,42 @@ export default function Index() {
           style={{ overflowX: "auto", scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
         >
           {BOOK_FEATURES.map((f) => (
-            <div key={f.title} className="sb-card flex-shrink-0" style={{ width: "76vw", maxWidth: 300 }}>
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style={{ background: "#F2F9FF" }}>
-                <Icon name={f.icon as Parameters<typeof Icon>[0]["name"]} size={20} style={{ color: "#00A4E3" }} fallback="BookOpen" />
+            <div key={f.title} className="sb-card flex-shrink-0 overflow-hidden !p-0" style={{ width: "76vw", maxWidth: 300 }}>
+              {f.image && (
+                <div className="w-full overflow-hidden" style={{ height: 160 }}>
+                  <img src={f.image} alt={f.title} className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0" style={{ background: "#F2F9FF" }}>
+                    <Icon name={f.icon as Parameters<typeof Icon>[0]["name"]} size={16} style={{ color: "#00A4E3" }} fallback="BookOpen" />
+                  </div>
+                  <h4 className="text-[15px] font-semibold text-black">{f.title}</h4>
+                </div>
+                <p className="text-[13px] text-[#7A7A7A] leading-relaxed">{f.desc}</p>
               </div>
-              <h4 className="text-[15px] font-semibold text-black mb-2">{f.title}</h4>
-              <p className="text-[13px] text-[#7A7A7A] leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>
         {/* Desktop: сетка */}
         <div className="hidden md:grid max-w-7xl mx-auto px-6 grid-cols-3 gap-5">
-          {BOOK_FEATURES.map((f) => (
-            <div key={f.title} className="sb-card">
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style={{ background: "#F2F9FF" }}>
-                <Icon name={f.icon as Parameters<typeof Icon>[0]["name"]} size={20} style={{ color: "#00A4E3" }} fallback="BookOpen" />
+          {BOOK_FEATURES.map((f, i) => (
+            <div key={f.title} className={`sb-card overflow-hidden !p-0${i === 4 ? " md:col-start-2" : ""}`}>
+              {f.image && (
+                <div className="w-full overflow-hidden" style={{ height: 200 }}>
+                  <img src={f.image} alt={f.title} className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#F2F9FF" }}>
+                    <Icon name={f.icon as Parameters<typeof Icon>[0]["name"]} size={18} style={{ color: "#00A4E3" }} fallback="BookOpen" />
+                  </div>
+                  <h4 className="text-[16px] font-semibold text-black">{f.title}</h4>
+                </div>
+                <p className="text-[14px] text-[#7A7A7A] leading-relaxed">{f.desc}</p>
               </div>
-              <h4 className="text-[16px] font-semibold text-black mb-2">{f.title}</h4>
-              <p className="text-[14px] text-[#7A7A7A] leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>
