@@ -11,16 +11,16 @@ interface TariffsSectionProps {
 
 const TARIFF_CTA_SELF = [
   "Заказать онлайн-книгу",
-  "Заказать книгу — скидка 5%",
+  "Заказать книгу — скидка 10%",
+  "Заказать книгу — скидка 15%",
   "Заказать со скидкой 25% 🔥",
-  "Заказать премиум — скидка 10%",
 ];
 
 const TARIFF_CTA_GIFT = [
   "Подарить онлайн-книгу",
-  "Подарить книгу — скидка 5%",
+  "Подарить книгу — скидка 10%",
+  "Подарить книгу — скидка 15%",
   "Подарить со скидкой 25% 🔥",
-  "Подарить премиум — скидка 10%",
 ];
 
 const COMPARISON_ROWS = [
@@ -306,7 +306,11 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
           </div>
 
           <div className="flex gap-3">
-            <button onClick={() => handleOrder(t.fullName)} className="btn-cta text-[15px] px-7 py-4">
+            <button
+              onClick={() => handleOrder(t.fullName)}
+              className="text-[15px] px-7 py-4 rounded-xl font-bold text-white transition-opacity hover:opacity-90"
+              style={{ background: t.color }}
+            >
               {TARIFF_CTA[activeTariff]}
             </button>
             <button onClick={openConsult} className="btn-secondary text-[14px] px-6 py-4">
