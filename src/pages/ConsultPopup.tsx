@@ -8,7 +8,7 @@ interface ConsultPopupProps {
 }
 
 export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
-  const [form, setForm] = useState({ name: "", contact: "" });
+  const [form, setForm] = useState({ name: "", contact: "", agreePersonal: false, agreeTerms: false, agreeMarketing: false });
   const [contactType, setContactType] = useState<"phone" | "email">("phone");
   const [contactError, setContactError] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -58,7 +58,7 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
   const handleClose = () => {
     onClose();
     setTimeout(() => {
-      setForm({ name: "", contact: "" });
+      setForm({ name: "", contact: "", agreePersonal: false, agreeTerms: false, agreeMarketing: false });
       setContactType("phone");
       setContactError("");
       setSubmitted(false);
@@ -201,14 +201,42 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
               )}
             </div>
 
+            <div className="border-t border-[#F0F0F0] pt-3 space-y-3">
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox" required checked={form.agreePersonal}
+                  onChange={(e) => setForm({ ...form, agreePersonal: e.target.checked })}
+                  className="mt-0.5 w-4 h-4 flex-shrink-0 cursor-pointer" style={{ accentColor: "#00A4E3" }}
+                />
+                <span className="text-[13px] text-[#444] leading-snug">
+                  Согласен(-на) на <Link to="/legal/data-consent" target="_blank" className="underline hover:text-[#00A4E3]">обработку персональных данных</Link> (ФЗ № 152) <span style={{ color: "#ED4463" }}>*</span>
+                </span>
+              </label>
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox" required checked={form.agreeTerms}
+                  onChange={(e) => setForm({ ...form, agreeTerms: e.target.checked })}
+                  className="mt-0.5 w-4 h-4 flex-shrink-0 cursor-pointer" style={{ accentColor: "#00A4E3" }}
+                />
+                <span className="text-[13px] text-[#444] leading-snug">
+                  Принимаю условия <Link to="/legal/offer" target="_blank" className="underline hover:text-[#00A4E3]">договора оферты</Link> <span style={{ color: "#ED4463" }}>*</span>
+                </span>
+              </label>
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox" checked={form.agreeMarketing}
+                  onChange={(e) => setForm({ ...form, agreeMarketing: e.target.checked })}
+                  className="mt-0.5 w-4 h-4 flex-shrink-0 cursor-pointer" style={{ accentColor: "#00A4E3" }}
+                />
+                <span className="text-[13px] text-[#7A7A7A] leading-snug">
+                  Хочу получать новости и специальные предложения
+                </span>
+              </label>
+            </div>
+
             <button type="submit" className="btn-cta w-full text-center text-[15px] py-4">
               Записаться на бесплатную консультацию
             </button>
-
-            <p className="text-[11px] text-center" style={{ color: "#AAAAAA" }}>
-              Нажимая кнопку, вы соглашаетесь с{" "}
-              <Link to="/legal/privacy" target="_blank" className="underline hover:text-[#00A4E3]">политикой обработки персональных данных</Link>
-            </p>
           </form>
         )}
       </div>
