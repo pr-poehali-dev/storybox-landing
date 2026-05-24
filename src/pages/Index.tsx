@@ -111,7 +111,7 @@ export default function Index() {
                 Пробное интервью
               </button>
             </div>
-            <p className="text-[12px] text-[#AAAAAA] mt-3">Рассрочка 0% · Оплата СБП и МИР · Доставка по всему миру</p>
+
           </div>
           <div className="overflow-hidden" style={{ maxHeight: 600 }}>
             <img
