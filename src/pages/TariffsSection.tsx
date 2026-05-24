@@ -59,21 +59,25 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
   return (
     <section id="tariffs" className="py-12 md:py-20" style={{ background: "#fff" }}>
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="mb-6 md:mb-8">
-          <h2 className="text-[24px] md:text-[40px] font-bold text-black mb-4">Выберите тариф</h2>
+        <div className="mb-6 md:mb-8 text-center">
+          <h2 className="text-[24px] md:text-[40px] font-bold text-black mb-5">Выберите тариф</h2>
           {/* Переключатель */}
-          <div className="inline-flex rounded-xl p-1 gap-1" style={{ background: "#F2F2F2" }}>
+          <div className="inline-flex rounded-2xl p-1.5 gap-1.5" style={{ background: "#F0F0F0" }}>
             <button
               onClick={() => setIsGift(false)}
-              className="px-5 py-2 rounded-lg text-[14px] font-semibold transition-all duration-200"
-              style={!isGift ? { background: "#fff", color: "#000", boxShadow: "0 1px 4px rgba(0,0,0,0.10)" } : { color: "#7A7A7A" }}
+              className="px-6 py-3 rounded-xl text-[15px] font-bold transition-all duration-200"
+              style={!isGift
+                ? { background: "#00A4E3", color: "#fff", boxShadow: "0 4px 14px rgba(0,164,227,0.35)" }
+                : { background: "transparent", color: "#7A7A7A" }}
             >
-              Для себя
+              👤 Для себя
             </button>
             <button
               onClick={() => setIsGift(true)}
-              className="px-5 py-2 rounded-lg text-[14px] font-semibold transition-all duration-200"
-              style={isGift ? { background: "#fff", color: "#000", boxShadow: "0 1px 4px rgba(0,0,0,0.10)" } : { color: "#7A7A7A" }}
+              className="px-6 py-3 rounded-xl text-[15px] font-bold transition-all duration-200"
+              style={isGift
+                ? { background: "#ED4463", color: "#fff", boxShadow: "0 4px 14px rgba(237,68,99,0.35)" }
+                : { background: "transparent", color: "#7A7A7A" }}
             >
               🎁 Подарок близкому
             </button>

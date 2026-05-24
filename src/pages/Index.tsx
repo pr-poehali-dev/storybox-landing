@@ -398,15 +398,33 @@ export default function Index() {
           {/* Интервьюеры */}
           <h3 className="text-[20px] md:text-[28px] font-bold text-black mb-2">Наши интервьюеры</h3>
           <p className="text-[14px] md:text-[15px] text-[#7A7A7A] mb-6 md:mb-8">Проверенные психологи, умеющие профессионально и бережно задавать вопросы</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {/* Mobile: горизонтальный скролл */}
+          <div
+            className="md:hidden flex gap-4 -mx-4 px-4 pb-2"
+            style={{ overflowX: "auto", scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
+          >
+            {TEAM_MEMBERS.map((m) => (
+              <div key={m.name} className="sb-card overflow-hidden p-0 flex-shrink-0" style={{ width: 160 }}>
+                <div className="w-full overflow-hidden bg-[#F2F9FF]" style={{ height: 200 }}>
+                  <img src={m.photo!} alt={m.name} className="w-full h-full object-cover object-top" />
+                </div>
+                <div className="px-3 py-3 text-center">
+                  <h3 className="text-[13px] font-semibold text-black mb-0.5">{m.name}</h3>
+                  <p className="text-[11px] text-[#7A7A7A]">{m.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Desktop: сетка */}
+          <div className="hidden md:grid grid-cols-4 gap-6">
             {TEAM_MEMBERS.map((m) => (
               <div key={m.name} className="sb-card overflow-hidden p-0">
                 <div className="w-full aspect-[3/4] overflow-hidden bg-[#F2F9FF]">
                   <img src={m.photo!} alt={m.name} className="w-full h-full object-cover object-top" />
                 </div>
-                <div className="px-3 md:px-4 py-3 md:py-4 text-center">
-                  <h3 className="text-[13px] md:text-[15px] font-semibold text-black mb-0.5">{m.name}</h3>
-                  <p className="text-[12px] md:text-[13px] text-[#7A7A7A]">{m.role}</p>
+                <div className="px-4 py-4 text-center">
+                  <h3 className="text-[15px] font-semibold text-black mb-0.5">{m.name}</h3>
+                  <p className="text-[13px] text-[#7A7A7A]">{m.role}</p>
                 </div>
               </div>
             ))}
