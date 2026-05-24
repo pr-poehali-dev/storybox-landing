@@ -310,7 +310,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
               {TARIFF_CTA[activeTariff]}
             </button>
             <button onClick={openConsult} className="btn-secondary text-[14px] px-6 py-4">
-              Пробное интервью
+              Бесплатная консультация
             </button>
           </div>
         </div>

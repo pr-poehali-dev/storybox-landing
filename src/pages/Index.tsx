@@ -95,7 +95,7 @@ export default function Index() {
             <a href="#tariffs" className="btn-cta w-full text-center block" style={{ fontSize: 16, padding: "16px 20px" }}>
               Книга со скидкой 25% →
             </a>
-            <p className="text-[12px] text-[#AAAAAA] mt-2 text-center">Пробное интервью бесплатно · без предоплаты</p>
+            <p className="text-[12px] text-[#AAAAAA] mt-2 text-center">Консультация бесплатно · без предоплаты</p>
           </div>
         </div>
 
@@ -113,7 +113,7 @@ export default function Index() {
                 Книга со скидкой 25% →
               </a>
               <button onClick={openConsult} className="btn-secondary" style={{ fontSize: 15, padding: "15px 28px" }}>
-                Пробное интервью
+                Бесплатная консультация
               </button>
             </div>
 
