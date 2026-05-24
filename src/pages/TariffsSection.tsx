@@ -1,18 +1,26 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TARIFFS } from "./data";
 
 interface TariffsSectionProps {
   activeTariff: number;
   setActiveTariff: (idx: number) => void;
   openPopup: (tariff?: string) => void;
+  openGiftPopup: (tariff?: string) => void;
   openConsult: () => void;
 }
 
-const TARIFF_CTA = [
+const TARIFF_CTA_SELF = [
   "Заказать онлайн-книгу",
   "Заказать книгу — скидка 5%",
   "Заказать со скидкой 25% 🔥",
   "Заказать премиум — скидка 10%",
+];
+
+const TARIFF_CTA_GIFT = [
+  "Подарить онлайн-книгу",
+  "Подарить книгу — скидка 5%",
+  "Подарить со скидкой 25% 🔥",
+  "Подарить премиум — скидка 10%",
 ];
 
 const COMPARISON_ROWS = [
@@ -26,8 +34,14 @@ const COMPARISON_ROWS = [
   { label: "Обложка",         vals: ["Стандарт", "Стандарт", "Премиум", "Кожа + тиснение"] },
 ];
 
-export default function TariffsSection({ activeTariff, setActiveTariff, openPopup, openConsult }: TariffsSectionProps) {
+export default function TariffsSection({ activeTariff, setActiveTariff, openPopup, openGiftPopup, openConsult }: TariffsSectionProps) {
   const t = TARIFFS[activeTariff];
+  const [isGift, setIsGift] = useState(false);
+
+  const handleOrder = (tariffName: string) => {
+    if (isGift) openGiftPopup(tariffName);
+    else openPopup(tariffName);
+  };
 
   // На мобайле скроллим к карточке «5 часов» (idx=2) при первом рендере
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -40,12 +54,35 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
     }
   }, []);
 
+  const TARIFF_CTA = isGift ? TARIFF_CTA_GIFT : TARIFF_CTA_SELF;
+
   return (
     <section id="tariffs" className="py-12 md:py-20" style={{ background: "#fff" }}>
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="mb-6 md:mb-10">
-          <h2 className="text-[24px] md:text-[40px] font-bold text-black mb-2">Выберите тариф</h2>
-          <p className="text-[14px] md:text-[17px] text-[#7A7A7A]">Запишитесь на пробное интервью — бесплатно, 30 минут, онлайн</p>
+        <div className="mb-6 md:mb-8">
+          <h2 className="text-[24px] md:text-[40px] font-bold text-black mb-4">Выберите тариф</h2>
+          {/* Переключатель */}
+          <div className="inline-flex rounded-xl p-1 gap-1" style={{ background: "#F2F2F2" }}>
+            <button
+              onClick={() => setIsGift(false)}
+              className="px-5 py-2 rounded-lg text-[14px] font-semibold transition-all duration-200"
+              style={!isGift ? { background: "#fff", color: "#000", boxShadow: "0 1px 4px rgba(0,0,0,0.10)" } : { color: "#7A7A7A" }}
+            >
+              Для себя
+            </button>
+            <button
+              onClick={() => setIsGift(true)}
+              className="px-5 py-2 rounded-lg text-[14px] font-semibold transition-all duration-200"
+              style={isGift ? { background: "#fff", color: "#000", boxShadow: "0 1px 4px rgba(0,0,0,0.10)" } : { color: "#7A7A7A" }}
+            >
+              🎁 Подарок близкому
+            </button>
+          </div>
+          {isGift && (
+            <p className="mt-3 text-[14px]" style={{ color: "#7A7A7A" }}>
+              Вы получите подарочный сертификат — красиво оформленный и готовый к вручению
+            </p>
+          )}
         </div>
       </div>
 
@@ -111,7 +148,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
               </ul>
 
               <button
-                onClick={() => openPopup(tariff.fullName)}
+                onClick={() => handleOrder(tariff.fullName)}
                 className="w-full rounded-xl py-3.5 text-[14px] font-bold text-white transition-opacity hover:opacity-90"
                 style={{ background: idx === 2 ? "#ED4463" : tariff.color }}
               >
@@ -265,7 +302,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
           </div>
 
           <div className="flex gap-3">
-            <button onClick={() => openPopup(t.fullName)} className="btn-cta text-[15px] px-7 py-4">
+            <button onClick={() => handleOrder(t.fullName)} className="btn-cta text-[15px] px-7 py-4">
               {TARIFF_CTA[activeTariff]}
             </button>
             <button onClick={openConsult} className="btn-secondary text-[14px] px-6 py-4">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import BookingPopup from "./BookingPopup";
+import GiftPopup from "./GiftPopup";
 import ConsultPopup from "./ConsultPopup";
 import TariffsSection from "./TariffsSection";
 import FaqSection from "./FaqSection";
@@ -16,15 +17,19 @@ const BOOK_SPREAD_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5d
 export default function Index() {
   const [popupOpen, setPopupOpen] = useState(false);
   const [popupTariff, setPopupTariff] = useState("");
+  const [giftOpen, setGiftOpen] = useState(false);
+  const [giftTariff, setGiftTariff] = useState("");
   const [consultOpen, setConsultOpen] = useState(false);
   const [activeTariff, setActiveTariff] = useState(2);
 
   const openPopup = (tariff = "") => { setPopupTariff(tariff); setPopupOpen(true); };
+  const openGiftPopup = (tariff = "") => { setGiftTariff(tariff); setGiftOpen(true); };
   const openConsult = () => setConsultOpen(true);
 
   return (
     <div style={{ fontFamily: "'Open Sans', sans-serif" }}>
       <BookingPopup open={popupOpen} onClose={() => setPopupOpen(false)} initialTariff={popupTariff} />
+      <GiftPopup open={giftOpen} onClose={() => setGiftOpen(false)} initialTariff={giftTariff} />
       <ConsultPopup open={consultOpen} onClose={() => setConsultOpen(false)} />
 
       {/* HEADER */}
@@ -298,6 +303,7 @@ export default function Index() {
         activeTariff={activeTariff}
         setActiveTariff={setActiveTariff}
         openPopup={openPopup}
+        openGiftPopup={openGiftPopup}
         openConsult={openConsult}
       />
 
