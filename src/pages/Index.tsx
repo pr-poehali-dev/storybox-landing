@@ -401,8 +401,13 @@ export default function Index() {
             </div>
           </div>
 
-          {/* Интервьюеры */}
-          <h3 className="text-[20px] md:text-[28px] font-bold text-black mb-2">Наши интервьюеры</h3>
+        </div>
+      </section>
+
+      {/* ИНТЕРВЬЮЕРЫ */}
+      <section className="py-10 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Наши интервьюеры</h2>
           <p className="text-[14px] md:text-[15px] text-[#7A7A7A] mb-6 md:mb-8">Проверенные психологи, умеющие профессионально и бережно задавать вопросы</p>
           {/* Mobile: горизонтальный скролл */}
           <div
