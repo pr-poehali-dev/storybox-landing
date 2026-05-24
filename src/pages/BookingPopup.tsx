@@ -123,14 +123,9 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
                   </span>
                 )}
               </div>
-              {/* Строка 2: формат + бейдж */}
+              {/* Строка 2: формат */}
               <div className="flex items-center gap-2">
                 <span className="text-[13px] text-[#7A7A7A] whitespace-nowrap">{tariffData.duration}</span>
-                {tariffData.tag && (
-                  <span className="text-[10px] font-bold text-white px-2 py-0.5 rounded-full whitespace-nowrap" style={{ background: "#ED4463" }}>
-                    🔥 {tariffData.tag}
-                  </span>
-                )}
               </div>
             </div>
           </div>
