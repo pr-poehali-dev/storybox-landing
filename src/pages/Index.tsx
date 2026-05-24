@@ -37,7 +37,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 md:px-6 h-14 md:h-16 flex items-center justify-between">
           <a href="#" className="flex items-center select-none">
             <img
-              src="https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/874d79b5-75c5-4ae2-9132-9374a61ed263.png"
+              src="https://static.tildacdn.one/tild3937-3830-4361-a239-323264653433/_2023-11-07_12181908.png"
               alt="StoryBox"
               className="h-8 md:h-10 w-auto object-contain"
             />
