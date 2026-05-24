@@ -371,7 +371,7 @@ export default function Index() {
       </section>
 
       {/* О НАС */}
-      <section id="about" className="py-10 md:py-20">
+      <section id="about" className="py-10 md:py-20 hidden">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center mb-12">
             <div>
