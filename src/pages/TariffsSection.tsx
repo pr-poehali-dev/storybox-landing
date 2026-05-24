@@ -70,7 +70,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
                 ? { background: "#00A4E3", color: "#fff", boxShadow: "0 4px 14px rgba(0,164,227,0.35)" }
                 : { background: "transparent", color: "#7A7A7A" }}
             >
-              👤 Для себя
+              Для себя
             </button>
             <button
               onClick={() => setIsGift(true)}
@@ -79,7 +79,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
                 ? { background: "#ED4463", color: "#fff", boxShadow: "0 4px 14px rgba(237,68,99,0.35)" }
                 : { background: "transparent", color: "#7A7A7A" }}
             >
-              🎁 Подарок близкому
+              Подарок близкому
             </button>
           </div>
           {isGift && (
