@@ -395,7 +395,7 @@ export default function Index() {
 
       {/* FOOTER */}
       <footer style={{ background: "#0F1419" }} className="border-t border-white/10 pt-12 pb-8 px-4 md:px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-10 mb-10">
           <div className="col-span-2 md:col-span-1">
             <div className="text-[22px] text-white mb-3">
               <span style={{ fontWeight: 400 }}>Story</span><span style={{ fontWeight: 700 }}>Box</span>
@@ -444,6 +444,30 @@ export default function Index() {
                 <span>T</span> Telegram
               </a>
             </div>
+          </div>
+          <div>
+            <h4 className="text-white font-semibold mb-4 text-[15px]">Мы в соцсетях</h4>
+            <ul className="space-y-2">
+              {[
+                { label: "ВКонтакте", href: "https://vk.com/club239010528" },
+                { label: "Дзен", href: "https://dzen.ru/user/oirptu9saqakc6dcdz8weitgz8m?share_to=link" },
+                { label: "Telegram канал", href: "https://t.me/+V5oog1-jZNZiNzNi" },
+                { label: "RuTube", href: "https://rutube.ru/channel/65993772/" },
+                { label: "YouTube", href: "https://www.youtube.com/@StoryBox_interviews" },
+              ].map(({ label, href }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[14px] hover:text-white transition-colors"
+                    style={{ color: "rgba(255,255,255,0.5)" }}
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
         <div className="max-w-7xl mx-auto border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between gap-3 text-[13px]"
