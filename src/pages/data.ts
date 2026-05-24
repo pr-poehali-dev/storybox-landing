@@ -47,8 +47,8 @@ export const TARIFFS = [
     fullName: "Книга 3 часа",
     duration: "Студия · 3 камеры",
     priceOld: "47 900 ₽",
-    price: "45 500 ₽",
-    discount: 5,
+    price: "43 100 ₽",
+    discount: 10,
     tag: null as string | null,
     color: "#00A4E3",
     hook: "Полноценная история жизни — профессиональное видео в студии",
@@ -68,9 +68,9 @@ export const TARIFFS = [
     fullName: "Книга 5 часов",
     duration: "Студия · 3 камеры",
     priceOld: "88 000 ₽",
-    price: "66 000 ₽",
-    discount: 25,
-    tag: "Максимальная скидка" as string | null,
+    price: "74 800 ₽",
+    discount: 15,
+    tag: null as string | null,
     color: "#ED4463",
     hook: "Самый популярный выбор — глубина, архив и два экземпляра",
     features: [
@@ -89,10 +89,10 @@ export const TARIFFS = [
     fullName: "Книга 8 часов",
     duration: "Студия · премиум",
     priceOld: "101 000 ₽",
-    price: "91 000 ₽",
-    discount: 10,
-    tag: null as string | null,
-    color: "#00A4E3",
+    price: "75 750 ₽",
+    discount: 25,
+    tag: "Максимальная скидка" as string | null,
+    color: "#ED4463",
     hook: "Полная семейная хроника — кожа, тиснение, бессрочное хранение",
     features: [
       { text: "8 часов в студии", included: true },
@@ -109,9 +109,9 @@ export const TARIFFS = [
 
 export const GIFT_CARDS = [
   { name: "Онлайн-книга", priceOld: "", price: "24 500 ₽", discount: 0, desc: "Интервью в Zoom, ~50 стр., аудио по QR" },
-  { name: "Книга 3 часа", priceOld: "47 900 ₽", price: "45 500 ₽", discount: 5, desc: "Студия, профессиональное видео по QR" },
-  { name: "Книга 5 часов", priceOld: "88 000 ₽", price: "66 000 ₽", discount: 25, desc: "Студия, архивная работа, 2 экземпляра" },
-  { name: "Книга 8 часов", priceOld: "101 000 ₽", price: "91 000 ₽", discount: 10, desc: "Полная хроника, кожа, тиснение, бессрочно" },
+  { name: "Книга 3 часа", priceOld: "47 900 ₽", price: "43 100 ₽", discount: 10, desc: "Студия, профессиональное видео по QR" },
+  { name: "Книга 5 часов", priceOld: "88 000 ₽", price: "74 800 ₽", discount: 15, desc: "Студия, архивная работа, 2 экземпляра" },
+  { name: "Книга 8 часов", priceOld: "101 000 ₽", price: "75 750 ₽", discount: 25, desc: "Полная хроника, кожа, тиснение, бессрочно" },
 ];
 
 export const BOOK_FEATURES = [

@@ -20,7 +20,7 @@ export default function Index() {
   const [giftOpen, setGiftOpen] = useState(false);
   const [giftTariff, setGiftTariff] = useState("");
   const [consultOpen, setConsultOpen] = useState(false);
-  const [activeTariff, setActiveTariff] = useState(2);
+  const [activeTariff, setActiveTariff] = useState(3);
 
   const openPopup = (tariff = "") => { setPopupTariff(tariff); setPopupOpen(true); };
   const openGiftPopup = (tariff = "") => { setGiftTariff(tariff); setGiftOpen(true); };
