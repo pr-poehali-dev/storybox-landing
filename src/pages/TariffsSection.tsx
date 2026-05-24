@@ -111,8 +111,8 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
               {/* Бейдж */}
               {tariff.tag && (
                 <div className="mb-3">
-                  <span className="text-[11px] font-bold text-white px-2.5 py-1 rounded-full" style={{ background: "#ED4463" }}>
-                    🔥 {tariff.tag} — скидка {tariff.discount}%
+                  <span className="inline-block text-[11px] font-bold text-white px-2.5 py-1 rounded-full whitespace-nowrap" style={{ background: "#ED4463" }}>
+                    🔥 {tariff.tag} −{tariff.discount}%
                   </span>
                 </div>
               )}

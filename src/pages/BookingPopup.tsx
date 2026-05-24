@@ -75,12 +75,12 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3"
       style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }}
       onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}
     >
       <div
-        className="bg-white rounded-2xl w-full max-w-[480px] max-h-[92vh] overflow-y-auto shadow-2xl"
+        className="bg-white rounded-2xl w-full max-w-[480px] max-h-[94vh] overflow-y-auto overflow-x-hidden shadow-2xl"
         style={{ animation: "popup-in 0.25s cubic-bezier(0.34,1.56,0.64,1)" }}
       >
         {/* Шапка */}
@@ -168,9 +168,9 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
               </label>
               <div className="flex gap-2">
                 <input
-                  type="text" value={form.promo} placeholder="Введите промокод"
+                  type="text" value={form.promo} placeholder="Промокод"
                   onChange={(e) => { setForm({ ...form, promo: e.target.value }); setPromoStatus("idle"); setPromoDiscount(0); }}
-                  className={`flex-1 border rounded-lg px-4 py-3 text-[15px] focus:outline-none transition-colors uppercase ${
+                  className={`flex-1 min-w-0 border rounded-lg px-3 py-3 text-[14px] focus:outline-none transition-colors uppercase ${
                     promoStatus === "valid" ? "border-green-500 bg-green-50"
                     : promoStatus === "invalid" ? "border-red-400 bg-red-50"
                     : "border-[#E5E5E5] focus:border-[#00A4E3]"
@@ -178,7 +178,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
                 />
                 <button
                   type="button" onClick={checkPromo} disabled={!form.promo.trim()}
-                  className="px-4 py-3 rounded-lg text-[14px] font-semibold border transition-colors disabled:opacity-40"
+                  className="flex-shrink-0 px-3 py-3 rounded-lg text-[13px] font-semibold border transition-colors disabled:opacity-40 whitespace-nowrap"
                   style={{ borderColor: "#00A4E3", color: "#00A4E3" }}
                 >
                   Применить
