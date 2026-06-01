@@ -143,9 +143,7 @@ export default function Index() {
             width: max-content;
             animation: book-scroll 22s linear infinite;
           }
-          .book-scroll-track:hover {
-            animation-play-state: paused;
-          }
+
         `}</style>
         <div className="book-scroll-track">
           {[
