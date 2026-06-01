@@ -142,21 +142,39 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
                 )}
               </div>
 
-              <ul className="space-y-2 mb-6 flex-1">
-                {tariff.features.map((f) => (
-                  <li key={f.text} className="flex items-start gap-2">
-                    <span
-                      className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold mt-0.5"
-                      style={{ background: f.included ? `${tariff.color}18` : "#F5F5F5", color: f.included ? tariff.color : "#CCC" }}
-                    >
-                      {f.included ? "✓" : "×"}
-                    </span>
-                    <span className={`text-[13px] leading-snug ${f.included ? "text-[#222]" : "line-through opacity-35"}`}>
-                      {f.text}
-                    </span>
-                  </li>
-                ))}
+              {/* Параметры из таблицы */}
+              <ul className="space-y-2 mb-4 flex-1">
+                {COMPARISON_ROWS.map((row) => {
+                  const val = row.vals[idx];
+                  const isEmpty = val === "—";
+                  return (
+                    <li key={row.label} className="flex items-center justify-between gap-2">
+                      <span className="text-[12px] text-[#888]">{row.label}</span>
+                      <span
+                        className="text-[13px] font-semibold"
+                        style={{ color: isEmpty ? "#CCC" : "#222" }}
+                      >
+                        {val}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
+
+              {/* Что успеем обсудить */}
+              <div className="mb-5 rounded-xl p-3" style={{ background: "#F0F9FF" }}>
+                <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: "#00A4E3" }}>
+                  Что успеем обсудить
+                </p>
+                <ul className="space-y-1">
+                  {TOPICS[idx].map((topic) => (
+                    <li key={topic} className="flex items-start gap-1.5">
+                      <span className="flex-shrink-0 mt-1 w-1.5 h-1.5 rounded-full" style={{ background: tariff.color }} />
+                      <span className="text-[12px] text-[#333] leading-snug">{topic}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
               <button
                 onClick={() => handleOrder(tariff.fullName)}
