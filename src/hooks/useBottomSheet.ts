@@ -7,63 +7,87 @@ interface UseBottomSheetOptions {
 
 export function useBottomSheet({ onClose, isOpen }: UseBottomSheetOptions) {
   const sheetRef = useRef<HTMLDivElement>(null);
-  const handleRef = useRef<HTMLDivElement>(null);
   const [dragY, setDragY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const startY = useRef(0);
   const currentY = useRef(0);
 
-  // Блокируем скролл страницы когда шит открыт
+  // Блокируем скролл страницы — Safari-совместимый способ
   useEffect(() => {
-    if (isOpen) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => { document.body.style.overflow = prev; };
-    }
+    if (!isOpen) return;
+
+    const onTouchMove = (e: TouchEvent) => {
+      // Разрешаем скролл внутри шита, блокируем под ним
+      const sheet = sheetRef.current;
+      if (!sheet) { e.preventDefault(); return; }
+      const target = e.target as Node;
+      if (!sheet.contains(target)) e.preventDefault();
+    };
+
+    const scrollY = window.scrollY;
+    document.addEventListener("touchmove", onTouchMove, { passive: false });
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+
+    return () => {
+      document.removeEventListener("touchmove", onTouchMove);
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, scrollY);
+    };
   }, [isOpen]);
 
   // Сброс позиции при открытии
   useEffect(() => {
-    if (isOpen) setDragY(0);
+    if (isOpen) {
+      setDragY(0);
+      setIsDragging(false);
+      currentY.current = 0;
+    }
   }, [isOpen]);
 
   const onHandleTouchStart = useCallback((e: React.TouchEvent) => {
+    e.stopPropagation();
     startY.current = e.touches[0].clientY;
     currentY.current = 0;
     setIsDragging(true);
   }, []);
 
   const onHandleTouchMove = useCallback((e: React.TouchEvent) => {
-    if (!isDragging) return;
+    e.stopPropagation();
     const delta = e.touches[0].clientY - startY.current;
-    // Только вниз
     if (delta > 0) {
       currentY.current = delta;
       setDragY(delta);
     }
-  }, [isDragging]);
+  }, []);
 
   const onHandleTouchEnd = useCallback(() => {
     setIsDragging(false);
     const sheetHeight = sheetRef.current?.offsetHeight ?? 400;
-    // Закрыть если потянули больше 30% высоты или быстро свайпнули > 80px
-    if (currentY.current > Math.min(sheetHeight * 0.3, 200)) {
-      onClose();
+    if (currentY.current > Math.min(sheetHeight * 0.3, 160)) {
+      setDragY(sheetHeight);
+      setTimeout(() => onClose(), 280);
     } else {
       setDragY(0);
     }
+    currentY.current = 0;
   }, [onClose]);
 
   const sheetStyle: React.CSSProperties = {
-    transform: dragY > 0 ? `translateY(${dragY}px)` : undefined,
+    transform: dragY > 0 ? `translateY(${dragY}px)` : "translateY(0)",
     transition: isDragging ? "none" : "transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)",
+    willChange: "transform",
+    // Safari GPU acceleration
+    WebkitTransform: dragY > 0 ? `translateY(${dragY}px)` : "translateY(0)",
   };
 
   return {
     sheetRef,
-    handleRef,
-    dragY,
-    isDragging,
     sheetStyle,
     onHandleTouchStart,
     onHandleTouchMove,
