@@ -62,10 +62,25 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
 
   const handleClose = () => onClose();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const err = validatePhone(form.phone);
     if (err) { setPhoneError(err); return; }
+
+    try {
+      await fetch("https://functions.poehali.dev/261c487f-3a43-41db-9302-4b4ce0812db0", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          tariff: initialTariff || "не указан",
+          promo: form.promo,
+          source: "Для себя",
+        }),
+      });
+    } catch (_e) { /* отправляем форму даже при ошибке сети */ }
+
     setSubmitted(true);
   };
 

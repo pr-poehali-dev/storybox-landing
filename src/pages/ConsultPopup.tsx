@@ -49,10 +49,25 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
     setContactError("");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const err = validateContact(form.contact, contactType);
     if (err) { setContactError(err); return; }
+
+    try {
+      await fetch("https://functions.poehali.dev/261c487f-3a43-41db-9302-4b4ce0812db0", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          phone: contactType === "phone" ? form.contact : form.contact,
+          tariff: "Консультация",
+          promo: "",
+          source: `Консультация (${contactType === "phone" ? "телефон" : "email"})`,
+        }),
+      });
+    } catch (_e) { /* отправляем форму даже при ошибке сети */ }
+
     setSubmitted(true);
   };
 
