@@ -64,9 +64,9 @@ export const TARIFFS = [
     name: "Standard",
     fullName: "Книга Standard",
     duration: "5 часов интервью",
-    priceOld: "",
+    priceOld: "74 950 ₽",
     price: "67 950 ₽",
-    discount: 0,
+    discount: 10,
     tag: null as string | null,
     color: "#00A4E3",
     hook: "Самый популярный выбор — глубина, аудио-архив и реставрация фото",
@@ -84,9 +84,9 @@ export const TARIFFS = [
     name: "Premium",
     fullName: "Книга Premium",
     duration: "8 часов интервью",
-    priceOld: "",
+    priceOld: "117 450 ₽",
     price: "93 950 ₽",
-    discount: 0,
+    discount: 25,
     tag: "Максимум" as string | null,
     color: "#ED4463",
     hook: "Полная семейная хроника с рассказами о близких родственниках",
@@ -105,8 +105,8 @@ export const TARIFFS = [
 export const GIFT_CARDS = [
   { name: "Электронная книга", priceOld: "", price: "25 950 ₽", discount: 0, desc: "3 ч интервью, ~90 стр., генеалогическое древо, 40 фото" },
   { name: "Книга Light", priceOld: "", price: "46 950 ₽", discount: 0, desc: "3 ч интервью, ~90 стр., печатная книга, 40 фото" },
-  { name: "Книга Standard", priceOld: "", price: "67 950 ₽", discount: 0, desc: "5 ч интервью, ~150 стр., аудио-архив, реставрация фото" },
-  { name: "Книга Premium", priceOld: "", price: "93 950 ₽", discount: 0, desc: "8 ч интервью, ~240 стр., полная семейная хроника" },
+  { name: "Книга Standard", priceOld: "74 950 ₽", price: "67 950 ₽", discount: 10, desc: "5 ч интервью, ~150 стр., аудио-архив, реставрация фото" },
+  { name: "Книга Premium", priceOld: "117 450 ₽", price: "93 950 ₽", discount: 25, desc: "8 ч интервью, ~240 стр., полная семейная хроника" },
 ];
 
 export const BOOK_FEATURES = [
