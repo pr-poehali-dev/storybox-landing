@@ -6,9 +6,7 @@ interface Props {
 }
 
 export default function FaqSection({ openConsult }: Props) {
-  const [openSet, setOpenSet] = useState<Set<number>>(
-    () => new Set(FAQ_ITEMS.map((_, i) => i))
-  );
+  const [openSet, setOpenSet] = useState<Set<number>>(() => new Set());
 
   const toggle = (idx: number) => {
     setOpenSet((prev) => {
