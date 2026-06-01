@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import BookingPopup from "./BookingPopup";
@@ -25,6 +25,23 @@ export default function Index() {
   const openPopup = (tariff = "") => { setPopupTariff(tariff); setPopupOpen(true); };
   const openGiftPopup = (tariff = "") => { setGiftTariff(tariff); setGiftOpen(true); };
   const openConsult = () => setConsultOpen(true);
+
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const [galleryIndex, setGalleryIndex] = useState(0);
+  const GALLERY_ITEMS = [
+    { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/0d069a37-552f-48da-b1e8-605a5f113e74.png", alt: "Коллекция семейных книг StoryBox" },
+    { src: BOOK_SPREAD_IMG, alt: "Разворот семейной книги StoryBox" },
+    { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/b4c7ee0d-1be8-4d00-a733-e20e61158248.jpg", alt: "Премиальные обложки книг StoryBox" },
+    { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/c09e7ca1-eb4b-4a20-88c1-8c06b7101416.jpg", alt: "Семейные мемуары в твёрдой обложке" },
+  ];
+  const scrollGallery = (dir: 1 | -1) => {
+    const next = Math.max(0, Math.min(GALLERY_ITEMS.length - 1, galleryIndex + dir));
+    setGalleryIndex(next);
+    const el = galleryRef.current;
+    if (!el) return;
+    const card = el.children[next] as HTMLElement;
+    if (card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
+  };
 
   return (
     <div style={{ fontFamily: "'Open Sans', sans-serif" }}>
@@ -154,35 +171,34 @@ export default function Index() {
           ))}
         </div>
 
-        {/* Десктоп: бесконечная прокрутка */}
-        <div className="hidden md:block overflow-hidden">
-          <style>{`
-            @keyframes book-scroll {
-              0%   { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-            .book-scroll-track {
-              display: flex;
-              width: max-content;
-              animation: book-scroll 22s linear infinite;
-            }
-          `}</style>
-          <div className="book-scroll-track">
-            {[
-              { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/0d069a37-552f-48da-b1e8-605a5f113e74.png", alt: "Коллекция семейных книг StoryBox" },
-              { src: BOOK_SPREAD_IMG, alt: "Разворот семейной книги StoryBox" },
-              { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/b4c7ee0d-1be8-4d00-a733-e20e61158248.jpg", alt: "Премиальные обложки книг StoryBox" },
-              { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/c09e7ca1-eb4b-4a20-88c1-8c06b7101416.jpg", alt: "Семейные мемуары в твёрдой обложке" },
-              { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/0d069a37-552f-48da-b1e8-605a5f113e74.png", alt: "Коллекция семейных книг StoryBox" },
-              { src: BOOK_SPREAD_IMG, alt: "Разворот семейной книги StoryBox" },
-              { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/b4c7ee0d-1be8-4d00-a733-e20e61158248.jpg", alt: "Премиальные обложки книг StoryBox" },
-              { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/c09e7ca1-eb4b-4a20-88c1-8c06b7101416.jpg", alt: "Семейные мемуары в твёрдой обложке" },
-            ].map((img, i) => (
-              <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden mx-3" style={{ width: "clamp(280px, 50vw, 560px)", height: "clamp(180px, 32vw, 360px)" }}>
+        {/* Десктоп: слайдер с кнопками */}
+        <div className="hidden md:block relative px-6">
+          <div
+            ref={galleryRef}
+            className="flex gap-4 overflow-x-hidden"
+          >
+            {GALLERY_ITEMS.map((img, i) => (
+              <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden" style={{ width: "clamp(280px, 45vw, 560px)", height: "clamp(180px, 29vw, 360px)" }}>
                 <img src={img.src} alt={img.alt} className="w-full h-full object-cover" style={{ display: "block" }} />
               </div>
             ))}
           </div>
+          <button
+            onClick={() => scrollGallery(-1)}
+            disabled={galleryIndex === 0}
+            className="absolute left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center transition-opacity"
+            style={{ opacity: galleryIndex === 0 ? 0.3 : 1 }}
+          >
+            <Icon name="ChevronLeft" size={22} />
+          </button>
+          <button
+            onClick={() => scrollGallery(1)}
+            disabled={galleryIndex === GALLERY_ITEMS.length - 1}
+            className="absolute right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center transition-opacity"
+            style={{ opacity: galleryIndex === GALLERY_ITEMS.length - 1 ? 0.3 : 1 }}
+          >
+            <Icon name="ChevronRight" size={22} />
+          </button>
         </div>
       </section>
 
