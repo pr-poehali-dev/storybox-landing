@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import { useBottomSheet } from "@/hooks/useBottomSheet";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { TARIFFS, VALID_PROMOS } from "./data";
@@ -68,18 +69,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
     setSubmitted(true);
   };
 
-  const sheetRef = useRef<HTMLDivElement>(null);
-  const dragStartY = useRef<number | null>(null);
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    dragStartY.current = e.touches[0].clientY;
-  };
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (dragStartY.current === null) return;
-    const delta = e.changedTouches[0].clientY - dragStartY.current;
-    if (delta > 80) handleClose();
-    dragStartY.current = null;
-  };
+  const { sheetRef, sheetStyle, onHandleTouchStart, onHandleTouchMove, onHandleTouchEnd } = useBottomSheet({ onClose: handleClose, isOpen: open });
 
   if (!open) return null;
 
@@ -94,18 +84,25 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
     >
       <div
         ref={sheetRef}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
         className="bottom-sheet-enter bg-white w-full rounded-t-3xl md:rounded-2xl md:max-w-[480px] max-h-[92vh] overflow-y-auto overflow-x-hidden shadow-2xl md:mb-0"
-        style={{ animation: undefined } as React.CSSProperties}
+        style={sheetStyle}
       >
-        {/* Drag handle — только на мобайле */}
-        <div className="md:hidden flex justify-center pt-3 pb-1">
+        {/* Drag handle + крестик — только на мобайле */}
+        <div
+          className="md:hidden flex items-center justify-between px-4 pt-3 pb-2 cursor-grab active:cursor-grabbing"
+          onTouchStart={onHandleTouchStart}
+          onTouchMove={onHandleTouchMove}
+          onTouchEnd={onHandleTouchEnd}
+        >
+          <div className="w-6" />
           <div className="w-10 h-1 rounded-full" style={{ background: "#DDD" }} />
+          <button onClick={handleClose} className="w-6 h-6 flex items-center justify-center rounded-full" style={{ background: "#F0F0F0" }}>
+            <Icon name="X" size={13} />
+          </button>
         </div>
         {/* Шапка */}
         <div
-          className="flex items-start justify-between px-7 pt-7 pb-5"
+          className="flex items-start justify-between px-7 pt-4 md:pt-7 pb-5"
           style={{ borderBottom: tariffData ? "none" : "1px solid #F0F0F0" }}
         >
           <div>
@@ -114,7 +111,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
             </p>
             <h2 className="text-[22px] font-bold text-black leading-tight">{title}</h2>
           </div>
-          <button onClick={handleClose} className="w-9 h-9 rounded-full flex items-center justify-center text-[#7A7A7A] hover:bg-[#F2F2F2] transition-colors flex-shrink-0 mt-1">
+          <button onClick={handleClose} className="hidden md:flex w-9 h-9 rounded-full items-center justify-center text-[#7A7A7A] hover:bg-[#F2F2F2] transition-colors flex-shrink-0 mt-1">
             <Icon name="X" size={18} />
           </button>
         </div>

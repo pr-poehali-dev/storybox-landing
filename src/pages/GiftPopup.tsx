@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import { useBottomSheet } from "@/hooks/useBottomSheet";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { TARIFFS, VALID_PROMOS } from "./data";
@@ -66,13 +67,7 @@ export default function GiftPopup({ open, onClose, initialTariff = "" }: GiftPop
     setSubmitted(true);
   };
 
-  const dragStartY = useRef<number | null>(null);
-  const handleTouchStart = (e: React.TouchEvent) => { dragStartY.current = e.touches[0].clientY; };
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (dragStartY.current === null) return;
-    if (e.changedTouches[0].clientY - dragStartY.current > 80) onClose();
-    dragStartY.current = null;
-  };
+  const { sheetRef, sheetStyle, onHandleTouchStart, onHandleTouchMove, onHandleTouchEnd } = useBottomSheet({ onClose, isOpen: open });
 
   if (!open) return null;
 
@@ -109,14 +104,22 @@ export default function GiftPopup({ open, onClose, initialTariff = "" }: GiftPop
         onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
       >
         <div
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
+          ref={sheetRef}
           className="bottom-sheet-enter bg-white w-full rounded-t-3xl md:rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden"
-          style={{ maxWidth: 860, maxHeight: "92vh" } as React.CSSProperties}
+          style={{ ...sheetStyle, maxWidth: 860, maxHeight: "92vh" } as React.CSSProperties}
         >
-          {/* Drag handle — только на мобайле */}
-          <div className="md:hidden flex justify-center pt-3 pb-1 w-full flex-shrink-0">
+          {/* Drag handle + крестик — только на мобайле */}
+          <div
+            className="md:hidden flex items-center justify-between px-4 pt-3 pb-2 w-full flex-shrink-0 cursor-grab active:cursor-grabbing"
+            onTouchStart={onHandleTouchStart}
+            onTouchMove={onHandleTouchMove}
+            onTouchEnd={onHandleTouchEnd}
+          >
+            <div className="w-6" />
             <div className="w-10 h-1 rounded-full" style={{ background: "#DDD" }} />
+            <button onClick={onClose} className="w-6 h-6 flex items-center justify-center rounded-full" style={{ background: "#F0F0F0" }}>
+              <Icon name="X" size={13} />
+            </button>
           </div>
           {/* Левая колонка — сертификат */}
           <div
@@ -165,7 +168,7 @@ export default function GiftPopup({ open, onClose, initialTariff = "" }: GiftPop
                 <p className="text-[11px] font-bold uppercase tracking-widest mb-1 md:hidden" style={{ color: "#ED4463" }}>🎁 Подарочный сертификат</p>
                 <h2 className="text-[20px] font-bold text-black leading-tight">{title}</h2>
               </div>
-              <button onClick={onClose} className="w-9 h-9 rounded-full flex items-center justify-center text-[#7A7A7A] hover:bg-[#F2F2F2] transition-colors flex-shrink-0 ml-2">
+              <button onClick={onClose} className="hidden md:flex w-9 h-9 rounded-full items-center justify-center text-[#7A7A7A] hover:bg-[#F2F2F2] transition-colors flex-shrink-0 ml-2">
                 <Icon name="X" size={18} />
               </button>
             </div>

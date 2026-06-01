@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
+import { useBottomSheet } from "@/hooks/useBottomSheet";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 
@@ -65,13 +66,7 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
     }, 300);
   };
 
-  const dragStartY = useRef<number | null>(null);
-  const handleTouchStart = (e: React.TouchEvent) => { dragStartY.current = e.touches[0].clientY; };
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (dragStartY.current === null) return;
-    if (e.changedTouches[0].clientY - dragStartY.current > 80) handleClose();
-    dragStartY.current = null;
-  };
+  const { sheetRef, sheetStyle, onHandleTouchStart, onHandleTouchMove, onHandleTouchEnd } = useBottomSheet({ onClose: handleClose, isOpen: open });
 
   if (!open) return null;
 
@@ -82,16 +77,25 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
       onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}
     >
       <div
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
+        ref={sheetRef}
         className="bottom-sheet-enter bg-white w-full rounded-t-3xl md:rounded-2xl md:max-w-[420px] shadow-2xl overflow-hidden"
+        style={sheetStyle}
       >
-        {/* Drag handle — только на мобайле */}
-        <div className="md:hidden flex justify-center pt-3 pb-1">
+        {/* Drag handle + крестик — только на мобайле */}
+        <div
+          className="md:hidden flex items-center justify-between px-4 pt-3 pb-2 cursor-grab active:cursor-grabbing"
+          onTouchStart={onHandleTouchStart}
+          onTouchMove={onHandleTouchMove}
+          onTouchEnd={onHandleTouchEnd}
+        >
+          <div className="w-6" />
           <div className="w-10 h-1 rounded-full" style={{ background: "#DDD" }} />
+          <button onClick={handleClose} className="w-6 h-6 flex items-center justify-center rounded-full" style={{ background: "#F0F0F0" }}>
+            <Icon name="X" size={13} />
+          </button>
         </div>
         {/* Шапка */}
-        <div className="px-7 pt-7 pb-5 border-b border-[#F0F0F0]">
+        <div className="px-7 pt-4 md:pt-7 pb-5 border-b border-[#F0F0F0]">
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="text-[20px] font-bold text-black leading-tight">
@@ -103,7 +107,7 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
             </div>
             <button
               onClick={handleClose}
-              className="w-9 h-9 rounded-full flex items-center justify-center text-[#7A7A7A] hover:bg-[#F2F2F2] transition-colors flex-shrink-0"
+              className="hidden md:flex w-9 h-9 rounded-full items-center justify-center text-[#7A7A7A] hover:bg-[#F2F2F2] transition-colors flex-shrink-0"
             >
               <Icon name="X" size={18} />
             </button>
