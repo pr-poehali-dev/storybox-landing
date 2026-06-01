@@ -88,10 +88,9 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
           onTouchMove={onHandleTouchMove}
           onTouchEnd={onHandleTouchEnd}
         >
-          <div className="w-6" />
-          <div className="w-10 h-1 rounded-full" style={{ background: "#DDD" }} />
-          <button onClick={handleClose} className="w-6 h-6 flex items-center justify-center rounded-full" style={{ background: "#F0F0F0" }}>
-            <Icon name="X" size={13} />
+          <div className="flex-1" />
+          <button onClick={handleClose} className="w-10 h-10 flex items-center justify-center rounded-full" style={{ background: "#F0F0F0" }}>
+            <Icon name="X" size={20} />
           </button>
         </div>
         {/* Шапка */}

@@ -115,10 +115,9 @@ export default function GiftPopup({ open, onClose, initialTariff = "" }: GiftPop
             onTouchMove={onHandleTouchMove}
             onTouchEnd={onHandleTouchEnd}
           >
-            <div className="w-6" />
-            <div className="w-10 h-1 rounded-full" style={{ background: "#DDD" }} />
-            <button onClick={onClose} className="w-6 h-6 flex items-center justify-center rounded-full" style={{ background: "#F0F0F0" }}>
-              <Icon name="X" size={13} />
+            <div className="flex-1" />
+            <button onClick={onClose} className="w-10 h-10 flex items-center justify-center rounded-full" style={{ background: "#F0F0F0" }}>
+              <Icon name="X" size={20} />
             </button>
           </div>
           {/* Левая колонка — сертификат */}
