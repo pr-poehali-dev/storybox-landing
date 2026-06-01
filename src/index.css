@@ -273,4 +273,27 @@
       transform: scale(1) translateY(0);
     }
   }
+
+  @keyframes sheet-in {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  @keyframes sheet-out {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(100%);
+    }
+  }
+  .bottom-sheet-enter {
+    animation: sheet-in 0.32s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  }
+  .bottom-sheet-exit {
+    animation: sheet-out 0.28s ease-in forwards;
+  }
 }

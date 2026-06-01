@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { TARIFFS, VALID_PROMOS } from "./data";
@@ -66,6 +66,14 @@ export default function GiftPopup({ open, onClose, initialTariff = "" }: GiftPop
     setSubmitted(true);
   };
 
+  const dragStartY = useRef<number | null>(null);
+  const handleTouchStart = (e: React.TouchEvent) => { dragStartY.current = e.touches[0].clientY; };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (dragStartY.current === null) return;
+    if (e.changedTouches[0].clientY - dragStartY.current > 80) onClose();
+    dragStartY.current = null;
+  };
+
   if (!open) return null;
 
   const title = tariffData ? tariffData.fullName : initialTariff || "Подарочный сертификат";
@@ -96,14 +104,20 @@ export default function GiftPopup({ open, onClose, initialTariff = "" }: GiftPop
 
       {/* Основной попап */}
       <div
-        className="fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-6"
+        className="fixed inset-0 z-[100] flex items-end md:items-center md:justify-center md:p-6"
         style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }}
         onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
       >
         <div
-          className="bg-white rounded-2xl w-full shadow-2xl flex flex-col md:flex-row overflow-hidden"
-          style={{ maxWidth: 860, maxHeight: "92vh", animation: "popup-in 0.25s cubic-bezier(0.34,1.56,0.64,1)" }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="bottom-sheet-enter bg-white w-full rounded-t-3xl md:rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden"
+          style={{ maxWidth: 860, maxHeight: "92vh" } as React.CSSProperties}
         >
+          {/* Drag handle — только на мобайле */}
+          <div className="md:hidden flex justify-center pt-3 pb-1 w-full flex-shrink-0">
+            <div className="w-10 h-1 rounded-full" style={{ background: "#DDD" }} />
+          </div>
           {/* Левая колонка — сертификат */}
           <div
             className="hidden md:flex flex-col justify-between p-6 flex-shrink-0"

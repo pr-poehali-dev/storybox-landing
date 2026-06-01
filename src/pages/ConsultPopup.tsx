@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 
@@ -65,18 +65,31 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
     }, 300);
   };
 
+  const dragStartY = useRef<number | null>(null);
+  const handleTouchStart = (e: React.TouchEvent) => { dragStartY.current = e.touches[0].clientY; };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (dragStartY.current === null) return;
+    if (e.changedTouches[0].clientY - dragStartY.current > 80) handleClose();
+    dragStartY.current = null;
+  };
+
   if (!open) return null;
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[100] flex items-end md:items-center md:justify-center md:p-4"
       style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }}
       onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}
     >
       <div
-        className="bg-white rounded-2xl w-full max-w-[420px] shadow-2xl overflow-hidden"
-        style={{ animation: "popup-in 0.25s cubic-bezier(0.34,1.56,0.64,1)" }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        className="bottom-sheet-enter bg-white w-full rounded-t-3xl md:rounded-2xl md:max-w-[420px] shadow-2xl overflow-hidden"
       >
+        {/* Drag handle — только на мобайле */}
+        <div className="md:hidden flex justify-center pt-3 pb-1">
+          <div className="w-10 h-1 rounded-full" style={{ background: "#DDD" }} />
+        </div>
         {/* Шапка */}
         <div className="px-7 pt-7 pb-5 border-b border-[#F0F0F0]">
           <div className="flex items-start justify-between gap-4">

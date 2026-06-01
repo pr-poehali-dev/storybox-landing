@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { TARIFFS, VALID_PROMOS } from "./data";
@@ -68,6 +68,19 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
     setSubmitted(true);
   };
 
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const dragStartY = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    dragStartY.current = e.touches[0].clientY;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (dragStartY.current === null) return;
+    const delta = e.changedTouches[0].clientY - dragStartY.current;
+    if (delta > 80) handleClose();
+    dragStartY.current = null;
+  };
+
   if (!open) return null;
 
   const title = tariffData ? tariffData.fullName : initialTariff || "Заказать книгу";
@@ -75,14 +88,21 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-3"
+      className="fixed inset-0 z-[100] flex items-end md:items-center md:justify-center md:p-3"
       style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }}
       onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}
     >
       <div
-        className="bg-white rounded-2xl w-full max-w-[480px] max-h-[94vh] overflow-y-auto overflow-x-hidden shadow-2xl"
-        style={{ animation: "popup-in 0.25s cubic-bezier(0.34,1.56,0.64,1)" }}
+        ref={sheetRef}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        className="bottom-sheet-enter bg-white w-full rounded-t-3xl md:rounded-2xl md:max-w-[480px] max-h-[92vh] overflow-y-auto overflow-x-hidden shadow-2xl md:mb-0"
+        style={{ animation: undefined } as React.CSSProperties}
       >
+        {/* Drag handle — только на мобайле */}
+        <div className="md:hidden flex justify-center pt-3 pb-1">
+          <div className="w-10 h-1 rounded-full" style={{ background: "#DDD" }} />
+        </div>
         {/* Шапка */}
         <div
           className="flex items-start justify-between px-7 pt-7 pb-5"
