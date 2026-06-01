@@ -107,33 +107,33 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
           {TARIFFS.map((tariff, idx) => (
             <div
               key={tariff.name}
-              className="flex-shrink-0 rounded-2xl border-2 p-5 flex flex-col"
+              className="flex-shrink-0 rounded-2xl border-2 p-4 flex flex-col"
               style={{
                 width: "82vw",
-                maxWidth: 320,
+                maxWidth: 300,
                 borderColor: idx === 3 ? "#ED4463" : "#E5E5E5",
                 background: idx === 3 ? "#FFF5F7" : "#fff",
               }}
             >
               {/* Бейдж */}
               {tariff.tag && (
-                <div className="mb-3">
+                <div className="mb-2">
                   <span className="inline-block text-[11px] font-bold text-white px-2.5 py-1 rounded-full whitespace-nowrap" style={{ background: "#ED4463" }}>
                     🔥 {tariff.tag} −{tariff.discount}%
                   </span>
                 </div>
               )}
 
-              <p className="text-[11px] font-semibold uppercase tracking-widest mb-1" style={{ color: tariff.color }}>
+              <p className="text-[10px] font-semibold uppercase tracking-widest mb-0.5" style={{ color: tariff.color }}>
                 {tariff.duration}
               </p>
-              <h3 className="text-[18px] font-bold text-black mb-1">{tariff.fullName}</h3>
-              <p className="text-[13px] text-[#7A7A7A] mb-4 leading-snug">{tariff.hook}</p>
+              <h3 className="text-[17px] font-bold text-black mb-0.5">{tariff.fullName}</h3>
+              <p className="text-[12px] text-[#7A7A7A] mb-3 leading-snug">{tariff.hook}</p>
 
-              <div className="flex items-baseline gap-2 mb-5">
-                <span className="text-[28px] font-extrabold text-black" style={{ lineHeight: 1 }}>{tariff.price}</span>
+              <div className="flex items-baseline gap-2 mb-3">
+                <span className="text-[26px] font-extrabold text-black" style={{ lineHeight: 1 }}>{tariff.price}</span>
                 {tariff.priceOld && (
-                  <span className="text-[13px] text-[#AAAAAA] line-through">{tariff.priceOld}</span>
+                  <span className="text-[12px] text-[#AAAAAA] line-through">{tariff.priceOld}</span>
                 )}
                 {tariff.discount > 0 && (
                   <span className="text-[11px] font-bold text-white px-1.5 py-0.5 rounded-full" style={{ background: "#ED4463" }}>
@@ -143,33 +143,34 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
               </div>
 
               {/* Параметры из таблицы */}
-              <ul className="space-y-2 mb-4 flex-1">
-                {COMPARISON_ROWS.map((row) => {
+              <div className="rounded-xl overflow-hidden border border-[#F0F0F0] mb-3">
+                {COMPARISON_ROWS.map((row, ri) => {
                   const val = row.vals[idx];
                   const isEmpty = val === "—";
                   return (
-                    <li key={row.label} className="flex items-center justify-between gap-2">
+                    <div
+                      key={row.label}
+                      className="flex items-center justify-between px-3 py-1.5"
+                      style={{ background: ri % 2 === 0 ? "#fff" : "#FAFAFA" }}
+                    >
                       <span className="text-[12px] text-[#888]">{row.label}</span>
-                      <span
-                        className="text-[13px] font-semibold"
-                        style={{ color: isEmpty ? "#CCC" : "#222" }}
-                      >
+                      <span className="text-[12px] font-semibold" style={{ color: isEmpty ? "#CCC" : "#222" }}>
                         {val}
                       </span>
-                    </li>
+                    </div>
                   );
                 })}
-              </ul>
+              </div>
 
               {/* Что успеем обсудить */}
-              <div className="mb-5 rounded-xl p-3" style={{ background: "#F0F9FF" }}>
-                <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: "#00A4E3" }}>
+              <div className="mb-4 rounded-xl p-3" style={{ background: "#F0F9FF" }}>
+                <p className="text-[10px] font-bold uppercase tracking-widest mb-1.5" style={{ color: "#00A4E3" }}>
                   Что успеем обсудить
                 </p>
                 <ul className="space-y-1">
                   {TOPICS[idx].map((topic) => (
                     <li key={topic} className="flex items-start gap-1.5">
-                      <span className="flex-shrink-0 mt-1 w-1.5 h-1.5 rounded-full" style={{ background: tariff.color }} />
+                      <span className="flex-shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full" style={{ background: tariff.color }} />
                       <span className="text-[12px] text-[#333] leading-snug">{topic}</span>
                     </li>
                   ))}
@@ -178,7 +179,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
 
               <button
                 onClick={() => handleOrder(tariff.fullName)}
-                className="w-full rounded-xl py-3.5 text-[14px] font-bold text-white transition-opacity hover:opacity-90"
+                className="w-full rounded-xl py-3 text-[14px] font-bold text-white transition-opacity hover:opacity-90 mt-auto"
                 style={{ background: idx === 3 ? "#ED4463" : tariff.color }}
               >
                 {TARIFF_CTA[idx]}
