@@ -52,16 +52,20 @@ export default function Index() {
               href="https://wa.me/79031932725"
               target="_blank" rel="noopener noreferrer"
               aria-label="WhatsApp"
-              className="w-9 h-9 rounded-full flex items-center justify-center text-white text-[13px] font-bold hover:opacity-85 transition-opacity flex-shrink-0"
+              className="w-9 h-9 rounded-full flex items-center justify-center text-white hover:opacity-85 transition-opacity flex-shrink-0"
               style={{ background: "#25D366" }}
-            >W</a>
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.555 4.116 1.529 5.845L0 24l6.335-1.509A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.727.977.994-3.634-.235-.374A9.818 9.818 0 1112 21.818z"/></svg>
+            </a>
             <a
               href="https://t.me/storybox_ru"
               target="_blank" rel="noopener noreferrer"
               aria-label="Telegram"
-              className="w-9 h-9 rounded-full flex items-center justify-center text-white text-[13px] font-bold hover:opacity-85 transition-opacity flex-shrink-0"
+              className="w-9 h-9 rounded-full flex items-center justify-center text-white hover:opacity-85 transition-opacity flex-shrink-0"
               style={{ background: "#2AABEE" }}
-            >T</a>
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
+            </a>
             <a
               href="#tariffs"
               className="hidden md:inline-flex items-center btn-cta ml-2"
@@ -467,7 +471,7 @@ export default function Index() {
           <div>
             <h4 className="text-white font-semibold mb-4 text-[15px]">Тарифы</h4>
             <ul className="space-y-2">
-              {["Онлайн-книга", "Книга 3 часа", "Книга 5 часов", "Книга 8 часов"].map((name) => (
+              {["Электронная книга", "Книга Light", "Книга Standard", "Книга Premium"].map((name) => (
                 <li key={name}>
                   <button onClick={() => openPopup(name)} className="text-[14px] hover:text-white transition-colors text-left" style={{ color: "rgba(255,255,255,0.5)" }}>
                     {name}
@@ -494,14 +498,16 @@ export default function Index() {
             </ul>
             <div className="flex gap-2">
               <a href="https://wa.me/79031932725" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] font-semibold hover:opacity-90 transition-opacity"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold hover:opacity-90 transition-opacity"
                 style={{ background: "#25D366", color: "#fff" }}>
-                <span>W</span> WhatsApp
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.555 4.116 1.529 5.845L0 24l6.335-1.509A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.727.977.994-3.634-.235-.374A9.818 9.818 0 1112 21.818z"/></svg>
+                WhatsApp
               </a>
               <a href="https://t.me/storybox_ru" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] font-semibold hover:opacity-90 transition-opacity"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold hover:opacity-90 transition-opacity"
                 style={{ background: "#2AABEE", color: "#fff" }}>
-                <span>T</span> Telegram
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
+                Telegram
               </a>
             </div>
           </div>
