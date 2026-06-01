@@ -118,13 +118,7 @@ export default function Index() {
                 {l.label}
               </a>
             ))}
-            <a
-              href="#tariffs"
-              onClick={() => setMobileMenuOpen(false)}
-              className="btn-cta text-center mt-3 py-3 text-[15px]"
-            >
-              Книга со скидкой 25% →
-            </a>
+
           </div>
         )}
       </header>
@@ -142,7 +136,7 @@ export default function Index() {
             />
           </div>
           <div className="bg-white px-5 pt-7 pb-10">
-            <h1 className="leading-tight mb-4 text-[32px] font-bold text-black">
+            <h1 className="leading-tight mb-4 text-[32px] font-bold" style={{ color: "#00a4e3" }}>
               Превращаем воспоминания в книги
             </h1>
             <p className="text-[16px] text-[#444] leading-relaxed mb-6">
@@ -158,7 +152,7 @@ export default function Index() {
         {/* Desktop layout */}
         <div className="hidden md:grid md:grid-cols-2 max-w-7xl mx-auto" style={{ minHeight: 520 }}>
           <div className="flex flex-col justify-center px-8 lg:px-16 py-16">
-            <h1 className="leading-tight mb-5" style={{ fontSize: "clamp(36px, 4vw, 56px)", fontWeight: 700, color: "#000" }}>
+            <h1 className="leading-tight mb-5" style={{ fontSize: "clamp(36px, 4vw, 56px)", fontWeight: 700, color: "#00a4e3" }}>
               Превращаем воспоминания в книги
             </h1>
             <p className="text-[17px] text-[#444] leading-relaxed mb-8 max-w-lg">
