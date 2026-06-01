@@ -152,11 +152,10 @@ export const PROCESS_STEPS = [
 ];
 
 export const TEAM_MEMBERS = [
-  { name: "Екатерина Чемрова", role: "Психолог, детский психолог", photo: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/e04eab5a-c083-4660-aaf3-22d3358eb20c.png" },
+  { name: "Иван Соломин", role: "Историк", photo: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/8b49b5ef-f9eb-4116-915f-08a0e6fbbd47.jpg" },
   { name: "Дарья Дараганова", role: "Психолог", photo: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/fa60aaff-c935-42d3-9c88-058347c72d52.jpg" },
   { name: "Екатерина Аникина", role: "Психолог", photo: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/6ab504aa-c638-4b49-a47c-ed2e708b8182.png" },
   { name: "Максим Третьяков", role: "Психолог", photo: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/da534402-267e-4668-9e22-9584b3400c36.jpg" },
-  { name: "Иван Соломин", role: "Историк", photo: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/8b49b5ef-f9eb-4116-915f-08a0e6fbbd47.jpg" },
 ];
 
 export const FAQ_ITEMS = [
