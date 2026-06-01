@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { TARIFFS, VALID_PROMOS } from "./data";
 
-const CERT_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/291d5a8b-c4f4-4134-90e9-92ab9ef5f1de.png";
+const CERT_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/f344c56f-9b25-43a5-ab69-a4c8fe51dcd8.jpg";
 
 interface GiftPopupProps {
   open: boolean;
