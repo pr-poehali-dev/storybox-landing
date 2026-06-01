@@ -33,13 +33,13 @@ export default function FaqSection({ openConsult }: Props) {
           <div className="flex flex-col items-start md:items-end gap-0.5">
             <p className="text-[13px] md:text-[14px]" style={{ color: "#AAAAAA" }}>Остался вопрос?</p>
             <a
-              href="https://wa.me/79035069205"
+              href="https://t.me/StoryBox_support"
               target="_blank"
               rel="noopener noreferrer"
               className="font-semibold text-[14px] md:text-[15px] hover:opacity-80 transition-opacity"
               style={{ color: "#00A4E3" }}
             >
-              WhatsApp → +7 903 506 92 05
+              Telegram → @StoryBox_support
             </a>
           </div>
         </div>
