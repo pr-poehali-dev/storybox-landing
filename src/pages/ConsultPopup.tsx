@@ -135,7 +135,7 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
             <div className="rounded-xl px-4 py-3 flex gap-3" style={{ background: "#F2F9FF" }}>
               <span className="text-xl flex-shrink-0 mt-0.5">💬</span>
               <p className="text-[13px] text-[#444] leading-snug">
-                Проведём короткое пробное интервью, чтобы вы почувствовали формат и поняли, подходит ли он вашей семье.
+                Расскажем, как проходит создание книги, обсудим ваши задачи и ответим на любые вопросы.
               </p>
             </div>
 
