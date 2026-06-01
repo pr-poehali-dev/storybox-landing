@@ -3,6 +3,7 @@ import { useBottomSheet } from "@/hooks/useBottomSheet";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { TARIFFS, VALID_PROMOS } from "./data";
+import { applyPhoneMask, validatePhone } from "@/utils/phoneMask";
 
 interface BookingPopupProps {
   open: boolean;
@@ -38,18 +39,10 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
     }
   }, [open]);
 
-  const validatePhone = (value: string) => {
-    const digits = value.replace(/\D/g, "");
-    if (!value.trim()) return "Введите номер телефона";
-    if (digits.length < 10) return "Слишком короткий номер";
-    if (digits.length > 12) return "Слишком длинный номер";
-    return "";
-  };
-
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setForm({ ...form, phone: value });
-    if (phoneError) setPhoneError(validatePhone(value));
+    const masked = applyPhoneMask(e.target.value);
+    setForm({ ...form, phone: masked });
+    if (phoneError) setPhoneError(validatePhone(masked));
   };
 
   const handlePhoneBlur = () => setPhoneError(validatePhone(form.phone));
@@ -185,7 +178,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
               <input
                 type="tel" required value={form.phone}
                 onChange={handlePhoneChange} onBlur={handlePhoneBlur}
-                placeholder="+7 999 123-45-67"
+                placeholder="+7 (999) 123-45-67"
                 className="w-full rounded-lg px-4 py-3 text-[15px] focus:outline-none transition-colors"
                 style={{ border: phoneError ? "1.5px solid #ED4463" : "1px solid #E5E5E5" }}
               />

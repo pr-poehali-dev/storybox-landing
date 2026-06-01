@@ -3,6 +3,7 @@ import { useBottomSheet } from "@/hooks/useBottomSheet";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { TARIFFS, VALID_PROMOS } from "./data";
+import { applyPhoneMask, validatePhone } from "@/utils/phoneMask";
 
 const CERT_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/291d5a8b-c4f4-4134-90e9-92ab9ef5f1de.png";
 
@@ -41,17 +42,10 @@ export default function GiftPopup({ open, onClose, initialTariff = "" }: GiftPop
     }
   }, [open]);
 
-  const validatePhone = (value: string) => {
-    const digits = value.replace(/\D/g, "");
-    if (!value.trim()) return "Введите номер телефона";
-    if (digits.length < 10) return "Слишком короткий номер";
-    if (digits.length > 12) return "Слишком длинный номер";
-    return "";
-  };
-
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, phone: e.target.value });
-    if (phoneError) setPhoneError("");
+    const masked = applyPhoneMask(e.target.value);
+    setForm({ ...form, phone: masked });
+    if (phoneError) setPhoneError(validatePhone(masked));
   };
 
   const checkPromo = () => {

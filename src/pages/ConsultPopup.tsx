@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useBottomSheet } from "@/hooks/useBottomSheet";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import { applyPhoneMask, validatePhone, validateEmail } from "@/utils/phoneMask";
 
 interface ConsultPopupProps {
   open: boolean;
@@ -14,29 +15,18 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
   const [contactError, setContactError] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const validateContact = (value: string, type: "phone" | "email") => {
-    if (!value.trim()) return "Заполните это поле";
-    if (type === "phone") {
-      const digits = value.replace(/\D/g, "");
-      if (digits.length < 10) return "Слишком короткий номер";
-      if (digits.length > 12) return "Слишком длинный номер";
-    } else {
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) return "Введите корректный e-mail";
-    }
-    return "";
-  };
+  const validateContact = (value: string, type: "phone" | "email") =>
+    type === "phone" ? validatePhone(value) : validateEmail(value);
 
   const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const raw = e.target.value;
-    // разрешаем только цифры, +, пробел, скобки, дефис
-    const filtered = raw.replace(/[^\d\s+()/-]/g, "");
-    setForm({ ...form, contact: filtered });
-    if (contactError) setContactError(validateContact(filtered, "phone"));
+    const masked = applyPhoneMask(e.target.value);
+    setForm({ ...form, contact: masked });
+    if (contactError) setContactError(validatePhone(masked));
   };
 
   const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, contact: e.target.value });
-    if (contactError) setContactError(validateContact(e.target.value, "email"));
+    if (contactError) setContactError(validateEmail(e.target.value));
   };
 
   const handleContactBlur = () => {
@@ -202,7 +192,7 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
                   value={form.contact}
                   onChange={handlePhoneInput}
                   onBlur={handleContactBlur}
-                  placeholder="+7 999 123-45-67"
+                  placeholder="+7 (999) 123-45-67"
                   className="w-full rounded-lg px-4 py-3 text-[15px] focus:outline-none transition-colors"
                   style={{
                     border: contactError ? "1.5px solid #ED4463" : "1px solid #E5E5E5",
