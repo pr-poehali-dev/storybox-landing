@@ -327,7 +327,7 @@ export default function Index() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-start">
             <div>
               <p className="text-[12px] font-semibold uppercase tracking-widest mb-3" style={{ color: "#00A4E3" }}>
-                Реальный результат
+                Пример книги
               </p>
               <h2 className="text-[24px] md:text-[34px] font-bold text-black mb-1">
                 Ирина Александровна, 85 лет
@@ -336,11 +336,10 @@ export default function Index() {
                 Иваново · тариф «Выездная съёмка» · осень 2025
               </p>
 
-              <div className="grid grid-cols-4 gap-2 mb-6">
+              <div className="grid grid-cols-3 gap-2 mb-6">
                 {[
-                  { val: "704", label: "стр. книги" },
-                  { val: "70", label: "стр. текста" },
-                  { val: "600", label: "стр. фото" },
+                  { val: "48", label: "стр. книги" },
+                  { val: "38 шт", label: "фото" },
                   { val: "3 ч", label: "интервью" },
                 ].map((s) => (
                   <div key={s.label} className="bg-white rounded-xl px-2 py-3 border border-[#E5E5E5] text-center shadow-sm">
