@@ -342,7 +342,7 @@ export default function Index() {
 
               <div className="grid grid-cols-3 gap-2 mb-6">
                 {[
-                  { val: "48", label: "стр. книги" },
+                  { val: "88", label: "стр. книги" },
                   { val: "38 шт", label: "фото" },
                   { val: "3 ч", label: "интервью" },
                 ].map((s) => (
