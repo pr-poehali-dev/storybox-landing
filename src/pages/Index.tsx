@@ -11,7 +11,7 @@ import {
   TEAM_MEMBERS,
 } from "./data";
 
-const HERO_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/fd310fb0-c335-470c-b966-732b344805cf.jpg";
+const HERO_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/f344c56f-9b25-43a5-ab69-a4c8fe51dcd8.jpg";
 const BOOK_SPREAD_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/092dd021-1b7d-4089-94bf-c958bff5c481.jpg";
 
 export default function Index() {
