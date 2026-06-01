@@ -84,12 +84,12 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
     >
       <div
         ref={sheetRef}
-        className="bottom-sheet-enter bg-white w-full rounded-t-3xl md:rounded-2xl md:max-w-[480px] max-h-[92vh] overflow-y-auto overflow-x-hidden shadow-2xl md:mb-0"
+        className="bottom-sheet-enter bg-white w-full rounded-t-3xl md:rounded-2xl md:max-w-[480px] max-h-[92vh] shadow-2xl md:mb-0 relative flex flex-col"
         style={sheetStyle}
       >
-        {/* Drag handle + крестик — только на мобайле */}
+        {/* Drag handle — только на мобайле, закреплён */}
         <div
-          className="md:hidden flex items-center justify-between px-4 pt-3 pb-2 cursor-grab active:cursor-grabbing"
+          className="md:hidden flex-shrink-0 flex items-center justify-between px-4 pt-3 pb-2 cursor-grab active:cursor-grabbing rounded-t-3xl bg-white z-10"
           onTouchStart={onHandleTouchStart}
           onTouchMove={onHandleTouchMove}
           onTouchEnd={onHandleTouchEnd}
@@ -99,6 +99,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
             <Icon name="X" size={20} />
           </button>
         </div>
+        <div className="overflow-y-auto overflow-x-hidden flex-1">
         {/* Шапка */}
         <div
           className="flex items-start justify-between px-7 pt-4 md:pt-7 pb-5"
@@ -248,6 +249,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
             </p>
           </form>
         )}
+        </div>
       </div>
     </div>
   );
