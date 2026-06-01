@@ -33,6 +33,14 @@ const COMPARISON_ROWS = [
   { label: "Электронная книга",   vals: ["да", "—", "да", "да"] },
 ];
 
+// Темы по тарифам (индекс = тариф)
+const TOPICS: string[][] = [
+  ["Семья и корни", "Жизненный путь", "Опыт и наследие"],
+  ["Семья и корни", "Жизненный путь", "Опыт и наследие"],
+  ["Семья и корни", "Жизненный путь", "Опыт и наследие", "Характер и внутренний мир героя", "Яркие и трогательные истории"],
+  ["Семья и корни", "Жизненный путь", "Опыт и наследие", "Характер и внутренний мир героя и близких родственников", "Яркие и трогательные истории", "Рассказы о членах семьи"],
+];
+
 export default function TariffsSection({ activeTariff, setActiveTariff, openPopup, openGiftPopup, openConsult }: TariffsSectionProps) {
   const t = TARIFFS[activeTariff];
   const [isGift, setIsGift] = useState(false);
@@ -250,6 +258,35 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
                         }}
                       >
                         {v}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+                {/* Секция: Что успеем обсудить */}
+                <tr style={{ background: "#F0F9FF" }}>
+                  <td
+                    colSpan={5}
+                    className="px-5 py-2.5 text-[11px] font-bold uppercase tracking-widest border-b border-[#E0EEF8]"
+                    style={{ color: "#00A4E3" }}
+                  >
+                    Что успеем обсудить
+                  </td>
+                </tr>
+                {Array.from({ length: Math.max(...TOPICS.map(t => t.length)) }).map((_, topicIdx) => (
+                  <tr key={`topic-${topicIdx}`} style={{ background: topicIdx % 2 === 0 ? "#fff" : "#FAFAFA" }}>
+                    <td className="px-5 py-2.5 border-b border-[#F5F5F5]" />
+                    {TOPICS.map((tariffTopics, vi) => (
+                      <td
+                        key={vi}
+                        onClick={() => setActiveTariff(vi)}
+                        className="px-4 py-2.5 text-center text-[13px] cursor-pointer border-b border-[#F5F5F5] transition-colors"
+                        style={{
+                          background: activeTariff === vi ? `${TARIFFS[vi].color}06` : "transparent",
+                          color: tariffTopics[topicIdx] ? (activeTariff === vi ? TARIFFS[vi].color : "#333") : "#DDD",
+                          fontWeight: activeTariff === vi && tariffTopics[topicIdx] ? 600 : 400,
+                        }}
+                      >
+                        {tariffTopics[topicIdx] ?? "—"}
                       </td>
                     ))}
                   </tr>
