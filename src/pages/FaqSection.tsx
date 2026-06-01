@@ -120,7 +120,7 @@ export default function FaqSection({ openConsult }: Props) {
             </div>
             <div className="flex-shrink-0">
               <button onClick={openConsult} className="btn-cta-meeting w-full md:w-auto">
-                Записать установочную встречу
+                Записаться на установочную встречу
                 <span className="arrow">→</span>
               </button>
               <p className="text-[12px] mt-2 md:text-right" style={{ color: "#AAAAAA" }}>
