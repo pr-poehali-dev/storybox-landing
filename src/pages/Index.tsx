@@ -21,6 +21,7 @@ export default function Index() {
   const [giftTariff, setGiftTariff] = useState("");
   const [consultOpen, setConsultOpen] = useState(false);
   const [activeTariff, setActiveTariff] = useState(3);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const openPopup = (tariff = "") => { setPopupTariff(tariff); setPopupOpen(true); };
   const openGiftPopup = (tariff = "") => { setGiftTariff(tariff); setGiftOpen(true); };
@@ -50,7 +51,7 @@ export default function Index() {
       <ConsultPopup open={consultOpen} onClose={() => setConsultOpen(false)} />
 
       {/* HEADER */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[#E5E5E5]">
+      <header className="sticky top-0 z-50 bg-white border-b border-[#E5E5E5]">
         <div className="max-w-7xl mx-auto px-4 md:px-6 h-14 md:h-16 flex items-center justify-between">
           <a href="#" className="flex items-center select-none">
             <img
@@ -92,8 +93,40 @@ export default function Index() {
             >
               Книга со скидкой 25% →
             </a>
+            {/* Бургер — только мобайл */}
+            <button
+              className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg ml-1"
+              style={{ background: mobileMenuOpen ? "#F0F0F0" : "transparent" }}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Меню"
+            >
+              <Icon name={mobileMenuOpen ? "X" : "Menu"} size={22} />
+            </button>
           </div>
         </div>
+
+        {/* Мобильное меню */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-[#F0F0F0] px-4 py-3 flex flex-col gap-1">
+            {NAV_LINKS.map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-[16px] text-[#222] py-3 border-b border-[#F5F5F5] last:border-0 hover:text-[#00A4E3] transition-colors"
+              >
+                {l.label}
+              </a>
+            ))}
+            <a
+              href="#tariffs"
+              onClick={() => setMobileMenuOpen(false)}
+              className="btn-cta text-center mt-3 py-3 text-[15px]"
+            >
+              Книга со скидкой 25% →
+            </a>
+          </div>
+        )}
       </header>
 
       {/* HERO — десктоп: сетка 50/50, мобайл: фото сверху, текст снизу */}
