@@ -1,32 +1,46 @@
-function buildMask(d: string): string {
-  if (d.length === 0) return "";
+function buildMask(digits: string): string {
+  // digits всегда начинается с "7", длина 1..11
+  if (digits.length === 0) return "";
   let result = "+7";
-  if (d.length > 1) result += " (" + d.slice(1, 4);
-  if (d.length >= 4) result += ") " + d.slice(4, 7);
-  if (d.length >= 7) result += "-" + d.slice(7, 9);
-  if (d.length >= 9) result += "-" + d.slice(9, 11);
+  if (digits.length > 1) result += " (" + digits.slice(1, 4);
+  if (digits.length >= 4) result += ") " + digits.slice(4, 7);
+  if (digits.length >= 7) result += "-" + digits.slice(7, 9);
+  if (digits.length >= 9) result += "-" + digits.slice(9, 11);
   return result;
 }
 
-export function applyPhoneMask(raw: string, prev: string): string {
-  const isDeleting = raw.length < prev.length;
-
-  let digits = raw.replace(/\D/g, "");
-
-  if (digits.startsWith("8") || digits.startsWith("7")) {
-    digits = "7" + digits.slice(1);
-  } else if (digits.length > 0) {
-    digits = "7" + digits;
+// Нормализуем чистые цифры (без ведущих 7/8) → всегда "7XXXXXXXXXX"
+function normalizeDigits(raw: string): string {
+  let d = raw.replace(/\D/g, "");
+  if (d.startsWith("8") || d.startsWith("7")) {
+    d = "7" + d.slice(1);
+  } else if (d.length > 0) {
+    d = "7" + d;
   }
+  return d.slice(0, 11);
+}
 
-  digits = digits.slice(0, 11);
+// Основная функция — принимает новое raw значение из input
+// prevDigits — предыдущие чистые цифры (храните в state/ref)
+// Возвращает { masked, digits }
+export function applyPhoneMask(
+  raw: string,
+  prevDigits: string,
+): { masked: string; digits: string } {
+  const newDigits = normalizeDigits(raw);
 
-  // При удалении — убираем последнюю цифру (кроме фиксированной "7")
+  // Определяем удаление по количеству чистых цифр (надёжно на iOS)
+  const isDeleting = newDigits.length <= prevDigits.length && raw.length < buildMask(prevDigits).length;
+
+  let digits = newDigits;
+
   if (isDeleting && digits.length > 1) {
-    digits = digits.slice(0, -1);
+    // Убираем последнюю значащую цифру
+    digits = prevDigits.slice(0, -1);
+    if (digits.length === 0) digits = "";
   }
 
-  return buildMask(digits);
+  return { masked: buildMask(digits), digits };
 }
 
 export function validatePhone(value: string): string {

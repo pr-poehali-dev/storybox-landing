@@ -27,6 +27,7 @@ export default function GiftPopup({ open, onClose, initialTariff = "" }: GiftPop
   const [promoDiscount, setPromoDiscount] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [phoneError, setPhoneError] = useState("");
+  const [phoneDigits, setPhoneDigits] = useState("");
   const [lightbox, setLightbox] = useState(false);
 
   const tariffData = TARIFFS.find((t) => t.fullName === initialTariff) ?? null;
@@ -38,12 +39,14 @@ export default function GiftPopup({ open, onClose, initialTariff = "" }: GiftPop
       setPromoDiscount(0);
       setSubmitted(false);
       setPhoneError("");
+      setPhoneDigits("");
       setLightbox(false);
     }
   }, [open]);
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const masked = applyPhoneMask(e.target.value, form.phone);
+    const { masked, digits } = applyPhoneMask(e.target.value, phoneDigits);
+    setPhoneDigits(digits);
     setForm({ ...form, phone: masked });
     if (phoneError) setPhoneError(validatePhone(masked));
   };

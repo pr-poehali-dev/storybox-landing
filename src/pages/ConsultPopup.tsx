@@ -14,12 +14,14 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
   const [contactType, setContactType] = useState<"phone" | "email">("phone");
   const [contactError, setContactError] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [phoneDigits, setPhoneDigits] = useState("");
 
   const validateContact = (value: string, type: "phone" | "email") =>
     type === "phone" ? validatePhone(value) : validateEmail(value);
 
   const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const masked = applyPhoneMask(e.target.value, form.contact);
+    const { masked, digits } = applyPhoneMask(e.target.value, phoneDigits);
+    setPhoneDigits(digits);
     setForm({ ...form, contact: masked });
     if (contactError) setContactError(validatePhone(masked));
   };
@@ -37,6 +39,7 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
     setContactType(type);
     setForm({ ...form, contact: "" });
     setContactError("");
+    setPhoneDigits("");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

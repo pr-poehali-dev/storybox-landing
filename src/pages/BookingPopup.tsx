@@ -24,6 +24,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
   const [promoDiscount, setPromoDiscount] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [phoneError, setPhoneError] = useState("");
+  const [phoneDigits, setPhoneDigits] = useState("");
 
   // Находим тариф по fullName
   const tariffData = TARIFFS.find((t) => t.fullName === initialTariff) ?? null;
@@ -36,11 +37,13 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
       setPromoDiscount(0);
       setSubmitted(false);
       setPhoneError("");
+      setPhoneDigits("");
     }
   }, [open]);
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const masked = applyPhoneMask(e.target.value, form.phone);
+    const { masked, digits } = applyPhoneMask(e.target.value, phoneDigits);
+    setPhoneDigits(digits);
     setForm({ ...form, phone: masked });
     if (phoneError) setPhoneError(validatePhone(masked));
   };
