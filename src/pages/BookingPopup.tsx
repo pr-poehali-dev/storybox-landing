@@ -40,7 +40,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
   }, [open]);
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const masked = applyPhoneMask(e.target.value);
+    const masked = applyPhoneMask(e.target.value, form.phone);
     setForm({ ...form, phone: masked });
     if (phoneError) setPhoneError(validatePhone(masked));
   };

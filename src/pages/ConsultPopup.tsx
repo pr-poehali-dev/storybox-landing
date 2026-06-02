@@ -19,7 +19,7 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
     type === "phone" ? validatePhone(value) : validateEmail(value);
 
   const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const masked = applyPhoneMask(e.target.value);
+    const masked = applyPhoneMask(e.target.value, form.contact);
     setForm({ ...form, contact: masked });
     if (contactError) setContactError(validatePhone(masked));
   };

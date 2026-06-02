@@ -1,25 +1,32 @@
-export function applyPhoneMask(raw: string): string {
-  const digits = raw.replace(/\D/g, "");
-  let d = digits;
-
-  // Нормализуем: если начинается с 8 или 7 — заменяем на 7
-  if (d.startsWith("8") || d.startsWith("7")) {
-    d = "7" + d.slice(1);
-  } else if (d.length > 0) {
-    d = "7" + d;
-  }
-
-  d = d.slice(0, 11);
-
-  let result = "";
+function buildMask(d: string): string {
   if (d.length === 0) return "";
-  result = "+7";
+  let result = "+7";
   if (d.length > 1) result += " (" + d.slice(1, 4);
   if (d.length >= 4) result += ") " + d.slice(4, 7);
   if (d.length >= 7) result += "-" + d.slice(7, 9);
   if (d.length >= 9) result += "-" + d.slice(9, 11);
-
   return result;
+}
+
+export function applyPhoneMask(raw: string, prev: string): string {
+  const isDeleting = raw.length < prev.length;
+
+  let digits = raw.replace(/\D/g, "");
+
+  if (digits.startsWith("8") || digits.startsWith("7")) {
+    digits = "7" + digits.slice(1);
+  } else if (digits.length > 0) {
+    digits = "7" + digits;
+  }
+
+  digits = digits.slice(0, 11);
+
+  // При удалении — убираем последнюю цифру (кроме фиксированной "7")
+  if (isDeleting && digits.length > 1) {
+    digits = digits.slice(0, -1);
+  }
+
+  return buildMask(digits);
 }
 
 export function validatePhone(value: string): string {
