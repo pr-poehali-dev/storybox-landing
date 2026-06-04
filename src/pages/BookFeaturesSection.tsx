@@ -1,0 +1,131 @@
+import Icon from "@/components/ui/icon";
+import { BOOK_FEATURES } from "./data";
+
+const STEPS = [
+  {
+    n: "1",
+    title: "Установочная встреча",
+    desc: "Перед началом работы мы проводим подробную встречу, чтобы книга получилась по-настоящему личной и отражала именно вашего близкого человека. Мы обсуждаем важные темы, семейные истории, атмосферу будущей книги, людей, на которых стоит сделать акцент, воспоминания и даже фразы, которые важно сохранить.",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/2c2f29ad-9e9a-4c10-b168-c9168dde8c80.jpg",
+  },
+  {
+    n: "2",
+    title: "Интервью",
+    desc: "Мы проводим глубокие интервью по тщательно подготовленному сценарию, чтобы раскрыть историю жизни человека, его характер, взгляды и воспоминания. Беседы проходят в несколько сессий по 1,5 часа и записываются на аудио, а список вопросов заранее отправляется герою, чтобы можно было спокойно подготовиться и вспомнить важные истории.",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/2c2f29ad-9e9a-4c10-b168-c9168dde8c80.jpg",
+  },
+  {
+    n: "3",
+    title: "Литературная обработка",
+    desc: "Перед началом работы мы согласовываем стиль будущей книги: тёплый семейный рассказ, глубокая биография, живая разговорная история или более художественное повествование. Затем наши редакторы превращают интервью в книгу, которую действительно интересно читать.",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/3328f699-4625-44b1-8039-95f75d8b8bbc.jpg",
+  },
+  {
+    n: "4",
+    title: "Печать и доставка",
+    desc: "После согласования финального макета мы печатаем книгу в твёрдом переплёте на качественной дизайнерской бумаге и помогаем организовать доставку вашей семье в любой точке мира. При желании также подготовим электронную версию книги для удобного хранения и передачи близким.",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/3c8715ac-4a6d-498a-8fc6-02d22c42f2a4.jpg",
+  },
+];
+
+export default function BookFeaturesSection() {
+  return (
+    <>
+      {/* ИЗ ЧЕГО СОСТОИТ КНИГА */}
+      <section className="py-10 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-8">
+          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Из чего состоит каждая книга</h2>
+          <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">Пять составляющих, которые входят в каждый проект</p>
+        </div>
+        {/* Mobile: горизонтальный скролл */}
+        <div
+          className="md:hidden flex gap-4 px-4 pb-2"
+          style={{ overflowX: "auto", scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
+        >
+          {BOOK_FEATURES.map((f) => (
+            <div key={f.title} className="sb-card flex-shrink-0 overflow-hidden !p-0" style={{ width: "76vw", maxWidth: 300 }}>
+              {f.image && (
+                <div className="w-full overflow-hidden" style={{ height: 160 }}>
+                  <img src={f.image} alt={f.title} className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0" style={{ background: "#F2F9FF" }}>
+                    <Icon name={f.icon as Parameters<typeof Icon>[0]["name"]} size={16} style={{ color: "#00A4E3" }} fallback="BookOpen" />
+                  </div>
+                  <h4 className="text-[15px] font-semibold text-black">{f.title}</h4>
+                </div>
+                <p className="text-[13px] text-[#7A7A7A] leading-relaxed">{f.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* Desktop: сетка */}
+        <div className="hidden md:grid max-w-7xl mx-auto px-6 grid-cols-3 gap-5">
+          {BOOK_FEATURES.map((f, i) => (
+            <div key={f.title} className={`sb-card overflow-hidden !p-0${i === 4 ? " md:col-start-2" : ""}`}>
+              {f.image && (
+                <div className="w-full overflow-hidden" style={{ height: 200 }}>
+                  <img src={f.image} alt={f.title} className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#F2F9FF" }}>
+                    <Icon name={f.icon as Parameters<typeof Icon>[0]["name"]} size={18} style={{ color: "#00A4E3" }} fallback="BookOpen" />
+                  </div>
+                  <h4 className="text-[16px] font-semibold text-black">{f.title}</h4>
+                </div>
+                <p className="text-[14px] text-[#7A7A7A] leading-relaxed">{f.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* КАК ЭТО РАБОТАЕТ */}
+      <section className="py-10 md:py-16 section-soft">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-10">
+          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Как это работает</h2>
+          <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">От первой встречи до книги в ваших руках — 4 шага</p>
+        </div>
+
+        {/* Mobile: горизонтальный скролл */}
+        <div
+          className="md:hidden flex gap-4 px-4 pb-2"
+          style={{ overflowX: "auto", scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
+        >
+          {STEPS.map((s) => (
+            <div key={s.n} className="flex-shrink-0 bg-white rounded-2xl overflow-hidden shadow-sm border border-[#EEEEEE]" style={{ width: "76vw", maxWidth: 300 }}>
+              <div style={{ aspectRatio: "4/3", overflow: "hidden" }}>
+                <img src={s.img} alt={s.title} className="w-full h-full object-cover" />
+              </div>
+              <div className="p-5">
+                <p className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: "#00A4E3" }}>Шаг {s.n}</p>
+                <h3 className="text-[16px] font-bold text-black mb-2">{s.title}</h3>
+                <p className="text-[13px] text-[#7A7A7A] leading-relaxed">{s.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop: четыре карточки в ряд */}
+        <div className="hidden md:grid max-w-7xl mx-auto px-6 grid-cols-4 gap-6">
+          {STEPS.map((s) => (
+            <div key={s.n} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-[#EEEEEE]">
+              <div style={{ aspectRatio: "4/3", overflow: "hidden" }}>
+                <img src={s.img} alt={s.title} className="w-full h-full object-cover" />
+              </div>
+              <div className="p-6">
+                <p className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: "#00A4E3" }}>Шаг {s.n}</p>
+                <h3 className="text-[19px] font-bold text-black mb-3">{s.title}</h3>
+                <p className="text-[14px] text-[#7A7A7A] leading-relaxed">{s.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}

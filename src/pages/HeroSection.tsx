@@ -1,0 +1,135 @@
+import { useRef, useState } from "react";
+import Icon from "@/components/ui/icon";
+
+const HERO_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/f344c56f-9b25-43a5-ab69-a4c8fe51dcd8.jpg";
+const BOOK_SPREAD_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/092dd021-1b7d-4089-94bf-c958bff5c481.jpg";
+
+const GALLERY_ITEMS = [
+  { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/0d069a37-552f-48da-b1e8-605a5f113e74.png", alt: "Коллекция семейных книг StoryBox" },
+  { src: BOOK_SPREAD_IMG, alt: "Разворот семейной книги StoryBox" },
+  { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/b4c7ee0d-1be8-4d00-a733-e20e61158248.jpg", alt: "Премиальные обложки книг StoryBox" },
+  { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/c09e7ca1-eb4b-4a20-88c1-8c06b7101416.jpg", alt: "Семейные мемуары в твёрдой обложке" },
+];
+
+interface HeroSectionProps {
+  openConsult: () => void;
+}
+
+export default function HeroSection({ openConsult }: HeroSectionProps) {
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const [galleryIndex, setGalleryIndex] = useState(0);
+
+  const scrollGallery = (dir: 1 | -1) => {
+    const next = Math.max(0, Math.min(GALLERY_ITEMS.length - 1, galleryIndex + dir));
+    setGalleryIndex(next);
+    const el = galleryRef.current;
+    if (!el) return;
+    const card = el.children[next] as HTMLElement;
+    if (card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
+  };
+
+  return (
+    <>
+      {/* HERO */}
+      <section className="w-full">
+        {/* Mobile layout */}
+        <div className="md:hidden">
+          <div className="w-full overflow-hidden" style={{ maxHeight: "80vw" }}>
+            <img
+              src={HERO_IMG}
+              alt="Бабушка держит семейную книгу воспоминаний"
+              className="w-full object-cover object-center"
+              style={{ display: "block", maxHeight: "80vw" }}
+            />
+          </div>
+          <div className="bg-white px-5 pt-7 pb-10">
+            <h1 className="leading-tight mb-4 text-[32px] font-bold" style={{ color: "#00a4e3" }}>
+              Превращаем воспоминания в книги
+            </h1>
+            <p className="text-[16px] text-[#444] leading-relaxed mb-6">
+              Мы бережно интервьюируем ваших близких, помогаем собрать фотографии и создаём красивую книгу, которая сохранит семейные истории на годы.
+            </p>
+            <a href="#tariffs" className="btn-cta w-full text-center block" style={{ fontSize: 16, padding: "16px 20px" }}>
+              Книга со скидкой 25% →
+            </a>
+          </div>
+        </div>
+
+        {/* Desktop layout */}
+        <div className="hidden md:grid md:grid-cols-2 max-w-7xl mx-auto" style={{ minHeight: 520 }}>
+          <div className="flex flex-col justify-center px-8 lg:px-16 py-16">
+            <h1 className="leading-tight mb-5" style={{ fontSize: "clamp(36px, 4vw, 56px)", fontWeight: 700, color: "#00a4e3" }}>
+              Превращаем воспоминания в книги
+            </h1>
+            <p className="text-[17px] text-[#444] leading-relaxed mb-8 max-w-lg">
+              Мы бережно интервьюируем ваших близких, помогаем собрать фотографии и создаём красивую книгу, которая сохранит семейные истории на годы.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 items-start">
+              <a href="#tariffs" className="btn-cta" style={{ fontSize: 16, padding: "16px 32px" }}>
+                Книга со скидкой 25% →
+              </a>
+              <button onClick={openConsult} className="btn-secondary" style={{ fontSize: 15, padding: "15px 28px" }}>
+                Бесплатная консультация
+              </button>
+            </div>
+          </div>
+          <div className="overflow-hidden" style={{ maxHeight: 600 }}>
+            <img
+              src={HERO_IMG}
+              alt="Бабушка держит семейную книгу воспоминаний"
+              className="w-full h-full object-cover object-center"
+              style={{ display: "block" }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ГАЛЕРЕЯ КНИГ */}
+      <section className="w-full py-6 md:py-10" style={{ background: "#FAFAFA" }}>
+        {/* Мобайл: ручной горизонтальный скролл */}
+        <div
+          className="md:hidden flex gap-3 px-4"
+          style={{ overflowX: "auto", scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
+        >
+          {[
+            { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/0d069a37-552f-48da-b1e8-605a5f113e74.png", alt: "Коллекция семейных книг StoryBox" },
+            { src: BOOK_SPREAD_IMG, alt: "Разворот семейной книги StoryBox" },
+            { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/b4c7ee0d-1be8-4d00-a733-e20e61158248.jpg", alt: "Премиальные обложки книг StoryBox" },
+            { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/c09e7ca1-eb4b-4a20-88c1-8c06b7101416.jpg", alt: "Семейные мемуары в твёрдой обложке" },
+          ].map((img, i) => (
+            <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden" style={{ width: "72vw", height: "48vw" }}>
+              <img src={img.src} alt={img.alt} className="w-full h-full object-cover" style={{ display: "block" }} />
+            </div>
+          ))}
+        </div>
+
+        {/* Десктоп: слайдер с кнопками */}
+        <div className="hidden md:block relative px-6">
+          <div ref={galleryRef} className="flex gap-4 overflow-x-hidden">
+            {GALLERY_ITEMS.map((img, i) => (
+              <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden" style={{ width: "clamp(280px, 45vw, 560px)", height: "clamp(180px, 29vw, 360px)" }}>
+                <img src={img.src} alt={img.alt} className="w-full h-full object-cover" style={{ display: "block" }} />
+              </div>
+            ))}
+          </div>
+          <button
+            onClick={() => scrollGallery(-1)}
+            disabled={galleryIndex === 0}
+            className="absolute left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center transition-opacity"
+            style={{ opacity: galleryIndex === 0 ? 0.3 : 1 }}
+          >
+            <Icon name="ChevronLeft" size={22} />
+          </button>
+          <button
+            onClick={() => scrollGallery(1)}
+            disabled={galleryIndex === GALLERY_ITEMS.length - 1}
+            className="absolute right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center transition-opacity"
+            style={{ opacity: galleryIndex === GALLERY_ITEMS.length - 1 ? 0.3 : 1 }}
+          >
+            <Icon name="ChevronRight" size={22} />
+          </button>
+        </div>
+      </section>
+    </>
+  );
+}
