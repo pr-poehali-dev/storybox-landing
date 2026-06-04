@@ -5,10 +5,12 @@ const HERO_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb
 const BOOK_SPREAD_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/092dd021-1b7d-4089-94bf-c958bff5c481.jpg";
 
 const GALLERY_ITEMS = [
-  { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/0d069a37-552f-48da-b1e8-605a5f113e74.png", alt: "Коллекция семейных книг StoryBox" },
-  { src: BOOK_SPREAD_IMG, alt: "Разворот семейной книги StoryBox" },
-  { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/b4c7ee0d-1be8-4d00-a733-e20e61158248.jpg", alt: "Премиальные обложки книг StoryBox" },
-  { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/c09e7ca1-eb4b-4a20-88c1-8c06b7101416.jpg", alt: "Семейные мемуары в твёрдой обложке" },
+  { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/3d3c578e-b613-4b76-aeea-48442604659b.png", alt: "Семейная книга воспоминаний StoryBox" },
+  { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/b63e69c6-e8e7-4d17-9044-325ba6826e5c.png", alt: "Коллекция семейных книг StoryBox" },
+  { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/bcf24bde-7759-46f0-a20c-38899736cb77.png", alt: "Разворот семейной книги StoryBox" },
+  { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/41657e1a-ddca-48b3-99b5-d9bb8f7575fc.png", alt: "Премиальные обложки книг StoryBox" },
+  { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/55866719-9d93-487c-ba1c-7b022899578d.png", alt: "Семейные мемуары в твёрдой обложке" },
+  { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/bb1e0d48-7ee3-4cd8-af42-c17381b98c4e.png", alt: "Книга воспоминаний StoryBox" },
 ];
 
 interface HeroSectionProps {
@@ -91,12 +93,7 @@ export default function HeroSection({ openConsult }: HeroSectionProps) {
           className="md:hidden flex gap-3 px-4"
           style={{ overflowX: "auto", scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
         >
-          {[
-            { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/0d069a37-552f-48da-b1e8-605a5f113e74.png", alt: "Коллекция семейных книг StoryBox" },
-            { src: BOOK_SPREAD_IMG, alt: "Разворот семейной книги StoryBox" },
-            { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/b4c7ee0d-1be8-4d00-a733-e20e61158248.jpg", alt: "Премиальные обложки книг StoryBox" },
-            { src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/c09e7ca1-eb4b-4a20-88c1-8c06b7101416.jpg", alt: "Семейные мемуары в твёрдой обложке" },
-          ].map((img, i) => (
+          {GALLERY_ITEMS.map((img, i) => (
             <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden" style={{ width: "72vw", height: "48vw" }}>
               <img src={img.src} alt={img.alt} className="w-full h-full object-cover" style={{ display: "block" }} />
             </div>
