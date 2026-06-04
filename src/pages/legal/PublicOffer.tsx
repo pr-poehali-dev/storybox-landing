@@ -379,12 +379,12 @@ export default function PublicOffer() {
           <div><strong>Налоговый режим:</strong> Налог на профессиональный доход</div>
           <div><strong>Бренд/проект:</strong> StoryBox</div>
           <div>
-            <strong>Email:</strong>{" "}
+            <strong>Email для связи и претензий:</strong>{" "}
             <a href="mailto:vkorobkostorybox@gmail.com" style={{ color: "#00A4E3" }}>
               vkorobkostorybox@gmail.com
             </a>
           </div>
-          <div><strong>Telegram:</strong> StoryBox_support</div>
+          <div><strong>Telegram для оперативной связи:</strong> StoryBox_support</div>
           <div><strong>Адрес:</strong> Москва, Новодмитровская 2к5, кв. 599</div>
           <div className="mt-2 pt-2" style={{ color: "#7A7A7A", borderTop: "1px solid #E5E5E5" }}>
             Редакция от: 23.05.2026
