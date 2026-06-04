@@ -1,7 +1,7 @@
 import LegalLayout from "./LegalLayout";
 
 const PDF_URL =
-  "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/0ee8885f-9922-46c7-917c-29535d5f723e.pdf";
+  "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/6f38fda3-bf35-4d07-9220-d06358b578bc.pdf";
 
 const sections: { title: string; items: string[] }[] = [
   {
