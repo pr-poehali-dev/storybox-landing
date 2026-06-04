@@ -120,25 +120,25 @@ export const BOOK_FEATURES = [
     icon: "Image",
     title: "Фотоархив",
     desc: "Мы помогаем составить список людей и событий, которые важно сохранить в книге, а затем вплетаем предоставленные фотографии прямо в повествование. Снимки появляются рядом с первыми упоминаниями людей и дополняются подписями.",
-    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/971c95b8-bb5f-4fde-af1d-88adfcbaa020.jpg",
+    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/28ea17ad-2e45-4240-9e96-841b9256b7cc.png",
   },
   {
     icon: "GitBranch",
     title: "Генеалогическое древо",
     desc: "Во время интервью мы внимательно фиксируем связи между членами семьи и на основе этих историй создаём красиво оформленное семейное древо, которое помогает увидеть историю рода и сохранить её для будущих поколений.",
-    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/1b059321-955d-4fd1-a8da-9dee34926c78.jpg",
+    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/b6f8d972-d99b-43f2-b3b1-7c4e25b3531e.png",
   },
   {
     icon: "QrCode",
     title: "Аудиозаписи интервью",
     desc: "Чтобы будущие поколения могли не только прочитать воспоминания, но и услышать голос своих близких, мы добавляем в книгу QR-коды с доступом к аудиозаписям интервью. Так сохраняются интонации, манера речи, смех и живое присутствие человека.",
-    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/da6bce07-eb06-4aef-b607-79e28d6e5e0f.jpg",
+    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/2d7a5d2f-cb3a-4e9e-8d84-bc56a9176944.png",
   },
   {
     icon: "BookOpen",
     title: "Формат и печать",
     desc: "Книга создаётся в формате 20×20 см в твёрдом переплёте с прочной обложкой и антивандальным покрытием. Мы печатаем её на плотной дизайнерской бумаге, чтобы она ощущалась как настоящая семейная реликвия, которую хочется бережно хранить и передавать дальше.",
-    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/874b6401-8623-48a9-9795-831ced7c0a22.jpg",
+    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/e0636ba2-a46c-4857-89e1-947ac3a2527f.png",
   },
 ];
 
