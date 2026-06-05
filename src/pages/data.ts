@@ -114,7 +114,7 @@ export const BOOK_FEATURES = [
     icon: "Heart",
     title: "Истории ваших близких",
     desc: "Не просто факты и даты, а живые рассказы о детстве, семье, любви, мечтах, испытаниях и людях, которые сформировали вашу историю. Мы сохраняем воспоминания, семейные ценности, характер, взгляды на жизнь и истории, которые обычно остаются только в памяти семьи.",
-    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/b7a34c03-291f-468d-8635-2898d674b896.jpg",
+    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/aa5f43d0-3587-4103-bf34-b9b6f559d9bd.png",
   },
   {
     icon: "Image",
@@ -152,7 +152,7 @@ export const PROCESS_STEPS = [
 ];
 
 export const TEAM_MEMBERS = [
-  { name: "Иван Соломин", role: "Историк", photo: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/8b49b5ef-f9eb-4116-915f-08a0e6fbbd47.jpg" },
+  { name: "Иван Соломин", role: "Историк", photo: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/f83f2a2c-2f78-47e1-afe9-a3b57420bbea.jpg" },
   { name: "Дарья Дараганова", role: "Психолог", photo: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/fa60aaff-c935-42d3-9c88-058347c72d52.jpg" },
   { name: "Екатерина Аникина", role: "Психолог", photo: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/6ab504aa-c638-4b49-a47c-ed2e708b8182.png" },
   { name: "Максим Третьяков", role: "Психолог", photo: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/da534402-267e-4668-9e22-9584b3400c36.jpg" },

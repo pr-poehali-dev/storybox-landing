@@ -109,7 +109,6 @@ export default function WhyOneBook({ openConsult }: Props) {
         <div className="flex-shrink-0 flex flex-col items-start md:items-end gap-1.5">
           <button onClick={openConsult} className="btn-cta-meeting w-full sm:w-auto">
             Бесплатная консультация
-            <span className="arrow">→</span>
           </button>
           <p className="text-[12px]" style={{ color: "#AAAAAA" }}>30 минут · Online · Бесплатно</p>
         </div>

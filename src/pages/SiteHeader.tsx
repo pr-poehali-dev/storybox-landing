@@ -34,7 +34,7 @@ export default function SiteHeader({ mobileMenuOpen, setMobileMenuOpen }: SiteHe
             </svg>
           </a>
           <a
-            href="https://t.me/storybox_ru"
+            href="https://t.me/StoryBox_support"
             target="_blank" rel="noopener noreferrer"
             aria-label="Telegram"
             className="hover:opacity-80 transition-opacity flex-shrink-0"
@@ -48,7 +48,7 @@ export default function SiteHeader({ mobileMenuOpen, setMobileMenuOpen }: SiteHe
             className="hidden md:inline-flex items-center btn-cta ml-2"
             style={{ padding: "10px 20px", fontSize: 14 }}
           >
-            Книга со скидкой 25% →
+            Книга со скидкой 25%
           </a>
           <button
             className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg ml-1"

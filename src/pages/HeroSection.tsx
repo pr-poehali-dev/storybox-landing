@@ -52,7 +52,7 @@ export default function HeroSection({ openConsult }: HeroSectionProps) {
               Мы бережно интервьюируем ваших близких, помогаем собрать фотографии и создаём красивую книгу, которая сохранит семейные истории на годы.
             </p>
             <a href="#tariffs" className="btn-cta w-full text-center block" style={{ fontSize: 16, padding: "16px 20px" }}>
-              Книга со скидкой 25% →
+              Книга со скидкой 25%
             </a>
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function HeroSection({ openConsult }: HeroSectionProps) {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 items-start">
               <a href="#tariffs" className="btn-cta" style={{ fontSize: 16, padding: "16px 32px" }}>
-                Книга со скидкой 25% →
+                Книга со скидкой 25%
               </a>
               <button onClick={openConsult} className="btn-secondary" style={{ fontSize: 15, padding: "15px 28px" }}>
                 Бесплатная консультация

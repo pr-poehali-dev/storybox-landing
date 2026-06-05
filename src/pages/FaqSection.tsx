@@ -37,7 +37,7 @@ export default function FaqSection({ openConsult }: Props) {
               className="font-semibold text-[14px] md:text-[15px] hover:opacity-80 transition-opacity"
               style={{ color: "#00A4E3" }}
             >
-              Telegram → @StoryBox_support
+              Telegram: @StoryBox_support
             </a>
           </div>
         </div>
@@ -121,7 +121,6 @@ export default function FaqSection({ openConsult }: Props) {
             <div className="flex-shrink-0">
               <button onClick={openConsult} className="btn-cta-meeting w-full md:w-auto">
                 Записаться на установочную встречу
-                <span className="arrow">→</span>
               </button>
               <p className="text-[12px] mt-2 md:text-right" style={{ color: "#AAAAAA" }}>
                 30 минут · Online · Бесплатно
