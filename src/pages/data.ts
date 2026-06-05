@@ -5,8 +5,8 @@ export const SPREAD_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a
 export const COVERS_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/b1ec7a56-7caf-4ae9-8860-26aee6a4da56.jpg";
 
 export const NAV_LINKS = [
-  { label: "О нас", href: "#about" },
-  { label: "Книга", href: "#book" },
+  { label: "Книги", href: "#book" },
+  { label: "Как это работает", href: "#how" },
   { label: "Тарифы", href: "#tariffs" },
   { label: "Интервьюеры", href: "#team" },
   { label: "FAQ", href: "#faq" },

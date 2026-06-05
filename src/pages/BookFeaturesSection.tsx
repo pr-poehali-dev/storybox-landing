@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
 import { BOOK_FEATURES } from "./data";
 
@@ -28,15 +29,49 @@ const STEPS = [
   },
 ];
 
+const CARD_WIDTH = 300;
+const CARD_GAP = 20;
+
 export default function BookFeaturesSection() {
+  const bookScrollRef = useRef<HTMLDivElement>(null);
+  const [bookIdx, setBookIdx] = useState(0);
+
+  const scrollBook = (dir: 1 | -1) => {
+    const next = Math.max(0, Math.min(BOOK_FEATURES.length - 1, bookIdx + dir));
+    setBookIdx(next);
+    const el = bookScrollRef.current;
+    if (!el) return;
+    el.scrollTo({ left: next * (CARD_WIDTH + CARD_GAP), behavior: "smooth" });
+  };
+
   return (
     <>
       {/* ИЗ ЧЕГО СОСТОИТ КНИГА */}
-      <section className="py-10 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-8">
-          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Из чего состоит каждая книга</h2>
-          <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">Пять составляющих, которые входят в каждый проект</p>
+      <section id="book" className="py-10 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-8 flex items-end justify-between">
+          <div>
+            <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Из чего состоит каждая книга</h2>
+            <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">Пять составляющих, которые входят в каждый проект</p>
+          </div>
+          {/* Desktop: кнопки влево/вправо */}
+          <div className="hidden md:flex items-center gap-2 flex-shrink-0 ml-6">
+            <button
+              onClick={() => scrollBook(-1)}
+              disabled={bookIdx === 0}
+              className="w-10 h-10 rounded-full border border-[#E5E5E5] flex items-center justify-center hover:border-[#00A4E3] hover:text-[#00A4E3] transition-colors disabled:opacity-30 disabled:cursor-default"
+            >
+              <Icon name="ChevronLeft" size={20} />
+            </button>
+            <button
+              onClick={() => scrollBook(1)}
+              disabled={bookIdx >= BOOK_FEATURES.length - 1}
+              className="w-10 h-10 rounded-full border border-[#E5E5E5] flex items-center justify-center hover:border-[#00A4E3] hover:text-[#00A4E3] transition-colors disabled:opacity-30 disabled:cursor-default"
+            >
+              <Icon name="ChevronRight" size={20} />
+            </button>
+          </div>
         </div>
+
         {/* Mobile: горизонтальный скролл */}
         <div
           className="md:hidden flex gap-4 px-4 pb-2"
@@ -61,31 +96,38 @@ export default function BookFeaturesSection() {
             </div>
           ))}
         </div>
-        {/* Desktop: сетка */}
-        <div className="hidden md:grid max-w-7xl mx-auto px-6 grid-cols-3 gap-5">
-          {BOOK_FEATURES.map((f, i) => (
-            <div key={f.title} className={`sb-card overflow-hidden !p-0${i === 4 ? " md:col-start-2" : ""}`}>
-              {f.image && (
-                <div className="w-full overflow-hidden" style={{ height: 200 }}>
-                  <img src={f.image} alt={f.title} className="w-full h-full object-cover" />
-                </div>
-              )}
-              <div className="p-5">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#F2F9FF" }}>
-                    <Icon name={f.icon as Parameters<typeof Icon>[0]["name"]} size={18} style={{ color: "#00A4E3" }} fallback="BookOpen" />
+
+        {/* Desktop: горизонтальный скролл */}
+        <div className="hidden md:block max-w-7xl mx-auto px-6 overflow-hidden">
+          <div
+            ref={bookScrollRef}
+            className="flex gap-5 pb-2"
+            style={{ overflowX: "auto", scrollbarWidth: "none" } as React.CSSProperties}
+          >
+            {BOOK_FEATURES.map((f) => (
+              <div key={f.title} className="sb-card flex-shrink-0 overflow-hidden !p-0" style={{ width: CARD_WIDTH }}>
+                {f.image && (
+                  <div className="w-full overflow-hidden" style={{ height: 200 }}>
+                    <img src={f.image} alt={f.title} className="w-full h-full object-cover" />
                   </div>
-                  <h4 className="text-[16px] font-semibold text-black">{f.title}</h4>
+                )}
+                <div className="p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#F2F9FF" }}>
+                      <Icon name={f.icon as Parameters<typeof Icon>[0]["name"]} size={18} style={{ color: "#00A4E3" }} fallback="BookOpen" />
+                    </div>
+                    <h4 className="text-[16px] font-semibold text-black">{f.title}</h4>
+                  </div>
+                  <p className="text-[14px] text-[#7A7A7A] leading-relaxed">{f.desc}</p>
                 </div>
-                <p className="text-[14px] text-[#7A7A7A] leading-relaxed">{f.desc}</p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* КАК ЭТО РАБОТАЕТ */}
-      <section className="py-10 md:py-16 section-soft">
+      <section id="how" className="py-10 md:py-16 section-soft">
         <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-10">
           <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Как это работает</h2>
           <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">От первой встречи до книги в ваших руках — 4 шага</p>
