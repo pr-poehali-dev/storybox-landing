@@ -4,6 +4,13 @@ import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { TARIFFS, VALID_PROMOS } from "./data";
 import { applyPhoneMask, validatePhone } from "@/utils/phoneMask";
+import { PaymentButton } from "@/components/extensions/robokassa/PaymentButton";
+
+const ROBOKASSA_URL = "https://functions.poehali.dev/b0b464a9-7187-4ddf-91f5-a292f1793a94";
+
+function parsePriceToNumber(priceStr: string): number {
+  return Number(priceStr.replace(/[^\d]/g, ""));
+}
 
 interface BookingPopupProps {
   open: boolean;
@@ -15,6 +22,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
   const [form, setForm] = useState({
     name: "",
     phone: "",
+    email: "",
     promo: "",
     agreePersonal: false,
     agreeTerms: false,
@@ -32,7 +40,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
   // Сбрасываем форму при открытии
   useEffect(() => {
     if (open) {
-      setForm({ name: "", phone: "", promo: "", agreePersonal: false, agreeTerms: false, agreeMarketing: false });
+      setForm({ name: "", phone: "", email: "", promo: "", agreePersonal: false, agreeTerms: false, agreeMarketing: false });
       setPromoStatus("idle");
       setPromoDiscount(0);
       setSubmitted(false);
@@ -189,6 +197,16 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
             </div>
 
             <div>
+              <label className="block text-[13px] font-semibold text-[#222] mb-1">Email</label>
+              <input
+                type="email" required value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                placeholder="ваш@email.com"
+                className="w-full border border-[#E5E5E5] rounded-lg px-4 py-3 text-[15px] focus:outline-none focus:border-[#00A4E3] transition-colors"
+              />
+            </div>
+
+            <div>
               <label className="block text-[13px] font-semibold text-[#222] mb-1">
                 Промокод <span className="text-[#7A7A7A] font-normal">(необязательно)</span>
               </label>
@@ -250,13 +268,23 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
             </div>
 
             <div className="flex flex-col gap-3">
-              <button
-                type="button"
+              <PaymentButton
+                apiUrl={ROBOKASSA_URL}
+                amount={(() => {
+                  const base = tariffData ? parsePriceToNumber(tariffData.price) : 0;
+                  return promoStatus === "valid" ? Math.round(base * (1 - promoDiscount / 100)) : base;
+                })()}
+                userName={form.name}
+                userEmail={form.email}
+                userPhone={form.phone}
+                cartItems={tariffData ? [{ id: tariffData.name, name: tariffData.fullName, price: parsePriceToNumber(tariffData.price), quantity: 1 }] : []}
+                successUrl={window.location.origin + "/?payment=success"}
+                failUrl={window.location.origin + "/?payment=fail"}
+                buttonText="Оплатить онлайн"
                 className="w-full text-center text-[15px] py-4 rounded-xl font-bold text-white transition-opacity hover:opacity-90"
-                style={{ background: "#ED4463" }}
-              >
-                Оплатить онлайн
-              </button>
+                style={{ background: "#ED4463" } as React.CSSProperties}
+                disabled={!form.name || !form.email || !form.agreePersonal || !form.agreeTerms || !tariffData}
+              />
               <button type="submit" className="w-full text-center text-[15px] py-4 rounded-xl font-bold text-white transition-opacity hover:opacity-90" style={{ background: "#00A4E3" }}>
                 Отправить заявку
               </button>
