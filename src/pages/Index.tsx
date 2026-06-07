@@ -55,7 +55,7 @@ export default function Index() {
               <span style={{ fontWeight: 400 }}>Story</span><span style={{ fontWeight: 700 }}>Box</span>
             </div>
             <p className="text-[14px] leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-              Интервью для будущего. Сохраняем внутренний мир и истории.
+              Превращаем воспоминания в книги
             </p>
           </div>
           <div>
@@ -73,7 +73,7 @@ export default function Index() {
           <div>
             <h4 className="text-white font-semibold mb-4 text-[15px]">Разделы</h4>
             <ul className="space-y-2">
-              {[["О нас", "#about"], ["Тарифы", "#tariffs"], ["FAQ", "#faq"]].map(([label, href]) => (
+              {[["Тарифы", "#tariffs"], ["FAQ", "#faq"]].map(([label, href]) => (
                 <li key={label}>
                   <a href={href} className="text-[14px] hover:text-white transition-colors" style={{ color: "rgba(255,255,255,0.5)" }}>{label}</a>
                 </li>
