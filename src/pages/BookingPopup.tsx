@@ -281,8 +281,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
                 successUrl={window.location.origin + "/?payment=success"}
                 failUrl={window.location.origin + "/?payment=fail"}
                 buttonText="Оплатить онлайн"
-                className="w-full text-center text-[15px] py-4 rounded-xl font-bold text-white transition-opacity hover:opacity-90"
-                style={{ background: "#ED4463" } as React.CSSProperties}
+                className="w-full text-center text-[15px] py-4 rounded-xl font-bold text-white transition-opacity hover:opacity-90 bg-[#ED4463]"
                 disabled={!form.name || !form.email || !form.agreePersonal || !form.agreeTerms || !tariffData}
               />
               <button type="submit" className="w-full text-center text-[15px] py-4 rounded-xl font-bold text-white transition-opacity hover:opacity-90" style={{ background: "#00A4E3" }}>
