@@ -1,11 +1,15 @@
+import { useState } from "react";
 import Icon from "@/components/ui/icon";
 import { TEAM_MEMBERS } from "./data";
+
+const PDF_URL = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/0c989fac-5b3e-44bf-ae44-b377cbe28535.pdf";
 
 interface AboutSectionProps {
   openPopup: (tariff?: string) => void;
 }
 
 export default function AboutSection({ openPopup }: AboutSectionProps) {
+  const [pdfOpen, setPdfOpen] = useState(false);
   return (
     <>
       {/* ОТЗЫВ ИРИНЫ АЛЕКСАНДРОВНЫ */}
@@ -46,11 +50,11 @@ export default function AboutSection({ openPopup }: AboutSectionProps) {
 
               <div className="flex flex-col sm:flex-row gap-3">
                 <button
-                  onClick={() => alert("PDF будет доступен в ближайшее время")}
+                  onClick={() => setPdfOpen(true)}
                   className="btn-cta flex items-center justify-center gap-2"
                 >
-                  <Icon name="Download" size={16} />
-                  Скачать пример книги
+                  <Icon name="BookOpen" size={16} />
+                  Посмотреть пример книги
                 </button>
                 <button onClick={() => openPopup()} className="btn-secondary">Заказать такую же</button>
               </div>
@@ -135,6 +139,46 @@ export default function AboutSection({ openPopup }: AboutSectionProps) {
           </div>
         </div>
       </section>
+
+      {/* PDF модалка */}
+      {pdfOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ background: "rgba(0,0,0,0.75)" }}
+          onClick={() => setPdfOpen(false)}
+        >
+          <div
+            className="relative bg-white rounded-2xl overflow-hidden flex flex-col"
+            style={{ width: "min(900px, 95vw)", height: "90vh" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-5 py-3 border-b border-[#F0F0F0]">
+              <span className="font-semibold text-[15px] text-black">Пример книги</span>
+              <div className="flex items-center gap-2">
+                <a
+                  href={PDF_URL}
+                  download
+                  className="flex items-center gap-1.5 text-[13px] text-[#00A4E3] hover:opacity-80 transition-opacity font-medium"
+                >
+                  <Icon name="Download" size={15} />
+                  Скачать
+                </a>
+                <button
+                  onClick={() => setPdfOpen(false)}
+                  className="ml-2 w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#F5F5F5] transition-colors"
+                >
+                  <Icon name="X" size={18} />
+                </button>
+              </div>
+            </div>
+            <iframe
+              src={`${PDF_URL}#toolbar=1&navpanes=1`}
+              className="flex-1 w-full"
+              title="Пример книги"
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 }
