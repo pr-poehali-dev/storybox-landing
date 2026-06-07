@@ -14,7 +14,7 @@ export default function SiteHeader({ mobileMenuOpen, setMobileMenuOpen }: SiteHe
           <img
             src="https://static.tildacdn.one/tild3937-3830-4361-a239-323264653433/_2023-11-07_12181908.png"
             alt="StoryBox"
-            className="h-12 md:h-[100px] w-auto object-contain"
+            className="h-12 md:h-[68px] w-auto object-contain"
           />
         </a>
         <nav className="hidden md:flex items-center gap-8">
