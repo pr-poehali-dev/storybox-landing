@@ -62,11 +62,14 @@ def send_telegram(order_number, user_name, user_email, user_phone, amount, items
         headers={"Content-Type": "application/json"},
         method="POST"
     )
-    try:
-        resp = urllib.request.urlopen(req, timeout=10)
-        print(f"[TG] OK: {resp.read().decode()}")
-    except Exception as e:
-        print(f"[TG] Error: {e}")
+    for attempt in range(3):
+        try:
+            resp = urllib.request.urlopen(req, timeout=5)
+            print(f"[TG] OK: {resp.read().decode()}")
+            return
+        except Exception as e:
+            print(f"[TG] Attempt {attempt+1} error: {e}")
+    print("[TG] All attempts failed")
 
 
 def send_google_sheets(order_number, user_name, user_email, user_phone, amount, items_names, date_str):
@@ -172,7 +175,7 @@ def handler(event: dict, context) -> dict:
     now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=3)))
     date_str = now.strftime("%d.%m.%Y %H:%M")
 
-    send_telegram(order_number, user_name, user_email, user_phone, amount, items_names, date_str)
     send_google_sheets(order_number, user_name, user_email, user_phone, amount, items_names, date_str)
+    send_telegram(order_number, user_name, user_email, user_phone, amount, items_names, date_str)
 
     return {'statusCode': 200, 'headers': HEADERS, 'body': f'OK{inv_id}', 'isBase64Encoded': False}
