@@ -249,9 +249,18 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
               </label>
             </div>
 
-            <button type="submit" className="btn-cta w-full text-center text-[15px] py-4">
-              Отправить заявку
-            </button>
+            <div className="flex flex-col gap-3">
+              <button
+                type="button"
+                className="w-full text-center text-[15px] py-4 rounded-xl font-bold text-white transition-opacity hover:opacity-90"
+                style={{ background: "#ED4463" }}
+              >
+                Оплатить онлайн
+              </button>
+              <button type="submit" className="w-full text-center text-[15px] py-4 rounded-xl font-bold text-white transition-opacity hover:opacity-90" style={{ background: "#00A4E3" }}>
+                Отправить заявку
+              </button>
+            </div>
 
             <p className="text-[11px] text-center" style={{ color: "#AAAAAA" }}>
               После отправки мы свяжемся в течение дня для подтверждения и оплаты
