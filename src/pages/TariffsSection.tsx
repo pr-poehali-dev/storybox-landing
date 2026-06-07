@@ -85,9 +85,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
               style={isGift
                 ? { background: "#ED4463", color: "#fff", boxShadow: "0 4px 14px rgba(237,68,99,0.35)" }
                 : { background: "transparent", color: "#7A7A7A" }}
-            >
-              Подарок близкому
-            </button>
+            >В подарок</button>
           </div>
           {isGift && (
             <p className="mt-3 text-[14px]" style={{ color: "#7A7A7A" }}>
