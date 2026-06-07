@@ -34,7 +34,7 @@ export default function SiteHeader({ mobileMenuOpen, setMobileMenuOpen }: SiteHe
             </svg>
           </a>
           <a
-            href="https://max.ru/StoryBox_support"
+            href="https://max.ru/u/f9LHodD0cOI8UouNiRQkCe1K4ytYGjf5V5GnnJPvsaF8JfKFdukRS-awK54"
             target="_blank" rel="nofollow"
             aria-label="maxmessenger"
             className="hover:opacity-80 transition-opacity flex-shrink-0 leading-none"
