@@ -128,7 +128,7 @@ export default function Index() {
         </div>
         <div className="max-w-7xl mx-auto border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between gap-3 text-[13px]"
           style={{ color: "rgba(255,255,255,0.35)" }}>
-          <span>© 2024 StoryBox. Все права защищены.</span>
+          <span>© 2026 StoryBox. Все права защищены.</span>
           <span className="flex flex-wrap gap-x-3 gap-y-1">
             <Link to="/legal/privacy" className="hover:text-white/60 transition-colors">Политика конфиденциальности</Link>
             <span>·</span>
