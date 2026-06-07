@@ -22,8 +22,10 @@ export default function Index() {
   const [paymentSuccessOpen, setPaymentSuccessOpen] = useState(false);
 
   useEffect(() => {
+    // Редирект от Robokassa с payment=success
     const params = new URLSearchParams(window.location.search);
     if (params.get("payment") === "success") {
+      localStorage.removeItem("pending_order");
       setPaymentSuccessOpen(true);
       params.delete("payment");
       params.delete("OutSum");
@@ -32,7 +34,22 @@ export default function Index() {
       params.delete("Culture");
       const newUrl = window.location.pathname + (params.toString() ? "?" + params.toString() : "");
       window.history.replaceState({}, "", newUrl);
+      return;
     }
+
+    // Проверка pending_order при возврате на сайт (без редиректа от Robokassa)
+    const pendingOrder = localStorage.getItem("pending_order");
+    if (!pendingOrder) return;
+
+    fetch(`https://functions.poehali.dev/39bd365b-99af-43f4-90aa-666541dd5c72?order_number=${encodeURIComponent(pendingOrder)}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.status === "paid") {
+          localStorage.removeItem("pending_order");
+          setPaymentSuccessOpen(true);
+        }
+      })
+      .catch(() => {});
   }, []);
 
   const openPopup = (tariff = "") => { setPopupTariff(tariff); setPopupOpen(true); };
