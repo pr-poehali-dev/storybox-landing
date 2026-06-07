@@ -56,7 +56,7 @@ export default function AboutSection({ openPopup }: AboutSectionProps) {
                   <Icon name="BookOpen" size={16} />
                   Посмотреть пример книги
                 </button>
-                <button onClick={() => openPopup()} className="btn-secondary">Заказать такую же</button>
+                <button onClick={() => openPopup("Книга Standard")} className="btn-secondary">Заказать такую же</button>
               </div>
             </div>
 
