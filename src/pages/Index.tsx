@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import BookingPopup from "./BookingPopup";
 import GiftPopup from "./GiftPopup";
 import ConsultPopup from "./ConsultPopup";
+import PaymentSuccessPopup from "./PaymentSuccessPopup";
 import TariffsSection from "./TariffsSection";
 import FaqSection from "./FaqSection";
 import SiteHeader from "./SiteHeader";
@@ -18,6 +19,21 @@ export default function Index() {
   const [consultOpen, setConsultOpen] = useState(false);
   const [activeTariff, setActiveTariff] = useState(3);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [paymentSuccessOpen, setPaymentSuccessOpen] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("payment") === "success") {
+      setPaymentSuccessOpen(true);
+      params.delete("payment");
+      params.delete("OutSum");
+      params.delete("InvId");
+      params.delete("SignatureValue");
+      params.delete("Culture");
+      const newUrl = window.location.pathname + (params.toString() ? "?" + params.toString() : "");
+      window.history.replaceState({}, "", newUrl);
+    }
+  }, []);
 
   const openPopup = (tariff = "") => { setPopupTariff(tariff); setPopupOpen(true); };
   const openGiftPopup = (tariff = "") => { setGiftTariff(tariff); setGiftOpen(true); };
@@ -28,6 +44,7 @@ export default function Index() {
       <BookingPopup open={popupOpen} onClose={() => setPopupOpen(false)} initialTariff={popupTariff} />
       <GiftPopup open={giftOpen} onClose={() => setGiftOpen(false)} initialTariff={giftTariff} />
       <ConsultPopup open={consultOpen} onClose={() => setConsultOpen(false)} />
+      <PaymentSuccessPopup open={paymentSuccessOpen} onClose={() => setPaymentSuccessOpen(false)} />
 
       <SiteHeader mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
 
