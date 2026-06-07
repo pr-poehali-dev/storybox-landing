@@ -2,6 +2,9 @@ import json
 import os
 import hashlib
 import psycopg2
+import urllib.request
+import urllib.error
+import datetime
 from urllib.parse import parse_qs
 
 
@@ -27,9 +30,74 @@ HEADERS = {
 }
 
 
+def send_telegram(order_number, user_name, user_email, user_phone, amount, items_names, date_str):
+    """Отправка уведомления в Telegram"""
+    tg_token = os.environ.get('TELEGRAM_BOT_TOKEN', '').strip()
+    tg_chat = os.environ.get('TELEGRAM_CHAT_ID', '').strip()
+    if not tg_token or not tg_chat:
+        print('[TG] No credentials')
+        return
+
+    items_line = f"\n📦 Состав: <b>{items_names}</b>" if items_names else ""
+    tg_text = (
+        f"✅ <b>Оплата получена!</b>\n\n"
+        f"🧾 Заказ: <b>{order_number}</b>\n"
+        f"👤 Имя: <b>{user_name}</b>\n"
+        f"📞 Телефон: <b>{user_phone}</b>\n"
+        f"📧 Email: <b>{user_email}</b>"
+        f"{items_line}\n"
+        f"💰 Сумма: <b>{amount} ₽</b>\n\n"
+        f"🕐 {date_str}"
+    )
+
+    payload = json.dumps({
+        "chat_id": tg_chat,
+        "text": tg_text,
+        "parse_mode": "HTML"
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        f"https://api.telegram.org/bot{tg_token}/sendMessage",
+        data=payload,
+        headers={"Content-Type": "application/json"},
+        method="POST"
+    )
+    try:
+        resp = urllib.request.urlopen(req, timeout=10)
+        print(f"[TG] OK: {resp.read().decode()}")
+    except Exception as e:
+        print(f"[TG] Error: {e}")
+
+
+def send_google_sheets(order_number, user_name, user_email, user_phone, amount, items_names, date_str):
+    """Запись оплаченного заказа в Google Sheets"""
+    try:
+        import gspread
+        from google.oauth2.service_account import Credentials
+
+        sa_json = json.loads(os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"])
+        creds = Credentials.from_service_account_info(sa_json, scopes=[
+            "https://www.googleapis.com/auth/spreadsheets"
+        ])
+        gc = gspread.authorize(creds)
+
+        sheet_id = "1BmzOi5inb9G7mWW5B5-kABWPHBXvGq2JDezCMA1o_gA"
+        sh = gc.open_by_key(sheet_id)
+        ws = sh.sheet1
+
+        if not ws.row_values(1):
+            ws.append_row(["Дата", "Имя", "Телефон", "Тариф", "Промокод", "Источник"])
+
+        ws.append_row([date_str, user_name, user_phone, items_names, "", "Онлайн оплата", user_email, str(amount)])
+        print("[SHEETS] OK — строка добавлена")
+    except Exception as e:
+        print(f"[SHEETS] Error: {e}")
+
+
 def handler(event: dict, context) -> dict:
     '''
     Result URL вебхук от Robokassa для подтверждения оплаты.
+    После оплаты отправляет уведомление в Telegram и Google Sheets.
     Robokassa отправляет: OutSum, InvId, SignatureValue
     Returns: OK{InvId} если подпись верна и заказ обновлён
     '''
@@ -76,13 +144,12 @@ def handler(event: dict, context) -> dict:
         UPDATE orders
         SET status = 'paid', paid_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP
         WHERE robokassa_inv_id = %s AND status = 'pending'
-        RETURNING id, order_number, user_email
+        RETURNING id, order_number, user_name, user_email, user_phone, amount
     """, (int(inv_id),))
 
     result = cur.fetchone()
 
     if not result:
-        # Проверяем, может уже оплачен
         cur.execute("SELECT status FROM orders WHERE robokassa_inv_id = %s", (int(inv_id),))
         existing = cur.fetchone()
         conn.close()
@@ -91,11 +158,21 @@ def handler(event: dict, context) -> dict:
             return {'statusCode': 200, 'headers': HEADERS, 'body': f'OK{inv_id}', 'isBase64Encoded': False}
         return {'statusCode': 404, 'headers': HEADERS, 'body': 'Order not found', 'isBase64Encoded': False}
 
+    order_id, order_number, user_name, user_email, user_phone, amount = result
+
+    # Получаем состав заказа
+    cur.execute("SELECT product_name, quantity FROM order_items WHERE order_id = %s", (order_id,))
+    items = cur.fetchall()
+    items_names = ", ".join(f"{row[0]}" + (f" x{row[1]}" if row[1] > 1 else "") for row in items)
+
     conn.commit()
     cur.close()
     conn.close()
 
-    # TODO: Отправить уведомление (email, telegram) после успешной оплаты
-    # order_id, order_number, user_email = result
+    now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=3)))
+    date_str = now.strftime("%d.%m.%Y %H:%M")
+
+    send_telegram(order_number, user_name, user_email, user_phone, amount, items_names, date_str)
+    send_google_sheets(order_number, user_name, user_email, user_phone, amount, items_names, date_str)
 
     return {'statusCode': 200, 'headers': HEADERS, 'body': f'OK{inv_id}', 'isBase64Encoded': False}
