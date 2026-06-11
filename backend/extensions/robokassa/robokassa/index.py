@@ -100,33 +100,51 @@ def handler(event: dict, context) -> dict:
         # Формирование ссылки на оплату
         amount_str = f"{amount:.2f}"
 
-        # Подпись: MerchantLogin:OutSum:InvId:Password#1
+        # Формирование чека (фискализация)
+        receipt_items = []
+        for item in cart_items:
+            item_sum = round(float(item.get('price', 0)) * int(item.get('quantity', 1)), 2)
+            receipt_items.append({
+                "name": str(item.get('name', ''))[:128],
+                "quantity": int(item.get('quantity', 1)),
+                "sum": item_sum,
+                "payment_method": "full_payment",
+                "payment_object": "service",
+                "tax": "none"
+            })
+
+        from urllib.parse import quote_plus
+        receipt_json = json.dumps({"items": receipt_items}, ensure_ascii=False)
+        # PHP urlencode-стиль: пробел = '+'. Та же строка идёт в подпись и в URL.
+        receipt_encoded = quote_plus(receipt_json)
+
+        # Подпись: MerchantLogin:OutSum:InvId:Receipt:[SuccessUrl2:GET:FailUrl2:GET:]Password#1
         if success_url or fail_url:
             signature = calculate_signature(
-                merchant_login, amount_str, robokassa_inv_id,
+                merchant_login, amount_str, robokassa_inv_id, receipt_encoded,
                 success_url, 'GET', fail_url, 'GET', password_1
             )
         else:
-            signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, password_1)
+            signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, receipt_encoded, password_1)
 
-        query_params = {
-            'MerchantLogin': merchant_login,
-            'OutSum': amount_str,
-            'InvoiceID': robokassa_inv_id,
-            'SignatureValue': signature,
-            'Email': user_email,
-            'Culture': 'ru',
-            'Description': f'Заказ {order_number}'
-        }
-
+        params_list = [
+            f"MerchantLogin={merchant_login}",
+            f"OutSum={amount_str}",
+            f"InvoiceID={robokassa_inv_id}",
+            f"SignatureValue={signature}",
+            f"Receipt={receipt_encoded}",
+            f"Email={quote_plus(user_email)}",
+            "Culture=ru",
+            f"Description={quote_plus(f'Заказ {order_number}')}",
+        ]
         if success_url:
-            query_params['SuccessUrl2'] = success_url
-            query_params['SuccessUrl2Method'] = 'GET'
+            params_list.append(f"SuccessUrl2={quote_plus(success_url)}")
+            params_list.append("SuccessUrl2Method=GET")
         if fail_url:
-            query_params['FailUrl2'] = fail_url
-            query_params['FailUrl2Method'] = 'GET'
+            params_list.append(f"FailUrl2={quote_plus(fail_url)}")
+            params_list.append("FailUrl2Method=GET")
 
-        payment_url = f"{ROBOKASSA_URL}?{urlencode(query_params)}"
+        payment_url = f"{ROBOKASSA_URL}?{'&'.join(params_list)}"
 
         cur.execute("UPDATE orders SET payment_url = %s WHERE id = %s", (payment_url, order_id))
         conn.commit()
