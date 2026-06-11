@@ -113,15 +113,16 @@ def handler(event: dict, context) -> dict:
                 "tax": "none"
             })
 
-        # Receipt: сначала URL-encode, затем та же строка идёт и в подпись и в параметр
-        from urllib.parse import quote as url_quote
-        receipt_json = json.dumps(receipt, ensure_ascii=False, separators=(',', ':'))
-        receipt_encoded = url_quote(receipt_json)
+        # Подпись: MerchantLogin:OutSum:InvId:Password#1
+        if success_url or fail_url:
+            signature = calculate_signature(
+                merchant_login, amount_str, robokassa_inv_id,
+                success_url, 'GET', fail_url, 'GET', password_1
+            )
+        else:
+            signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, password_1)
 
-        # Подпись: MerchantLogin:OutSum:InvId:Receipt(url-encoded):Password#1
-        signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, receipt_encoded, password_1)
-
-        base_params = {
+        query_params = {
             'MerchantLogin': merchant_login,
             'OutSum': amount_str,
             'InvoiceID': robokassa_inv_id,
@@ -132,14 +133,13 @@ def handler(event: dict, context) -> dict:
         }
 
         if success_url:
-            base_params['SuccessUrl2'] = success_url
-            base_params['SuccessUrl2Method'] = 'GET'
+            query_params['SuccessUrl2'] = success_url
+            query_params['SuccessUrl2Method'] = 'GET'
         if fail_url:
-            base_params['FailUrl2'] = fail_url
-            base_params['FailUrl2Method'] = 'GET'
+            query_params['FailUrl2'] = fail_url
+            query_params['FailUrl2Method'] = 'GET'
 
-        # Receipt передаём отдельно, чтобы избежать двойного кодирования
-        payment_url = f"{ROBOKASSA_URL}?{urlencode(base_params)}&Receipt={receipt_encoded}"
+        payment_url = f"{ROBOKASSA_URL}?{urlencode(query_params)}"
 
         cur.execute("UPDATE orders SET payment_url = %s WHERE id = %s", (payment_url, order_id))
         conn.commit()
