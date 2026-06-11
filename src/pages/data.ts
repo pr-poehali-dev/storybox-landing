@@ -114,7 +114,7 @@ export const BOOK_FEATURES = [
     icon: "Heart",
     title: "Истории ваших близких",
     desc: "Не просто факты и даты, а живые рассказы о детстве, семье, любви, мечтах, испытаниях и людях, которые сформировали вашу историю. Мы сохраняем воспоминания, семейные ценности, характер, взгляды на жизнь и истории, которые обычно остаются только в памяти семьи.",
-    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/aa5f43d0-3587-4103-bf34-b9b6f559d9bd.png",
+    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/a623bee0-2d58-4468-bc6e-68ea673457d3.png",
   },
   {
     icon: "Image",
