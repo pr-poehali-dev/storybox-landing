@@ -216,12 +216,19 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
         {/* Таблица сравнения */}
         <div className="rounded-2xl border border-[#E5E5E5] overflow-hidden mb-6">
           <div className="overflow-x-auto">
-            <table className="border-collapse" style={{ minWidth: 560, width: "100%" }}>
+            <table className="border-collapse table-fixed" style={{ minWidth: 600, width: "100%" }}>
+              <colgroup>
+                <col style={{ width: "22%" }} />
+                <col style={{ width: "19.5%" }} />
+                <col style={{ width: "19.5%" }} />
+                <col style={{ width: "19.5%" }} />
+                <col style={{ width: "19.5%" }} />
+              </colgroup>
               <thead>
                 <tr>
                   <th
-                    className="text-left px-5 py-4 text-[13px] font-semibold text-[#999] border-b border-[#F0F0F0]"
-                    style={{ background: "#FAFAFA", width: 130 }}
+                    className="text-left px-5 py-4 text-[14px] font-semibold text-[#999] border-b border-[#F0F0F0]"
+                    style={{ background: "#FAFAFA" }}
                   >
                     Параметр
                   </th>
@@ -234,21 +241,20 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
                         borderBottomWidth: 3,
                         borderBottomColor: activeTariff === vi ? tariff.color : "#F0F0F0",
                         background: activeTariff === vi ? `${tariff.color}08` : "#FAFAFA",
-                        minWidth: 120,
                       }}
                     >
-                      <div className="text-[13px] font-bold mb-0.5 leading-tight" style={{ color: activeTariff === vi ? tariff.color : "#555" }}>
+                      <div className="text-[14px] font-bold mb-0.5 leading-tight" style={{ color: activeTariff === vi ? tariff.color : "#555" }}>
                         {tariff.fullName}
                       </div>
                       {tariff.priceOld && (
-                        <div className="text-[11px] text-[#AAAAAA] line-through leading-none">{tariff.priceOld}</div>
+                        <div className="text-[12px] text-[#AAAAAA] line-through leading-none">{tariff.priceOld}</div>
                       )}
-                      <div className="text-[15px] font-extrabold leading-tight" style={{ color: activeTariff === vi ? tariff.color : "#222" }}>
+                      <div className="text-[16px] font-extrabold leading-tight" style={{ color: activeTariff === vi ? tariff.color : "#222" }}>
                         {tariff.price}
                       </div>
                       {tariff.discount > 0 && (
                         <div className="mt-1">
-                          <span className="text-[10px] font-bold text-white px-1.5 py-0.5 rounded-full" style={{ background: "#ED4463" }}>
+                          <span className="text-[11px] font-bold text-white px-1.5 py-0.5 rounded-full" style={{ background: "#ED4463" }}>
                             −{tariff.discount}%
                           </span>
                         </div>
@@ -260,14 +266,14 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
               <tbody>
                 {COMPARISON_ROWS.map((row, ri) => (
                   <tr key={row.label} style={{ background: ri % 2 === 0 ? "#fff" : "#FAFAFA" }}>
-                    <td className="px-5 py-3 text-[13px] font-semibold text-[#555] border-b border-[#F5F5F5] whitespace-nowrap">
+                    <td className="px-5 py-3 text-[14px] font-semibold text-[#555] border-b border-[#F5F5F5] whitespace-nowrap">
                       {row.label}
                     </td>
                     {row.vals.map((v, vi) => (
                       <td
                         key={vi}
                         onClick={() => setActiveTariff(vi)}
-                        className="px-4 py-3 text-center text-[13px] cursor-pointer border-b border-[#F5F5F5] transition-colors"
+                        className="px-4 py-3 text-center text-[14px] cursor-pointer border-b border-[#F5F5F5] transition-colors"
                         style={{
                           background: activeTariff === vi ? `${TARIFFS[vi].color}06` : "transparent",
                           color: v === "—" ? "#CCC" : activeTariff === vi ? TARIFFS[vi].color : "#333",
@@ -283,7 +289,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
                 <tr style={{ background: "#F0F9FF" }}>
                   <td
                     colSpan={5}
-                    className="px-5 py-2.5 text-[11px] font-bold uppercase tracking-widest border-b border-[#E0EEF8]"
+                    className="px-5 py-2.5 text-[12px] font-bold uppercase tracking-widest border-b border-[#E0EEF8]"
                     style={{ color: "#00A4E3" }}
                   >
                     Что успеем обсудить
@@ -296,7 +302,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
                       <td
                         key={vi}
                         onClick={() => setActiveTariff(vi)}
-                        className="px-4 py-2.5 text-center text-[13px] cursor-pointer border-b border-[#F5F5F5] transition-colors"
+                        className="px-4 py-2.5 text-center text-[14px] cursor-pointer border-b border-[#F5F5F5] transition-colors"
                         style={{
                           background: activeTariff === vi ? `${TARIFFS[vi].color}06` : "transparent",
                           color: tariffTopics[topicIdx] ? (activeTariff === vi ? TARIFFS[vi].color : "#333") : "#DDD",
