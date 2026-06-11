@@ -17,7 +17,7 @@ export default function Index() {
   const [giftOpen, setGiftOpen] = useState(false);
   const [giftTariff, setGiftTariff] = useState("");
   const [consultOpen, setConsultOpen] = useState(false);
-  const [activeTariff, setActiveTariff] = useState(3);
+  const [activeTariff, setActiveTariff] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [paymentSuccessOpen, setPaymentSuccessOpen] = useState(false);
 
