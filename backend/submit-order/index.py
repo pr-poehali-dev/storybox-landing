@@ -25,6 +25,7 @@ def handler(event: dict, context) -> dict:
     tariff = body.get("tariff", "").strip()
     promo = body.get("promo", "").strip()
     source = body.get("source", "Сайт")
+    marketing_consent = body.get("marketing_consent", "нет")
 
     if not name or not phone:
         return {"statusCode": 400, "headers": cors_headers, "body": json.dumps({"error": "Имя и телефон обязательны"})}
@@ -40,12 +41,14 @@ def handler(event: dict, context) -> dict:
         tg_chat = os.environ["TELEGRAM_CHAT_ID"].strip()
 
         promo_line = f"\n🎟 Промокод: <b>{promo}</b>" if promo else ""
+        marketing_line = f"\n📬 Рассылка: <b>{marketing_consent}</b>"
         tg_text = (
             f"📥 <b>Новая заявка — {source}</b>\n\n"
             f"👤 Имя: <b>{name}</b>\n"
             f"📞 Телефон: <b>{phone}</b>\n"
             f"📦 Тариф: <b>{tariff or 'не указан'}</b>"
-            f"{promo_line}\n\n"
+            f"{promo_line}"
+            f"{marketing_line}\n\n"
             f"🕐 {date_str}"
         )
 
@@ -84,9 +87,9 @@ def handler(event: dict, context) -> dict:
         ws = sh.sheet1
 
         if not ws.row_values(1):
-            ws.append_row(["Дата", "Имя", "Телефон", "Тариф", "Промокод", "Источник"])
+            ws.append_row(["Дата", "Имя", "Телефон", "Тариф", "Промокод", "Источник", "Согласие на рассылку"])
 
-        ws.append_row([date_str, name, phone, tariff, promo, source])
+        ws.append_row([date_str, name, phone, tariff, promo, source, marketing_consent])
         print("[SHEETS] OK — строка добавлена")
     except Exception as e:
         print(f"[SHEETS] Error: {e}")

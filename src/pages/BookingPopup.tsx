@@ -80,6 +80,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
         tariff: initialTariff || "не указан",
         promo: form.promo,
         source: "Для себя",
+        marketing_consent: form.agreeMarketing ? "да" : "нет",
       }),
     }).catch(() => {});
 
@@ -278,6 +279,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
                 userEmail={form.email}
                 userPhone={form.phone}
                 cartItems={tariffData ? [{ id: tariffData.name, name: tariffData.fullName, price: parsePriceToNumber(tariffData.price), quantity: 1 }] : []}
+                orderComment={`marketing_consent:${form.agreeMarketing ? "да" : "нет"}`}
                 successUrl={window.location.origin + "/?payment=success"}
                 failUrl={window.location.origin + "/?payment=fail"}
                 buttonText="Оплатить онлайн"

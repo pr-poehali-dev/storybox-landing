@@ -56,6 +56,7 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
         tariff: "Консультация",
         promo: "",
         source: `Консультация (${contactType === "phone" ? "телефон" : "email"})`,
+        marketing_consent: form.agreeMarketing ? "да" : "нет",
       }),
     }).catch(() => {});
 

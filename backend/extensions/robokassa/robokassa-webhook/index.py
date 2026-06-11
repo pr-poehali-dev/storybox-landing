@@ -30,7 +30,7 @@ HEADERS = {
 }
 
 
-def send_telegram(order_number, user_name, user_email, user_phone, amount, items_names, date_str):
+def send_telegram(order_number, user_name, user_email, user_phone, amount, items_names, date_str, marketing_consent="нет"):
     """Отправка уведомления в Telegram"""
     tg_token = os.environ.get('TELEGRAM_BOT_TOKEN', '').strip()
     tg_chat = os.environ.get('TELEGRAM_CHAT_ID', '').strip()
@@ -46,7 +46,8 @@ def send_telegram(order_number, user_name, user_email, user_phone, amount, items
         f"📞 Телефон: <b>{user_phone}</b>\n"
         f"📧 Email: <b>{user_email}</b>"
         f"{items_line}\n"
-        f"💰 Сумма: <b>{amount} ₽</b>\n\n"
+        f"💰 Сумма: <b>{amount} ₽</b>\n"
+        f"📬 Рассылка: <b>{marketing_consent}</b>\n\n"
         f"🕐 {date_str}"
     )
 
@@ -72,7 +73,7 @@ def send_telegram(order_number, user_name, user_email, user_phone, amount, items
     print("[TG] All attempts failed")
 
 
-def send_google_sheets(order_number, user_name, user_email, user_phone, amount, items_names, date_str):
+def send_google_sheets(order_number, user_name, user_email, user_phone, amount, items_names, date_str, marketing_consent="нет"):
     """Запись оплаченного заказа в Google Sheets"""
     try:
         import gspread
@@ -89,9 +90,9 @@ def send_google_sheets(order_number, user_name, user_email, user_phone, amount, 
         ws = sh.sheet1
 
         if not ws.row_values(1):
-            ws.append_row(["Дата", "Имя", "Телефон", "Тариф", "Промокод", "Источник"])
+            ws.append_row(["Дата", "Имя", "Телефон", "Тариф", "Промокод", "Источник", "Согласие на рассылку"])
 
-        ws.append_row([date_str, user_name, user_phone, items_names, "", "Онлайн оплата", user_email, str(amount)])
+        ws.append_row([date_str, user_name, user_phone, items_names, "", "Онлайн оплата", marketing_consent, user_email, str(amount)])
         print("[SHEETS] OK — строка добавлена")
     except Exception as e:
         print(f"[SHEETS] Error: {e}")
@@ -147,7 +148,7 @@ def handler(event: dict, context) -> dict:
         UPDATE orders
         SET status = 'paid', paid_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP
         WHERE robokassa_inv_id = %s AND status = 'pending'
-        RETURNING id, order_number, user_name, user_email, user_phone, amount
+        RETURNING id, order_number, user_name, user_email, user_phone, amount, order_comment
     """, (int(inv_id),))
 
     result = cur.fetchone()
@@ -161,7 +162,12 @@ def handler(event: dict, context) -> dict:
             return {'statusCode': 200, 'headers': HEADERS, 'body': f'OK{inv_id}', 'isBase64Encoded': False}
         return {'statusCode': 404, 'headers': HEADERS, 'body': 'Order not found', 'isBase64Encoded': False}
 
-    order_id, order_number, user_name, user_email, user_phone, amount = result
+    order_id, order_number, user_name, user_email, user_phone, amount, order_comment = result
+
+    # Извлекаем marketing_consent из order_comment
+    marketing_consent = "нет"
+    if order_comment and "marketing_consent:" in order_comment:
+        marketing_consent = order_comment.split("marketing_consent:")[-1].strip()
 
     # Получаем состав заказа
     cur.execute("SELECT product_name, quantity FROM order_items WHERE order_id = %s", (order_id,))
@@ -175,7 +181,7 @@ def handler(event: dict, context) -> dict:
     now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=3)))
     date_str = now.strftime("%d.%m.%Y %H:%M")
 
-    send_google_sheets(order_number, user_name, user_email, user_phone, amount, items_names, date_str)
-    send_telegram(order_number, user_name, user_email, user_phone, amount, items_names, date_str)
+    send_google_sheets(order_number, user_name, user_email, user_phone, amount, items_names, date_str, marketing_consent)
+    send_telegram(order_number, user_name, user_email, user_phone, amount, items_names, date_str, marketing_consent)
 
     return {'statusCode': 200, 'headers': HEADERS, 'body': f'OK{inv_id}', 'isBase64Encoded': False}

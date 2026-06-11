@@ -71,6 +71,7 @@ export default function GiftPopup({ open, onClose, initialTariff = "" }: GiftPop
         tariff: initialTariff || "не указан",
         promo: form.promo,
         source: `Подарок${form.recipientName ? " (получатель: " + form.recipientName + ")" : ""}`,
+        marketing_consent: form.agreeMarketing ? "да" : "нет",
       }),
     }).catch(() => {});
 
