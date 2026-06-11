@@ -113,7 +113,7 @@ def handler(event: dict, context) -> dict:
                 "tax": "none"
             })
 
-        receipt = {"sno": "usn_income", "items": receipt_items}
+        receipt = {"items": receipt_items}
         receipt_json = json.dumps(receipt, ensure_ascii=False)
         from urllib.parse import quote
         receipt_encoded = quote(receipt_json)
