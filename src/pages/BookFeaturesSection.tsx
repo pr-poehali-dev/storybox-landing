@@ -82,7 +82,7 @@ export default function BookFeaturesSection() {
         </div>
 
         {/* Desktop: горизонтальный скролл */}
-        <div className="hidden md:block max-w-7xl mx-auto px-6 overflow-hidden relative">
+        <div className="hidden md:block max-w-7xl mx-auto px-6 overflow-hidden">
           <div
             ref={bookScrollRef}
             className="flex gap-5 pb-2"
@@ -107,22 +107,24 @@ export default function BookFeaturesSection() {
               </div>
             ))}
           </div>
-          <button
-            onClick={() => scrollBook(-1)}
-            disabled={bookIdx === 0}
-            className="absolute left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center transition-opacity"
-            style={{ opacity: bookIdx === 0 ? 0.3 : 1 }}
-          >
-            <Icon name="ChevronLeft" size={22} />
-          </button>
-          <button
-            onClick={() => scrollBook(1)}
-            disabled={bookIdx >= BOOK_FEATURES.length - 1}
-            className="absolute right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center transition-opacity"
-            style={{ opacity: bookIdx >= BOOK_FEATURES.length - 1 ? 0.3 : 1 }}
-          >
-            <Icon name="ChevronRight" size={22} />
-          </button>
+          <div className="hidden md:flex items-center gap-2 mt-4">
+            <button
+              onClick={() => scrollBook(-1)}
+              disabled={bookIdx === 0}
+              className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center transition-opacity"
+              style={{ opacity: bookIdx === 0 ? 0.3 : 1 }}
+            >
+              <Icon name="ChevronLeft" size={22} />
+            </button>
+            <button
+              onClick={() => scrollBook(1)}
+              disabled={bookIdx >= BOOK_FEATURES.length - 1}
+              className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center transition-opacity"
+              style={{ opacity: bookIdx >= BOOK_FEATURES.length - 1 ? 0.3 : 1 }}
+            >
+              <Icon name="ChevronRight" size={22} />
+            </button>
+          </div>
         </div>
       </section>
 
