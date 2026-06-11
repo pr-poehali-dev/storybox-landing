@@ -134,15 +134,15 @@ def handler(event: dict, context) -> dict:
             f"InvoiceID={robokassa_inv_id}",
             f"SignatureValue={signature}",
             f"Receipt={receipt_encoded}",
-            f"Email={quote_plus(user_email)}",
+            f"Email={quote(user_email, safe='')}",
             "Culture=ru",
-            f"Description={quote_plus(f'Заказ {order_number}')}",
+            f"Description={quote(f'Заказ {order_number}', safe='')}",
         ]
         if success_url:
-            params_list.append(f"SuccessUrl2={quote_plus(success_url)}")
+            params_list.append(f"SuccessUrl2={quote(success_url, safe='')}")
             params_list.append("SuccessUrl2Method=GET")
         if fail_url:
-            params_list.append(f"FailUrl2={quote_plus(fail_url)}")
+            params_list.append(f"FailUrl2={quote(fail_url, safe='')}")
             params_list.append("FailUrl2Method=GET")
 
         payment_url = f"{ROBOKASSA_URL}?{'&'.join(params_list)}"
