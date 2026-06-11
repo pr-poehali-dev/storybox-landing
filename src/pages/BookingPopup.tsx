@@ -284,7 +284,8 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
                 className="w-full text-center text-[15px] py-4 rounded-xl font-bold text-white transition-opacity hover:opacity-90 bg-[#ED4463]"
                 disabled={!form.name || !form.email || !form.agreePersonal || !form.agreeTerms || !tariffData}
               />
-              <button type="submit" className="w-full text-center text-[15px] py-4 rounded-xl font-bold text-white transition-opacity hover:opacity-90" style={{ background: "#00A4E3" }}>
+              <div className="text-center text-[13px] font-semibold" style={{ color: "#AAAAAA" }}>или</div>
+              <button type="submit" className="w-full text-center text-[17px] font-bold transition-opacity hover:opacity-70 py-1" style={{ color: "#00A4E3", background: "none", border: "none" }}>
                 Отправить заявку
               </button>
             </div>
