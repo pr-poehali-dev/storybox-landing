@@ -58,8 +58,8 @@ export default function HeroSection({ openConsult }: HeroSectionProps) {
         </div>
 
         {/* Desktop layout */}
-        <div className="hidden md:grid md:grid-cols-2 max-w-7xl mx-auto" style={{ minHeight: 520 }}>
-          <div className="flex flex-col justify-center px-8 lg:px-16 py-16">
+        <div className="hidden md:grid md:grid-cols-2 max-w-7xl mx-auto px-4 md:px-6" style={{ minHeight: 520 }}>
+          <div className="flex flex-col justify-center py-16">
             <h1 className="leading-tight mb-5" style={{ fontSize: "clamp(36px, 4vw, 56px)", fontWeight: 700, color: "#00a4e3" }}>
               Превращаем воспоминания в книги
             </h1>
