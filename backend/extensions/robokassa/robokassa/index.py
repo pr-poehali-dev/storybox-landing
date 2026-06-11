@@ -113,20 +113,17 @@ def handler(event: dict, context) -> dict:
                 "tax": "none"
             })
 
-        # Подпись: MerchantLogin:OutSum:InvId:Password#1
-        if success_url or fail_url:
-            signature = calculate_signature(
-                merchant_login, amount_str, robokassa_inv_id,
-                success_url, 'GET', fail_url, 'GET', password_1
-            )
-        else:
-            signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, password_1)
+        receipt_json = json.dumps({"items": receipt_items}, ensure_ascii=False, separators=(',', ':'))
+
+        # Подпись: MerchantLogin:OutSum:InvId:Receipt(raw json):Password#1
+        signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, receipt_json, password_1)
 
         query_params = {
             'MerchantLogin': merchant_login,
             'OutSum': amount_str,
             'InvoiceID': robokassa_inv_id,
             'SignatureValue': signature,
+            'Receipt': receipt_json,
             'Email': user_email,
             'Culture': 'ru',
             'Description': f'Заказ {order_number}'
