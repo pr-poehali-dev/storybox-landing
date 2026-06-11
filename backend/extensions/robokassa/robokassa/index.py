@@ -114,26 +114,19 @@ def handler(event: dict, context) -> dict:
             })
 
         receipt = {"items": receipt_items}
-        receipt_json = json.dumps(receipt, ensure_ascii=False)
-        from urllib.parse import quote
-        receipt_encoded = quote(receipt_json)
+        receipt_json = json.dumps(receipt, ensure_ascii=False, separators=(',', ':'))
 
         # Подпись: MerchantLogin:OutSum:InvId:Receipt:Password#1
-        if success_url or fail_url:
-            signature = calculate_signature(
-                merchant_login, amount_str, robokassa_inv_id,
-                receipt_json,
-                success_url, 'GET', fail_url, 'GET', password_1
-            )
-        else:
-            signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, receipt_json, password_1)
+        # (SuccessUrl2/FailUrl2 не включаются в подпись при наличии Receipt)
+        signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, receipt_json, password_1)
 
+        from urllib.parse import quote as url_quote
         query_params = {
             'MerchantLogin': merchant_login,
             'OutSum': amount_str,
             'InvoiceID': robokassa_inv_id,
             'SignatureValue': signature,
-            'Receipt': receipt_encoded,
+            'Receipt': url_quote(receipt_json),
             'Email': user_email,
             'Culture': 'ru',
             'Description': f'Заказ {order_number}'
@@ -146,7 +139,7 @@ def handler(event: dict, context) -> dict:
             query_params['FailUrl2'] = fail_url
             query_params['FailUrl2Method'] = 'GET'
 
-        payment_url = f"{ROBOKASSA_URL}?{urlencode(query_params, quote_via=quote)}"
+        payment_url = f"{ROBOKASSA_URL}?{urlencode(query_params)}"
 
         cur.execute("UPDATE orders SET payment_url = %s WHERE id = %s", (payment_url, order_id))
         conn.commit()
