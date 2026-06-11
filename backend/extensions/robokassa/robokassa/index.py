@@ -107,36 +107,38 @@ def handler(event: dict, context) -> dict:
             receipt_items.append({
                 "name": str(item.get('name', ''))[:128],
                 "quantity": int(item.get('quantity', 1)),
-                "sum": item_sum,
+                "sum": float(f"{item_sum:.2f}"),
                 "payment_method": "full_payment",
                 "payment_object": "service",
                 "tax": "none"
             })
 
+        from urllib.parse import quote
         receipt_json = json.dumps({"items": receipt_items}, ensure_ascii=False, separators=(',', ':'))
+        # URL-encode с %20 вместо + (quote вместо urlencode)
+        receipt_encoded = quote(receipt_json, safe='')
 
-        # Подпись: MerchantLogin:OutSum:InvId:Receipt(raw json):Password#1
-        signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, receipt_json, password_1)
+        # Подпись считаем с URL-encoded Receipt — именно так Robokassa проверяет
+        signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, receipt_encoded, password_1)
 
-        query_params = {
-            'MerchantLogin': merchant_login,
-            'OutSum': amount_str,
-            'InvoiceID': robokassa_inv_id,
-            'SignatureValue': signature,
-            'Receipt': receipt_json,
-            'Email': user_email,
-            'Culture': 'ru',
-            'Description': f'Заказ {order_number}'
-        }
-
+        base_params = [
+            f"MerchantLogin={quote(merchant_login, safe='')}",
+            f"OutSum={amount_str}",
+            f"InvoiceID={robokassa_inv_id}",
+            f"SignatureValue={signature}",
+            f"Receipt={receipt_encoded}",
+            f"Email={quote(user_email, safe='')}",
+            f"Culture=ru",
+            f"Description={quote(f'Заказ {order_number}', safe='')}",
+        ]
         if success_url:
-            query_params['SuccessUrl2'] = success_url
-            query_params['SuccessUrl2Method'] = 'GET'
+            base_params.append(f"SuccessUrl2={quote(success_url, safe='')}")
+            base_params.append("SuccessUrl2Method=GET")
         if fail_url:
-            query_params['FailUrl2'] = fail_url
-            query_params['FailUrl2Method'] = 'GET'
+            base_params.append(f"FailUrl2={quote(fail_url, safe='')}")
+            base_params.append("FailUrl2Method=GET")
 
-        payment_url = f"{ROBOKASSA_URL}?{urlencode(query_params)}"
+        payment_url = f"{ROBOKASSA_URL}?{'&'.join(base_params)}"
 
         cur.execute("UPDATE orders SET payment_url = %s WHERE id = %s", (payment_url, order_id))
         conn.commit()
