@@ -53,23 +53,7 @@ export default function BookFeaturesSection() {
             <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Из чего состоит каждая книга</h2>
             <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">Пять составляющих, которые входят в каждый проект</p>
           </div>
-          {/* Desktop: кнопки влево/вправо */}
-          <div className="hidden md:flex items-center gap-2 flex-shrink-0 ml-6">
-            <button
-              onClick={() => scrollBook(-1)}
-              disabled={bookIdx === 0}
-              className="w-10 h-10 rounded-full border border-[#E5E5E5] flex items-center justify-center hover:border-[#00A4E3] hover:text-[#00A4E3] transition-colors disabled:opacity-30 disabled:cursor-default"
-            >
-              <Icon name="ChevronLeft" size={20} />
-            </button>
-            <button
-              onClick={() => scrollBook(1)}
-              disabled={bookIdx >= BOOK_FEATURES.length - 1}
-              className="w-10 h-10 rounded-full border border-[#E5E5E5] flex items-center justify-center hover:border-[#00A4E3] hover:text-[#00A4E3] transition-colors disabled:opacity-30 disabled:cursor-default"
-            >
-              <Icon name="ChevronRight" size={20} />
-            </button>
-          </div>
+
         </div>
 
         {/* Mobile: горизонтальный скролл */}
@@ -98,7 +82,7 @@ export default function BookFeaturesSection() {
         </div>
 
         {/* Desktop: горизонтальный скролл */}
-        <div className="hidden md:block max-w-7xl mx-auto px-6 overflow-hidden">
+        <div className="hidden md:block max-w-7xl mx-auto px-6 overflow-hidden relative">
           <div
             ref={bookScrollRef}
             className="flex gap-5 pb-2"
@@ -123,6 +107,22 @@ export default function BookFeaturesSection() {
               </div>
             ))}
           </div>
+          <button
+            onClick={() => scrollBook(-1)}
+            disabled={bookIdx === 0}
+            className="absolute left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center transition-opacity"
+            style={{ opacity: bookIdx === 0 ? 0.3 : 1 }}
+          >
+            <Icon name="ChevronLeft" size={22} />
+          </button>
+          <button
+            onClick={() => scrollBook(1)}
+            disabled={bookIdx >= BOOK_FEATURES.length - 1}
+            className="absolute right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center transition-opacity"
+            style={{ opacity: bookIdx >= BOOK_FEATURES.length - 1 ? 0.3 : 1 }}
+          >
+            <Icon name="ChevronRight" size={22} />
+          </button>
         </div>
       </section>
 
