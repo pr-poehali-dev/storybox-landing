@@ -276,11 +276,11 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
                         className="px-4 py-3 text-center text-[14px] cursor-pointer border-b border-[#F5F5F5] transition-colors"
                         style={{
                           background: activeTariff === vi ? `${TARIFFS[vi].color}06` : "transparent",
-                          color: v === "—" ? "#CCC" : activeTariff === vi ? TARIFFS[vi].color : "#333",
+                          color: v === "—" ? "#CCC" : v === "да" ? "#22C55E" : activeTariff === vi ? TARIFFS[vi].color : "#333",
                           fontWeight: activeTariff === vi ? 600 : 400,
                         }}
                       >
-                        {v}
+                        {v === "да" ? "✓" : v}
                       </td>
                     ))}
                   </tr>
