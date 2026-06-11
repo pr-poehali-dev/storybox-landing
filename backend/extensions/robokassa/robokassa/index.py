@@ -113,20 +113,20 @@ def handler(event: dict, context) -> dict:
                 "tax": "none"
             })
 
-        receipt = {"items": receipt_items}
-        receipt_json = json.dumps(receipt, ensure_ascii=False, separators=(',', ':'))
+        # Подпись: MerchantLogin:OutSum:InvId:Password#1
+        if success_url or fail_url:
+            signature = calculate_signature(
+                merchant_login, amount_str, robokassa_inv_id,
+                success_url, 'GET', fail_url, 'GET', password_1
+            )
+        else:
+            signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, password_1)
 
-        # Подпись: MerchantLogin:OutSum:InvId:Receipt:Password#1
-        # (SuccessUrl2/FailUrl2 не включаются в подпись при наличии Receipt)
-        signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, receipt_json, password_1)
-
-        from urllib.parse import quote as url_quote
         query_params = {
             'MerchantLogin': merchant_login,
             'OutSum': amount_str,
             'InvoiceID': robokassa_inv_id,
             'SignatureValue': signature,
-            'Receipt': url_quote(receipt_json),
             'Email': user_email,
             'Culture': 'ru',
             'Description': f'Заказ {order_number}'
