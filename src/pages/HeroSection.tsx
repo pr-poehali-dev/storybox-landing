@@ -75,7 +75,7 @@ export default function HeroSection({ openConsult }: HeroSectionProps) {
               </button>
             </div>
           </div>
-          <div className="overflow-hidden" style={{ maxHeight: 600 }}>
+          <div className="overflow-hidden rounded-2xl" style={{ maxHeight: 600 }}>
             <img
               src={HERO_IMG}
               alt="Бабушка держит семейную книгу воспоминаний"
