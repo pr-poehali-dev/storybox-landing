@@ -113,19 +113,20 @@ def handler(event: dict, context) -> dict:
                 "tax": "none"
             })
 
-        from urllib.parse import quote_plus
-        receipt_json = json.dumps({"items": receipt_items}, ensure_ascii=False)
-        # PHP urlencode-стиль: пробел = '+'. Та же строка идёт в подпись и в URL.
-        receipt_encoded = quote_plus(receipt_json)
+        from urllib.parse import quote
+        # Компактный JSON без лишних пробелов
+        receipt_json = json.dumps({"items": receipt_items}, ensure_ascii=False, separators=(',', ':'))
+        # В URL — закодированный (%20 для пробелов). В подпись — сырой JSON.
+        receipt_encoded = quote(receipt_json, safe='')
 
         # Подпись: MerchantLogin:OutSum:InvId:Receipt:[SuccessUrl2:GET:FailUrl2:GET:]Password#1
         if success_url or fail_url:
             signature = calculate_signature(
-                merchant_login, amount_str, robokassa_inv_id, receipt_encoded,
+                merchant_login, amount_str, robokassa_inv_id, receipt_json,
                 success_url, 'GET', fail_url, 'GET', password_1
             )
         else:
-            signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, receipt_encoded, password_1)
+            signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, receipt_json, password_1)
 
         params_list = [
             f"MerchantLogin={merchant_login}",
