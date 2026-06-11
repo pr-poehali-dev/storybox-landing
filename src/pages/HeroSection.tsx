@@ -33,7 +33,7 @@ export default function HeroSection({ openConsult }: HeroSectionProps) {
   return (
     <>
       {/* HERO */}
-      <section className="w-full">
+      <section className="w-full mx-0 my-0 px-0 py-0">
         {/* Mobile layout */}
         <div className="md:hidden">
           <div className="w-full overflow-hidden" style={{ maxHeight: "80vw" }}>
