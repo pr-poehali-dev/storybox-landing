@@ -122,11 +122,11 @@ def handler(event: dict, context) -> dict:
         # Подпись: MerchantLogin:OutSum:InvId:Receipt:[SuccessUrl2:GET:FailUrl2:GET:]Password#1
         if success_url or fail_url:
             signature = calculate_signature(
-                merchant_login, amount_str, robokassa_inv_id, receipt_encoded,
+                merchant_login, amount_str, robokassa_inv_id, receipt_json,
                 success_url, 'GET', fail_url, 'GET', password_1
             )
         else:
-            signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, receipt_encoded, password_1)
+            signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, receipt_json, password_1)
 
         params_list = [
             f"MerchantLogin={merchant_login}",
