@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { TARIFFS, VALID_PROMOS } from "./data";
 import { applyPhoneMask, validatePhone } from "@/utils/phoneMask";
+import { reachGoal } from "@/utils/metrika";
 import { PaymentButton } from "@/components/extensions/robokassa/PaymentButton";
 
 const ROBOKASSA_URL = "https://functions.poehali.dev/b0b464a9-7187-4ddf-91f5-a292f1793a94";
@@ -84,6 +85,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
       }),
     }).catch(() => {});
 
+    reachGoal("order_form_submit", { tariff: initialTariff || "не указан" });
     setSubmitted(true);
   };
 
@@ -282,6 +284,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
                 orderComment={`marketing_consent:${form.agreeMarketing ? "да" : "нет"}`}
                 successUrl={window.location.origin + "/?payment=success"}
                 failUrl={window.location.origin + "/?payment=fail"}
+                onSuccess={() => reachGoal("payment_start", { tariff: initialTariff || "не указан" })}
                 buttonText="Оплатить онлайн"
                 className="w-full text-center text-[15px] py-4 rounded-xl font-bold text-white transition-opacity hover:opacity-90 bg-[#ED4463]"
                 disabled={!form.name || !form.email || !form.agreePersonal || !form.agreeTerms || !tariffData}

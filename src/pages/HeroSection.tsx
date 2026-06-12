@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
+import { reachGoal } from "@/utils/metrika";
 
 const HERO_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/f344c56f-9b25-43a5-ab69-a4c8fe51dcd8.jpg";
 const BOOK_SPREAD_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/092dd021-1b7d-4089-94bf-c958bff5c481.jpg";
@@ -51,7 +52,7 @@ export default function HeroSection({ openConsult }: HeroSectionProps) {
             <p className="text-[16px] text-[#444] leading-relaxed mb-6">
               Мы бережно интервьюируем ваших близких, помогаем собрать фотографии и создаём красивую книгу, которая сохранит семейные истории на годы.
             </p>
-            <a href="#tariffs" className="btn-cta w-full text-center block" style={{ fontSize: 16, padding: "16px 20px" }}>
+            <a href="#tariffs" onClick={() => reachGoal("cta_click", { place: "hero_mobile" })} className="btn-cta w-full text-center block" style={{ fontSize: 16, padding: "16px 20px" }}>
               Книга со скидкой 25%
             </a>
           </div>
@@ -67,7 +68,7 @@ export default function HeroSection({ openConsult }: HeroSectionProps) {
               Мы бережно интервьюируем ваших близких, помогаем собрать фотографии и создаём красивую книгу, которая сохранит семейные истории на годы.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 items-start">
-              <a href="#tariffs" className="btn-cta" style={{ fontSize: 16, padding: "16px 32px" }}>
+              <a href="#tariffs" onClick={() => reachGoal("cta_click", { place: "hero" })} className="btn-cta" style={{ fontSize: 16, padding: "16px 32px" }}>
                 Книга со скидкой 25%
               </a>
               <button onClick={openConsult} className="btn-secondary" style={{ fontSize: 15, padding: "15px 28px" }}>

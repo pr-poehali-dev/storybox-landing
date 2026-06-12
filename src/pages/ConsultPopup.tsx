@@ -3,6 +3,7 @@ import { useBottomSheet } from "@/hooks/useBottomSheet";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { applyPhoneMask, validatePhone, validateEmail } from "@/utils/phoneMask";
+import { reachGoal } from "@/utils/metrika";
 
 interface ConsultPopupProps {
   open: boolean;
@@ -60,6 +61,7 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
       }),
     }).catch(() => {});
 
+    reachGoal("consult_form_submit", { type: contactType });
     setSubmitted(true);
   };
 

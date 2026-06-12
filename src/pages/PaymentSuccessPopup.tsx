@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useBottomSheet } from "@/hooks/useBottomSheet";
 import Icon from "@/components/ui/icon";
+import { reachGoal } from "@/utils/metrika";
 
 interface PaymentSuccessPopupProps {
   open: boolean;
@@ -103,6 +104,7 @@ export default function PaymentSuccessPopup({ open, onClose }: PaymentSuccessPop
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => reachGoal("social_click", { network: s.label })}
                 className="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-[15px] text-white transition-opacity hover:opacity-90"
                 style={{ background: s.color }}
               >

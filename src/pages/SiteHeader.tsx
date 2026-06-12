@@ -1,5 +1,6 @@
 import Icon from "@/components/ui/icon";
 import { NAV_LINKS } from "./data";
+import { reachGoal } from "@/utils/metrika";
 
 interface SiteHeaderProps {
   mobileMenuOpen: boolean;
@@ -27,6 +28,7 @@ export default function SiteHeader({ mobileMenuOpen, setMobileMenuOpen }: SiteHe
             href="https://wa.me/79031932725"
             target="_blank" rel="noopener noreferrer"
             aria-label="WhatsApp"
+            onClick={() => reachGoal("social_click", { network: "whatsapp" })}
             className="hover:opacity-80 transition-opacity flex-shrink-0 leading-none"
           >
             <svg role="presentation" width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,6 +39,7 @@ export default function SiteHeader({ mobileMenuOpen, setMobileMenuOpen }: SiteHe
             href="https://max.ru/u/f9LHodD0cOI8UouNiRQkCe1K4ytYGjf5V5GnnJPvsaF8JfKFdukRS-awK54"
             target="_blank" rel="nofollow"
             aria-label="maxmessenger"
+            onClick={() => reachGoal("social_click", { network: "max" })}
             className="hover:opacity-80 transition-opacity flex-shrink-0 leading-none"
           >
             <svg role="presentation" width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,6 +50,7 @@ export default function SiteHeader({ mobileMenuOpen, setMobileMenuOpen }: SiteHe
             href="https://t.me/StoryBox_support"
             target="_blank" rel="noopener noreferrer"
             aria-label="Telegram"
+            onClick={() => reachGoal("social_click", { network: "telegram" })}
             className="hover:opacity-80 transition-opacity flex-shrink-0"
           >
             <svg role="presentation" width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,6 +59,7 @@ export default function SiteHeader({ mobileMenuOpen, setMobileMenuOpen }: SiteHe
           </a>
           <a
             href="#tariffs"
+            onClick={() => reachGoal("cta_click", { place: "header" })}
             className="hidden md:inline-flex items-center btn-cta ml-2"
             style={{ padding: "10px 20px", fontSize: 14 }}
           >

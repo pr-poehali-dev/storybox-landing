@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { TARIFFS, VALID_PROMOS } from "./data";
 import { applyPhoneMask, validatePhone } from "@/utils/phoneMask";
+import { reachGoal } from "@/utils/metrika";
 
 const CERT_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/291d5a8b-c4f4-4134-90e9-92ab9ef5f1de.png";
 
@@ -75,6 +76,7 @@ export default function GiftPopup({ open, onClose, initialTariff = "" }: GiftPop
       }),
     }).catch(() => {});
 
+    reachGoal("gift_form_submit", { tariff: initialTariff || "не указан" });
     setSubmitted(true);
   };
 

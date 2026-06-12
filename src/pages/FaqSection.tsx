@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FAQ_ITEMS } from "./data";
+import { reachGoal } from "@/utils/metrika";
 
 interface Props {
   openConsult: () => void;
@@ -34,6 +35,7 @@ export default function FaqSection({ openConsult }: Props) {
               href="https://t.me/StoryBox_support"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => reachGoal("social_click", { network: "telegram" })}
               className="font-semibold text-[14px] md:text-[15px] hover:opacity-80 transition-opacity"
               style={{ color: "#00A4E3" }}
             >
