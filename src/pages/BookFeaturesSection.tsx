@@ -81,48 +81,26 @@ export default function BookFeaturesSection() {
           ))}
         </div>
 
-        {/* Desktop: горизонтальный скролл */}
-        <div className="hidden md:flex items-stretch gap-3 max-w-7xl mx-auto px-6">
-          <button
-            onClick={() => scrollBook(-1)}
-            disabled={bookIdx === 0}
-            className="flex-shrink-0 self-center w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center transition-opacity"
-            style={{ opacity: bookIdx === 0 ? 0.3 : 1 }}
-          >
-            <Icon name="ChevronLeft" size={22} />
-          </button>
-          <div
-            ref={bookScrollRef}
-            className="flex items-stretch gap-5 pb-2 flex-1"
-            style={{ overflowX: "auto", scrollbarWidth: "none" } as React.CSSProperties}
-          >
-            {BOOK_FEATURES.map((f) => (
-              <div key={f.title} className="sb-card flex-shrink-0 overflow-hidden !p-0 flex flex-col" style={{ width: CARD_WIDTH }}>
-                {f.image && (
-                  <div className="w-full overflow-hidden flex-shrink-0" style={{ height: 200 }}>
-                    <img src={f.image} alt={f.title} className="w-full h-full object-cover" />
-                  </div>
-                )}
-                <div className="p-5 flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#F2F9FF" }}>
-                      <Icon name={f.icon as Parameters<typeof Icon>[0]["name"]} size={18} style={{ color: "#00A4E3" }} fallback="BookOpen" />
-                    </div>
-                    <h4 className="text-[16px] font-semibold text-black">{f.title}</h4>
-                  </div>
-                  <p className="text-[14px] text-[#7A7A7A] leading-relaxed">{f.desc}</p>
+        {/* Desktop: сетка */}
+        <div className="hidden md:grid grid-cols-5 gap-5 max-w-7xl mx-auto px-6">
+          {BOOK_FEATURES.map((f) => (
+            <div key={f.title} className="sb-card overflow-hidden !p-0 flex flex-col">
+              {f.image && (
+                <div className="w-full overflow-hidden flex-shrink-0" style={{ height: 160 }}>
+                  <img src={f.image} alt={f.title} className="w-full h-full object-cover" />
                 </div>
+              )}
+              <div className="p-4 flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#F2F9FF" }}>
+                    <Icon name={f.icon as Parameters<typeof Icon>[0]["name"]} size={18} style={{ color: "#00A4E3" }} fallback="BookOpen" />
+                  </div>
+                  <h4 className="text-[15px] font-semibold text-black">{f.title}</h4>
+                </div>
+                <p className="text-[13px] text-[#7A7A7A] leading-relaxed">{f.desc}</p>
               </div>
-            ))}
-          </div>
-          <button
-            onClick={() => scrollBook(1)}
-            disabled={bookIdx >= BOOK_FEATURES.length - 1}
-            className="flex-shrink-0 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center transition-opacity"
-            style={{ opacity: bookIdx >= BOOK_FEATURES.length - 1 ? 0.3 : 1 }}
-          >
-            <Icon name="ChevronRight" size={22} />
-          </button>
+            </div>
+          ))}
         </div>
       </section>
 
