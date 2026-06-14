@@ -15,19 +15,22 @@ export default function AboutSection({ openPopup }: AboutSectionProps) {
       {/* ОТЗЫВ ИРИНЫ АЛЕКСАНДРОВНЫ */}
       <section className="py-10 md:py-20 section-soft">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-start">
-            <div>
-              <p className="text-[12px] font-semibold uppercase tracking-widest mb-3" style={{ color: "#00A4E3" }}>
-                Пример книги
-              </p>
-              <h2 className="text-[24px] md:text-[34px] font-bold text-black mb-1">
-                Ирина Александровна, 85 лет
-              </h2>
-              <p className="text-[13px] mb-6" style={{ color: "#7A7A7A" }}>
-                Иваново · тариф «Выездная съёмка» · осень 2025
-              </p>
+          {/* Заголовок */}
+          <p className="text-[12px] font-semibold uppercase tracking-widest mb-3" style={{ color: "#00A4E3" }}>
+            Пример книги
+          </p>
+          <h2 className="text-[24px] md:text-[34px] font-bold text-black mb-1">
+            Ирина Александровна, 85 лет
+          </h2>
+          <p className="text-[13px] mb-6" style={{ color: "#7A7A7A" }}>
+            Иваново · тариф «Выездная съёмка» · осень 2025
+          </p>
 
-              <div className="grid grid-cols-3 gap-2 mb-6 md:mt-[62px]">
+          {/* Двухколоночная таблица */}
+          <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start">
+            {/* Левая колонка: статистика + цитата + кнопки */}
+            <div>
+              <div className="grid grid-cols-3 gap-2 mb-6">
                 {[
                   { val: "88", label: "стр. книги" },
                   { val: "38 шт", label: "фото" },
@@ -60,6 +63,7 @@ export default function AboutSection({ openPopup }: AboutSectionProps) {
               </div>
             </div>
 
+            {/* Правая колонка: видео */}
             <div className="rounded-2xl overflow-hidden" style={{ aspectRatio: "16/9" }}>
               <iframe
                 src="https://www.youtube.com/embed/SyRnCEncSh8"
