@@ -27,7 +27,7 @@ export default function AboutSection({ openPopup }: AboutSectionProps) {
                 Иваново · тариф «Выездная съёмка» · осень 2025
               </p>
 
-              <div className="grid grid-cols-3 gap-2 mb-6">
+              <div className="grid grid-cols-3 gap-2 mb-6 md:mt-[92px]">
                 {[
                   { val: "88", label: "стр. книги" },
                   { val: "38 шт", label: "фото" },
@@ -60,7 +60,7 @@ export default function AboutSection({ openPopup }: AboutSectionProps) {
               </div>
             </div>
 
-            <div className="rounded-2xl overflow-hidden md:mt-[92px]" style={{ aspectRatio: "16/9" }}>
+            <div className="rounded-2xl overflow-hidden" style={{ aspectRatio: "16/9" }}>
               <iframe
                 src="https://www.youtube.com/embed/SyRnCEncSh8"
                 title="Ирина Александровна — семейная хроника StoryBox"
