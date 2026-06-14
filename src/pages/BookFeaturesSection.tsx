@@ -82,7 +82,7 @@ export default function BookFeaturesSection() {
         </div>
 
         {/* Desktop: горизонтальный скролл */}
-        <div className="hidden md:flex items-stretch gap-3 max-w-7xl px-0 mx-[25px]">
+        <div className="hidden md:flex items-stretch gap-3 max-w-7xl mx-auto px-6">
           <button
             onClick={() => scrollBook(-1)}
             disabled={bookIdx === 0}
