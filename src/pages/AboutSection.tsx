@@ -43,7 +43,7 @@ export default function AboutSection({ openPopup }: AboutSectionProps) {
                 ))}
               </div>
 
-              <div className="bg-white rounded-2xl border border-[#E5E5E5] p-5 md:p-7 mb-6 py-[49px]">
+              <div className="bg-white rounded-2xl border border-[#E5E5E5] p-5 md:p-7 mb-6 py-[99px]">
                 <div className="text-[40px] leading-none mb-1" style={{ color: "#00A4E3", opacity: 0.2 }}>"</div>
                 <p className="text-[15px] md:text-[16px] leading-relaxed text-[#222] mb-4" style={{ fontStyle: "italic", marginTop: -16 }}>
                   Я знала свою бабушку всю жизнь, но только во время интервью поняла, через что ей пришлось пройти и какой сильный она человек. После этой беседы моё восхищение ею стало ещё глубже.
