@@ -191,7 +191,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
       {/* DESKTOP: таблица + детальная карточка */}
       <div className="hidden md:block max-w-7xl mx-auto px-6">
         {/* Табы */}
-        <div className="flex gap-3 mb-8">
+        <div className="hidden flex gap-3 mb-8">
           {TARIFFS.map((tariff, idx) => (
             <button
               key={tariff.name}
