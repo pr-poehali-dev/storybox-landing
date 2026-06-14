@@ -291,7 +291,7 @@ export default function BookingPopup({ open, onClose, initialTariff = "" }: Book
               />
               <div className="text-center text-[13px] font-semibold" style={{ color: "#AAAAAA" }}>или</div>
               <button type="submit" className="w-full text-center text-[17px] font-bold transition-opacity hover:opacity-70 py-1" style={{ color: "#00A4E3", background: "none", border: "none" }}>
-                Отправить заявку
+                Получить консультацию
               </button>
             </div>
 
