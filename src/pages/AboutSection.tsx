@@ -60,7 +60,7 @@ export default function AboutSection({ openPopup }: AboutSectionProps) {
               </div>
             </div>
 
-            <div className="rounded-2xl overflow-hidden md:mt-[52px]" style={{ aspectRatio: "16/9" }}>
+            <div className="rounded-2xl overflow-hidden md:mt-[100px]" style={{ aspectRatio: "16/9" }}>
               <iframe
                 src="https://www.youtube.com/embed/SyRnCEncSh8"
                 title="Ирина Александровна — семейная хроника StoryBox"
