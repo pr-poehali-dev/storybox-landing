@@ -27,7 +27,7 @@ export default function AboutSection({ openPopup }: AboutSectionProps) {
                 Иваново · тариф «Выездная съёмка» · осень 2025
               </p>
 
-              <div className="grid grid-cols-3 gap-2 mb-6 md:mt-[92px]">
+              <div className="grid grid-cols-3 gap-2 mb-6 md:mt-[62px]">
                 {[
                   { val: "88", label: "стр. книги" },
                   { val: "38 шт", label: "фото" },
