@@ -7,6 +7,7 @@ interface TariffsSectionProps {
   openPopup: (tariff?: string) => void;
   openGiftPopup: (tariff?: string) => void;
   openConsult: () => void;
+  defaultGift?: boolean;
 }
 
 const TARIFF_CTA_SELF = [
@@ -41,9 +42,9 @@ const TOPICS: string[][] = [
   ["Семья и корни", "Жизненный путь", "Опыт и наследие"],
 ];
 
-export default function TariffsSection({ activeTariff, setActiveTariff, openPopup, openGiftPopup, openConsult }: TariffsSectionProps) {
+export default function TariffsSection({ activeTariff, setActiveTariff, openPopup, openGiftPopup, openConsult, defaultGift = false }: TariffsSectionProps) {
   const t = TARIFFS[activeTariff];
-  const [isGift, setIsGift] = useState(false);
+  const [isGift, setIsGift] = useState(defaultGift);
 
   const handleOrder = (tariffName: string) => {
     if (isGift) openGiftPopup(tariffName);

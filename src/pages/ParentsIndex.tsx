@@ -93,6 +93,7 @@ export default function ParentsIndex() {
         openPopup={openPopup}
         openGiftPopup={openGiftPopup}
         openConsult={openConsult}
+        defaultGift={true}
       />
 
       <AboutSection openPopup={openPopup} />
