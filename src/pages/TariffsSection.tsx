@@ -50,12 +50,12 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
     else openPopup(tariffName);
   };
 
-  // На мобайле скроллим к карточке «5 часов» (idx=2) при первом рендере
+  // На мобайле скроллим к карточке «Книга Premium» (idx=0) при первом рендере
   const scrollRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    const card = el.children[3] as HTMLElement;
+    const card = el.children[0] as HTMLElement;
     if (card) {
       el.scrollLeft = card.offsetLeft - 16;
     }
@@ -109,8 +109,8 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
               style={{
                 width: "82vw",
                 maxWidth: 300,
-                borderColor: idx === 3 ? "#ED4463" : "#E5E5E5",
-                background: idx === 3 ? "#FFF5F7" : "#fff",
+                borderColor: idx === 0 ? "#ED4463" : "#E5E5E5",
+                background: idx === 0 ? "#FFF5F7" : "#fff",
               }}
             >
               {/* Бейдж */}
@@ -178,7 +178,7 @@ export default function TariffsSection({ activeTariff, setActiveTariff, openPopu
               <button
                 onClick={() => handleOrder(tariff.fullName)}
                 className="w-full rounded-xl py-3 text-[14px] font-bold text-white transition-opacity hover:opacity-90 mt-auto"
-                style={{ background: idx === 3 ? "#ED4463" : tariff.color }}
+                style={{ background: idx === 0 ? "#ED4463" : tariff.color }}
               >
                 {TARIFF_CTA[idx]}
               </button>
