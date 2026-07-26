@@ -101,7 +101,7 @@ export default function Index() {
 
       <AboutSection openPopup={openPopup} />
 
-      <InterviewProcessSection openConsult={openConsult} />
+      <InterviewProcessSection />
 
       <FaqSection openConsult={openConsult} />
 

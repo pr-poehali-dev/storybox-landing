@@ -99,7 +99,7 @@ export default function ParentsIndex() {
 
       <AboutSection openPopup={openPopup} />
 
-      <InterviewProcessSection openConsult={openConsult} />
+      <InterviewProcessSection />
 
       <FaqSection openConsult={openConsult} />
 
