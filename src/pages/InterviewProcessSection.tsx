@@ -1,5 +1,6 @@
 import Icon from "@/components/ui/icon";
-import { INTERVIEW_IMG } from "./data";
+
+const VIDEO_INTERVIEW_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/3a42ae0b-1b96-4f18-b318-5d7ce9d47c31.jpg";
 
 const INTERVIEW_STEPS = [
   {
@@ -33,16 +34,13 @@ export default function InterviewProcessSection() {
       <div className="md:hidden">
         <div className="w-full overflow-hidden" style={{ maxHeight: "80vw" }}>
           <img
-            src={INTERVIEW_IMG}
+            src={VIDEO_INTERVIEW_IMG}
             alt="Видеоинтервью с историей жизни"
             className="w-full object-cover object-center"
             style={{ display: "block", maxHeight: "80vw" }}
           />
         </div>
         <div className="px-4 pt-7">
-          <p className="text-[12px] font-semibold uppercase tracking-widest mb-2" style={{ color: "#00A4E3" }}>
-            Ещё один продукт StoryBox
-          </p>
           <h2 className="text-[24px] font-bold text-black mb-3 leading-tight">
             Видеоинтервью с историей вашей жизни
           </h2>
@@ -71,9 +69,6 @@ export default function InterviewProcessSection() {
       {/* Desktop */}
       <div className="hidden md:grid md:grid-cols-2 max-w-7xl mx-auto px-4 md:px-6 gap-10 items-center">
         <div>
-          <p className="text-[12px] font-semibold uppercase tracking-widest mb-3" style={{ color: "#00A4E3" }}>
-            Ещё один продукт StoryBox
-          </p>
           <h2 className="text-[36px] font-bold text-black mb-4 leading-tight">
             Видеоинтервью с историей вашей жизни
           </h2>
@@ -100,7 +95,7 @@ export default function InterviewProcessSection() {
 
         <div className="overflow-hidden rounded-2xl" style={{ maxHeight: 600 }}>
           <img
-            src={INTERVIEW_IMG}
+            src={VIDEO_INTERVIEW_IMG}
             alt="Видеоинтервью с историей жизни"
             className="w-full h-full object-cover object-center"
             style={{ display: "block" }}
