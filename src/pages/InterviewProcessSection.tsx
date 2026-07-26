@@ -1,6 +1,6 @@
 import Icon from "@/components/ui/icon";
 
-const VIDEO_INTERVIEW_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/3a42ae0b-1b96-4f18-b318-5d7ce9d47c31.jpg";
+const VIDEO_INTERVIEW_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/c3a805d5-7ef1-4e03-8d92-558e4041e368.jpg";
 
 const INTERVIEW_STEPS = [
   {
