@@ -10,6 +10,7 @@ import SiteHeader from "./SiteHeader";
 import HeroSection from "./HeroSection";
 import BookFeaturesSection from "./BookFeaturesSection";
 import AboutSection from "./AboutSection";
+import InterviewProcessSection from "./InterviewProcessSection";
 import { reachGoal } from "@/utils/metrika";
 
 export default function Index() {
@@ -99,6 +100,8 @@ export default function Index() {
       />
 
       <AboutSection openPopup={openPopup} />
+
+      <InterviewProcessSection openConsult={openConsult} />
 
       <FaqSection openConsult={openConsult} />
 

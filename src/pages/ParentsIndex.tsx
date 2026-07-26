@@ -9,6 +9,7 @@ import SiteHeader from "./SiteHeader";
 import ParentsHeroSection from "./ParentsHeroSection";
 import BookFeaturesSection from "./BookFeaturesSection";
 import AboutSection from "./AboutSection";
+import InterviewProcessSection from "./InterviewProcessSection";
 import { reachGoal } from "@/utils/metrika";
 import { Link } from "react-router-dom";
 
@@ -97,6 +98,8 @@ export default function ParentsIndex() {
       />
 
       <AboutSection openPopup={openPopup} />
+
+      <InterviewProcessSection openConsult={openConsult} />
 
       <FaqSection openConsult={openConsult} />
 
