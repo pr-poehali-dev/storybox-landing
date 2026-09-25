@@ -39,10 +39,10 @@ export default function OthersView() {
               Книга в подарок
             </p>
             <h1 className="text-[30px] md:text-[46px] font-bold text-black leading-tight mb-5">
-              Он знает, что его любят. <em className="not-italic" style={{ color: "#00A4E3" }}>Теперь узнает — за что.</em>
+              Уникальный подарок близкому человеку — <em className="not-italic" style={{ color: "#00A4E3" }}>книга его собственной жизни</em>
             </h1>
             <p className="text-[15px] md:text-[17px] text-[#444] leading-relaxed mb-6 max-w-lg">
-              Мама, жена, друг и коллега рассказывают о нём психологу — каждый в своём разговоре. Мы собираем их истории и фотографии в книгу. Он получает её в подарок и читает о себе.
+              Мама, жена, друг и коллега рассказывают о нём психологу — каждый в своём разговоре. Мы собираем их истории и фотографии в книгу, которая существует в единственном экземпляре. Такую нельзя купить в магазине — только создать вместе с теми, кто его любит.
             </p>
             <div className="hidden md:block">
               <div className="rounded-2xl overflow-hidden" style={{ maxHeight: 420 }}>
