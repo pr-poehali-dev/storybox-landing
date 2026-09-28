@@ -39,20 +39,20 @@ export default function OthersView() {
               Книга в подарок
             </p>
             <h1 className="text-[30px] md:text-[46px] font-bold text-black leading-tight mb-5">
-              Расскажите о нём вместе с близкими — <em className="not-italic" style={{ color: "#00A4E3" }}>мы сделаем из ваших историй книгу</em>
+              Расскажите о дорогом человеке вместе с близкими — <em className="not-italic" style={{ color: "#00A4E3" }}>мы сделаем из ваших историй книгу</em>
             </h1>
             <p className="text-[15px] md:text-[17px] text-[#444] leading-relaxed mb-6 max-w-lg">
-              Вы, его мама, друг и коллега говорите о нём с нашим психологом — каждый отдельно. Мы добавляем семейные фотографии и печатаем книгу в твёрдом переплёте. Он прочитает о себе то, что вслух обычно не говорят.
+              Вы, родители, друзья и коллеги по очереди беседуете с нашим психологом — каждый отдельно. Мы добавляем семейные фотографии и печатаем книгу в твёрдом переплёте. Получатель подарка прочитает о себе то, что вслух обычно не говорят.
             </p>
             <div className="hidden md:block">
               <div className="rounded-2xl overflow-hidden" style={{ maxHeight: 420 }}>
-                <img src={HERO_IMG} alt="Мужчина открывает подарок" className="w-full h-full object-cover" style={{ display: "block" }} />
+                <img src={HERO_IMG} alt="Близкий человек открывает подарок" className="w-full h-full object-cover" style={{ display: "block" }} />
               </div>
             </div>
           </div>
 
           <div className="md:hidden rounded-2xl overflow-hidden mb-2" style={{ maxHeight: "70vw" }}>
-            <img src={HERO_IMG} alt="Мужчина открывает подарок" className="w-full object-cover" style={{ display: "block", maxHeight: "70vw" }} />
+            <img src={HERO_IMG} alt="Близкий человек открывает подарок" className="w-full object-cover" style={{ display: "block", maxHeight: "70vw" }} />
           </div>
 
           <div id="others-final-form">
@@ -65,7 +65,7 @@ export default function OthersView() {
       <section className="py-10 md:py-16 section-soft">
         <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-10">
           <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Как выглядит внутри</h2>
-          <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">У вас и у каждого из близких своя глава: ваши истории о нём и общие фотографии</p>
+          <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">У вас и у каждого из близких своя глава: ваши истории и общие фотографии</p>
         </div>
 
         <div
@@ -186,7 +186,7 @@ export default function OthersView() {
         <div className="max-w-3xl mx-auto px-4 md:px-6 text-center">
           <h2 className="text-[22px] md:text-[30px] font-bold text-black mb-4">Сколько это стоит</h2>
           <p className="text-[15px] md:text-[17px] text-[#444] leading-relaxed mb-7">
-            Цена зависит от того, сколько близких расскажут о нём, и от объёма книги. Посчитаем на первой встрече — вместе со сроками к празднику.
+            Цена зависит от того, сколько близких примут участие, и от объёма книги. Посчитаем на первой встрече — вместе со сроками к празднику.
           </p>
           <button onClick={scrollToForm} className="btn-cta">
             Узнать стоимость

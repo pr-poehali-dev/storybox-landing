@@ -66,7 +66,7 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
     >
       {!compact && (
         <div>
-          <h3 className="text-[19px] font-bold text-black mb-1">Обсудим книгу к его празднику</h3>
+          <h3 className="text-[19px] font-bold text-black mb-1">Обсудим книгу к празднику</h3>
           <p className="text-[13px] text-[#7A7A7A]">Подскажем, кого ещё позвать, проверим сроки и посчитаем стоимость</p>
         </div>
       )}
