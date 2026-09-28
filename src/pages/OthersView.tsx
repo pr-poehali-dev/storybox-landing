@@ -39,20 +39,20 @@ export default function OthersView() {
               Книга в подарок
             </p>
             <h1 className="text-[30px] md:text-[46px] font-bold text-black leading-tight mb-5">
-              Уникальный подарок близкому человеку — <em className="not-italic" style={{ color: "#00A4E3" }}>книга его собственной жизни</em>
+              Расскажите о нём вместе с близкими — <em className="not-italic" style={{ color: "#00A4E3" }}>мы сделаем из ваших историй книгу</em>
             </h1>
             <p className="text-[15px] md:text-[17px] text-[#444] leading-relaxed mb-6 max-w-lg">
-              Мама, жена, друг и коллега рассказывают о нём психологу — каждый в своём разговоре. Мы собираем их истории и фотографии в книгу, которая существует в единственном экземпляре. Такую нельзя купить в магазине — только создать вместе с теми, кто его любит.
+              Вы, его мама, друг и коллега говорите о нём с нашим психологом — каждый отдельно. Мы добавляем семейные фотографии и печатаем книгу в твёрдом переплёте. Он прочитает о себе то, что вслух обычно не говорят.
             </p>
             <div className="hidden md:block">
               <div className="rounded-2xl overflow-hidden" style={{ maxHeight: 420 }}>
-                <img src={HERO_IMG} alt="Мужчина получает книгу воспоминаний в подарок" className="w-full h-full object-cover" style={{ display: "block" }} />
+                <img src={HERO_IMG} alt="Мужчина открывает подарок" className="w-full h-full object-cover" style={{ display: "block" }} />
               </div>
             </div>
           </div>
 
           <div className="md:hidden rounded-2xl overflow-hidden mb-2" style={{ maxHeight: "70vw" }}>
-            <img src={HERO_IMG} alt="Мужчина получает книгу воспоминаний в подарок" className="w-full object-cover" style={{ display: "block", maxHeight: "70vw" }} />
+            <img src={HERO_IMG} alt="Мужчина открывает подарок" className="w-full object-cover" style={{ display: "block", maxHeight: "70vw" }} />
           </div>
 
           <div id="others-final-form">
@@ -65,7 +65,7 @@ export default function OthersView() {
       <section className="py-10 md:py-16 section-soft">
         <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-10">
           <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Как выглядит внутри</h2>
-          <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">Каждый разворот — голос одного из тех, кто его любит</p>
+          <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">У вас и у каждого из близких своя глава: ваши истории о нём и общие фотографии</p>
         </div>
 
         <div
@@ -106,7 +106,7 @@ export default function OthersView() {
       <section className="py-10 md:py-16">
         <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-10">
           <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Как проходит</h2>
-          <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">От первой встречи до вручения — 4 шага</p>
+          <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">Вы зовёте близких и рассказываете сами. Вопросы, запись, текст и печать — на нас</p>
         </div>
 
         <div
@@ -146,7 +146,7 @@ export default function OthersView() {
       {/* 4. ПОВОДЫ */}
       <section className="py-10 md:py-14 section-soft">
         <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
-          <h2 className="text-[22px] md:text-[30px] font-bold text-black mb-6">Для какого повода</h2>
+          <h2 className="text-[22px] md:text-[30px] font-bold text-black mb-6">Когда подарить</h2>
           <div className="flex flex-wrap justify-center gap-3">
             {OCCASIONS.map((o) => (
               <span
@@ -164,8 +164,8 @@ export default function OthersView() {
       {/* 5. ДЕЛИКАТНОСТЬ */}
       <section className="py-10 md:py-16">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2 text-center">Деликатность прежде всего</h2>
-          <p className="text-[14px] md:text-[16px] text-[#7A7A7A] mb-8 md:mb-10 text-center">Сюрприз должен остаться сюрпризом</p>
+          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2 text-center">Сюрприз останется сюрпризом</h2>
+          <p className="text-[14px] md:text-[16px] text-[#7A7A7A] mb-8 md:mb-10 text-center">А то, что вы расскажете, не попадёт никуда, кроме книги</p>
 
           <div className="grid md:grid-cols-3 gap-5 md:gap-6">
             {DISCRETION_CARDS.map((c) => (
@@ -186,7 +186,7 @@ export default function OthersView() {
         <div className="max-w-3xl mx-auto px-4 md:px-6 text-center">
           <h2 className="text-[22px] md:text-[30px] font-bold text-black mb-4">Сколько это стоит</h2>
           <p className="text-[15px] md:text-[17px] text-[#444] leading-relaxed mb-7">
-            Зависит от числа рассказчиков и объёма книги. Считаем на встрече. Назовите дату праздника — сразу скажем, успеваем ли.
+            Цена зависит от того, сколько близких расскажут о нём, и от объёма книги. Посчитаем на первой встрече — вместе со сроками к празднику.
           </p>
           <button onClick={scrollToForm} className="btn-cta">
             Узнать стоимость
@@ -197,7 +197,7 @@ export default function OthersView() {
       {/* 7. FAQ */}
       <section className="py-10 md:py-16">
         <div className="max-w-3xl mx-auto px-4 md:px-6">
-          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-6 md:mb-10 text-center">Частые вопросы</h2>
+          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-6 md:mb-10 text-center">Вопросы и ответы</h2>
 
           <div className="space-y-3">
             {FAQ_ITEMS.map((item, idx) => {
@@ -247,7 +247,7 @@ export default function OthersView() {
         <div className="max-w-xl mx-auto px-4 md:px-6">
           <h2 className="text-[24px] md:text-[32px] font-bold text-black mb-2 text-center">Обсудим книгу</h2>
           <p className="text-[14px] md:text-[15px] text-[#7A7A7A] mb-6 text-center">
-            Первая встреча — 30 минут, бесплатно
+            Подскажем, кого ещё позвать, проверим сроки и посчитаем стоимость
           </p>
           <OthersLeadForm formId="others-bottom-form" compact />
         </div>

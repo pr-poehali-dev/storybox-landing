@@ -59,9 +59,9 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
         <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl" style={{ background: "#00A4E3" }}>
           ✓
         </div>
-        <h3 className="text-[19px] font-bold text-black mb-2">Заявка принята!</h3>
+        <h3 className="text-[19px] font-bold text-black mb-2">Спасибо, заявка у нас</h3>
         <p className="text-[14px] text-[#7A7A7A]">
-          Свяжемся с вами в ближайшее время и договоримся об удобном времени встречи.
+          Напишем или позвоним, как вы выбрали, и договоримся о времени встречи.
         </p>
       </div>
     );
@@ -76,8 +76,8 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
     >
       {!compact && (
         <div>
-          <h3 className="text-[19px] font-bold text-black mb-1">Обсудим книгу</h3>
-          <p className="text-[13px] text-[#7A7A7A]">Расскажем, как всё устроено, и посчитаем стоимость</p>
+          <h3 className="text-[19px] font-bold text-black mb-1">Обсудим книгу к его празднику</h3>
+          <p className="text-[13px] text-[#7A7A7A]">Подскажем, кого ещё позвать, проверим сроки и посчитаем стоимость</p>
         </div>
       )}
 
@@ -115,12 +115,12 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
             type="text"
             value={form.occasion}
             onChange={(e) => setForm({ ...form, occasion: e.target.value })}
-            placeholder="День рождения"
+            placeholder="Юбилей мужа"
             className="w-full border border-[#E5E5E5] rounded-lg px-3 py-3 text-[14px] focus:outline-none focus:border-[#00A4E3] transition-colors"
           />
         </div>
         <div>
-          <label className="block text-[13px] font-semibold text-[#222] mb-1.5">Дата</label>
+          <label className="block text-[13px] font-semibold text-[#222] mb-1.5">Дата праздника</label>
           <input
             type="date"
             value={form.date}
@@ -164,10 +164,10 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
       </label>
 
       <button type="submit" className="btn-cta w-full text-center block">
-        Обсудить книгу
+        Записаться на встречу
       </button>
       <p className="text-[12px] text-center" style={{ color: "#AAAAAA" }}>
-        Первая встреча — 30 минут, бесплатно
+        30 минут, бесплатно
       </p>
     </form>
   );
