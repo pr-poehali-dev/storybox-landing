@@ -46,7 +46,13 @@ export const PROCESS_STEPS = [
   },
 ];
 
-export const OCCASIONS = ["День рождения", "Юбилей", "Годовщина свадьбы", "14 февраля", "Выход на пенсию"];
+export const OCCASIONS = [
+  { title: "День рождения", icon: "Cake" },
+  { title: "Юбилей", icon: "PartyPopper" },
+  { title: "Годовщина свадьбы", icon: "Gem" },
+  { title: "14 февраля", icon: "Heart" },
+  { title: "Выход на пенсию", icon: "Sunset" },
+];
 
 export const DISCRETION_CARDS = [
   { icon: "EyeOff", title: "Получателю подарка мы не пишем и не звоним", desc: "Созваниваемся и переписываемся только с вами и близкими, которых вы позвали." },

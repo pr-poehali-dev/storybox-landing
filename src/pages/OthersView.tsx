@@ -145,59 +145,86 @@ export default function OthersView() {
       </section>
 
       {/* 3. КАК ПРОХОДИТ */}
-      <section className="py-10 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-10">
-          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Как всё проходит</h2>
-          <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">Вы предупреждаете близких героя о нашем звонке, а дальше мы всё берём на себя: проводим интервью, запрашиваем фото, превращаем рассказы в текст и печатаем книгу.</p>
+      <section className="py-14 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8 md:mb-12 text-center">
+          <span
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-widest mb-4"
+            style={{ color: "#00A4E3", background: "rgba(0,164,227,0.1)" }}
+          >
+            <Icon name="Route" size={14} />
+            4 простых шага
+          </span>
+          <h2 className="text-[28px] md:text-[40px] font-bold text-black leading-[1.15] tracking-tight mb-3">Как всё проходит</h2>
+          <p className="text-[15px] md:text-[17px] text-[#666] leading-relaxed max-w-[680px] mx-auto">
+            Вы предупреждаете близких героя о нашем звонке, а дальше мы всё берём на себя: проводим интервью, запрашиваем фото, превращаем рассказы в текст и печатаем книгу.
+          </p>
         </div>
 
         <div
-          className="md:hidden flex gap-4 px-4 pb-2"
-          style={{ overflowX: "auto", scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
+          className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto px-4 md:px-6 pb-2 md:pb-0 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-4"
+          style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
         >
           {PROCESS_STEPS.map((s) => (
-            <div key={s.n} className="flex-shrink-0 bg-white rounded-2xl overflow-hidden shadow-sm border border-[#EEEEEE]" style={{ width: "76vw", maxWidth: 300 }}>
-              <div style={{ aspectRatio: "4/3", overflow: "hidden" }}>
-                <img src={s.img} alt={s.title} className="w-full h-full object-cover" />
+            <article
+              key={s.n}
+              className="group flex-shrink-0 w-[78vw] max-w-[320px] md:w-auto md:max-w-none snap-start bg-white rounded-3xl p-3 flex flex-col border border-[#F0F0F0] transition-transform duration-300 md:hover:-translate-y-1"
+              style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.06)" }}
+            >
+              <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "4/3" }}>
+                <img
+                  src={s.img}
+                  alt={s.title}
+                  className="w-full h-full object-cover transition-transform duration-500 md:group-hover:scale-105"
+                />
+                <span
+                  className="absolute top-3 left-3 w-9 h-9 rounded-full flex items-center justify-center text-[15px] font-bold text-white"
+                  style={{ background: "#00A4E3", boxShadow: "0 4px 12px rgba(0,164,227,0.35)" }}
+                >
+                  {s.n}
+                </span>
               </div>
-              <div className="p-5">
-                <p className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: "#00A4E3" }}>Шаг {s.n}</p>
-                <h3 className="text-[16px] font-bold text-black mb-2">{s.title}</h3>
-                <p className="text-[13px] text-[#7A7A7A] leading-relaxed">{s.desc}</p>
+              <div className="px-3 pt-5 pb-4 flex-1 flex flex-col">
+                <p className="text-[12px] font-bold uppercase tracking-widest mb-2" style={{ color: "#ED4463" }}>
+                  Шаг {s.n}
+                </p>
+                <h3 className="text-[18px] md:text-[19px] font-bold text-black leading-snug mb-2">{s.title}</h3>
+                <p className="text-[14px] text-[#666] leading-relaxed">{s.desc}</p>
               </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="hidden md:grid max-w-7xl mx-auto px-6 grid-cols-4 gap-6">
-          {PROCESS_STEPS.map((s) => (
-            <div key={s.n} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-[#EEEEEE]">
-              <div style={{ aspectRatio: "4/3", overflow: "hidden" }}>
-                <img src={s.img} alt={s.title} className="w-full h-full object-cover" />
-              </div>
-              <div className="p-6">
-                <p className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: "#00A4E3" }}>Шаг {s.n}</p>
-                <h3 className="text-[19px] font-bold text-black mb-3">{s.title}</h3>
-                <p className="text-[14px] text-[#7A7A7A] leading-relaxed">{s.desc}</p>
-              </div>
-            </div>
+            </article>
           ))}
         </div>
       </section>
 
       {/* 4. ПОВОДЫ */}
-      <section className="py-10 md:py-14 section-soft">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
-          <h2 className="text-[22px] md:text-[30px] font-bold text-black mb-6">Когда подарить</h2>
-          <div className="flex flex-wrap justify-center gap-3">
-            {OCCASIONS.map((o) => (
-              <span
-                key={o}
-                className="px-5 py-2.5 rounded-full text-[14px] font-semibold bg-white border"
-                style={{ borderColor: "#00A4E3", color: "#00A4E3" }}
+      <section className="py-14 md:py-20 section-soft">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="text-center mb-8 md:mb-12">
+            <span
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-widest mb-4"
+              style={{ color: "#ED4463", background: "rgba(237,68,99,0.08)" }}
+            >
+              <Icon name="CalendarHeart" size={14} fallback="Calendar" />
+              Поводы
+            </span>
+            <h2 className="text-[28px] md:text-[40px] font-bold text-black leading-[1.15] tracking-tight">Когда подарить</h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-5">
+            {OCCASIONS.map((o, i) => (
+              <div
+                key={o.title}
+                className={`bg-white rounded-3xl px-4 py-6 md:py-8 flex flex-col items-center text-center gap-4 border border-[#F0F0F0] transition-transform duration-300 md:hover:-translate-y-1 ${
+                  i === OCCASIONS.length - 1 ? "col-span-2 sm:col-span-1" : ""
+                }`}
+                style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.05)" }}
               >
-                {o}
-              </span>
+                <div
+                  className="w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center"
+                  style={{ background: "rgba(0,164,227,0.1)", color: "#00A4E3" }}
+                >
+                  <Icon name={o.icon} size={28} fallback="Gift" />
+                </div>
+                <p className="text-[15px] md:text-[16px] font-bold text-black leading-snug">{o.title}</p>
+              </div>
             ))}
           </div>
         </div>
