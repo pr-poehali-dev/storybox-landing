@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import ParentsIndex from "./pages/ParentsIndex";
 import OthersView from "./pages/OthersView";
+import FatherDayView from "./pages/FatherDayView";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import DataConsent from "./pages/legal/DataConsent";
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/parents" element={<ParentsIndex />} />
           <Route path="/others" element={<OthersView />} />
+          <Route path="/den-otca" element={<FatherDayView />} />
           <Route path="/legal/privacy" element={<PrivacyPolicy />} />
           <Route path="/legal/data-consent" element={<DataConsent />} />
           <Route path="/legal/offer" element={<PublicOffer />} />

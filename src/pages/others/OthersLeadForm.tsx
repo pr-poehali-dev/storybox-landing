@@ -14,9 +14,26 @@ const CHANNELS = [
 interface OthersLeadFormProps {
   formId?: string;
   compact?: boolean;
+  title?: string;
+  subtitle?: string;
+  buttonText?: string;
+  tariff?: string;
+  goal?: string;
+  successTitle?: string;
+  successText?: string;
 }
 
-export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps) {
+export default function OthersLeadForm({
+  formId,
+  compact,
+  title = "Обсудим создание книги",
+  subtitle = "Напишем или позвоним вам, расскажем, как всё проходит, уточним детали и рассчитаем стоимость.",
+  buttonText = "Обсудить книгу",
+  tariff = "Ты глазами других",
+  goal = "others_lead_submit",
+  successTitle = "Спасибо, заявка у нас",
+  successText = "расскажем, как всё проходит, и рассчитаем стоимость.",
+}: OthersLeadFormProps) {
   const [form, setForm] = useState({ name: "", phone: "", agreePersonal: false });
   const [channel, setChannel] = useState<(typeof CHANNELS)[number]["key"]>("Telegram");
   const [phoneDigits, setPhoneDigits] = useState("");
@@ -41,14 +58,14 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
       body: JSON.stringify({
         name: form.name,
         phone: form.phone,
-        tariff: "Ты глазами других",
+        tariff,
         promo: "",
-        source: `Ты глазами других (${channel})`,
+        source: `${tariff} (${channel})`,
         marketing_consent: "нет",
       }),
     }).catch(() => {});
 
-    reachGoal("others_lead_submit", { channel });
+    reachGoal(goal, { channel });
     setSubmitted(true);
   };
 
@@ -58,9 +75,9 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
         <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl" style={{ background: "#00A4E3" }}>
           ✓
         </div>
-        <h3 className="text-[19px] font-bold text-black mb-2">Спасибо, заявка у нас</h3>
+        <h3 className="text-[19px] font-bold text-black mb-2">{successTitle}</h3>
         <p className="text-[14px] text-[#7A7A7A]">
-          {channel === "Звонок" ? "Скоро позвоним" : `Скоро напишем в ${channel}`}, расскажем, как всё проходит, и рассчитаем стоимость.
+          {channel === "Звонок" ? "Скоро позвоним" : `Скоро напишем в ${channel}`}, {successText}
         </p>
       </div>
     );
@@ -75,8 +92,8 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
     >
       {!compact && (
         <div>
-          <h3 className="text-[19px] font-bold text-black mb-1">Обсудим создание книги</h3>
-          <p className="text-[13px] text-[#7A7A7A]">Напишем или позвоним вам, расскажем, как всё проходит, уточним детали и рассчитаем стоимость.</p>
+          <h3 className="text-[19px] font-bold text-black mb-1">{title}</h3>
+          <p className="text-[13px] text-[#7A7A7A]">{subtitle}</p>
         </div>
       )}
 
@@ -139,7 +156,7 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
       </label>
 
       <button type="submit" className="btn-cta w-full text-center block">
-        Обсудить книгу
+        {buttonText}
       </button>
     </form>
   );
