@@ -231,19 +231,37 @@ export default function OthersView() {
       </section>
 
       {/* 5. ДЕЛИКАТНОСТЬ */}
-      <section className="py-10 md:py-16">
+      <section className="py-14 md:py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2 text-center">Полная конфиденциальность</h2>
-          <p className="text-[14px] md:text-[16px] text-[#7A7A7A] mb-8 md:mb-10 text-center">Всё, что расскажут ваши близкие, останется только между нами и внутри книги.</p>
+          <div className="text-center mb-8 md:mb-12">
+            <span
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-widest mb-4"
+              style={{ color: "#00A4E3", background: "rgba(0,164,227,0.1)" }}
+            >
+              <Icon name="Lock" size={14} />
+              Деликатность
+            </span>
+            <h2 className="text-[28px] md:text-[40px] font-bold text-black leading-[1.15] tracking-tight mb-3">Полная конфиденциальность</h2>
+            <p className="text-[15px] md:text-[17px] text-[#666] leading-relaxed max-w-[640px] mx-auto">
+              Всё, что расскажут ваши близкие, останется только между нами и внутри книги.
+            </p>
+          </div>
 
-          <div className="grid md:grid-cols-3 gap-5 md:gap-6">
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
             {DISCRETION_CARDS.map((c) => (
-              <div key={c.title} className="sb-card">
-                <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-4" style={{ background: "#F2F9FF" }}>
-                  <Icon name={c.icon} size={22} style={{ color: "#00A4E3" }} fallback="ShieldCheck" />
+              <div
+                key={c.title}
+                className="bg-white rounded-3xl p-6 md:p-8 flex flex-col border border-[#F0F0F0] transition-transform duration-300 md:hover:-translate-y-1"
+                style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.06)" }}
+              >
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5"
+                  style={{ background: "rgba(0,164,227,0.1)", color: "#00A4E3" }}
+                >
+                  <Icon name={c.icon} size={26} fallback="ShieldCheck" />
                 </div>
-                <h3 className="text-[16px] font-bold text-black mb-2">{c.title}</h3>
-                <p className="text-[14px] text-[#7A7A7A] leading-relaxed">{c.desc}</p>
+                <h3 className="text-[18px] md:text-[19px] font-bold text-black leading-snug mb-2">{c.title}</h3>
+                <p className="text-[14px] md:text-[15px] text-[#666] leading-relaxed">{c.desc}</p>
               </div>
             ))}
           </div>
@@ -264,46 +282,63 @@ export default function OthersView() {
       </section>
 
       {/* 7. FAQ */}
-      <section className="py-10 md:py-16">
+      <section className="py-14 md:py-20">
         <div className="max-w-3xl mx-auto px-4 md:px-6">
-          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-6 md:mb-10 text-center">Вопросы и ответы</h2>
+          <div className="text-center mb-8 md:mb-12">
+            <span
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-widest mb-4"
+              style={{ color: "#ED4463", background: "rgba(237,68,99,0.08)" }}
+            >
+              <Icon name="MessageCircleQuestion" size={14} fallback="HelpCircle" />
+              Частые вопросы
+            </span>
+            <h2 className="text-[28px] md:text-[40px] font-bold text-black leading-[1.15] tracking-tight">Вопросы и ответы</h2>
+          </div>
 
-          <div className="space-y-3">
+          <div className="space-y-3 md:space-y-4">
             {FAQ_ITEMS.map((item, idx) => {
               const isOpen = openIdx === idx;
               return (
                 <div
                   key={item.q}
-                  className="rounded-xl overflow-hidden"
+                  className="bg-white rounded-2xl border transition-all duration-300"
                   style={{
-                    background: "#fff",
-                    border: isOpen ? "1.5px solid #00A4E3" : "1.5px solid #E8EEF3",
+                    borderColor: isOpen ? "rgba(0,164,227,0.4)" : "#F0F0F0",
+                    boxShadow: isOpen ? "0 12px 36px rgba(0,164,227,0.10)" : "0 4px 20px rgba(0,0,0,0.04)",
                   }}
                 >
                   <button
                     onClick={() => setOpenIdx(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between gap-3 text-left"
-                    style={{ padding: "16px 18px" }}
+                    aria-expanded={isOpen}
+                    className="w-full flex items-center justify-between gap-4 text-left px-5 md:px-7 py-5"
                   >
-                    <span className="text-[14px] md:text-[15px] font-semibold" style={{ color: isOpen ? "#00A4E3" : "#1A1A1A" }}>
+                    <span
+                      className="text-[15px] md:text-[17px] font-bold leading-snug transition-colors duration-300"
+                      style={{ color: isOpen ? "#00A4E3" : "#1A1A1A" }}
+                    >
                       {item.q}
                     </span>
                     <span
-                      className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-[17px] font-light transition-transform"
+                      className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300"
                       style={{
-                        background: isOpen ? "#00A4E3" : "#F0F4F8",
-                        color: isOpen ? "#fff" : "#7A7A7A",
+                        background: isOpen ? "#00A4E3" : "rgba(0,164,227,0.1)",
+                        color: isOpen ? "#fff" : "#00A4E3",
                         transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
                       }}
                     >
-                      +
+                      <Icon name="Plus" size={18} />
                     </span>
                   </button>
-                  {isOpen && (
-                    <div style={{ padding: "0 18px 18px" }}>
-                      <p className="text-[14px] leading-relaxed" style={{ color: "#555" }}>{item.a}</p>
+                  <div
+                    className="grid transition-[grid-template-rows] duration-300 ease-out"
+                    style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="px-5 md:px-7 pb-6 -mt-1 pr-16 md:pr-20 text-[14px] md:text-[15px] leading-relaxed text-[#555]">
+                        {item.a}
+                      </p>
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}
