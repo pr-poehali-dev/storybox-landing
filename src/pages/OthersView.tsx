@@ -35,13 +35,6 @@ export default function OthersView() {
       <section className="py-8 md:py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-16 items-stretch">
           <div className="flex flex-col justify-center">
-            <span
-              className="self-start inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-widest mb-5"
-              style={{ color: "#ED4463", background: "rgba(237,68,99,0.08)" }}
-            >
-              <Icon name="Gift" size={14} />
-              Книга в подарок
-            </span>
             <h1
               className="text-[32px] md:text-[40px] lg:text-[52px] font-bold text-black leading-[1.1] tracking-tight mb-5"
               style={{ textWrap: "balance" } as React.CSSProperties}
@@ -95,14 +88,7 @@ export default function OthersView() {
       {/* 2. КАК ВЫГЛЯДИТ ВНУТРИ */}
       <section className="py-14 md:py-20 section-soft">
         <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8 md:mb-12 text-center">
-          <span
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-widest mb-4"
-            style={{ color: "#00A4E3", background: "rgba(0,164,227,0.1)" }}
-          >
-            <Icon name="BookOpen" size={14} />
-            Внутри книги
-          </span>
-          <h2 className="text-[28px] md:text-[40px] font-bold text-black leading-[1.15] tracking-tight mb-3">Как выглядит внутри</h2>
+          <h2 className="text-[28px] md:text-[40px] font-bold text-black leading-[1.15] tracking-tight mb-3">Что будет внутри книги</h2>
           <p className="text-[15px] md:text-[17px] text-[#666] leading-relaxed max-w-[640px] mx-auto">
             У вас и у каждого из близких своя глава: ваши истории и общие фотографии
           </p>
@@ -147,13 +133,6 @@ export default function OthersView() {
       {/* 3. КАК ПРОХОДИТ */}
       <section className="py-14 md:py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8 md:mb-12 text-center">
-          <span
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-widest mb-4"
-            style={{ color: "#00A4E3", background: "rgba(0,164,227,0.1)" }}
-          >
-            <Icon name="Route" size={14} />
-            4 простых шага
-          </span>
           <h2 className="text-[28px] md:text-[40px] font-bold text-black leading-[1.15] tracking-tight mb-3">Как всё проходит</h2>
           <p className="text-[15px] md:text-[17px] text-[#666] leading-relaxed max-w-[680px] mx-auto">
             Вы предупреждаете близких героя о нашем звонке, а дальше мы всё берём на себя: проводим интервью, запрашиваем фото, превращаем рассказы в текст и печатаем книгу.
@@ -199,13 +178,6 @@ export default function OthersView() {
       <section className="py-14 md:py-20 section-soft">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-8 md:mb-12">
-            <span
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-widest mb-4"
-              style={{ color: "#ED4463", background: "rgba(237,68,99,0.08)" }}
-            >
-              <Icon name="CalendarHeart" size={14} fallback="Calendar" />
-              Поводы
-            </span>
             <h2 className="text-[28px] md:text-[40px] font-bold text-black leading-[1.15] tracking-tight">Когда подарить</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-5">
@@ -234,13 +206,6 @@ export default function OthersView() {
       <section className="py-14 md:py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-8 md:mb-12">
-            <span
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-widest mb-4"
-              style={{ color: "#00A4E3", background: "rgba(0,164,227,0.1)" }}
-            >
-              <Icon name="Lock" size={14} />
-              Деликатность
-            </span>
             <h2 className="text-[28px] md:text-[40px] font-bold text-black leading-[1.15] tracking-tight mb-3">Полная конфиденциальность</h2>
             <p className="text-[15px] md:text-[17px] text-[#666] leading-relaxed max-w-[640px] mx-auto">
               Всё, что расскажут ваши близкие, останется только между нами и внутри книги.
@@ -285,13 +250,6 @@ export default function OthersView() {
       <section className="py-14 md:py-20">
         <div className="max-w-3xl mx-auto px-4 md:px-6">
           <div className="text-center mb-8 md:mb-12">
-            <span
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-widest mb-4"
-              style={{ color: "#ED4463", background: "rgba(237,68,99,0.08)" }}
-            >
-              <Icon name="MessageCircleQuestion" size={14} fallback="HelpCircle" />
-              Частые вопросы
-            </span>
             <h2 className="text-[28px] md:text-[40px] font-bold text-black leading-[1.15] tracking-tight">Вопросы и ответы</h2>
           </div>
 
