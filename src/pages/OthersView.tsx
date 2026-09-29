@@ -39,10 +39,10 @@ export default function OthersView() {
               Книга в подарок
             </p>
             <h1 className="text-[30px] md:text-[46px] font-bold text-black leading-tight mb-5">
-              Расскажите о дорогом человеке вместе с близкими — <em className="not-italic" style={{ color: "#00A4E3" }}>мы сделаем из ваших историй книгу</em>
+              Соберите истории близких <em className="not-italic" style={{ color: "#00A4E3" }}>в книгу о дорогом человеке</em>
             </h1>
             <p className="text-[15px] md:text-[17px] text-[#444] leading-relaxed mb-6 max-w-lg">
-              Вы, родители, друзья и коллеги по очереди беседуете с нашим психологом — каждый отдельно. Мы добавляем семейные фотографии и печатаем книгу в твёрдом переплёте. Получатель подарка прочитает о себе то, что вслух обычно не говорят.
+              Делаем подарочные книги о самых дорогих людях. Поговорим с друзьями и родными получателя, соберём трогательные, смешные и неожиданные истории, добавим фотографии и превратим всё это в настоящую книгу в твёрдом переплёте.
             </p>
             <div className="hidden md:block">
               <div className="rounded-2xl overflow-hidden" style={{ maxHeight: 420 }}>
@@ -105,8 +105,8 @@ export default function OthersView() {
       {/* 3. КАК ПРОХОДИТ */}
       <section className="py-10 md:py-16">
         <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-10">
-          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Как проходит</h2>
-          <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">Вы зовёте близких и рассказываете сами. Вопросы, запись, текст и печать — на нас</p>
+          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Как всё проходит</h2>
+          <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">Вы предупреждаете близких героя о нашем звонке, а дальше мы всё берём на себя: проводим интервью, запрашиваем фото, превращаем рассказы в текст и печатаем книгу.</p>
         </div>
 
         <div
@@ -164,8 +164,8 @@ export default function OthersView() {
       {/* 5. ДЕЛИКАТНОСТЬ */}
       <section className="py-10 md:py-16">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2 text-center">Сюрприз останется сюрпризом</h2>
-          <p className="text-[14px] md:text-[16px] text-[#7A7A7A] mb-8 md:mb-10 text-center">А то, что вы расскажете, не попадёт никуда, кроме книги</p>
+          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2 text-center">Полная конфиденциальность</h2>
+          <p className="text-[14px] md:text-[16px] text-[#7A7A7A] mb-8 md:mb-10 text-center">Всё, что расскажут ваши близкие, останется только между нами и внутри книги.</p>
 
           <div className="grid md:grid-cols-3 gap-5 md:gap-6">
             {DISCRETION_CARDS.map((c) => (
@@ -186,7 +186,7 @@ export default function OthersView() {
         <div className="max-w-3xl mx-auto px-4 md:px-6 text-center">
           <h2 className="text-[22px] md:text-[30px] font-bold text-black mb-4">Сколько это стоит</h2>
           <p className="text-[15px] md:text-[17px] text-[#444] leading-relaxed mb-7">
-            Цена зависит от того, сколько близких примут участие, и от объёма книги. Посчитаем на первой встрече — вместе со сроками к празднику.
+            Цена зависит от того, сколько близких примут участие, и от объёма книги. Рассчитаем при первом разговоре — и сразу скажем, успеем ли к празднику.
           </p>
           <button onClick={scrollToForm} className="btn-cta">
             Узнать стоимость
@@ -245,9 +245,9 @@ export default function OthersView() {
       {/* 8. ФИНАЛЬНАЯ ФОРМА */}
       <section id="others-final-form" className="py-10 md:py-16 section-soft">
         <div className="max-w-xl mx-auto px-4 md:px-6">
-          <h2 className="text-[24px] md:text-[32px] font-bold text-black mb-2 text-center">Обсудим книгу</h2>
+          <h2 className="text-[24px] md:text-[32px] font-bold text-black mb-2 text-center">Обсудим создание книги</h2>
           <p className="text-[14px] md:text-[15px] text-[#7A7A7A] mb-6 text-center">
-            Подскажем, кого ещё позвать, проверим сроки и посчитаем стоимость
+            Напишем или позвоним вам, расскажем, как всё проходит, уточним детали и рассчитаем стоимость.
           </p>
           <OthersLeadForm formId="others-bottom-form" compact />
         </div>

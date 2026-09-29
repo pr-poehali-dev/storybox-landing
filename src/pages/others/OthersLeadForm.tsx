@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Icon from "@/components/ui/icon";
 import { applyPhoneMask, validatePhone } from "@/utils/phoneMask";
 import { reachGoal } from "@/utils/metrika";
+
+const CHANNELS = [
+  { key: "Telegram", label: "Telegram", icon: "Send" },
+  { key: "Max", label: "Max", icon: "MessageSquare" },
+  { key: "WhatsApp", label: "WhatsApp", icon: "MessageCircle" },
+  { key: "Звонок", label: "Звонок", icon: "Phone" },
+] as const;
 
 interface OthersLeadFormProps {
   formId?: string;
@@ -10,6 +18,7 @@ interface OthersLeadFormProps {
 
 export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps) {
   const [form, setForm] = useState({ name: "", phone: "", agreePersonal: false });
+  const [channel, setChannel] = useState<(typeof CHANNELS)[number]["key"]>("Telegram");
   const [phoneDigits, setPhoneDigits] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -34,12 +43,12 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
         phone: form.phone,
         tariff: "Ты глазами других",
         promo: "",
-        source: "Ты глазами других",
+        source: `Ты глазами других (${channel})`,
         marketing_consent: "нет",
       }),
     }).catch(() => {});
 
-    reachGoal("others_lead_submit");
+    reachGoal("others_lead_submit", { channel });
     setSubmitted(true);
   };
 
@@ -51,7 +60,7 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
         </div>
         <h3 className="text-[19px] font-bold text-black mb-2">Спасибо, заявка у нас</h3>
         <p className="text-[14px] text-[#7A7A7A]">
-          Скоро свяжемся с вами и договоримся о времени встречи.
+          {channel === "Звонок" ? "Скоро позвоним" : `Скоро напишем в ${channel}`}, расскажем, как всё проходит, и рассчитаем стоимость.
         </p>
       </div>
     );
@@ -66,8 +75,8 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
     >
       {!compact && (
         <div>
-          <h3 className="text-[19px] font-bold text-black mb-1">Обсудим книгу к празднику</h3>
-          <p className="text-[13px] text-[#7A7A7A]">Подскажем, кого ещё позвать, проверим сроки и посчитаем стоимость</p>
+          <h3 className="text-[19px] font-bold text-black mb-1">Обсудим создание книги</h3>
+          <p className="text-[13px] text-[#7A7A7A]">Напишем или позвоним вам, расскажем, как всё проходит, уточним детали и рассчитаем стоимость.</p>
         </div>
       )}
 
@@ -96,6 +105,28 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
         {phoneError && <p className="text-[12px] mt-1.5 font-medium" style={{ color: "#ED4463" }}>{phoneError}</p>}
       </div>
 
+      <div>
+        <p className="text-[13px] font-semibold text-[#222] mb-2">Как с вами удобнее связаться?</p>
+        <div className="flex flex-wrap gap-2">
+          {CHANNELS.map((c) => (
+            <button
+              key={c.key}
+              type="button"
+              onClick={() => setChannel(c.key)}
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[13px] font-semibold transition-colors border"
+              style={{
+                background: channel === c.key ? "#00A4E3" : "transparent",
+                color: channel === c.key ? "#fff" : "#7A7A7A",
+                borderColor: channel === c.key ? "#00A4E3" : "#E5E5E5",
+              }}
+            >
+              <Icon name={c.icon} size={14} fallback="MessageCircle" />
+              {c.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <label className="flex items-start gap-3 cursor-pointer">
         <input
           type="checkbox" required checked={form.agreePersonal}
@@ -108,11 +139,8 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
       </label>
 
       <button type="submit" className="btn-cta w-full text-center block">
-        Записаться на встречу
+        Обсудить книгу
       </button>
-      <p className="text-[12px] text-center" style={{ color: "#AAAAAA" }}>
-        30 минут, бесплатно
-      </p>
     </form>
   );
 }
