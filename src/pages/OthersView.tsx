@@ -93,43 +93,54 @@ export default function OthersView() {
       </section>
 
       {/* 2. КАК ВЫГЛЯДИТ ВНУТРИ */}
-      <section className="py-10 md:py-16 section-soft">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-10">
-          <h2 className="text-[24px] md:text-[36px] font-bold text-black mb-2">Как выглядит внутри</h2>
-          <p className="text-[14px] md:text-[16px] text-[#7A7A7A]">У вас и у каждого из близких своя глава: ваши истории и общие фотографии</p>
+      <section className="py-14 md:py-20 section-soft">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8 md:mb-12 text-center">
+          <span
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-widest mb-4"
+            style={{ color: "#00A4E3", background: "rgba(0,164,227,0.1)" }}
+          >
+            <Icon name="BookOpen" size={14} />
+            Внутри книги
+          </span>
+          <h2 className="text-[28px] md:text-[40px] font-bold text-black leading-[1.15] tracking-tight mb-3">Как выглядит внутри</h2>
+          <p className="text-[15px] md:text-[17px] text-[#666] leading-relaxed max-w-[640px] mx-auto">
+            У вас и у каждого из близких своя глава: ваши истории и общие фотографии
+          </p>
         </div>
 
         <div
-          className="md:hidden flex gap-4 px-4 pb-2"
-          style={{ overflowX: "auto", scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
+          className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto px-4 md:px-6 pb-2 md:pb-0 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-4"
+          style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
         >
-          {SPREADS.map((s) => (
-            <div key={s.caption} className="flex-shrink-0 rounded-xl overflow-hidden bg-white shadow-sm border border-[#EEEEEE]" style={{ width: "76vw", maxWidth: 300 }}>
-              <div style={{ aspectRatio: "1/1", overflow: "hidden" }}>
-                <img src={s.img} alt={s.caption} className="w-full h-full object-cover" />
-              </div>
-              <div className="px-4 py-4">
-                <p style={{ fontFamily: "'Caveat', cursive", fontSize: 24, fontWeight: 600, color: "#222", lineHeight: 1.3 }}>
-                  {s.caption}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="hidden md:grid grid-cols-4 gap-5 max-w-7xl mx-auto px-6">
-          {SPREADS.map((s) => (
-            <div key={s.caption} className="rounded-xl overflow-hidden bg-white shadow-sm border border-[#EEEEEE]">
-              <div style={{ aspectRatio: "1/1", overflow: "hidden" }}>
-                <img src={s.img} alt={s.caption} className="w-full h-full object-cover" />
-              </div>
-              <div className="px-4 py-4">
-                <p style={{ fontFamily: "'Caveat', cursive", fontSize: 24, fontWeight: 600, color: "#222", lineHeight: 1.3 }}>
-                  {s.caption}
-                </p>
-              </div>
-            </div>
-          ))}
+          {SPREADS.map((s, i) => {
+            const [role, topic] = s.caption.split(" — ");
+            return (
+              <article
+                key={s.caption}
+                className="group flex-shrink-0 w-[78vw] max-w-[320px] md:w-auto md:max-w-none snap-start bg-white rounded-3xl p-3 flex flex-col transition-transform duration-300 md:hover:-translate-y-1"
+                style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.06)" }}
+              >
+                <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "1/1" }}>
+                  <img
+                    src={s.img}
+                    alt={s.caption}
+                    className="w-full h-full object-cover transition-transform duration-500 md:group-hover:scale-105"
+                  />
+                  <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur text-[12px] font-bold text-[#222]">
+                    Глава {i + 1}
+                  </span>
+                </div>
+                <div className="px-3 pt-5 pb-4 flex-1 flex flex-col">
+                  <p className="text-[12px] font-bold uppercase tracking-widest mb-2" style={{ color: "#ED4463" }}>
+                    {role}
+                  </p>
+                  <p style={{ fontFamily: "'Caveat', cursive", fontSize: 24, fontWeight: 600, color: "#222", lineHeight: 1.25 }}>
+                    {topic ? topic.charAt(0).toUpperCase() + topic.slice(1) : s.caption}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 
