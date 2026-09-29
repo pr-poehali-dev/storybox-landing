@@ -53,7 +53,7 @@ export default function OthersView() {
             </p>
             <ul className="flex flex-wrap gap-x-6 gap-y-2 mb-8 text-[14px] font-semibold text-[#222]">
               {[
-                { icon: "Users", text: "3–5 голосов близких" },
+                { icon: "Users", text: "Уникальный и неповторимый подарок" },
                 { icon: "Image", text: "Ваши фотографии" },
                 { icon: "BookOpen", text: "Твёрдый переплёт" },
               ].map((b) => (
@@ -85,7 +85,7 @@ export default function OthersView() {
                 <Icon name="Heart" size={20} />
               </div>
               <p className="text-[14px] leading-snug text-[#222]">
-                <b>Подарок, который перечитывают.</b> Каждая глава — голос одного из близких.
+                <b>Подарок, который перечитывают.</b> Каждая глава — история одного из близких героя.
               </p>
             </div>
           </div>
