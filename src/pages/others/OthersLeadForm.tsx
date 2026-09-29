@@ -54,7 +54,7 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
 
   if (submitted) {
     return (
-      <div id={formId} className="bg-white rounded-2xl border border-[#E5E5E5] px-6 py-10 text-center" style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.06)" }}>
+      <div id={formId} className="bg-white rounded-3xl border border-[#F0F0F0] px-6 py-10 text-center" style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.06)" }}>
         <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl" style={{ background: "#00A4E3" }}>
           ✓
         </div>
@@ -70,7 +70,7 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
     <form
       id={formId}
       onSubmit={handleSubmit}
-      className="bg-white rounded-2xl border border-[#E5E5E5] p-6 md:p-7 space-y-4"
+      className="bg-white rounded-3xl border border-[#F0F0F0] p-6 md:p-8 space-y-4"
       style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.06)" }}
     >
       {!compact && (
@@ -87,7 +87,7 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
         onChange={(e) => setForm({ ...form, name: e.target.value })}
         placeholder="Ваше имя"
         aria-label="Ваше имя"
-        className="w-full border border-[#E5E5E5] rounded-lg px-4 py-3 text-[15px] focus:outline-none focus:border-[#00A4E3] transition-colors"
+        className="w-full border border-[#E5E5E5] rounded-xl px-4 py-3 text-[15px] focus:outline-none focus:border-[#00A4E3] transition-colors"
       />
 
       <div>
@@ -99,7 +99,7 @@ export default function OthersLeadForm({ formId, compact }: OthersLeadFormProps)
           onBlur={() => setPhoneError(validatePhone(form.phone))}
           placeholder="Телефон"
           aria-label="Телефон"
-          className="w-full rounded-lg px-4 py-3 text-[15px] focus:outline-none transition-colors"
+          className="w-full rounded-xl px-4 py-3 text-[15px] focus:outline-none transition-colors"
           style={{ border: phoneError ? "1.5px solid #ED4463" : "1px solid #E5E5E5" }}
         />
         {phoneError && <p className="text-[12px] mt-1.5 font-medium" style={{ color: "#ED4463" }}>{phoneError}</p>}

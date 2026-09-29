@@ -234,15 +234,30 @@ export default function OthersView() {
       </section>
 
       {/* 6. ЦЕНА */}
-      <section className="py-10 md:py-14 section-soft">
-        <div className="max-w-3xl mx-auto px-4 md:px-6 text-center">
-          <h2 className="text-[22px] md:text-[30px] font-bold text-black mb-4">Сколько это стоит</h2>
-          <p className="text-[15px] md:text-[17px] text-[#444] leading-relaxed mb-7">
-            Цена зависит от того, сколько близких примут участие, и от объёма книги. Рассчитаем при первом разговоре — и сразу скажем, успеем ли к празднику.
-          </p>
-          <button onClick={scrollToForm} className="btn-cta">
-            Узнать стоимость
-          </button>
+      <section className="py-14 md:py-20 section-soft">
+        <div className="max-w-5xl mx-auto px-4 md:px-6">
+          <div
+            className="bg-white rounded-3xl border border-[#F0F0F0] p-6 md:p-10 lg:p-12 grid md:grid-cols-[1fr_auto] gap-6 md:gap-12 items-center"
+            style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.06)" }}
+          >
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-5 md:gap-6 text-center md:text-left">
+              <div
+                className="w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center flex-shrink-0"
+                style={{ background: "rgba(0,164,227,0.1)", color: "#00A4E3" }}
+              >
+                <Icon name="Calculator" size={28} />
+              </div>
+              <div>
+                <h2 className="text-[28px] md:text-[36px] font-bold text-black leading-[1.15] tracking-tight mb-3">Сколько это стоит</h2>
+                <p className="text-[15px] md:text-[17px] text-[#666] leading-relaxed max-w-[520px]">
+                  Цена зависит от того, сколько близких примут участие, и от объёма книги. Рассчитаем при первом разговоре — и сразу скажем, успеем ли к празднику.
+                </p>
+              </div>
+            </div>
+            <button onClick={scrollToForm} className="btn-cta w-full md:w-auto whitespace-nowrap justify-self-center">
+              Узнать стоимость
+            </button>
+          </div>
         </div>
       </section>
 
@@ -305,12 +320,14 @@ export default function OthersView() {
       </section>
 
       {/* 8. ФИНАЛЬНАЯ ФОРМА */}
-      <section id="others-final-form" className="py-10 md:py-16 section-soft">
+      <section id="others-final-form" className="py-14 md:py-20 section-soft">
         <div className="max-w-xl mx-auto px-4 md:px-6">
-          <h2 className="text-[24px] md:text-[32px] font-bold text-black mb-2 text-center">Обсудим создание книги</h2>
-          <p className="text-[14px] md:text-[15px] text-[#7A7A7A] mb-6 text-center">
-            Напишем или позвоним вам, расскажем, как всё проходит, уточним детали и рассчитаем стоимость.
-          </p>
+          <div className="text-center mb-8 md:mb-10">
+            <h2 className="text-[28px] md:text-[40px] font-bold text-black leading-[1.15] tracking-tight mb-3">Обсудим создание книги</h2>
+            <p className="text-[15px] md:text-[17px] text-[#666] leading-relaxed">
+              Напишем или позвоним вам, расскажем, как всё проходит, уточним детали и рассчитаем стоимость.
+            </p>
+          </div>
           <OthersLeadForm formId="others-bottom-form" compact />
         </div>
       </section>
