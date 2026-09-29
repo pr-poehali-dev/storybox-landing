@@ -32,31 +32,62 @@ export default function OthersView() {
       </header>
 
       {/* 1. ПЕРВЫЙ ЭКРАН */}
-      <section className="py-8 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-10 md:gap-14 items-center">
-          <div>
-            <p className="text-[12px] font-bold uppercase tracking-widest mb-3" style={{ color: "#ED4463" }}>
+      <section className="py-8 md:py-14 lg:py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-16 items-stretch">
+          <div className="flex flex-col justify-center">
+            <span
+              className="self-start inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-bold uppercase tracking-widest mb-5"
+              style={{ color: "#ED4463", background: "rgba(237,68,99,0.08)" }}
+            >
+              <Icon name="Gift" size={14} />
               Книга в подарок
-            </p>
-            <h1 className="text-[30px] md:text-[46px] font-bold text-black leading-tight mb-5">
-              Соберите истории близких <em className="not-italic" style={{ color: "#00A4E3" }}>в книгу о дорогом человеке</em>
+            </span>
+            <h1
+              className="text-[32px] md:text-[40px] lg:text-[52px] font-bold text-black leading-[1.1] tracking-tight mb-5"
+              style={{ textWrap: "balance" } as React.CSSProperties}
+            >
+              Соберите истории близких <span style={{ color: "#00A4E3" }}>в книгу о&nbsp;дорогом человеке</span>
             </h1>
-            <p className="text-[15px] md:text-[17px] text-[#444] leading-relaxed mb-6 max-w-lg">
-              Делаем подарочные книги о самых дорогих людях. Поговорим с друзьями и родными получателя, соберём трогательные, смешные и неожиданные истории, добавим фотографии и превратим всё это в настоящую книгу в твёрдом переплёте.
+            <p className="text-[15px] md:text-[17px] text-[#555] leading-relaxed mb-6 max-w-[520px]">
+              Поговорим с друзьями и родными героя, соберём трогательные, смешные и неожиданные истории, добавим фотографии — и превратим всё это в настоящую книгу в твёрдом переплёте.
             </p>
-            <div className="hidden md:block">
-              <div className="rounded-2xl overflow-hidden" style={{ maxHeight: 420 }}>
-                <img src={HERO_IMG} alt="Близкий человек открывает подарок" className="w-full h-full object-cover" style={{ display: "block" }} />
-              </div>
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 mb-8 text-[14px] font-semibold text-[#222]">
+              {[
+                { icon: "Users", text: "3–5 голосов близких" },
+                { icon: "Image", text: "Ваши фотографии" },
+                { icon: "BookOpen", text: "Твёрдый переплёт" },
+              ].map((b) => (
+                <li key={b.text} className="flex items-center gap-2">
+                  <Icon name={b.icon} size={18} style={{ color: "#00A4E3" }} />
+                  {b.text}
+                </li>
+              ))}
+            </ul>
+
+            <div className="md:hidden rounded-3xl overflow-hidden mb-6" style={{ aspectRatio: "4/3" }}>
+              <img src={HERO_IMG} alt="Близкий человек открывает подарок" className="w-full h-full object-cover block" />
+            </div>
+
+            <div id="others-final-form">
+              <OthersLeadForm formId="others-hero-form" />
             </div>
           </div>
 
-          <div className="md:hidden rounded-2xl overflow-hidden mb-2" style={{ maxHeight: "70vw" }}>
-            <img src={HERO_IMG} alt="Близкий человек открывает подарок" className="w-full object-cover" style={{ display: "block", maxHeight: "70vw" }} />
-          </div>
-
-          <div id="others-final-form">
-            <OthersLeadForm formId="others-hero-form" />
+          <div className="hidden md:block relative">
+            <div className="absolute inset-0 rounded-[28px] overflow-hidden">
+              <img src={HERO_IMG} alt="Близкий человек открывает подарок" className="w-full h-full object-cover block" />
+            </div>
+            <div
+              className="absolute left-6 right-6 bottom-6 lg:left-8 lg:right-auto lg:bottom-8 bg-white/95 backdrop-blur rounded-2xl px-5 py-4 flex items-center gap-4 max-w-[360px]"
+              style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.12)" }}
+            >
+              <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "rgba(0,164,227,0.1)", color: "#00A4E3" }}>
+                <Icon name="Heart" size={20} />
+              </div>
+              <p className="text-[14px] leading-snug text-[#222]">
+                <b>Подарок, который перечитывают.</b> Каждая глава — голос одного из близких.
+              </p>
+            </div>
           </div>
         </div>
       </section>
