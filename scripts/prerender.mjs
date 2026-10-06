@@ -1,10 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
-import { pathToFileURL } from "node:url";
 
-const root = process.cwd();
-const outDir = path.resolve(root, process.argv[2] || "dist");
-const ssrEntry = path.resolve(root, process.argv[3] || "dist-ssr/entry-server.js");
+let outDir = "";
 
 const esc = (s) =>
   String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -84,8 +81,8 @@ function htmlToText(html) {
     .join("\n");
 }
 
-async function main() {
-  const mod = await import(pathToFileURL(ssrEntry).href);
+export async function prerender(targetDir, mod) {
+  outDir = targetDir;
   const { render, ROUTES_SEO, SITE_URL, TARIFFS } = mod;
   const template = fs.readFileSync(path.join(outDir, "index.html"), "utf-8");
   const today = new Date().toISOString().slice(0, 10);
@@ -145,8 +142,3 @@ async function main() {
 
   console.log(`[prerender] готово: ${pages.length} страниц, sitemap.xml, llms.txt, llms-full.txt`);
 }
-
-main().catch((e) => {
-  console.warn("[prerender] пропущен:", e?.message || e);
-  process.exit(0);
-});

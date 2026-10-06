@@ -100,11 +100,51 @@ const hmrKeepalive = {
     transformIndexHtml: () => [{tag: 'script', children: hmrClient, injectTo: 'head-prepend' as const}],
 };
 
+const prerenderPages = () => {
+    let outDir = "dist";
+    let root = process.cwd();
+    let isSsr = false;
+    return {
+        name: 'prerender-pages',
+        apply: 'build' as const,
+        configResolved(config: any) {
+            root = config.root;
+            outDir = path.resolve(config.root, config.build.outDir);
+            isSsr = !!config.build.ssr;
+        },
+        async closeBundle() {
+            if (isSsr) return;
+            let server: any = null;
+            try {
+                const {createServer} = await import("vite");
+                server = await createServer({
+                    root,
+                    configFile: false,
+                    logLevel: 'error',
+                    appType: 'custom',
+                    mode: 'production',
+                    esbuild: {jsx: 'automatic', jsxDev: false},
+                    resolve: {alias: {"@": path.resolve(__dirname, "./src")}},
+                    server: {middlewareMode: true, hmr: false, ws: false},
+                });
+                const mod = await server.ssrLoadModule("/src/entry-server.tsx");
+                const {prerender} = await import("./scripts/prerender.mjs");
+                await prerender(outDir, mod);
+            } catch (e: any) {
+                console.warn("[prerender] пропущен:", e?.message || e);
+            } finally {
+                if (server) await server.close();
+            }
+        },
+    };
+};
+
 // https://vitejs.dev/config/
 export default defineConfig(({mode}) => ({
     plugins: [
         react(),
         hmrKeepalive,
+        prerenderPages(),
         mode === 'development' &&
         componentTagger(),
     ].filter(Boolean),
