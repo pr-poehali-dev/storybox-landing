@@ -24,25 +24,25 @@ export const PROCESS_STEPS = [
     n: "1",
     title: "Знакомство и план",
     desc: "Вместе решим, чьи голоса прозвучат в книге, о чём расскажет каждый, и сверим сроки с датой праздника.",
-    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/40207a6a-d136-4973-9ed1-d1fbad639c1d.jpg",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/b3c49478-2f3e-4528-94aa-fada950b8b73.jpg",
   },
   {
     n: "2",
     title: "Для каждого — свои вопросы",
     desc: "Родители вспомнят детство героя, друзья — самые яркие истории, любимый человек — первую встречу и общие мечты. Вопросы каждый получит заранее, чтобы успеть вспомнить главное.",
-    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/6f7ad19a-1865-4714-baf8-ee6efb096252.jpg",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/eba0cea0-438b-4c6e-8d41-3e6fdb6801a6.jpg",
   },
   {
     n: "3",
     title: "Разговоры с близкими героя",
     desc: "С каждым встречаемся наедине и без спешки — лично или по видеосвязи, как удобнее. Так рассказ получается живым и искренним.",
-    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/8474d64d-ec08-459d-a3f2-5954a9d76708.jpg",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/69eddd9a-52ac-4edc-9386-1fa892281c6f.jpg",
   },
   {
     n: "4",
     title: "Печать и доставка",
     desc: "Бережно превращаем рассказы в текст, дополняем фотографиями, печатаем книгу и доставляем вам. Остаётся лишь вручить её.",
-    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/6d275d78-13e1-4eab-9d5d-7930a83d1f55.jpg",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/c6963500-0859-46c1-9d3b-57e919f77053.jpg",
   },
 ];
 

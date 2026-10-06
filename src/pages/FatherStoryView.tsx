@@ -184,23 +184,33 @@ export default function FatherStoryView() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {CERT_STEPS.map((s) => (
-              <div
+              <article
                 key={s.n}
-                className="bg-white rounded-3xl p-6 md:p-7 flex flex-col border border-[#F0F0F0] transition-transform duration-300 md:hover:-translate-y-1"
+                className="group bg-white rounded-3xl p-3 flex flex-col border border-[#F0F0F0] transition-transform duration-300 md:hover:-translate-y-1"
                 style={CARD_SHADOW}
               >
-                <div className="flex items-center justify-between mb-5">
-                  <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center"
-                    style={{ background: "rgba(0,164,227,0.1)", color: "#00A4E3" }}
+                <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "4/3" }}>
+                  <img
+                    src={s.img}
+                    alt={s.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-500 md:group-hover:scale-105"
+                  />
+                  <span
+                    className="absolute top-3 left-3 w-9 h-9 rounded-full flex items-center justify-center text-[15px] font-bold text-white"
+                    style={{ background: "#00A4E3", boxShadow: "0 4px 12px rgba(0,164,227,0.35)" }}
                   >
-                    <Icon name={s.icon} size={26} fallback="Circle" />
-                  </div>
-                  <span className="text-[40px] font-bold leading-none" style={{ color: "#EEF3F7" }}>{s.n}</span>
+                    {s.n}
+                  </span>
                 </div>
-                <h3 className="text-[18px] md:text-[19px] font-bold text-black leading-snug mb-2">{s.title}</h3>
-                <p className="text-[14px] text-[#666] leading-relaxed">{s.desc}</p>
-              </div>
+                <div className="px-3 pt-5 pb-4 flex-1 flex flex-col">
+                  <p className="text-[12px] font-bold uppercase tracking-widest mb-2" style={{ color: "#ED4463" }}>
+                    Шаг {s.n}
+                  </p>
+                  <h3 className="text-[18px] md:text-[19px] font-bold text-black leading-snug mb-2">{s.title}</h3>
+                  <p className="text-[14px] text-[#666] leading-relaxed">{s.desc}</p>
+                </div>
+              </article>
             ))}
           </div>
         </div>
