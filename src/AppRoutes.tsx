@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import ParentsIndex from "./pages/ParentsIndex";
+import IndexDouble from "./pages/IndexDouble";
 import OthersView from "./pages/OthersView";
 import FatherDayView from "./pages/FatherDayView";
 import FatherStoryView from "./pages/FatherStoryView";
@@ -19,6 +20,7 @@ export default function AppRoutes() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/parents" element={<ParentsIndex />} />
+        <Route path="/index_double" element={<IndexDouble />} />
         <Route path="/others" element={<OthersView />} />
         <Route path="/den-otca" element={<FatherDayView />} />
         <Route path="/den-otca-istoriya" element={<FatherStoryView />} />

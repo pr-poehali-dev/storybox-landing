@@ -5,9 +5,11 @@ import { reachGoal } from "@/utils/metrika";
 interface SiteHeaderProps {
   mobileMenuOpen: boolean;
   setMobileMenuOpen: (v: boolean) => void;
+  navLinks?: { label: string; href: string }[];
+  ctaText?: string;
 }
 
-export default function SiteHeader({ mobileMenuOpen, setMobileMenuOpen }: SiteHeaderProps) {
+export default function SiteHeader({ mobileMenuOpen, setMobileMenuOpen, navLinks = NAV_LINKS, ctaText = "Книга со скидкой 25%" }: SiteHeaderProps) {
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-[#E5E5E5]">
       <div className="max-w-7xl mx-auto px-4 md:px-6 h-20 md:h-[100px] flex items-center justify-between">
@@ -19,7 +21,7 @@ export default function SiteHeader({ mobileMenuOpen, setMobileMenuOpen }: SiteHe
           />
         </a>
         <nav className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((l) => (
+          {navLinks.map((l) => (
             <a key={l.label} href={l.href} className="text-[15px] text-[#222] hover:text-[#00A4E3] transition-colors">{l.label}</a>
           ))}
         </nav>
@@ -63,7 +65,7 @@ export default function SiteHeader({ mobileMenuOpen, setMobileMenuOpen }: SiteHe
             className="hidden md:inline-flex items-center btn-cta ml-2"
             style={{ padding: "10px 20px", fontSize: 14 }}
           >
-            Книга со скидкой 25%
+            {ctaText}
           </a>
           <button
             className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg ml-1"
@@ -78,7 +80,7 @@ export default function SiteHeader({ mobileMenuOpen, setMobileMenuOpen }: SiteHe
 
       {mobileMenuOpen && (
         <div className="md:hidden bg-white border-t border-[#F0F0F0] px-4 py-3 flex flex-col gap-1">
-          {NAV_LINKS.map((l) => (
+          {navLinks.map((l) => (
             <a
               key={l.label}
               href={l.href}
