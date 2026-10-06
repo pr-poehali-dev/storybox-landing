@@ -19,14 +19,24 @@ interface PriceCalculatorProps {
   isGift: boolean;
   setIsGift: (v: boolean) => void;
   onOrder: () => void;
+  selfColor?: string;
+  selfSoft?: string;
 }
 
-const BLUE = "#00A4E3";
 const PINK = "#ED4463";
 
 const pct = (h: number) => ((h - MIN_HOURS) / (MAX_HOURS - MIN_HOURS)) * 100;
 
-export default function PriceCalculator({ hours, setHours, isGift, setIsGift, onOrder }: PriceCalculatorProps) {
+export default function PriceCalculator({
+  hours,
+  setHours,
+  isGift,
+  setIsGift,
+  onOrder,
+  selfColor = "#00A4E3",
+  selfSoft = "#F5FAFE",
+}: PriceCalculatorProps) {
+  const BLUE = selfColor;
   const p = calcPrice(hours);
   const base = calcPrice(MIN_HOURS);
   const accent = isGift ? PINK : BLUE;
@@ -51,7 +61,7 @@ export default function PriceCalculator({ hours, setHours, isGift, setIsGift, on
             onClick={() => switchMode(false)}
             className="flex-1 sm:flex-none px-4 sm:px-6 py-3 rounded-xl text-[15px] font-bold whitespace-nowrap transition-all duration-200"
             style={!isGift
-              ? { background: BLUE, color: "#fff", boxShadow: "0 4px 14px rgba(0,164,227,0.35)" }
+              ? { background: BLUE, color: "#fff", boxShadow: `0 4px 14px ${BLUE}59` }
               : { background: "transparent", color: "#7A7A7A" }}
           >
             Для себя
@@ -104,7 +114,7 @@ export default function PriceCalculator({ hours, setHours, isGift, setIsGift, on
             className="block w-7 h-7 rounded-full bg-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black/10 transition-transform active:scale-110"
             style={{
               border: `4px solid ${accent}`,
-              boxShadow: isGift ? "0 4px 14px rgba(237,68,99,0.35)" : "0 4px 14px rgba(0,164,227,0.35)",
+              boxShadow: isGift ? "0 4px 14px rgba(237,68,99,0.35)" : `0 4px 14px ${BLUE}59`,
             }}
           />
         </SliderPrimitive.Root>
@@ -143,7 +153,7 @@ export default function PriceCalculator({ hours, setHours, isGift, setIsGift, on
       </div>
 
       <div className="grid md:grid-cols-[1.1fr_1fr] gap-6 md:gap-10 mt-6 md:mt-8">
-        <div className="rounded-2xl p-5 md:p-7" style={{ background: isGift ? "#FFF5F7" : "#F5FAFE" }}>
+        <div className="rounded-2xl p-5 md:p-7" style={{ background: isGift ? "#FFF5F7" : selfSoft }}>
           <p className="text-[14px] text-[#555] mb-1">{isGift ? "Сумма сертификата" : "Стоимость книги"}</p>
           <div className="flex flex-wrap items-baseline gap-3 mb-4">
             <span className="text-[36px] md:text-[48px] font-extrabold text-black leading-none">{formatRub(p.total)}</span>
@@ -209,7 +219,7 @@ export default function PriceCalculator({ hours, setHours, isGift, setIsGift, on
                 <li key={f} className="flex items-start gap-2.5 text-[14px] text-[#444]">
                   <span
                     className="mt-0.5 w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center"
-                    style={{ background: "rgba(0,164,227,0.12)", color: BLUE }}
+                    style={{ background: `${BLUE}1F`, color: BLUE }}
                   >
                     <Icon name="Check" size={13} />
                   </span>

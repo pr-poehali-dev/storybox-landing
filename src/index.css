@@ -303,3 +303,32 @@
     animation: sheet-out 0.28s ease-in forwards;
   }
 }
+
+.promo-reveal {
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.promo-serif {
+  font-family: "Lora", Georgia, serif;
+}
+
+@keyframes promo-scroll-hint {
+  0%, 100% { transform: translateY(0); opacity: 0.9; }
+  50% { transform: translateY(8px); opacity: 0.4; }
+}
+
+.promo-scroll-hint {
+  animation: promo-scroll-hint 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promo-reveal {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .promo-scroll-hint {
+    animation: none;
+  }
+}
