@@ -48,7 +48,6 @@ export default function FatherStoryView() {
   const [days, setDays] = useState(daysLeft());
 
   useEffect(() => {
-    document.title = "Книга воспоминаний папы в подарок на День отца — StoryBox";
     const t = setInterval(() => setDays(daysLeft()), 60 * 60 * 1000);
     return () => clearInterval(t);
   }, []);
