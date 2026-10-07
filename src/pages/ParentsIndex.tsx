@@ -11,7 +11,6 @@ import BookFeaturesSection from "./BookFeaturesSection";
 import AboutSection from "./AboutSection";
 import InterviewProcessSection from "./InterviewProcessSection";
 import { reachGoal } from "@/utils/metrika";
-import { Link } from "react-router-dom";
 
 export default function ParentsIndex() {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -163,13 +162,13 @@ export default function ParentsIndex() {
             <h4 className="text-white font-semibold mb-4 text-[15px]">Документы</h4>
             <ul className="space-y-2">
               {[
-                ["Политика конфиденциальности", "/legal/privacy"],
-                ["Согласие на обработку данных", "/legal/data-consent"],
-                ["Публичная оферта", "/legal/offer"],
-                ["Согласие на рассылку", "/legal/marketing-consent"],
-              ].map(([label, href]) => (
+                ["Политика конфиденциальности"],
+                ["Согласие на обработку данных"],
+                ["Публичная оферта"],
+                ["Согласие на рассылку"],
+              ].map(([label]) => (
                 <li key={label}>
-                  <Link to={href} className="text-[14px] hover:text-white transition-colors" style={{ color: "rgba(255,255,255,0.5)" }}>{label}</Link>
+                  <span className="text-[14px]" style={{ color: "rgba(255,255,255,0.5)" }}>{label}</span>
                 </li>
               ))}
             </ul>

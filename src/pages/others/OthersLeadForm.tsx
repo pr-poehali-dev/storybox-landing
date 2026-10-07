@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { applyPhoneMask, validatePhone } from "@/utils/phoneMask";
 import { reachGoal } from "@/utils/metrika";
@@ -151,7 +150,7 @@ export default function OthersLeadForm({
           className="mt-0.5 w-4 h-4 flex-shrink-0 cursor-pointer" style={{ accentColor: "#00A4E3" }}
         />
         <span className="text-[12px] text-[#7A7A7A] leading-snug">
-          Согласен(-на) на <Link to="/legal/data-consent" target="_blank" className="underline hover:text-[#00A4E3]">обработку персональных данных</Link>
+          Согласен(-на) на <span>обработку персональных данных</span>
         </span>
       </label>
 

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useBottomSheet } from "@/hooks/useBottomSheet";
-import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { applyPhoneMask, validatePhone, validateEmail } from "@/utils/phoneMask";
 import { reachGoal } from "@/utils/metrika";
@@ -234,7 +233,7 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
                   className="mt-0.5 w-4 h-4 flex-shrink-0 cursor-pointer" style={{ accentColor: "#00A4E3" }}
                 />
                 <span className="text-[13px] text-[#444] leading-snug">
-                  Согласен(-на) на <Link to="/legal/data-consent" target="_blank" className="underline hover:text-[#00A4E3]">обработку персональных данных</Link> (ФЗ № 152) <span style={{ color: "#ED4463" }}>*</span>
+                  Согласен(-на) на <span>обработку персональных данных</span> (ФЗ № 152) <span style={{ color: "#ED4463" }}>*</span>
                 </span>
               </label>
               <label className="flex items-start gap-3 cursor-pointer">
@@ -244,7 +243,7 @@ export default function ConsultPopup({ open, onClose }: ConsultPopupProps) {
                   className="mt-0.5 w-4 h-4 flex-shrink-0 cursor-pointer" style={{ accentColor: "#00A4E3" }}
                 />
                 <span className="text-[13px] text-[#444] leading-snug">
-                  Принимаю условия <Link to="/legal/offer" target="_blank" className="underline hover:text-[#00A4E3]">договора оферты</Link> <span style={{ color: "#ED4463" }}>*</span>
+                  Принимаю условия <span>договора оферты</span> <span style={{ color: "#ED4463" }}>*</span>
                 </span>
               </label>
               <label className="flex items-start gap-3 cursor-pointer">

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import BookingPopup from "./BookingPopup";
 import GiftPopup from "./GiftPopup";
 import ConsultPopup from "./ConsultPopup";
@@ -191,13 +190,13 @@ export default function Index() {
           style={{ color: "rgba(255,255,255,0.35)" }}>
           <span>© 2026 StoryBox. Все права защищены.</span>
           <span className="flex flex-wrap gap-x-3 gap-y-1">
-            <Link to="/legal/privacy" className="hover:text-white/60 transition-colors">Политика конфиденциальности</Link>
+            <span>Политика конфиденциальности</span>
             <span>·</span>
-            <Link to="/legal/offer" className="hover:text-white/60 transition-colors">Договор оферты</Link>
+            <span>Договор оферты</span>
             <span>·</span>
-            <Link to="/legal/data-consent" className="hover:text-white/60 transition-colors">Согласие на обработку данных</Link>
+            <span>Согласие на обработку данных</span>
             <span>·</span>
-            <Link to="/legal/marketing-consent" className="hover:text-white/60 transition-colors">Политика и согласие на рассылки</Link>
+            <span>Политика и согласие на рассылки</span>
           </span>
         </div>
       </footer>

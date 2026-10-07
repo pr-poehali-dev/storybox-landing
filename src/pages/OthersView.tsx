@@ -342,9 +342,9 @@ export default function OthersView() {
             © 2026 StoryBox. Все права защищены.
           </div>
           <div className="flex flex-wrap gap-x-3 gap-y-1 text-[13px]" style={{ color: "rgba(255,255,255,0.4)" }}>
-            <Link to="/legal/privacy" className="hover:text-white/70 transition-colors">Конфиденциальность</Link>
+            <span>Конфиденциальность</span>
             <span>·</span>
-            <Link to="/legal/offer" className="hover:text-white/70 transition-colors">Оферта</Link>
+            <span>Оферта</span>
           </div>
         </div>
       </footer>

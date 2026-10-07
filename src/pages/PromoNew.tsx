@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { DEFAULT_HOURS } from "./indexdouble/priceCalc";
 import PromoHeader from "./promo/PromoHeader";
 import PromoHero from "./promo/PromoHero";
@@ -33,10 +32,10 @@ export default function PromoNew() {
             <a href="tel:+79031932725" className="hover:text-white transition-colors">+7 903 193 27 25</a>
           </div>
           <div className="flex flex-col gap-1.5 md:text-right">
-            <Link to="/legal/privacy" className="hover:text-white transition-colors">Политика конфиденциальности</Link>
-            <Link to="/legal/offer" className="hover:text-white transition-colors">Договор оферты</Link>
-            <Link to="/legal/data-consent" className="hover:text-white transition-colors">Согласие на обработку данных</Link>
-            <Link to="/legal/marketing-consent" className="hover:text-white transition-colors">Политика и согласие на рассылки</Link>
+            <span>Политика конфиденциальности</span>
+            <span>Договор оферты</span>
+            <span>Согласие на обработку данных</span>
+            <span>Политика и согласие на рассылки</span>
           </div>
         </div>
       </footer>

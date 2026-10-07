@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useBottomSheet } from "@/hooks/useBottomSheet";
-import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { TARIFFS, VALID_PROMOS } from "./data";
 import { applyPhoneMask, validatePhone } from "@/utils/phoneMask";
@@ -277,14 +276,14 @@ export default function GiftPopup({ open, onClose, initialTariff = "" }: GiftPop
                     <input type="checkbox" required checked={form.agreePersonal} onChange={(e) => setForm({ ...form, agreePersonal: e.target.checked })}
                       className="mt-0.5 w-4 h-4 flex-shrink-0" style={{ accentColor: "#ED4463" }} />
                     <span className="text-[12px] text-[#444] leading-snug">
-                      Согласен(-на) на <Link to="/legal/data-consent" target="_blank" className="underline hover:text-[#ED4463]">обработку персональных данных</Link> (ФЗ № 152) <span style={{ color: "#ED4463" }}>*</span>
+                      Согласен(-на) на <span>обработку персональных данных</span> (ФЗ № 152) <span style={{ color: "#ED4463" }}>*</span>
                     </span>
                   </label>
                   <label className="flex items-start gap-2.5 cursor-pointer">
                     <input type="checkbox" required checked={form.agreeTerms} onChange={(e) => setForm({ ...form, agreeTerms: e.target.checked })}
                       className="mt-0.5 w-4 h-4 flex-shrink-0" style={{ accentColor: "#ED4463" }} />
                     <span className="text-[12px] text-[#444] leading-snug">
-                      Принимаю <Link to="/legal/offer" target="_blank" className="underline hover:text-[#ED4463]">договор оферты</Link> <span style={{ color: "#ED4463" }}>*</span>
+                      Принимаю <span>договор оферты</span> <span style={{ color: "#ED4463" }}>*</span>
                     </span>
                   </label>
                   <label className="flex items-start gap-2.5 cursor-pointer">
