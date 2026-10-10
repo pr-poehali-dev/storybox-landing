@@ -10,6 +10,8 @@ const CHANNELS = [
   { key: "Звонок", label: "Звонок", icon: "Phone" },
 ] as const;
 
+const SUBMIT_URL = "https://functions.poehali.dev/261c487f-3a43-41db-9302-4b4ce0812db0";
+
 interface OthersLeadFormProps {
   formId?: string;
   compact?: boolean;
@@ -38,6 +40,8 @@ export default function OthersLeadForm({
   const [phoneDigits, setPhoneDigits] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState("");
 
   const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { masked, digits } = applyPhoneMask(e.target.value, phoneDigits);
@@ -46,26 +50,35 @@ export default function OthersLeadForm({
     if (phoneError) setPhoneError(validatePhone(masked));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (sending) return;
     const err = validatePhone(form.phone);
     if (err) { setPhoneError(err); return; }
 
-    fetch("https://functions.poehali.dev/261c487f-3a43-41db-9302-4b4ce0812db0", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: form.name,
-        phone: form.phone,
-        tariff,
-        promo: "",
-        source: `${tariff} (${channel})`,
-        marketing_consent: "нет",
-      }),
-    }).catch(() => {});
-
-    reachGoal(goal, { channel });
-    setSubmitted(true);
+    setSending(true);
+    setSendError("");
+    try {
+      const res = await fetch(SUBMIT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          phone: form.phone,
+          tariff,
+          promo: "",
+          source: `${tariff} (${channel}) — ${window.location.pathname}`,
+          marketing_consent: "нет",
+        }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      reachGoal(goal, { channel });
+      setSubmitted(true);
+    } catch {
+      setSendError("Не получилось отправить заявку. Попробуйте ещё раз или позвоните нам: +7 903 193 27 25");
+    } finally {
+      setSending(false);
+    }
   };
 
   if (submitted) {
@@ -154,8 +167,19 @@ export default function OthersLeadForm({
         </span>
       </label>
 
-      <button type="submit" className="btn-cta w-full text-center block">
-        {buttonText}
+      {sendError && (
+        <p className="text-[13px] font-medium leading-snug" style={{ color: "#ED4463" }} role="alert">
+          {sendError}
+        </p>
+      )}
+
+      <button
+        type="submit"
+        disabled={sending}
+        className="btn-cta w-full text-center flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-wait"
+      >
+        {sending && <Icon name="Loader2" size={18} className="animate-spin" />}
+        {sending ? "Отправляем…" : buttonText}
       </button>
     </form>
   );

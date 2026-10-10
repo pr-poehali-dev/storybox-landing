@@ -35,6 +35,30 @@ def handler(event: dict, context) -> dict:
 
     errors = []
 
+    # --- Google Sheets ---
+    sheets_ok = True
+    try:
+        sa_json = json.loads(os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"])
+        creds = Credentials.from_service_account_info(sa_json, scopes=[
+            "https://www.googleapis.com/auth/spreadsheets"
+        ])
+        gc = gspread.authorize(creds)
+
+        sheet_id = "1BmzOi5inb9G7mWW5B5-kABWPHBXvGq2JDezCMA1o_gA"
+        sh = gc.open_by_key(sheet_id)
+        ws = sh.sheet1
+
+        if not ws.row_values(1):
+            ws.append_row(["Дата", "Имя", "Телефон", "Тариф", "Промокод", "Источник", "Согласие на рассылку"])
+
+        ws.append_row([date_str, name, phone, tariff, promo, source, marketing_consent])
+        print("[SHEETS] OK — строка добавлена")
+    except Exception as e:
+        print(f"[SHEETS] Error: {e}")
+        errors.append(f"SHEETS: {e}")
+        sheets_ok = False
+
+
     # --- Telegram ---
     try:
         tg_token = os.environ["TELEGRAM_BOT_TOKEN"].strip()
@@ -64,7 +88,7 @@ def handler(event: dict, context) -> dict:
             headers={"Content-Type": "application/json"},
             method="POST"
         )
-        tg_resp = urllib.request.urlopen(tg_req, timeout=10)
+        tg_resp = urllib.request.urlopen(tg_req, timeout=4)
         print(f"[TG] OK: {tg_resp.read().decode()}")
     except urllib.error.HTTPError as e:
         err_body = e.read().decode()
@@ -74,26 +98,12 @@ def handler(event: dict, context) -> dict:
         print(f"[TG] Error: {e}")
         errors.append(f"TG: {e}")
 
-    # --- Google Sheets ---
-    try:
-        sa_json = json.loads(os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"])
-        creds = Credentials.from_service_account_info(sa_json, scopes=[
-            "https://www.googleapis.com/auth/spreadsheets"
-        ])
-        gc = gspread.authorize(creds)
-
-        sheet_id = "1BmzOi5inb9G7mWW5B5-kABWPHBXvGq2JDezCMA1o_gA"
-        sh = gc.open_by_key(sheet_id)
-        ws = sh.sheet1
-
-        if not ws.row_values(1):
-            ws.append_row(["Дата", "Имя", "Телефон", "Тариф", "Промокод", "Источник", "Согласие на рассылку"])
-
-        ws.append_row([date_str, name, phone, tariff, promo, source, marketing_consent])
-        print("[SHEETS] OK — строка добавлена")
-    except Exception as e:
-        print(f"[SHEETS] Error: {e}")
-        errors.append(f"SHEETS: {e}")
+    if not sheets_ok:
+        return {
+            "statusCode": 502,
+            "headers": cors_headers,
+            "body": json.dumps({"ok": False, "error": "Не удалось сохранить заявку", "errors": errors})
+        }
 
     return {
         "statusCode": 200,
