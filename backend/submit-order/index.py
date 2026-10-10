@@ -63,6 +63,7 @@ def handler(event: dict, context) -> dict:
     try:
         tg_token = os.environ["TELEGRAM_BOT_TOKEN"].strip()
         tg_chat = os.environ["TELEGRAM_CHAT_ID"].strip()
+        tg_base = (os.environ.get("TELEGRAM_API_URL") or "https://api.telegram.org").strip().rstrip("/")
 
         promo_line = f"\n🎟 Промокод: <b>{promo}</b>" if promo else ""
         marketing_line = f"\n📬 Рассылка: <b>{marketing_consent}</b>"
@@ -83,9 +84,9 @@ def handler(event: dict, context) -> dict:
         }).encode("utf-8")
 
         tg_req = urllib.request.Request(
-            f"https://api.telegram.org/bot{tg_token}/sendMessage",
+            f"{tg_base}/bot{tg_token}/sendMessage",
             data=tg_payload,
-            headers={"Content-Type": "application/json"},
+            headers={"Content-Type": "application/json", "User-Agent": "StoryBox-Lead/1.0"},
             method="POST"
         )
         tg_resp = urllib.request.urlopen(tg_req, timeout=4)
