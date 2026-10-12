@@ -42,7 +42,7 @@ export const PROCESS_STEPS = [
     n: "4",
     title: "Печать и доставка",
     desc: "Бережно превращаем рассказы в текст, дополняем фотографиями, печатаем книгу и доставляем вам. Остаётся лишь вручить её.",
-    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/fa2fe1f4-2f56-4e34-94ac-d8a717507663.jpeg",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/0c32bf04-73e7-411e-b645-d500e1a49f46.jpeg",
   },
 ];
 
