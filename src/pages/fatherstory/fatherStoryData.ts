@@ -35,7 +35,7 @@ export const CERT_STEPS = [
   {
     n: "4",
     icon: "Mic",
-    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/896f70f3-1fc1-4db1-870e-8100d2d591bb.jpg",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/3a10b345-a6b2-4018-a869-4be5de7ac54c.jpg",
     title: "Папа рассказывает",
     desc: "Несколько неспешных встреч с нашим интервьюером — по видеосвязи или лично. Затем пишем текст, добавляем фото и печатаем книгу.",
   },
