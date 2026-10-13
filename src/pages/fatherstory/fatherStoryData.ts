@@ -58,7 +58,7 @@ export const SPREADS = [
     topic: "Как я встретил вашу маму и как появились вы",
   },
   {
-    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/cf1218da-977f-455d-b2d4-a224e03a0817.jpg",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/ea3be801-a80d-43b5-a58b-18509cb5c2ce.jpeg",
     role: "Опыт",
     topic: "Что я понял о жизни и хочу передать вам",
   },
