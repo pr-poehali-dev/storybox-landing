@@ -21,7 +21,7 @@ export const CERT_STEPS = [
   {
     n: "2",
     icon: "Mail",
-    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/11fb184e-54e9-4255-8c49-f8567243230d.jpeg",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/0d7f6791-ced1-40c7-b238-492bb863af46.jpeg",
     title: "Получаете сертификат",
     desc: "Красиво оформленный сертификат с именем папы — готовый к вручению в праздник.",
   },
