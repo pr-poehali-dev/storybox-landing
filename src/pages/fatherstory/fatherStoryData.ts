@@ -43,7 +43,7 @@ export const CERT_STEPS = [
 
 export const SPREADS = [
   {
-    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/82a9caf5-01ca-4836-81e4-0d300c388583.jpg",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/f58430b9-df47-4070-b9a5-1ba4097b6f65.jpg",
     role: "Детство",
     topic: "Двор, в котором я вырос, и мои родители",
   },
