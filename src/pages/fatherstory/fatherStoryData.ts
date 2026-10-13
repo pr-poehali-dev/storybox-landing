@@ -14,7 +14,7 @@ export const CERT_STEPS = [
   {
     n: "1",
     icon: "PenLine",
-    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/e2c73539-9814-48d3-9db2-388155a24f69.jpg",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/647faf47-adcd-4fb0-a188-db19e1884064.jpeg",
     title: "Оставляете заявку",
     desc: "Свяжемся с вами, расскажем, как всё проходит, и рассчитаем стоимость.",
   },
