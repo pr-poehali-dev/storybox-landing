@@ -195,12 +195,6 @@ export default function FatherStoryView() {
                     loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-500 md:group-hover:scale-105"
                   />
-                  <span
-                    className="absolute top-3 left-3 w-9 h-9 rounded-full flex items-center justify-center text-[15px] font-bold text-white"
-                    style={{ background: "#00A4E3", boxShadow: "0 4px 12px rgba(0,164,227,0.35)" }}
-                  >
-                    {s.n}
-                  </span>
                 </div>
                 <div className="px-3 pt-5 pb-4 flex-1 flex flex-col">
                   <p className="text-[12px] font-bold uppercase tracking-widest mb-2" style={{ color: "#ED4463" }}>
