@@ -48,7 +48,7 @@ export const SPREADS = [
     topic: "Двор, в котором я вырос, и мои родители",
   },
   {
-    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/d6798082-587e-456f-a23b-688f317adadc.jpg",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/4991557a-f976-4f21-9c00-302d23cbaf8c.jpg",
     role: "Молодость",
     topic: "Учёба, армия, первая работа и лучшие друзья",
   },
