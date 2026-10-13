@@ -28,7 +28,7 @@ export const CERT_STEPS = [
   {
     n: "3",
     icon: "Heart",
-    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/0c84c1d4-6a60-4ca2-b2f4-822c4d8144fb.jpg",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/8f240811-2bd4-4f61-b717-d427e8eaa1e6.jpg",
     title: "Дарите 18 октября",
     desc: "Папа получает приглашение рассказать свою историю — в удобное для него время.",
   },
