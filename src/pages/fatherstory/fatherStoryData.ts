@@ -53,7 +53,7 @@ export const SPREADS = [
     topic: "Учёба, армия, первая работа и лучшие друзья",
   },
   {
-    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/e8d35ffa-2711-461d-b76f-434c95f4d032.jpg",
+    img: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/26a72baa-5083-45dd-a271-2d926907b567.jpeg",
     role: "Семья",
     topic: "Как я встретил вашу маму и как появились вы",
   },
