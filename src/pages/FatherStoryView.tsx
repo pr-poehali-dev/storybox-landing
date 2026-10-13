@@ -104,7 +104,7 @@ export default function FatherStoryView() {
             </ul>
 
             <div className="md:hidden rounded-3xl overflow-hidden mb-6" style={{ aspectRatio: "4/3" }}>
-              <img src={HERO_IMG} alt="Папа рассказывает историю своей жизни" className="w-full h-full object-cover block" />
+              <img src={HERO_IMG} alt="Папа рассказывает историю своей жизни" className="w-full h-full object-cover block" style={{ objectPosition: "center 40%" }} />
             </div>
 
             <OthersLeadForm formId="fd-hero-form" {...FORM_PROPS} />
