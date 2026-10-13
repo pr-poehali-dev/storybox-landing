@@ -104,7 +104,7 @@ export default function FatherStoryView() {
             </ul>
 
             <div className="md:hidden rounded-3xl overflow-hidden mb-6" style={{ aspectRatio: "4/3" }}>
-              <img src={HERO_IMG} alt="Папа рассказывает историю своей жизни" className="w-full h-full object-cover block" style={{ objectPosition: "center 40%" }} />
+              <img src={HERO_IMG} alt="Папа рассказывает историю своей жизни" className="w-full h-full object-cover block" style={{ objectPosition: "center 48%" }} />
             </div>
 
             <OthersLeadForm formId="fd-hero-form" {...FORM_PROPS} />
@@ -115,7 +115,7 @@ export default function FatherStoryView() {
               <img src={HERO_IMG} alt="Папа рассказывает историю своей жизни" className="w-full h-full object-cover block" />
             </div>
             <div
-              className="absolute left-6 right-6 bottom-6 lg:left-8 lg:right-auto lg:bottom-8 bg-white/95 backdrop-blur rounded-2xl px-5 py-4 flex items-center gap-4 max-w-[380px]"
+              className="absolute left-6 right-6 bottom-6 lg:left-auto lg:right-8 lg:bottom-8 bg-white/95 backdrop-blur rounded-2xl px-5 py-4 flex items-center gap-4 max-w-[380px]"
               style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.12)" }}
             >
               <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "rgba(237,68,99,0.1)", color: "#ED4463" }}>

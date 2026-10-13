@@ -1,6 +1,6 @@
 export const FATHER_DAY_DATE = new Date(2026, 9, 18);
 
-export const HERO_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/5491070f-7def-45f5-8555-8323681a2922.jpg";
+export const HERO_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/a5e4c52b-158a-44fb-bee0-3636e723f9a1.jpg";
 export const GIFT_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/cc16742f-6c8e-4833-ac07-88b40abd21d5.jpg";
 export const CERT_IMG = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/bucket/291d5a8b-c4f4-4134-90e9-92ab9ef5f1de.png";
 
