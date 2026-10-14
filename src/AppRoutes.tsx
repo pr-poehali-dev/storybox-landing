@@ -13,11 +13,13 @@ import PublicOffer from "./pages/legal/PublicOffer";
 import MarketingConsent from "./pages/legal/MarketingConsent";
 
 import SeoHead from "./seo/SeoHead";
+import VkAdsTracker from "./components/VkAdsTracker";
 
 export default function AppRoutes() {
   return (
     <>
       <SeoHead />
+      <VkAdsTracker />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/parents" element={<ParentsIndex />} />
