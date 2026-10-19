@@ -1,7 +1,8 @@
 import { useState } from "react";
 import OthersLeadForm from "@/pages/others/OthersLeadForm";
-import PriceCalculator from "./PriceCalculator";
-import { leadFormProps } from "./leadFormProps";
+import TierCalculator from "./TierCalculator";
+import { tierLeadFormProps } from "./leadFormProps";
+import { BookTier } from "./priceCalc";
 
 interface PriceSectionProps {
   hours: number;
@@ -11,35 +12,26 @@ interface PriceSectionProps {
 const FORM_ID = "price-lead-form";
 
 export default function PriceSection({ hours, setHours }: PriceSectionProps) {
-  const [isGift, setIsGift] = useState(false);
+  const [tier, setTier] = useState<BookTier>("premium");
 
   const scrollToForm = () => {
     document.getElementById(FORM_ID)?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
-  const form = leadFormProps(hours, isGift);
+  const form = tierLeadFormProps(hours, tier);
 
   return (
     <section id="tariffs" className="py-12 md:py-20" style={{ background: "#fff" }}>
       <div className="max-w-5xl mx-auto px-4 md:px-6">
         <div className="text-center mb-8 md:mb-10">
-          <h2 className="text-[24px] md:text-[40px] font-bold text-black mb-3">
-            {isGift ? "Рассчитайте сумму подарка" : "Рассчитайте стоимость книги"}
-          </h2>
+          <h2 className="text-[24px] md:text-[40px] font-bold text-black mb-3">Рассчитайте стоимость книги</h2>
           <p className="text-[15px] md:text-[17px] text-[#666] max-w-2xl mx-auto">
-            {isGift
-              ? "Выберите, сколько часов интервью подарить: от 3 до 25. Мы пришлём именной сертификат, а получатель сам выберет удобное время."
-              : "Цена зависит только от того, сколько часов интервью вы выберете: от 3 до 25. Чем больше часов, тем дешевле каждый час."}
+            Выберите вариант оформления и сколько часов интервью вам нужно: от 3 до 25. Истории и работа биографа
+            одинаковые, отличаются бумага, вёрстка и дизайн.
           </p>
         </div>
 
-        <PriceCalculator
-          hours={hours}
-          setHours={setHours}
-          isGift={isGift}
-          setIsGift={setIsGift}
-          onOrder={scrollToForm}
-        />
+        <TierCalculator hours={hours} setHours={setHours} tier={tier} setTier={setTier} onOrder={scrollToForm} />
 
         <div className="max-w-xl mx-auto mt-10 md:mt-14">
           <OthersLeadForm formId={FORM_ID} {...form} />

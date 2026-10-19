@@ -37,6 +37,42 @@ export function calcPrice(hours: number) {
   return { hours: h, total, perHour, savingPercent, pages, photos };
 }
 
+export type BookTier = "premium" | "standard";
+
+const STANDARD_POINTS: [number, number][] = [
+  [3, 36685],
+  [5, 40494],
+  [8, 66799],
+];
+
+export function calcStandardPrice(hours: number) {
+  const h = Math.min(MAX_HOURS, Math.max(MIN_HOURS, Math.round(hours)));
+  const exact = STANDARD_POINTS.find(([ph]) => ph === h);
+  const total = exact ? exact[1] : h > 8 ? 66799 : Math.round(interpolate(STANDARD_POINTS, h));
+  const perHour = Math.round(total / h);
+  const pages = h * 30;
+  return { hours: h, total, perHour, pages };
+}
+
+export function calcTierPrice(hours: number, tier: BookTier) {
+  return tier === "premium" ? calcPrice(hours) : { ...calcPrice(hours), ...calcStandardPrice(hours), savingPercent: 0 };
+}
+
+export const BOOK_CONTENT = (h: number) => {
+  const list = ["Интервью с биографом и запись историй", "Генеалогическое древо", "Печатная книга"];
+  if (h >= 5) list.push("Реставрация фото", "Аудио-архив интервью", "Электронная версия книги");
+  if (h >= 8) list.push("Несколько героев и рассказчиков в одной книге");
+  if (h >= 15) list.push("Полная семейная хроника — несколько поколений");
+  return list;
+};
+
+export const TIER_DIFF: { icon: string; label: string; premium: string; standard: string }[] = [
+  { icon: "ScrollText", label: "Бумага", premium: "Плотная, приятная на ощупь, с эффектом «под старину»", standard: "Обычная бумага для печати" },
+  { icon: "PenLine", label: "Вёрстка и редактура", premium: "Авторская: текст удобно и приятно читать", standard: "Простая вёрстка без излишеств" },
+  { icon: "Palette", label: "Оформление страниц", premium: "Дизайнерские решения на каждом развороте", standard: "Без дизайнерского оформления" },
+  { icon: "BookMarked", label: "Обложка", premium: "Дизайнерская, твёрдый переплёт", standard: "Простая одноцветная" },
+];
+
 export function formatRub(n: number) {
   return n.toLocaleString("ru-RU").replace(/,/g, " ") + " ₽";
 }

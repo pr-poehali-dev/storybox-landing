@@ -1,4 +1,18 @@
-import { calcPrice, formatRub, hoursLabel } from "./priceCalc";
+import { BookTier, calcPrice, calcTierPrice, formatRub, hoursLabel } from "./priceCalc";
+
+export function tierLeadFormProps(hours: number, tier: BookTier, source = "Калькулятор") {
+  const p = calcTierPrice(hours, tier);
+  const name = tier === "premium" ? "Premium" : "Стандарт";
+  return {
+    title: "Обсудим вашу книгу",
+    subtitle: `Вы выбрали книгу «${name}», ${hoursLabel(p.hours)} — ${formatRub(p.total)}. Свяжемся, ответим на вопросы и поможем подобрать объём.`,
+    buttonText: "Оставить заявку",
+    tariff: `${source}, ${name}: ${hoursLabel(p.hours)}, ${formatRub(p.total)}`,
+    goal: "calc_lead_submit",
+    successTitle: "Спасибо, заявка у нас",
+    successText: "ответим на вопросы и уточним детали книги.",
+  };
+}
 
 export function leadFormProps(hours: number, isGift: boolean, source = "Калькулятор") {
   const p = calcPrice(hours);
