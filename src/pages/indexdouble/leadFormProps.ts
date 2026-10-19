@@ -1,8 +1,19 @@
 import { BookTier, calcPrice, calcTierPrice, formatRub, hoursLabel } from "./priceCalc";
 
-export function tierLeadFormProps(hours: number, tier: BookTier, source = "Калькулятор") {
+export function tierLeadFormProps(hours: number, tier: BookTier, isGift = false, source = "Калькулятор") {
   const p = calcTierPrice(hours, tier);
   const name = tier === "premium" ? "Premium" : "Стандарт";
+  if (isGift) {
+    return {
+      title: "Оформим подарочный сертификат",
+      subtitle: `Сертификат на книгу «${name}», ${hoursLabel(p.hours)} интервью — ${formatRub(p.total)}. Свяжемся, уточним имя получателя и пришлём сертификат, готовый к вручению.`,
+      buttonText: "Оформить сертификат",
+      tariff: `${source}, в подарок, ${name}: ${hoursLabel(p.hours)}, ${formatRub(p.total)}`,
+      goal: "calc_gift_lead_submit",
+      successTitle: "Спасибо, скоро будет подарок",
+      successText: "уточним имя получателя и пришлём сертификат.",
+    };
+  }
   return {
     title: "Обсудим вашу книгу",
     subtitle: `Вы выбрали книгу «${name}», ${hoursLabel(p.hours)} — ${formatRub(p.total)}. Свяжемся, ответим на вопросы и поможем подобрать объём.`,

@@ -13,12 +13,13 @@ const FORM_ID = "price-lead-form";
 
 export default function PriceSection({ hours, setHours }: PriceSectionProps) {
   const [tier, setTier] = useState<BookTier>("premium");
+  const [isGift, setIsGift] = useState(false);
 
   const scrollToForm = () => {
     document.getElementById(FORM_ID)?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
-  const form = tierLeadFormProps(hours, tier);
+  const form = tierLeadFormProps(hours, tier, isGift);
 
   return (
     <section id="tariffs" className="py-12 md:py-20" style={{ background: "#fff" }}>
@@ -31,7 +32,7 @@ export default function PriceSection({ hours, setHours }: PriceSectionProps) {
           </p>
         </div>
 
-        <TierCalculator hours={hours} setHours={setHours} tier={tier} setTier={setTier} onOrder={scrollToForm} />
+        <TierCalculator hours={hours} setHours={setHours} tier={tier} setTier={setTier} isGift={isGift} setIsGift={setIsGift} onOrder={scrollToForm} />
 
         <div className="max-w-xl mx-auto mt-10 md:mt-14">
           <OthersLeadForm formId={FORM_ID} {...form} />

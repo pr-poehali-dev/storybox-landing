@@ -3,11 +3,12 @@ import { formatRub, hoursLabel } from "./priceCalc";
 interface GiftCertificateProps {
   hours: number;
   total: number;
+  tierName?: string;
 }
 
 const LOGO = "https://static.tildacdn.one/tild3937-3830-4361-a239-323264653433/_2023-11-07_12181908.png";
 
-export default function GiftCertificate({ hours, total }: GiftCertificateProps) {
+export default function GiftCertificate({ hours, total, tierName }: GiftCertificateProps) {
   return (
     <div
       className="relative w-full overflow-hidden rounded-2xl bg-white border border-[#EEF1F4]"
@@ -31,7 +32,9 @@ export default function GiftCertificate({ hours, total }: GiftCertificateProps) 
             Подарочный<br className="sm:hidden" /> <span className="font-normal">сертификат</span>
           </p>
           <p className="text-[#7A7A7A] mt-1.5 leading-snug" style={{ fontSize: "clamp(9px, 2.2cqw, 12px)" }}>
-            На книгу воспоминаний с интервью, фотографиями и твёрдым переплётом
+            {tierName
+              ? <>На книгу воспоминаний <b className="text-black">«{tierName}»</b> с интервью и фотографиями</>
+              : "На книгу воспоминаний с интервью, фотографиями и твёрдым переплётом"}
           </p>
           <div className="flex items-center gap-2 mt-[5%]">
             <span className="w-3 h-3 rounded-full rounded-bl-none flex-shrink-0 rotate-45" style={{ background: "#ED4463" }} />

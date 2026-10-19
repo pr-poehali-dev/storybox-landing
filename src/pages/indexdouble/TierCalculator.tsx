@@ -3,20 +3,28 @@ import { reachGoal } from "@/utils/metrika";
 import HoursSlider from "./HoursSlider";
 import TierToggle from "./TierToggle";
 import TierCompare from "./TierCompare";
-import { BOOK_CONTENT, BookTier, calcTierPrice, formatRub, hoursLabel } from "./priceCalc";
+import GiftCertificate from "./GiftCertificate";
+import { BOOK_CONTENT, BookTier, GIFT_POINTS, calcTierPrice, formatRub, hoursLabel } from "./priceCalc";
 
 interface TierCalculatorProps {
   hours: number;
   setHours: (h: number) => void;
   tier: BookTier;
   setTier: (t: BookTier) => void;
+  isGift: boolean;
+  setIsGift: (v: boolean) => void;
   onOrder: () => void;
 }
 
 const BLUE = "#00A4E3";
 const GREY = "#4A5560";
+const PINK = "#ED4463";
 
-export default function TierCalculator({ hours, setHours, tier, setTier, onOrder }: TierCalculatorProps) {
+export default function TierCalculator({ hours, setHours, tier, setTier, isGift, setIsGift, onOrder }: TierCalculatorProps) {
+  const toggleGift = () => {
+    setIsGift(!isGift);
+    reachGoal("calc_mode_switch", { mode: !isGift ? "gift" : "self", tier });
+  };
   const isPremium = tier === "premium";
   const accent = isPremium ? BLUE : GREY;
   const p = calcTierPrice(hours, tier);
@@ -93,7 +101,8 @@ export default function TierCalculator({ hours, setHours, tier, setTier, onOrder
             onClick={onOrder}
             className="btn-cta w-full text-center mt-6 whitespace-nowrap flex items-center justify-center gap-2"
           >
-            Обсудить книгу
+            {isGift && <Icon name="Gift" size={18} />}
+            {isGift ? "Оформить сертификат" : "Обсудить книгу"}
           </button>
         </div>
 
@@ -123,6 +132,47 @@ export default function TierCalculator({ hours, setHours, tier, setTier, onOrder
             </p>
           </div>
         </div>
+      </div>
+
+      <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t border-[#F0F0F0]">
+        <label
+          className="flex items-center gap-3 cursor-pointer select-none rounded-2xl px-4 py-3.5 transition-colors"
+          style={{ background: isGift ? "#FFF5F7" : "#F7F8F9", boxShadow: isGift ? `inset 0 0 0 2px ${PINK}` : "none" }}
+        >
+          <input type="checkbox" checked={isGift} onChange={toggleGift} className="sr-only" />
+          <span
+            className="w-6 h-6 rounded-md flex-shrink-0 flex items-center justify-center transition-colors"
+            style={{ border: `2px solid ${isGift ? PINK : "#BFC6CC"}`, background: isGift ? PINK : "#fff" }}
+          >
+            {isGift && <Icon name="Check" size={15} className="text-white" />}
+          </span>
+          <Icon name="Gift" size={20} className="flex-shrink-0" style={{ color: PINK }} />
+          <span>
+            <span className="block text-[15px] md:text-[16px] font-bold text-black">Оформить как подарок</span>
+            <span className="block text-[13px] text-[#7A7A7A] leading-snug">
+              Пришлём именной сертификат — получатель сам выберет время интервью
+            </span>
+          </span>
+        </label>
+
+        {isGift && (
+          <div className="grid md:grid-cols-[1.1fr_1fr] gap-6 md:gap-10 mt-6 items-center">
+            <GiftCertificate hours={p.hours} total={p.total} tierName={isPremium ? "Premium" : "Стандарт"} />
+            <ul className="space-y-2.5">
+              {GIFT_POINTS.map((g) => (
+                <li key={g.text} className="flex items-start gap-2.5 text-[14px] text-[#444]">
+                  <span
+                    className="mt-0.5 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center"
+                    style={{ background: "rgba(237,68,99,0.12)", color: PINK }}
+                  >
+                    <Icon name={g.icon} size={13} fallback="Check" />
+                  </span>
+                  {g.text}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
