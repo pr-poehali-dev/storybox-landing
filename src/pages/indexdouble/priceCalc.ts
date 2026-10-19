@@ -48,7 +48,12 @@ const STANDARD_POINTS: [number, number][] = [
 export function calcStandardPrice(hours: number) {
   const h = Math.min(MAX_HOURS, Math.max(MIN_HOURS, Math.round(hours)));
   const exact = STANDARD_POINTS.find(([ph]) => ph === h);
-  const total = exact ? exact[1] : h > 8 ? 66799 : Math.round(interpolate(STANDARD_POINTS, h));
+  const ratio8 = 66799 / calcPrice(8).total;
+  const total = exact
+    ? exact[1]
+    : h > 8
+      ? Math.round((calcPrice(h).total * ratio8) / 10) * 10 - 1
+      : Math.round(interpolate(STANDARD_POINTS, h));
   const perHour = Math.round(total / h);
   const pages = h * 30;
   return { hours: h, total, perHour, pages };

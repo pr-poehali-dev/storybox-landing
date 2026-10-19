@@ -112,8 +112,9 @@ export default function TierCalculator({ hours, setHours, tier, setTier, onOrder
                 </>
               ) : (
                 <>
-                  За {formatRub(diff)} больше — Premium: особая бумага «под старину», авторская вёрстка и дизайнерская обложка.
-                  Такую книгу хочется передавать детям.{" "}
+                  Хотите книгу, которая станет семейной реликвией? Premium на {hoursLabel(p.hours)} стоит{" "}
+                  <b className="text-black">{formatRub(other.total)}</b> — это на {formatRub(diff)} дороже. За эту разницу: особая
+                  бумага «под старину», авторская вёрстка и дизайнерская обложка.{" "}
                   <button type="button" onClick={() => changeTier("premium")} className="font-semibold underline" style={{ color: BLUE }}>
                     Выбрать Premium
                   </button>

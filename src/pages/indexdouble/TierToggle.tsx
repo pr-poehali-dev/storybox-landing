@@ -13,7 +13,7 @@ const STANDARD_COLOR = "#4A5560";
 export default function TierToggle({ tier, hours, onChange, premiumColor }: TierToggleProps) {
   const options: { key: BookTier; title: string; hint: string; color: string; badge?: string }[] = [
     { key: "standard", title: "Стандарт", hint: "Простая вёрстка и обложка", color: STANDARD_COLOR },
-    { key: "premium", title: "Premium", hint: "Дизайн, особая бумага, авторская вёрстка", color: premiumColor, badge: "Выбирают чаще" },
+    { key: "premium", title: "Premium", hint: "Дизайн, особая бумага, авторская вёрстка", color: premiumColor, badge: "Идеально для подарка" },
   ];
 
   return (
