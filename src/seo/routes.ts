@@ -3,6 +3,8 @@ import { FAQ_ITEMS as OTHERS_FAQ } from "@/pages/others/othersData";
 import { FAQ_ITEMS as CHILDREN_FAQ } from "@/pages/forchildren/forChildrenData";
 import { FAQ_ITEMS as FATHER_DAY_FAQ } from "@/pages/fatherday/fatherDayData";
 import { FAQ_ITEMS as FATHER_STORY_FAQ } from "@/pages/fatherstory/fatherStoryData";
+import { FAQ_ITEMS as MOTHER_DAY_FAQ } from "@/pages/motherday/motherDayData";
+import { FAQ_ITEMS as MOTHER_STORY_FAQ } from "@/pages/motherstory/motherStoryData";
 
 export const SITE_URL = "https://books.mystorybox.ru";
 
@@ -75,6 +77,20 @@ export const ROUTES_SEO: RouteSeo[] = [
     description: "Сертификат на книгу, в которой папа сам рассказывает о своей жизни и опыте — для детей, родных и будущих внуков. Интервью, фотографии, твёрдый переплёт.",
     image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/039e1c38-0db7-4198-b98c-8a754185909b.jpg",
     faq: FATHER_STORY_FAQ,
+  },
+  {
+    path: "/den-materi",
+    title: "Подарок маме на День матери 29 ноября — книга о ней от близких | StoryBox",
+    description: "Подарочный сертификат на книгу о маме: родные и друзья расскажут истории о ней, мы добавим фотографии и напечатаем книгу. Сертификат — сразу, к празднику.",
+    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/2a1ae9e2-22c1-4edf-ae1b-959d4d70ca21.jpg",
+    faq: MOTHER_DAY_FAQ,
+  },
+  {
+    path: "/den-materi-istoriya",
+    title: "Подарок маме на День матери — книга её воспоминаний | StoryBox",
+    description: "Сертификат на книгу, в которой мама сама рассказывает о своей жизни и опыте — для детей, родных и будущих внуков. Интервью, фотографии, твёрдый переплёт.",
+    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/ec2cbbbe-b85f-48f5-b062-e6e6f5406d89.jpg",
+    faq: MOTHER_STORY_FAQ,
   },
   { path: "/legal/privacy", title: "Политика обработки персональных данных — StoryBox", description: "Политика обработки персональных данных сервиса StoryBox.", index: false },
   { path: "/legal/data-consent", title: "Согласие на обработку персональных данных — StoryBox", description: "Согласие на обработку персональных данных StoryBox.", index: false },

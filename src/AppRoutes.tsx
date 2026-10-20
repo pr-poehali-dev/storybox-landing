@@ -7,6 +7,8 @@ import OthersView from "./pages/OthersView";
 import FatherDayView from "./pages/FatherDayView";
 import ForChildrenView from "./pages/ForChildrenView";
 import FatherStoryView from "./pages/FatherStoryView";
+import MotherDayView from "./pages/MotherDayView";
+import MotherStoryView from "./pages/MotherStoryView";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import DataConsent from "./pages/legal/DataConsent";
@@ -30,6 +32,8 @@ export default function AppRoutes() {
         <Route path="/for_children" element={<ForChildrenView />} />
         <Route path="/den-otca" element={<FatherDayView />} />
         <Route path="/den-otca-istoriya" element={<FatherStoryView />} />
+        <Route path="/den-materi" element={<MotherDayView />} />
+        <Route path="/den-materi-istoriya" element={<MotherStoryView />} />
         <Route path="/legal/privacy" element={<PrivacyPolicy />} />
         <Route path="/legal/data-consent" element={<DataConsent />} />
         <Route path="/legal/offer" element={<PublicOffer />} />
