@@ -5,6 +5,7 @@ import IndexDouble from "./pages/IndexDouble";
 import PromoNew from "./pages/PromoNew";
 import OthersView from "./pages/OthersView";
 import FatherDayView from "./pages/FatherDayView";
+import ForChildrenView from "./pages/ForChildrenView";
 import FatherStoryView from "./pages/FatherStoryView";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
@@ -26,6 +27,7 @@ export default function AppRoutes() {
         <Route path="/index_double" element={<IndexDouble />} />
         <Route path="/new" element={<PromoNew />} />
         <Route path="/others" element={<OthersView />} />
+        <Route path="/for_children" element={<ForChildrenView />} />
         <Route path="/den-otca" element={<FatherDayView />} />
         <Route path="/den-otca-istoriya" element={<FatherStoryView />} />
         <Route path="/legal/privacy" element={<PrivacyPolicy />} />

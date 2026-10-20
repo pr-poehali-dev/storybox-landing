@@ -1,5 +1,6 @@
 import { FAQ_ITEMS as HOME_FAQ, TARIFFS } from "@/pages/data";
 import { FAQ_ITEMS as OTHERS_FAQ } from "@/pages/others/othersData";
+import { FAQ_ITEMS as CHILDREN_FAQ } from "@/pages/forchildren/forChildrenData";
 import { FAQ_ITEMS as FATHER_DAY_FAQ } from "@/pages/fatherday/fatherDayData";
 import { FAQ_ITEMS as FATHER_STORY_FAQ } from "@/pages/fatherstory/fatherStoryData";
 
@@ -53,6 +54,13 @@ export const ROUTES_SEO: RouteSeo[] = [
     description: "Поговорим с друзьями и родными героя, соберём трогательные, смешные и неожиданные истории с фотографиями и превратим их в книгу в твёрдом переплёте.",
     image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/1cdc8773-bd6e-414c-a803-f7fba61d2f93.jpg",
     faq: OTHERS_FAQ,
+  },
+  {
+    path: "/for_children",
+    title: "Фильм о вашем ребёнке — видеоинтервью с детьми на годы | StoryBox",
+    description: "Снимаем документальный фильм или цикл видеоинтервью с ребёнком, как в «Рождённых в СССР»: мечты, страхи и взросление — на память для всей семьи.",
+    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/b5f92f8f-d3f5-46a2-83e1-84469719b989.jpg",
+    faq: CHILDREN_FAQ,
   },
   {
     path: "/den-otca",
