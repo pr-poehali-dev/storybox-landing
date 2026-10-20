@@ -85,8 +85,7 @@ export const TARIFFS = [
     fullName: "Электронная книга",
     duration: "3 часа интервью",
     priceOld: "",
-    // ВРЕМЕННО для теста Robokassa, вернуть "25 950 ₽"
-    price: "10 ₽",
+    price: "25 950 ₽",
     discount: 0,
     tag: null as string | null,
     color: "#00A4E3",
