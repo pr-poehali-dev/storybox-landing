@@ -57,20 +57,20 @@ def send_telegram(order_number, user_name, user_email, user_phone, amount, items
         "parse_mode": "HTML"
     }).encode("utf-8")
 
+    tg_base = (os.environ.get('TELEGRAM_API_URL') or '').strip().rstrip('/') or "https://api.telegram.org"
     req = urllib.request.Request(
-        f"https://api.telegram.org/bot{tg_token}/sendMessage",
+        f"{tg_base}/bot{tg_token}/sendMessage",
         data=payload,
         headers={"Content-Type": "application/json"},
         method="POST"
     )
-    for attempt in range(3):
-        try:
-            resp = urllib.request.urlopen(req, timeout=5)
-            print(f"[TG] OK: {resp.read().decode()}")
-            return
-        except Exception as e:
-            print(f"[TG] Attempt {attempt+1} error: {e}")
-    print("[TG] All attempts failed")
+    try:
+        resp = urllib.request.urlopen(req, timeout=10)
+        print(f"[TG] OK: {resp.read().decode()}")
+    except urllib.error.HTTPError as e:
+        print(f"[TG] HTTPError {e.code}: {e.read().decode()}")
+    except Exception as e:
+        print(f"[TG] Error: {e}")
 
 
 def send_google_sheets(order_number, user_name, user_email, user_phone, amount, items_names, date_str, marketing_consent="нет"):

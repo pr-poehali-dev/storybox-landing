@@ -63,7 +63,7 @@ def handler(event: dict, context) -> dict:
     try:
         tg_token = os.environ["TELEGRAM_BOT_TOKEN"].strip()
         tg_chat = os.environ["TELEGRAM_CHAT_ID"].strip()
-        tg_base = (os.environ.get("TELEGRAM_API_URL") or "https://api.telegram.org").strip().rstrip("/")
+        tg_base = (os.environ.get("TELEGRAM_API_URL") or "").strip().rstrip("/") or "https://api.telegram.org"
 
         promo_line = f"\n🎟 Промокод: <b>{promo}</b>" if promo else ""
         marketing_line = f"\n📬 Рассылка: <b>{marketing_consent}</b>"
@@ -89,7 +89,7 @@ def handler(event: dict, context) -> dict:
             headers={"Content-Type": "application/json", "User-Agent": "StoryBox-Lead/1.0"},
             method="POST"
         )
-        tg_resp = urllib.request.urlopen(tg_req, timeout=4)
+        tg_resp = urllib.request.urlopen(tg_req, timeout=10)
         print(f"[TG] OK: {tg_resp.read().decode()}")
     except urllib.error.HTTPError as e:
         err_body = e.read().decode()
