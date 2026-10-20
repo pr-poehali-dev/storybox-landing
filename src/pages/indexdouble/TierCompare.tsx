@@ -7,19 +7,6 @@ interface TierCompareProps {
   premiumColor: string;
 }
 
-const PHOTOS: { key: BookTier; src: string; alt: string }[] = [
-  {
-    key: "standard",
-    src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/e7e1e33b-cb86-47f9-8bfa-4c04f98a1551.jpg",
-    alt: "Книга Стандарт: простая одноцветная обложка и обычная бумага",
-  },
-  {
-    key: "premium",
-    src: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/1e6b9cb3-8e56-4d44-935f-5bf196f1b68b.jpg",
-    alt: "Книга Premium: дизайнерская обложка и бумага «под старину»",
-  },
-];
-
 export default function TierCompare({ tier, onChange, premiumColor }: TierCompareProps) {
   const isPremium = tier === "premium";
 
@@ -27,28 +14,6 @@ export default function TierCompare({ tier, onChange, premiumColor }: TierCompar
     <div>
       <p className="text-[15px] font-bold text-black mb-3">Чем отличаются книги</p>
       <div className="rounded-2xl border border-[#EEF1F4] overflow-hidden">
-        <div className="grid grid-cols-2">
-          {PHOTOS.map((ph) => {
-            const active = tier === ph.key;
-            return (
-              <button
-                key={ph.key}
-                type="button"
-                onClick={() => onChange(ph.key)}
-                className="relative aspect-square overflow-hidden"
-                aria-label={ph.alt}
-              >
-                <img
-                  src={ph.src}
-                  alt={ph.alt}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-all duration-300"
-                  style={{ filter: active ? "none" : "grayscale(0.6)", opacity: active ? 1 : 0.6 }}
-                />
-              </button>
-            );
-          })}
-        </div>
         <div className="grid grid-cols-2 text-[12px] md:text-[13px] font-bold">
           <button
             type="button"
