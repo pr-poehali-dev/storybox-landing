@@ -445,7 +445,7 @@ export default function MotherDayView() {
               <Icon name="Clock" size={16} />
               {countdown}
             </p>
-            <h2 className={`${SECTION_TITLE} mb-3`}>Начните собирать истории о маме</h2>
+            <h2 className={`${SECTION_TITLE} mb-3`}>Сделайте уникальный и неповторимый подарок для своей мамы</h2>
             <p className={SECTION_TEXT}>
               Оставьте контакты — свяжемся, поможем выбрать книгу или фильм и рассчитаем стоимость.
             </p>
