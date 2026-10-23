@@ -206,7 +206,7 @@ export default function MotherDayView() {
           <div className="text-center mb-8 md:mb-12">
             <h2 className={`${SECTION_TITLE} mb-3`}>Два формата на выбор</h2>
             <p className={`${SECTION_TEXT} max-w-[640px] mx-auto`}>
-              В основе обоих — интервью с людьми, которые любят маму. Можно выбрать один или оба.
+              В основе обоих — интервью с людьми, которые любят маму. Можно выбрать один или оба — со скидкой 25%.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
@@ -324,6 +324,64 @@ export default function MotherDayView() {
             {VIDEOS.map((v) => (
               <VideoCard key={v.id} id={v.id} title={v.title} cover={v.cover} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5.1 КОМПЛЕКТ СО СКИДКОЙ */}
+      <section id="md-combo" className="pb-14 md:pb-20 scroll-mt-20">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div
+            className="relative overflow-hidden rounded-[32px] p-6 md:p-10 lg:p-14 grid lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-14 items-center"
+            style={{ background: "linear-gradient(135deg, #00A4E3 0%, #0077B6 100%)" }}
+          >
+            <div
+              className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full"
+              style={{ background: "rgba(255,255,255,0.08)" }}
+            />
+            <div className="relative text-white">
+              <span
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[14px] font-bold mb-5"
+                style={{ background: "#ED4463", boxShadow: "0 8px 24px rgba(237,68,99,0.4)" }}
+              >
+                <Icon name="BadgePercent" size={18} fallback="Percent" />
+                Скидка 25% на всё
+              </span>
+              <h2 className="text-[28px] md:text-[40px] font-bold leading-[1.15] tracking-tight mb-4">
+                Книга и фильм о маме в одном заказе
+              </h2>
+              <p className="text-[15px] md:text-[17px] leading-relaxed mb-7" style={{ color: "rgba(255,255,255,0.85)" }}>
+                Одни и те же интервью с близкими становятся сразу двумя подарками: книгой, которую можно взять в руки, и фильмом, где мама увидит и услышит каждого.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { icon: "BookOpen", text: "Книга в твёрдом переплёте на плотной бумаге" },
+                  { icon: "Clapperboard", text: "Фильм из видеоинтервью с родными и друзьями" },
+                  { icon: "BadgePercent", text: "Скидка 25% на весь заказ — и на книгу, и на фильм" },
+                ].map((b) => (
+                  <li key={b.text} className="flex items-start gap-3">
+                    <span
+                      className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: "rgba(255,255,255,0.15)" }}
+                    >
+                      <Icon name={b.icon} size={18} fallback="Check" />
+                    </span>
+                    <span className="text-[15px] md:text-[16px] leading-snug pt-1.5 font-semibold">{b.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="relative">
+              <OthersLeadForm
+                formId="md-combo-form"
+                {...FORM_PROPS}
+                title="Книга + фильм со скидкой 25%"
+                subtitle="Оставьте контакты — свяжемся и рассчитаем стоимость комплекта со скидкой."
+                tariff="День матери: книга + фильм (скидка 25%)"
+                goal="motherday_combo_submit"
+                successText="рассчитаем стоимость книги и фильма со скидкой 25%."
+              />
+            </div>
           </div>
         </div>
       </section>
