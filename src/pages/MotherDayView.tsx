@@ -306,7 +306,7 @@ export default function MotherDayView() {
               <p className="text-[12px] font-bold uppercase tracking-widest mb-3" style={{ color: "#ED4463" }}>Формат 2</p>
               <h2 className={`${SECTION_TITLE} mb-4`}>Фильм о маме</h2>
               <p className={`${SECTION_TEXT} mb-8`}>
-                Видеоинтервью с родными, близкими и друзьями, которые мы монтируем в один фильм о том, какая она в глазах других людей.
+                Видеоинтервью с родными, близкими и друзьями — очно в студии или онлайн. Мы монтируем их в один фильм о том, какая она в глазах других людей.
               </p>
               <BenefitGrid items={FILM_BENEFITS} color="#ED4463" />
               <CtaButton className="w-full sm:w-auto mt-8" />
