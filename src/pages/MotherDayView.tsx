@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import OthersLeadForm from "./others/OthersLeadForm";
+import MotherDayHeader from "./motherday/MotherDayHeader";
 import {
   MOTHER_DAY_DATE,
   HERO_IMG,
@@ -133,20 +133,7 @@ export default function MotherDayView() {
 
   return (
     <div style={{ fontFamily: "'Open Sans', sans-serif" }}>
-      <header className="sticky top-0 z-50 bg-white border-b border-[#E5E5E5]">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
-          <Link to="/" className="flex items-center select-none">
-            <img
-              src="https://static.tildacdn.one/tild3937-3830-4361-a239-323264653433/_2023-11-07_12181908.png"
-              alt="StoryBox"
-              className="h-[48px] md:h-[56px] w-auto object-contain"
-            />
-          </Link>
-          <button onClick={() => scrollTo("md-hero-form")} className="btn-cta" style={{ padding: "10px 20px", fontSize: 14 }}>
-            {CTA}
-          </button>
-        </div>
-      </header>
+      <MotherDayHeader ctaText={CTA} onCta={() => scrollTo("md-bottom-form")} />
 
       {/* 1. ПЕРВЫЙ ЭКРАН */}
       <section className="py-8 md:py-14 lg:py-16">
@@ -201,7 +188,7 @@ export default function MotherDayView() {
       </section>
 
       {/* 2. ДВА ФОРМАТА */}
-      <section className="py-14 md:py-20 section-soft">
+      <section id="md-formats" className="scroll-mt-20 py-14 md:py-20 section-soft">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-8 md:mb-12">
             <h2 className={`${SECTION_TITLE} mb-3`}>Два формата на выбор</h2>
@@ -387,7 +374,7 @@ export default function MotherDayView() {
       </section>
 
       {/* 6. КАК ЭТО РАБОТАЕТ */}
-      <section className="py-14 md:py-20 section-soft">
+      <section id="md-steps" className="scroll-mt-20 py-14 md:py-20 section-soft">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-8 md:mb-12">
             <h2 className={`${SECTION_TITLE} mb-3`}>Как это работает</h2>
@@ -447,7 +434,7 @@ export default function MotherDayView() {
       </section>
 
       {/* 8. FAQ */}
-      <section className="py-14 md:py-20 section-soft">
+      <section id="md-faq" className="scroll-mt-20 py-14 md:py-20 section-soft">
         <div className="max-w-3xl mx-auto px-4 md:px-6">
           <div className="text-center mb-8 md:mb-12">
             <h2 className={SECTION_TITLE}>Вопросы и ответы</h2>
