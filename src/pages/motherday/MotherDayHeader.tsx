@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { reachGoal } from "@/utils/metrika";
 
-const NAV = [
+export type NavItem = { id: string; label: string; badge?: string };
+
+const DEFAULT_NAV: NavItem[] = [
   { id: "md-formats", label: "Форматы" },
   { id: "md-book", label: "Книга" },
   { id: "md-film", label: "Фильм" },
@@ -15,14 +17,16 @@ const NAV = [
 interface Props {
   ctaText: string;
   onCta: () => void;
+  nav?: NavItem[];
+  goal?: string;
 }
 
-export default function MotherDayHeader({ ctaText, onCta }: Props) {
+export default function MotherDayHeader({ ctaText, onCta, nav = DEFAULT_NAV, goal = "motherday_nav_click" }: Props) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
-    const els = NAV.map((n) => document.getElementById(n.id)).filter(Boolean) as HTMLElement[];
+    const els = nav.map((n) => document.getElementById(n.id)).filter(Boolean) as HTMLElement[];
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -33,7 +37,7 @@ export default function MotherDayHeader({ ctaText, onCta }: Props) {
     );
     els.forEach((el) => obs.observe(el));
     return () => obs.disconnect();
-  }, []);
+  }, [nav]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -43,7 +47,7 @@ export default function MotherDayHeader({ ctaText, onCta }: Props) {
   }, [open]);
 
   const go = (id: string) => {
-    reachGoal("motherday_nav_click");
+    reachGoal(goal);
     setOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
@@ -60,7 +64,7 @@ export default function MotherDayHeader({ ctaText, onCta }: Props) {
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
-          {NAV.map((n) => {
+          {nav.map((n) => {
             const isActive = active === n.id;
             return (
               <button
@@ -102,7 +106,7 @@ export default function MotherDayHeader({ ctaText, onCta }: Props) {
       {open && (
         <div className="lg:hidden fixed inset-x-0 top-20 bottom-0 bg-white overflow-y-auto border-t border-[#F0F0F0]">
           <nav className="px-4 py-4 flex flex-col">
-            {NAV.map((n) => (
+            {nav.map((n) => (
               <button
                 key={n.id}
                 onClick={() => go(n.id)}

@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import OthersLeadForm from "./others/OthersLeadForm";
+import MotherDayHeader from "./motherday/MotherDayHeader";
+import { SECTION_TITLE, SECTION_TEXT, CARD_SHADOW, VideoCard, BenefitGrid, FaqList, MotherFooter } from "./motherday/MotherDayParts";
 import {
   MOTHER_DAY_DATE,
   HERO_IMG,
   GIFT_IMG,
   CERT_IMG,
+  BOOK_MACRO_IMG,
+  STUDIO_IMG,
+  NAV,
   HERO_BULLETS,
+  CERT_BULLETS,
+  FORMATS,
+  BOOK_BENEFITS,
+  FILM_BENEFITS,
+  VIDEOS,
   CERT_STEPS,
   SPREADS,
   WHY_CARDS,
@@ -15,19 +24,17 @@ import {
 } from "./motherstory/motherStoryData";
 import { reachGoal } from "@/utils/metrika";
 
+const CTA = "Оформить сертификат";
+
 const FORM_PROPS = {
-  title: "Оформить сертификат",
-  subtitle: "Свяжемся с вами, расскажем, как всё проходит, рассчитаем стоимость и пришлём сертификат с именем мамы.",
-  buttonText: "Оформить сертификат",
-  tariff: "Сертификат: мама рассказывает о себе",
+  title: CTA,
+  subtitle: "Свяжемся с вами, поможем выбрать книгу или видеоинтервью, рассчитаем стоимость и пришлём сертификат с именем мамы.",
+  buttonText: CTA,
+  tariff: "Сертификат: мама рассказывает о себе (книга или интервью)",
   goal: "motherstory_lead_submit",
   successTitle: "Спасибо, заявка у нас",
-  successText: "расскажем, как всё проходит, и пришлём сертификат к празднику.",
+  successText: "поможем выбрать формат и пришлём сертификат к празднику.",
 };
-
-const SECTION_TITLE = "text-[28px] md:text-[40px] font-bold text-black leading-[1.15] tracking-tight";
-const SECTION_TEXT = "text-[15px] md:text-[17px] text-[#666] leading-relaxed";
-const CARD_SHADOW = { boxShadow: "0 8px 32px rgba(0,0,0,0.06)" };
 
 function daysLeft() {
   const today = new Date();
@@ -44,7 +51,6 @@ function pluralDays(n: number) {
 }
 
 export default function MotherStoryView() {
-  const [openIdx, setOpenIdx] = useState<number | null>(0);
   const [days, setDays] = useState(daysLeft());
 
   useEffect(() => {
@@ -52,30 +58,23 @@ export default function MotherStoryView() {
     return () => clearInterval(t);
   }, []);
 
-  const scrollTo = (id: string) => {
-    reachGoal("motherstory_scroll_to_form");
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" });
+  const scrollTo = (id: string, goal = "motherstory_scroll_to_form") => {
+    reachGoal(goal);
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: id.endsWith("form") ? "center" : "start" });
   };
 
   const countdown =
     days > 0 ? `До Дня матери ${days} ${pluralDays(days)}` : days === 0 ? "День матери — сегодня" : "Подарок на любой праздник";
 
+  const CtaButton = ({ className = "" }: { className?: string }) => (
+    <button onClick={() => scrollTo("ms-bottom-form")} className={`btn-cta ${className}`}>
+      {CTA}
+    </button>
+  );
+
   return (
     <div style={{ fontFamily: "'Open Sans', sans-serif" }}>
-      <header className="sticky top-0 z-50 bg-white border-b border-[#E5E5E5]">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
-          <Link to="/" className="flex items-center select-none">
-            <img
-              src="https://static.tildacdn.one/tild3937-3830-4361-a239-323264653433/_2023-11-07_12181908.png"
-              alt="StoryBox"
-              className="h-[48px] md:h-[56px] w-auto object-contain"
-            />
-          </Link>
-          <button onClick={() => scrollTo("ms-hero-form")} className="btn-cta" style={{ padding: "10px 20px", fontSize: 14 }}>
-            Оформить сертификат
-          </button>
-        </div>
-      </header>
+      <MotherDayHeader ctaText={CTA} onCta={() => scrollTo("ms-bottom-form")} nav={NAV} goal="motherstory_nav_click" />
 
       {/* 1. ПЕРВЫЙ ЭКРАН */}
       <section className="py-8 md:py-14 lg:py-16">
@@ -89,22 +88,22 @@ export default function MotherStoryView() {
               className="text-[32px] md:text-[40px] lg:text-[52px] font-bold text-black leading-[1.1] tracking-tight mb-5"
               style={{ textWrap: "balance" } as React.CSSProperties}
             >
-              Подарите маме <span style={{ color: "#00A4E3" }}>книгу её воспоминаний</span>
+              Подарите маме <span style={{ color: "#00A4E3" }}>историю её жизни</span>
             </h1>
             <p className="text-[15px] md:text-[17px] text-[#555] leading-relaxed mb-6 max-w-[520px]">
-              Мама сама расскажет о своей жизни — о детстве, молодости, любви, работе и том, что она поняла за эти годы. Мы запишем её истории и превратим их в книгу для детей, родных и будущих внуков.
+              Мама сама расскажет о детстве, молодости, любви и том, что она поняла за эти годы. Мы запишем её рассказ и превратим его в книгу в твёрдом переплёте или в видеоинтервью — для детей, родных и будущих внуков.
             </p>
             <ul className="flex flex-wrap gap-x-6 gap-y-2 mb-8 text-[14px] font-semibold text-[#222]">
               {HERO_BULLETS.map((b) => (
                 <li key={b.text} className="flex items-center gap-2">
-                  <Icon name={b.icon} size={18} style={{ color: "#00A4E3" }} />
+                  <Icon name={b.icon} size={18} style={{ color: "#00A4E3" }} fallback="Check" />
                   {b.text}
                 </li>
               ))}
             </ul>
 
             <div className="md:hidden rounded-3xl overflow-hidden mb-6" style={{ aspectRatio: "4/3" }}>
-              <img src={HERO_IMG} alt="Мама рассказывает историю своей жизни" className="w-full h-full object-cover block" style={{ objectPosition: "center 48%" }} />
+              <img src={HERO_IMG} alt="Мама рассказывает историю своей жизни" className="w-full h-full object-cover block" />
             </div>
 
             <OthersLeadForm formId="ms-hero-form" {...FORM_PROPS} />
@@ -115,52 +114,44 @@ export default function MotherStoryView() {
               <img src={HERO_IMG} alt="Мама рассказывает историю своей жизни" className="w-full h-full object-cover block" />
             </div>
             <div
-              className="absolute left-6 right-6 bottom-6 lg:left-auto lg:right-8 lg:bottom-8 bg-white/95 backdrop-blur rounded-2xl px-5 py-4 flex items-center gap-4 max-w-[380px]"
+              className="absolute left-6 right-6 bottom-6 lg:left-8 lg:right-auto lg:bottom-8 bg-white/95 backdrop-blur rounded-2xl px-5 py-4 flex items-center gap-4 max-w-[380px]"
               style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.12)" }}
             >
               <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "rgba(237,68,99,0.1)", color: "#ED4463" }}>
-                <Icon name="Mail" size={20} />
+                <Icon name="Mic" size={20} />
               </div>
               <p className="text-[14px] leading-snug text-[#222]">
-                <b>Её история — её словами.</b> Книга от первого лица, которую прочитают внуки.
+                <b>Её история — её словами.</b> Книга или фильм, которые увидят внуки.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. СЕРТИФИКАТ */}
-      <section className="py-14 md:py-20 section-soft">
+      {/* 2. ПОДАРОЧНЫЙ СЕРТИФИКАТ */}
+      <section id="ms-cert" className="scroll-mt-20 py-14 md:py-20 section-soft">
         <div className="max-w-7xl mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           <div className="order-2 md:order-1">
+            <p className="text-[12px] font-bold uppercase tracking-widest mb-3" style={{ color: "#ED4463" }}>Подарочный сертификат</p>
             <h2 className={`${SECTION_TITLE} mb-4`}>Что вы подарите</h2>
             <p className={`${SECTION_TEXT} mb-6`}>
-              Именной сертификат на книгу воспоминаний. Вы вручаете его в праздник, а мама рассказывает свою историю позже — спокойно, без спешки и в удобное для неё время.
+              Именной сертификат на книгу воспоминаний или видеоинтервью. Вы вручаете его в праздник, а мама рассказывает свою историю позже — спокойно, без спешки и в удобное для неё время.
             </p>
             <ul className="space-y-4 mb-8">
-              {[
-                { icon: "BadgeCheck", text: "С именем мамы — красиво оформлен и готов к вручению" },
-                { icon: "Mail", text: "Пришлём в мессенджер или на почту — можно распечатать" },
-                { icon: "Clock", text: "Не сгорит после праздника — мама начнёт, когда будет готова" },
-              ].map((b) => (
+              {CERT_BULLETS.map((b) => (
                 <li key={b.text} className="flex items-start gap-3">
-                  <span
-                    className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: "rgba(0,164,227,0.1)", color: "#00A4E3" }}
-                  >
+                  <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(0,164,227,0.1)", color: "#00A4E3" }}>
                     <Icon name={b.icon} size={18} fallback="Check" />
                   </span>
                   <span className="text-[15px] md:text-[16px] text-[#222] leading-snug pt-1.5">{b.text}</span>
                 </li>
               ))}
             </ul>
-            <button onClick={() => scrollTo("ms-bottom-form")} className="btn-cta w-full sm:w-auto">
-              Оформить сертификат
-            </button>
+            <CtaButton className="w-full sm:w-auto" />
           </div>
           <div className="order-1 md:order-2 relative mb-10 md:mb-0">
             <div className="rounded-[28px] overflow-hidden" style={{ aspectRatio: "4/3" }}>
-              <img src={GIFT_IMG} alt="Сертификат в подарок маме" className="w-full h-full object-cover block" />
+              <img src={GIFT_IMG} alt="Сертификат в подарок маме" loading="lazy" className="w-full h-full object-cover block" />
             </div>
             <div
               className="absolute -bottom-8 left-3 w-[58%] md:-bottom-6 md:-left-8 md:w-[62%] bg-white rounded-xl md:rounded-2xl p-1.5 md:p-2"
@@ -172,36 +163,35 @@ export default function MotherStoryView() {
         </div>
       </section>
 
-      {/* 3. КАК ЭТО РАБОТАЕТ */}
+      {/* 3. ДВА ФОРМАТА */}
       <section className="py-14 md:py-20 mt-6 md:mt-0">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-8 md:mb-12">
-            <h2 className={`${SECTION_TITLE} mb-3`}>Как это работает</h2>
+            <h2 className={`${SECTION_TITLE} mb-3`}>Два формата на выбор</h2>
             <p className={`${SECTION_TEXT} max-w-[640px] mx-auto`}>
-              От заявки до готовой книги — вам остаётся только вручить подарок, а маме — рассказать.
+              В основе обоих — разговор с мамой о её жизни. Можно выбрать один или оба — со скидкой 25%.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {CERT_STEPS.map((s) => (
-              <article
-                key={s.n}
-                className="group bg-white rounded-3xl p-3 flex flex-col border border-[#F0F0F0] transition-transform duration-300 md:hover:-translate-y-1"
-                style={CARD_SHADOW}
-              >
-                <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "4/3" }}>
-                  <img
-                    src={s.img}
-                    alt={s.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-500 md:group-hover:scale-105"
-                  />
+          <div className="grid md:grid-cols-2 gap-4 md:gap-6">
+            {FORMATS.map((f) => (
+              <article key={f.id} className="bg-white rounded-3xl p-3 flex flex-col border border-[#F0F0F0]" style={CARD_SHADOW}>
+                <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "16/10" }}>
+                  <img src={f.img} alt={f.title} loading="lazy" className="w-full h-full object-cover" />
+                  <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur text-[12px] font-bold text-[#222]">{f.label}</span>
                 </div>
                 <div className="px-3 pt-5 pb-4 flex-1 flex flex-col">
-                  <p className="text-[12px] font-bold uppercase tracking-widest mb-2" style={{ color: "#ED4463" }}>
-                    Шаг {s.n}
-                  </p>
-                  <h3 className="text-[18px] md:text-[19px] font-bold text-black leading-snug mb-2">{s.title}</h3>
-                  <p className="text-[14px] text-[#666] leading-relaxed">{s.desc}</p>
+                  <h3 className="flex items-center gap-2 text-[22px] md:text-[26px] font-bold text-black leading-snug mb-2">
+                    <Icon name={f.icon} size={24} style={{ color: "#00A4E3" }} fallback="Star" />
+                    {f.title}
+                  </h3>
+                  <p className="text-[15px] text-[#666] leading-relaxed mb-5 flex-1">{f.desc}</p>
+                  <button
+                    onClick={() => scrollTo(f.id, `motherstory_format_${f.id}`)}
+                    className="self-start text-[15px] font-bold inline-flex items-center gap-1.5 hover:opacity-70 transition-opacity"
+                    style={{ color: "#00A4E3" }}
+                  >
+                    Подробнее <Icon name="ArrowDown" size={16} />
+                  </button>
                 </div>
               </article>
             ))}
@@ -209,13 +199,38 @@ export default function MotherStoryView() {
         </div>
       </section>
 
-      {/* 4. ЧТО БУДЕТ ВНУТРИ */}
-      <section className="py-14 md:py-20 section-soft">
+      {/* 4. КНИГА */}
+      <section id="ms-book" className="py-14 md:py-20 scroll-mt-20 section-soft">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+          <div className="relative">
+            <div className="rounded-[28px] overflow-hidden" style={{ aspectRatio: "1/1" }}>
+              <img src={BOOK_MACRO_IMG} alt="Книга воспоминаний мамы в твёрдом переплёте" loading="lazy" className="w-full h-full object-cover block" />
+            </div>
+            <div
+              className="absolute left-4 bottom-4 md:left-6 md:bottom-6 bg-white/95 backdrop-blur rounded-2xl px-4 py-3 flex items-center gap-3"
+              style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.12)" }}
+            >
+              <Icon name="ZoomIn" size={20} style={{ color: "#00A4E3" }} />
+              <span className="text-[13px] md:text-[14px] font-semibold text-[#222]">Твёрдый переплёт · плотная бумага</span>
+            </div>
+          </div>
+          <div>
+            <p className="text-[12px] font-bold uppercase tracking-widest mb-3" style={{ color: "#ED4463" }}>Формат 1</p>
+            <h2 className={`${SECTION_TITLE} mb-4`}>Книга воспоминаний</h2>
+            <p className={`${SECTION_TEXT} mb-8`}>
+              Настоящая книга, которую хочется держать в руках: история мамы её собственными словами.
+            </p>
+            <BenefitGrid items={BOOK_BENEFITS} color="#00A4E3" />
+            <CtaButton className="w-full sm:w-auto mt-8" />
+          </div>
+        </div>
+      </section>
+
+      {/* 5. ЧТО БУДЕТ ВНУТРИ */}
+      <section className="py-14 md:py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8 md:mb-12 text-center">
           <h2 className={`${SECTION_TITLE} mb-3`}>Что будет внутри книги</h2>
-          <p className={`${SECTION_TEXT} max-w-[640px] mx-auto`}>
-            Жизнь мамы, рассказанная ей самой: главы о главных периодах и семейные фотографии
-          </p>
+          <p className={`${SECTION_TEXT} max-w-[640px] mx-auto`}>Главы о разных периодах жизни мамы — с её рассказами и семейными фотографиями</p>
         </div>
         <div
           className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto px-4 md:px-6 pb-2 md:pb-0 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-4"
@@ -228,10 +243,8 @@ export default function MotherStoryView() {
               style={CARD_SHADOW}
             >
               <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "1/1" }}>
-                <img src={s.img} alt={`${s.role} — ${s.topic}`} className="w-full h-full object-cover transition-transform duration-500 md:group-hover:scale-105" />
-                <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur text-[12px] font-bold text-[#222]">
-                  Глава {i + 1}
-                </span>
+                <img src={s.img} alt={`${s.role} — ${s.topic}`} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 md:group-hover:scale-105" />
+                <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur text-[12px] font-bold text-[#222]">Глава {i + 1}</span>
               </div>
               <div className="px-3 pt-5 pb-4 flex-1">
                 <p className="text-[12px] font-bold uppercase tracking-widest mb-2" style={{ color: "#ED4463" }}>{s.role}</p>
@@ -242,11 +255,128 @@ export default function MotherStoryView() {
         </div>
       </section>
 
-      {/* 5. ПОЧЕМУ ЭТО ЛУЧШИЙ ПОДАРОК */}
+      {/* 6. ВИДЕОИНТЕРВЬЮ */}
+      <section id="ms-film" className="py-14 md:py-20 scroll-mt-20 section-soft">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center mb-12 md:mb-16">
+            <div className="order-2 md:order-1">
+              <p className="text-[12px] font-bold uppercase tracking-widest mb-3" style={{ color: "#ED4463" }}>Формат 2</p>
+              <h2 className={`${SECTION_TITLE} mb-4`}>Видеоинтервью с мамой</h2>
+              <p className={`${SECTION_TEXT} mb-8`}>
+                Мама рассказывает о своей жизни на камеру — очно в студии или онлайн. Мы монтируем разговор в фильм, который семья будет пересматривать годами.
+              </p>
+              <BenefitGrid items={FILM_BENEFITS} color="#ED4463" />
+              <CtaButton className="w-full sm:w-auto mt-8" />
+            </div>
+            <div className="order-1 md:order-2 rounded-[28px] overflow-hidden" style={{ aspectRatio: "4/5" }}>
+              <img src={STUDIO_IMG} alt="Запись видеоинтервью с мамой в студии StoryBox" loading="lazy" className="w-full h-full object-cover block" />
+            </div>
+          </div>
+
+          <div className="text-center mb-8">
+            <h3 className="text-[22px] md:text-[28px] font-bold text-black leading-snug mb-2">Посмотрите, как проходят наши интервью</h3>
+            <p className={SECTION_TEXT}>Несколько фрагментов из реальных записей StoryBox</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+            {VIDEOS.map((v) => (
+              <VideoCard key={v.id} id={v.id} title={v.title} cover={v.cover} goal="motherstory_video_play" />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. КОМПЛЕКТ СО СКИДКОЙ */}
+      <section id="ms-combo" className="py-14 md:py-20 scroll-mt-20">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div
+            className="relative overflow-hidden rounded-[32px] p-6 md:p-10 lg:p-14 grid lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-14 items-center"
+            style={{ background: "linear-gradient(135deg, #00A4E3 0%, #0077B6 100%)" }}
+          >
+            <div className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full" style={{ background: "rgba(255,255,255,0.08)" }} />
+            <div className="relative text-white">
+              <span
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[14px] font-bold mb-5"
+                style={{ background: "#ED4463", boxShadow: "0 8px 24px rgba(237,68,99,0.4)" }}
+              >
+                <Icon name="BadgePercent" size={18} fallback="Percent" />
+                Скидка 25% на всё
+              </span>
+              <h2 className="text-[28px] md:text-[40px] font-bold leading-[1.15] tracking-tight mb-4">Сертификат на книгу и видеоинтервью</h2>
+              <p className="text-[15px] md:text-[17px] leading-relaxed mb-7" style={{ color: "rgba(255,255,255,0.85)" }}>
+                Один разговор с мамой — два подарка: книга, которую можно взять в руки, и фильм, где сохранятся её голос и улыбка.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { icon: "BookOpen", text: "Книга воспоминаний в твёрдом переплёте" },
+                  { icon: "Clapperboard", text: "Видеоинтервью, смонтированное в фильм" },
+                  { icon: "Gift", text: "Один именной сертификат на оба формата" },
+                  { icon: "BadgePercent", text: "Скидка 25% на весь заказ" },
+                ].map((b) => (
+                  <li key={b.text} className="flex items-start gap-3">
+                    <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(255,255,255,0.15)" }}>
+                      <Icon name={b.icon} size={18} fallback="Check" />
+                    </span>
+                    <span className="text-[15px] md:text-[16px] leading-snug pt-1.5 font-semibold">{b.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="relative">
+              <OthersLeadForm
+                formId="ms-combo-form"
+                {...FORM_PROPS}
+                title="Книга + интервью со скидкой 25%"
+                subtitle="Оставьте контакты — рассчитаем стоимость комплекта и пришлём сертификат с именем мамы."
+                tariff="Сертификат: мама рассказывает о себе — книга + интервью (скидка 25%)"
+                goal="motherstory_combo_submit"
+                successText="рассчитаем стоимость книги и интервью со скидкой 25%."
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. КАК ЭТО РАБОТАЕТ */}
+      <section id="ms-steps" className="scroll-mt-20 py-14 md:py-20 section-soft">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className={`${SECTION_TITLE} mb-3`}>Как это работает</h2>
+            <p className={`${SECTION_TEXT} max-w-[640px] mx-auto`}>
+              От заявки до готовой книги или фильма — вам остаётся только вручить сертификат, а маме — рассказать свою историю.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {CERT_STEPS.map((s) => (
+              <article
+                key={s.n}
+                className="group bg-white rounded-3xl p-3 flex flex-col border border-[#F0F0F0] transition-transform duration-300 md:hover:-translate-y-1"
+                style={CARD_SHADOW}
+              >
+                <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "4/3" }}>
+                  <img src={s.img} alt={s.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 md:group-hover:scale-105" />
+                  <span
+                    className="absolute top-3 left-3 w-9 h-9 rounded-full flex items-center justify-center text-[15px] font-bold text-white"
+                    style={{ background: "#00A4E3", boxShadow: "0 4px 12px rgba(0,164,227,0.35)" }}
+                  >
+                    {s.n}
+                  </span>
+                </div>
+                <div className="px-3 pt-5 pb-4 flex-1 flex flex-col">
+                  <p className="text-[12px] font-bold uppercase tracking-widest mb-2" style={{ color: "#ED4463" }}>Шаг {s.n}</p>
+                  <h3 className="text-[18px] md:text-[19px] font-bold text-black leading-snug mb-2">{s.title}</h3>
+                  <p className="text-[14px] text-[#666] leading-relaxed">{s.desc}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 9. ПОЧЕМУ МАМЕ ПОНРАВИТСЯ */}
       <section className="py-14 md:py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-8 md:mb-12">
-            <h2 className={SECTION_TITLE}>Почему это важно</h2>
+            <h2 className={SECTION_TITLE}>Почему маме понравится</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-4 md:gap-6">
             {WHY_CARDS.map((c) => (
@@ -255,10 +385,7 @@ export default function MotherStoryView() {
                 className="bg-white rounded-3xl p-6 md:p-8 flex flex-col border border-[#F0F0F0] transition-transform duration-300 md:hover:-translate-y-1"
                 style={CARD_SHADOW}
               >
-                <div
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5"
-                  style={{ background: "rgba(237,68,99,0.08)", color: "#ED4463" }}
-                >
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style={{ background: "rgba(237,68,99,0.08)", color: "#ED4463" }}>
                   <Icon name={c.icon} size={26} fallback="Heart" />
                 </div>
                 <h3 className="text-[18px] md:text-[19px] font-bold text-black leading-snug mb-2">{c.title}</h3>
@@ -269,115 +396,32 @@ export default function MotherStoryView() {
         </div>
       </section>
 
-      {/* 6. ЦЕНА */}
-      <section className="py-14 md:py-20 section-soft">
-        <div className="max-w-5xl mx-auto px-4 md:px-6">
-          <div
-            className="bg-white rounded-3xl border border-[#F0F0F0] p-6 md:p-10 lg:p-12 grid md:grid-cols-[1fr_auto] gap-6 md:gap-12 items-center"
-            style={CARD_SHADOW}
-          >
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-5 md:gap-6 text-center md:text-left">
-              <div
-                className="w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center flex-shrink-0"
-                style={{ background: "rgba(0,164,227,0.1)", color: "#00A4E3" }}
-              >
-                <Icon name="Calculator" size={28} />
-              </div>
-              <div>
-                <h2 className="text-[28px] md:text-[36px] font-bold text-black leading-[1.15] tracking-tight mb-3">Сколько стоит сертификат</h2>
-                <p className={`${SECTION_TEXT} max-w-[520px]`}>
-                  Цена зависит от продолжительности интервью и объёма книги. Рассчитаем при первом разговоре и сразу пришлём сертификат.
-                </p>
-              </div>
-            </div>
-            <button onClick={() => scrollTo("ms-bottom-form")} className="btn-cta w-full md:w-auto whitespace-nowrap justify-self-center">
-              Узнать стоимость
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. FAQ */}
-      <section className="py-14 md:py-20">
+      {/* 10. FAQ */}
+      <section id="ms-faq" className="scroll-mt-20 py-14 md:py-20 section-soft">
         <div className="max-w-3xl mx-auto px-4 md:px-6">
           <div className="text-center mb-8 md:mb-12">
             <h2 className={SECTION_TITLE}>Вопросы и ответы</h2>
           </div>
-          <div className="space-y-3 md:space-y-4">
-            {FAQ_ITEMS.map((item, idx) => {
-              const isOpen = openIdx === idx;
-              return (
-                <div
-                  key={item.q}
-                  className="bg-white rounded-2xl border transition-all duration-300"
-                  style={{
-                    borderColor: isOpen ? "rgba(0,164,227,0.4)" : "#F0F0F0",
-                    boxShadow: isOpen ? "0 12px 36px rgba(0,164,227,0.10)" : "0 4px 20px rgba(0,0,0,0.04)",
-                  }}
-                >
-                  <button
-                    onClick={() => setOpenIdx(isOpen ? null : idx)}
-                    aria-expanded={isOpen}
-                    className="w-full flex items-center justify-between gap-4 text-left px-5 md:px-7 py-5"
-                  >
-                    <span className="text-[15px] md:text-[17px] font-bold leading-snug transition-colors duration-300" style={{ color: isOpen ? "#00A4E3" : "#1A1A1A" }}>
-                      {item.q}
-                    </span>
-                    <span
-                      className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300"
-                      style={{
-                        background: isOpen ? "#00A4E3" : "rgba(0,164,227,0.1)",
-                        color: isOpen ? "#fff" : "#00A4E3",
-                        transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
-                      }}
-                    >
-                      <Icon name="Plus" size={18} />
-                    </span>
-                  </button>
-                  <div className="grid transition-[grid-template-rows] duration-300 ease-out" style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}>
-                    <div className="overflow-hidden">
-                      <p className="px-5 md:px-7 pb-6 -mt-1 pr-16 md:pr-20 text-[14px] md:text-[15px] leading-relaxed text-[#555]">{item.a}</p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <FaqList items={FAQ_ITEMS} />
         </div>
       </section>
 
-      {/* 8. ФИНАЛЬНАЯ ФОРМА */}
-      <section className="py-14 md:py-20 section-soft">
+      {/* 11. ФИНАЛЬНАЯ ФОРМА */}
+      <section className="py-14 md:py-20">
         <div className="max-w-xl mx-auto px-4 md:px-6">
           <div className="text-center mb-8 md:mb-10">
             <p className="inline-flex items-center gap-2 text-[14px] font-bold mb-3" style={{ color: "#ED4463" }}>
               <Icon name="Clock" size={16} />
               {countdown}
             </p>
-            <h2 className={`${SECTION_TITLE} mb-3`}>Оформите сертификат заранее</h2>
-            <p className={SECTION_TEXT}>
-              Свяжемся с вами, рассчитаем стоимость и пришлём сертификат с именем мамы — к празднику всё будет готово, а историю она расскажет, когда захочет.
-            </p>
+            <h2 className={`${SECTION_TITLE} mb-3`}>Подарите маме возможность рассказать свою историю</h2>
+            <p className={SECTION_TEXT}>Оставьте контакты — поможем выбрать книгу или видеоинтервью и пришлём сертификат к празднику.</p>
           </div>
           <OthersLeadForm formId="ms-bottom-form" compact {...FORM_PROPS} />
         </div>
       </section>
 
-      <footer style={{ background: "#0F1419" }} className="pt-10 pb-6 px-4 md:px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-[18px] text-white">
-            <span style={{ fontWeight: 400 }}>Story</span><span style={{ fontWeight: 700 }}>Box</span>
-          </div>
-          <div className="text-[13px]" style={{ color: "rgba(255,255,255,0.4)" }}>
-            © 2026 StoryBox. Все права защищены.
-          </div>
-          <div className="flex flex-wrap gap-x-3 gap-y-1 text-[13px]" style={{ color: "rgba(255,255,255,0.4)" }}>
-            <span>Конфиденциальность</span>
-            <span>·</span>
-            <span>Оферта</span>
-          </div>
-        </div>
-      </footer>
+      <MotherFooter />
     </div>
   );
 }

@@ -87,9 +87,9 @@ export const ROUTES_SEO: RouteSeo[] = [
   },
   {
     path: "/den-materi-istoriya",
-    title: "Подарок маме на День матери — книга её воспоминаний | StoryBox",
-    description: "Сертификат на книгу, в которой мама сама рассказывает о своей жизни и опыте — для детей, родных и будущих внуков. Интервью, фотографии, твёрдый переплёт.",
-    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/ec2cbbbe-b85f-48f5-b062-e6e6f5406d89.jpg",
+    title: "Подарок маме на День матери — книга или видеоинтервью о её жизни | StoryBox",
+    description: "Подарочный сертификат на книгу воспоминаний или видеоинтервью, где мама сама рассказывает о своей жизни. Студия или онлайн, твёрдый переплёт, скидка 25% на комплект.",
+    image: "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/421aa11d-086e-4dfb-af35-ef54abc09647.jpg",
     faq: MOTHER_STORY_FAQ,
   },
   { path: "/legal/privacy", title: "Политика обработки персональных данных — StoryBox", description: "Политика обработки персональных данных сервиса StoryBox.", index: false },
