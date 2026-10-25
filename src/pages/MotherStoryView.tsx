@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
 import OthersLeadForm from "./others/OthersLeadForm";
 import MotherDayHeader from "./motherday/MotherDayHeader";
+import SpreadLightbox from "./motherday/SpreadLightbox";
 import { SECTION_TITLE, SECTION_TEXT, CARD_SHADOW, VideoCard, BenefitGrid, FaqList, MotherFooter } from "./motherday/MotherDayParts";
 import {
   MOTHER_DAY_DATE,
@@ -52,6 +53,7 @@ function pluralDays(n: number) {
 
 export default function MotherStoryView() {
   const [days, setDays] = useState(daysLeft());
+  const [spreadIdx, setSpreadIdx] = useState<number | null>(null);
 
   useEffect(() => {
     const t = setInterval(() => setDays(daysLeft()), 60 * 60 * 1000);
@@ -231,6 +233,13 @@ export default function MotherStoryView() {
         <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8 md:mb-12 text-center">
           <h2 className={`${SECTION_TITLE} mb-3`}>Что будет внутри книги</h2>
           <p className={`${SECTION_TEXT} max-w-[640px] mx-auto`}>Главы о разных периодах жизни мамы — с её рассказами и семейными фотографиями</p>
+          <p
+            className="inline-flex items-start md:items-center gap-2 mt-5 px-4 py-2.5 rounded-2xl md:rounded-full text-[13px] md:text-[14px] font-semibold text-left"
+            style={{ background: "rgba(0,164,227,0.08)", color: "#0077B6" }}
+          >
+            <Icon name="Info" size={16} className="flex-shrink-0 mt-0.5 md:mt-0" />
+            Это пример из 4 глав. В реальной книге их может быть гораздо больше — состав подбираем индивидуально под историю мамы.
+          </p>
         </div>
         <div
           className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto px-4 md:px-6 pb-2 md:pb-0 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-4"
@@ -242,17 +251,34 @@ export default function MotherStoryView() {
               className="group flex-shrink-0 w-[78vw] max-w-[320px] md:w-auto md:max-w-none snap-start bg-white rounded-3xl p-3 flex flex-col transition-transform duration-300 md:hover:-translate-y-1"
               style={CARD_SHADOW}
             >
-              <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "1/1" }}>
+              <button
+                onClick={() => {
+                  reachGoal("motherstory_spread_open");
+                  setSpreadIdx(i);
+                }}
+                aria-label={`Открыть пример главы ${i + 1} на весь экран`}
+                className="relative block w-full rounded-2xl overflow-hidden cursor-zoom-in"
+                style={{ aspectRatio: "1/1" }}
+              >
                 <img src={s.img} alt={`${s.role} — ${s.topic}`} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 md:group-hover:scale-105" />
                 <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur text-[12px] font-bold text-[#222]">Глава {i + 1}</span>
-              </div>
+                <span
+                  className="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-white/95 backdrop-blur flex items-center justify-center text-[#222] transition-transform md:group-hover:scale-110"
+                  style={{ boxShadow: "0 4px 14px rgba(0,0,0,0.15)" }}
+                >
+                  <Icon name="Maximize2" size={18} />
+                </span>
+              </button>
               <div className="px-3 pt-5 pb-4 flex-1">
                 <p className="text-[12px] font-bold uppercase tracking-widest mb-2" style={{ color: "#ED4463" }}>{s.role}</p>
                 <p style={{ fontFamily: "'Caveat', cursive", fontSize: 24, fontWeight: 600, color: "#222", lineHeight: 1.25 }}>{s.topic}</p>
               </div>
             </article>
           ))}
+          <div className="flex-shrink-0 w-2 md:hidden" aria-hidden />
         </div>
+        <p className="md:hidden text-center text-[13px] text-[#888] mt-3 px-4">Листайте вбок · нажмите на фото, чтобы открыть на весь экран</p>
+        <SpreadLightbox items={SPREADS} index={spreadIdx} onChange={setSpreadIdx} />
       </section>
 
       {/* 6. ВИДЕОИНТЕРВЬЮ */}
