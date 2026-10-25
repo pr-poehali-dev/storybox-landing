@@ -379,10 +379,10 @@ export default function MotherStoryView() {
             {CERT_STEPS.map((s) => (
               <article
                 key={s.n}
-                className="group bg-white rounded-3xl p-3 flex flex-col border border-[#F0F0F0] transition-transform duration-300 md:hover:-translate-y-1"
+                className="group bg-white rounded-3xl p-3 flex flex-row sm:flex-col gap-3 sm:gap-0 border border-[#F0F0F0] transition-transform duration-300 md:hover:-translate-y-1"
                 style={CARD_SHADOW}
               >
-                <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "4/3" }}>
+                <div className="relative rounded-2xl overflow-hidden w-[38%] sm:w-full flex-shrink-0 self-start aspect-square sm:aspect-[4/3]">
                   <img src={s.img} alt={s.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 md:group-hover:scale-105" />
                   <span
                     className="absolute top-3 left-3 w-9 h-9 rounded-full flex items-center justify-center text-[15px] font-bold text-white"
@@ -391,10 +391,10 @@ export default function MotherStoryView() {
                     {s.n}
                   </span>
                 </div>
-                <div className="px-3 pt-5 pb-4 flex-1 flex flex-col">
-                  <p className="text-[12px] font-bold uppercase tracking-widest mb-2" style={{ color: "#ED4463" }}>Шаг {s.n}</p>
-                  <h3 className="text-[18px] md:text-[19px] font-bold text-black leading-snug mb-2">{s.title}</h3>
-                  <p className="text-[14px] text-[#666] leading-relaxed">{s.desc}</p>
+                <div className="sm:px-3 py-1 sm:pt-5 sm:pb-4 pr-1 flex-1 flex flex-col min-w-0">
+                  <p className="text-[11px] sm:text-[12px] font-bold uppercase tracking-widest mb-1.5 sm:mb-2" style={{ color: "#ED4463" }}>Шаг {s.n}</p>
+                  <h3 className="text-[16px] sm:text-[18px] md:text-[19px] font-bold text-black leading-snug mb-1.5 sm:mb-2">{s.title}</h3>
+                  <p className="text-[13px] sm:text-[14px] text-[#666] leading-relaxed">{s.desc}</p>
                 </div>
               </article>
             ))}
@@ -412,10 +412,10 @@ export default function MotherStoryView() {
             {WHY_CARDS.map((c) => (
               <div
                 key={c.title}
-                className="bg-white rounded-3xl p-6 md:p-8 flex flex-col border border-[#F0F0F0] transition-transform duration-300 md:hover:-translate-y-1"
+                className="bg-white rounded-3xl p-5 md:p-8 flex flex-col border border-[#F0F0F0] transition-transform duration-300 md:hover:-translate-y-1"
                 style={CARD_SHADOW}
               >
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style={{ background: "rgba(237,68,99,0.08)", color: "#ED4463" }}>
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center mb-4 md:mb-5" style={{ background: "rgba(237,68,99,0.08)", color: "#ED4463" }}>
                   <Icon name={c.icon} size={26} fallback="Heart" />
                 </div>
                 <h3 className="text-[18px] md:text-[19px] font-bold text-black leading-snug mb-2">{c.title}</h3>
