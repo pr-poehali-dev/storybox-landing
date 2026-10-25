@@ -147,7 +147,7 @@ export default function MotherDayView() {
               className="text-[32px] md:text-[40px] lg:text-[52px] font-bold text-black leading-[1.1] tracking-tight mb-5"
               style={{ textWrap: "balance" } as React.CSSProperties}
             >
-              Мама глазами <span style={{ color: "#00A4E3" }}>самых близких людей</span>
+              Мама <span style={{ color: "#00A4E3" }}>самых близких людей</span>
             </h1>
             <p className="text-[15px] md:text-[17px] text-[#555] leading-relaxed mb-6 max-w-[520px]">
               Соберём рассказы родных, друзей и знакомых о маме — какой они её видят, за что любят, что помнят. И превратим их в книгу в твёрдом переплёте или в фильм о ней.
