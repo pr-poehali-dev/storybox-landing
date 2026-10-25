@@ -3,10 +3,11 @@ export const MOTHER_DAY_DATE = new Date(2026, 10, 29);
 const CDN = "https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files";
 const TILDA = "https://static.tildacdn.net";
 
-export const HERO_IMG = `${CDN}/2a1ae9e2-22c1-4edf-ae1b-959d4d70ca21.jpg`;
-export const BOOK_MACRO_IMG = `${CDN}/fc8453e6-c7fa-4e65-b1a0-cd1f72b4089e.jpg`;
-export const BOOK_MACRO_WIDE_IMG = `${CDN}/7b42ec8b-a926-4088-943f-79e64e534f76.jpg`;
-export const STUDIO_IMG = `${TILDA}/tild3732-3137-4537-a261-386238326464/photo_2024-09-23_221.jpeg`;
+export const HERO_IMG = `${CDN}/9d5d1402-81b1-4d3d-b1bd-bfdaa9b2f53f.jpg`;
+export const BOOK_MACRO_IMG = `${CDN}/98fdf052-50f3-47be-b1d9-b693b1821620.jpg`;
+export const BOOK_MACRO_WIDE_IMG = `${CDN}/f3061fe4-02f3-4341-a7f3-0bc202188e99.jpg`;
+export const STUDIO_IMG = `${CDN}/5c486445-d80e-4c80-b4b8-3c233539a5f7.jpg`;
+export const FILM_WATCH_IMG = `${CDN}/73fc8318-4283-4276-91f1-fcbf355e2011.jpg`;
 
 export const HERO_BULLETS = [
   { icon: "Users", text: "Рассказы родных и друзей" },
@@ -29,7 +30,7 @@ export const FORMATS = [
     label: "Формат 2",
     title: "Фильм о маме",
     desc: "Записываем видеоинтервью с родными, близкими и друзьями, а потом монтируем из них фильм о том, какой её видят другие.",
-    img: STUDIO_IMG,
+    img: FILM_WATCH_IMG,
   },
 ];
 
