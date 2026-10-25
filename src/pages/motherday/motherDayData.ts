@@ -7,7 +7,7 @@ export const HERO_IMG = `${CDN}/f3fa6bdd-91c2-42eb-9911-766a003266dd.jpg`;
 export const BOOK_MACRO_IMG = `${CDN}/98fdf052-50f3-47be-b1d9-b693b1821620.jpg`;
 export const BOOK_MACRO_WIDE_IMG = `${CDN}/f3061fe4-02f3-4341-a7f3-0bc202188e99.jpg`;
 export const STUDIO_IMG = `${CDN}/5c486445-d80e-4c80-b4b8-3c233539a5f7.jpg`;
-export const FILM_WATCH_IMG = `${CDN}/73fc8318-4283-4276-91f1-fcbf355e2011.jpg`;
+export const FILM_WATCH_IMG = `${CDN}/559a1f51-87fb-4299-ad0b-e59d88f3e29b.jpg`;
 
 export const HERO_BULLETS = [
   { icon: "Users", text: "Рассказы родных и друзей" },
