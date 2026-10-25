@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
 import OthersLeadForm from "./others/OthersLeadForm";
 import MotherDayHeader from "./motherday/MotherDayHeader";
+import CrossPageBanner from "./motherday/CrossPageBanner";
 import {
   MOTHER_DAY_DATE,
   HERO_IMG,
@@ -481,6 +482,17 @@ export default function MotherDayView() {
           </div>
         </div>
       </section>
+
+      {/* 8.1 ПЕРЕХОД НА СОСЕДНЮЮ СТРАНИЦУ */}
+      <CrossPageBanner
+        to="/den-materi-istoriya"
+        img="https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/421aa11d-086e-4dfb-af35-ef54abc09647.jpg"
+        eyebrow="Другой формат подарка"
+        title="Хотите, чтобы мама сама рассказала свою историю?"
+        text="Подарите сертификат на книгу воспоминаний или видеоинтервью, где мама от первого лица расскажет о детстве, молодости, любви и том, что поняла за эти годы."
+        button="Подробнее о формате"
+        goal="motherday_cross_to_story"
+      />
 
       {/* 9. ФИНАЛЬНАЯ ФОРМА */}
       <section className="py-14 md:py-20">

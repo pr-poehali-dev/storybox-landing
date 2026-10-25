@@ -3,6 +3,7 @@ import Icon from "@/components/ui/icon";
 import OthersLeadForm from "./others/OthersLeadForm";
 import MotherDayHeader from "./motherday/MotherDayHeader";
 import SpreadLightbox from "./motherday/SpreadLightbox";
+import CrossPageBanner from "./motherday/CrossPageBanner";
 import { SECTION_TITLE, SECTION_TEXT, CARD_SHADOW, VideoCard, BenefitGrid, FaqList, MotherFooter } from "./motherday/MotherDayParts";
 import {
   MOTHER_DAY_DATE,
@@ -431,6 +432,17 @@ export default function MotherStoryView() {
           <FaqList items={FAQ_ITEMS} />
         </div>
       </section>
+
+      {/* 10.1 ПЕРЕХОД НА СОСЕДНЮЮ СТРАНИЦУ */}
+      <CrossPageBanner
+        to="/den-materi"
+        img="https://cdn.poehali.dev/projects/93b2577c-d64f-4b54-a5df-edacb89bda77/files/f3fa6bdd-91c2-42eb-9911-766a003266dd.jpg"
+        eyebrow="Другой формат подарка"
+        title="Хотите собрать рассказы близких о маме?"
+        text="Запишем интервью с детьми, мужем, подругами и коллегами и соберём их в книгу или фильм о том, какой маму видят самые близкие люди."
+        button="Подробнее о формате"
+        goal="motherstory_cross_to_day"
+      />
 
       {/* 11. ФИНАЛЬНАЯ ФОРМА */}
       <section className="py-14 md:py-20">
