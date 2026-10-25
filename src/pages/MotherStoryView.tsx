@@ -304,7 +304,10 @@ export default function MotherStoryView() {
             <h3 className="text-[22px] md:text-[28px] font-bold text-black leading-snug mb-2">Посмотрите, как проходят наши интервью</h3>
             <p className={SECTION_TEXT}>Несколько фрагментов из реальных записей StoryBox</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+          <div
+            className="flex md:grid md:grid-cols-3 gap-4 md:gap-6 -mx-4 px-4 md:mx-0 md:px-0 pb-2 md:pb-0 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-4 [&>*]:flex-shrink-0 [&>*]:w-[82vw] [&>*]:max-w-[340px] [&>*]:snap-start md:[&>*]:w-auto md:[&>*]:max-w-none"
+            style={{ scrollbarWidth: "none" } as React.CSSProperties}
+          >
             {VIDEOS.map((v) => (
               <VideoCard key={v.id} id={v.id} title={v.title} cover={v.cover} goal="motherstory_video_play" />
             ))}
@@ -316,11 +319,11 @@ export default function MotherStoryView() {
       <section id="ms-combo" className="py-14 md:py-20 scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div
-            className="relative overflow-hidden rounded-[32px] p-6 md:p-10 lg:p-14 grid lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-14 items-center"
+            className="relative overflow-hidden rounded-[24px] md:rounded-[32px] px-4 py-7 md:p-10 lg:p-14 grid lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-14 items-center"
             style={{ background: "linear-gradient(135deg, #00A4E3 0%, #0077B6 100%)" }}
           >
             <div className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full" style={{ background: "rgba(255,255,255,0.08)" }} />
-            <div className="relative text-white">
+            <div className="relative text-white px-2 md:px-0">
               <span
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[14px] font-bold mb-5"
                 style={{ background: "#ED4463", boxShadow: "0 8px 24px rgba(237,68,99,0.4)" }}
@@ -328,7 +331,7 @@ export default function MotherStoryView() {
                 <Icon name="BadgePercent" size={18} fallback="Percent" />
                 Скидка 25% на всё
               </span>
-              <h2 className="text-[28px] md:text-[40px] font-bold leading-[1.15] tracking-tight mb-4">Сертификат на книгу и видеоинтервью</h2>
+              <h2 className="text-[26px] md:text-[40px] font-bold leading-[1.15] tracking-tight mb-4">Сертификат на книгу и видеоинтервью</h2>
               <p className="text-[15px] md:text-[17px] leading-relaxed mb-7" style={{ color: "rgba(255,255,255,0.85)" }}>
                 Один разговор с мамой — два подарка: книга, которую можно взять в руки, и фильм, где сохранятся её голос и улыбка.
               </p>

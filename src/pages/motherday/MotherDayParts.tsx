@@ -98,7 +98,7 @@ export function FaqList({ items }: { items: { q: string; a: string }[] }) {
             </button>
             <div className="grid transition-[grid-template-rows] duration-300 ease-out" style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}>
               <div className="overflow-hidden">
-                <p className="px-5 md:px-7 pb-6 -mt-1 pr-16 md:pr-20 text-[14px] md:text-[15px] leading-relaxed text-[#555]">{item.a}</p>
+                <p className="px-5 md:px-7 pb-6 -mt-1 md:pr-20 text-[14px] md:text-[15px] leading-relaxed text-[#555]">{item.a}</p>
               </div>
             </div>
           </div>

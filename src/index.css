@@ -73,7 +73,12 @@
       opacity 0.2s,
       transform 0.2s;
     display: inline-block;
-    line-height: 1;
+    line-height: 1.2;
+  }
+  @media (max-width: 639px) {
+    .btn-cta {
+      padding: 16px 20px;
+    }
   }
   .btn-cta:hover {
     opacity: 0.9;
